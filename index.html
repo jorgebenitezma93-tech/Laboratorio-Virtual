@@ -1,0 +1,962 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Laboratorio virtual de materiales</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: banco de laboratorio — selector de sistema arriba, diagrama a la izquierda, lectura, micrografía y ficha de solubilidad a la derecha */
+:root{
+  --bg:#f6f7f9; --panel:#ffffff; --ink:#0e2a3f; --muted:#56687a; --line:#d5dde5; --soft:#eef2f6;
+  --denim:#0f66ab; --naranja:#ff5900; --cafe:#6b3f23; --ok:#1d7a4f; --bad:#b3261e;
+  --curve:#0e2a3f; --tie:#ff5900; --liq:#cfe3f3; --alfa:#e9d6c3; --beta:#40556b; --gb:#6b3f23; --gam:#cfe6cf; --start:#b3261e; --finish:#1d7a4f; --half:#0f66ab; --path:#ff5900; --mart:#7a5aa6;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0b1823; --panel:#11222f; --ink:#e6edf3; --muted:#9db0c1; --line:#27404f; --soft:#172c3b;
+  --denim:#5aa7e6; --naranja:#ff7a33; --cafe:#c9946c; --ok:#4cc28a; --bad:#ef6b62;
+  --curve:#e6edf3; --tie:#ff7a33; --liq:#28506e; --alfa:#d8bea3; --beta:#2a3a4a; --gb:#8a5a38; --gam:#3d6a4c; --start:#ef6b62; --finish:#4cc28a; --half:#5aa7e6; --path:#ff7a33; --mart:#b39ae0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b1823; --panel:#11222f; --ink:#e6edf3; --muted:#9db0c1; --line:#27404f; --soft:#172c3b;
+  --denim:#5aa7e6; --naranja:#ff7a33; --cafe:#c9946c; --ok:#4cc28a; --bad:#ef6b62;
+  --curve:#e6edf3; --tie:#ff7a33; --liq:#28506e; --alfa:#d8bea3; --beta:#2a3a4a; --gb:#8a5a38; --gam:#3d6a4c; --start:#ef6b62; --finish:#4cc28a; --half:#5aa7e6; --path:#ff7a33; --mart:#b39ae0; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:18px}
+header{display:grid;gap:4px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cafe)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,5vw,46px);line-height:1;margin:0;text-wrap:balance}
+.lead{color:var(--muted);max-width:72ch;margin:0}
+.systems{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.sys{text-align:left;font:600 16px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:10px 12px;border-radius:8px;cursor:pointer;display:grid;gap:2px}
+.sys small{font:400 12.5px var(--f-body);color:var(--muted)}
+.sys .tag{font:500 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--cafe)}
+.sys[aria-pressed="true"]{border-color:var(--naranja);box-shadow:inset 0 0 0 1px var(--naranja)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{font:600 15px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.card h2{font-family:var(--f-display);font-weight:600;font-size:22px;margin:0 0 8px}
+.chart{width:100%;height:auto;display:block;touch-action:none;cursor:crosshair}
+.chart text{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
+.chart .reg{font-family:var(--f-display);font-size:19px;font-weight:600;fill:var(--ink);opacity:.6}
+.row{display:grid;grid-template-columns:120px minmax(0,1fr) 84px;gap:8px;align-items:center;font-size:14px;margin-top:8px}
+.row input[type=range]{width:100%;accent-color:var(--denim)}
+.row input[type=number]{width:100%;font:500 14px var(--f-mono);padding:4px 6px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink)}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.btn{font:600 14px var(--f-body);border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:7px 12px;border-radius:6px;cursor:pointer}
+.btn:hover{border-color:var(--denim)}
+.btn.primary{background:var(--naranja);border-color:var(--naranja);color:#fff}
+.btn.primary:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.tab:focus-visible,.sys:focus-visible,input:focus-visible{outline:2px solid var(--denim);outline-offset:2px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:15px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.lever{font-family:var(--f-mono);font-size:13.5px;background:var(--soft);border-radius:6px;padding:10px;margin-top:10px;line-height:1.7;overflow-x:auto}
+.micro{display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;align-items:center}
+@media (max-width:480px){.micro{grid-template-columns:minmax(0,1fr)}}
+canvas{width:200px;height:200px;border-radius:50%;border:3px solid var(--line);display:block;max-width:100%}
+.note{font-size:13px;color:var(--muted)}
+.hidden-ans{filter:blur(6px);user-select:none;pointer-events:none}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;margin-top:6px}
+.opt{display:flex;gap:6px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:6px 8px;font-size:14px;cursor:pointer;background:var(--bg)}
+.opt:has(input:checked){border-color:var(--naranja);box-shadow:inset 0 0 0 1px var(--naranja)}
+.verdict{font-weight:700;padding:8px 10px;border-radius:6px;border:1px solid;margin-top:10px}
+.verdict.ok{color:var(--ok);border-color:var(--ok)} .verdict.bad{color:var(--bad);border-color:var(--bad)}
+.challenge{background:var(--soft);border-radius:8px;padding:10px 12px;font-size:15px;margin-bottom:10px}
+.challenge b{font-family:var(--f-display);font-size:19px;font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line)}
+.ficha{display:grid;gap:10px;font-size:15px}
+.badge{display:inline-block;font:600 12px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:var(--soft);color:var(--cafe);border:1px solid var(--line)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+footer{font-size:13px;color:var(--muted);max-width:90ch}
+[hidden]{display:none!important}
+.views{display:flex;gap:0;border-bottom:2px solid var(--line);flex-wrap:wrap}
+.view{font:600 20px var(--f-display);letter-spacing:.02em;background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;color:var(--muted);padding:8px 16px;cursor:pointer}
+.view[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--naranja)}
+.view:focus-visible{outline:2px solid var(--denim);outline-offset:2px}
+.bridge{border-left:4px solid var(--naranja)}
+#view-ttt .tabs{display:flex;gap:6px;flex-wrap:wrap}
+#view-ttt .tab{font:600 15px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer}
+#view-ttt .tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+#view-ttt .grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:18px;align-items:start}
+#view-ttt .grid{grid-template-columns:minmax(0,1fr)}
+#view-ttt .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+#view-ttt .card h2{font-family:var(--f-display);font-weight:600;font-size:22px;margin:0 0 8px;letter-spacing:.01em}
+#view-ttt .chart{width:100%;height:auto;display:block}
+#view-ttt .chart text{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
+#view-ttt .chart .reg{font-family:var(--f-display);font-size:20px;font-weight:600;fill:var(--ink);opacity:.55}
+#view-ttt .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin-top:8px}
+#view-ttt .legend span{display:inline-flex;align-items:center;gap:6px}
+#view-ttt .sw{width:18px;height:3px;display:inline-block}
+#view-ttt .presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+#view-ttt .btn{font:600 14px var(--f-body);border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:7px 12px;border-radius:6px;cursor:pointer}
+#view-ttt .btn:hover{border-color:var(--denim)}
+#view-ttt .btn.primary{background:var(--naranja);border-color:var(--naranja);color:#fff}
+#view-ttt .btn.primary:disabled{opacity:.45;cursor:not-allowed}
+#view-ttt .btn:focus-visible,#view-ttt .tab:focus-visible,#view-ttt input:focus-visible{outline:2px solid var(--denim);outline-offset:2px}
+#view-ttt .step{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;display:grid;gap:6px}
+#view-ttt .step-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--cafe)}
+#view-ttt .row{display:grid;grid-template-columns:96px minmax(0,1fr) 98px;gap:8px;align-items:center;font-size:14px}
+#view-ttt .row input[type=range]{width:100%;accent-color:var(--denim)}
+#view-ttt .row input[type=number]{width:100%;font:500 14px var(--f-mono);padding:4px 6px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);font-variant-numeric:tabular-nums}
+#view-ttt .x{background:none;border:none;color:var(--muted);cursor:pointer;font:600 13px var(--f-body)}
+#view-ttt .note{font-size:13px;color:var(--muted)}
+#view-ttt fieldset{border:none;padding:0;margin:0;display:grid;gap:6px}
+#view-ttt legend{font-weight:600;margin-bottom:4px}
+#view-ttt .opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+#view-ttt .opt{display:flex;gap:6px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:6px 8px;font-size:14px;cursor:pointer;background:var(--bg)}
+#view-ttt .opt:has(input:checked){border-color:var(--naranja);box-shadow:inset 0 0 0 1px var(--naranja)}
+#view-ttt .bars{display:grid;gap:8px;margin:10px 0}
+#view-ttt .bar{display:grid;grid-template-columns:110px minmax(0,1fr) 52px;gap:8px;align-items:center;font-size:14px}
+#view-ttt .track{height:14px;background:var(--soft);border-radius:3px;overflow:hidden}
+#view-ttt .fill{height:100%}
+#view-ttt .pct{font-family:var(--f-mono);text-align:right;font-variant-numeric:tabular-nums}
+#view-ttt .verdict{font-weight:700;padding:8px 10px;border-radius:6px;border:1px solid}
+#view-ttt .verdict.ok{color:var(--ok);border-color:var(--ok)}
+#view-ttt .verdict.bad{color:var(--bad);border-color:var(--bad)}
+#view-ttt ol.why{margin:8px 0 0;padding-left:20px;font-size:14px;display:grid;gap:4px}
+#view-ttt .challenge{background:var(--soft);border-radius:8px;padding:10px 12px;font-size:15px}
+#view-ttt .challenge b{font-family:var(--f-display);font-size:19px;font-weight:600}
+#view-ttt footer{font-size:13px;color:var(--muted);max-width:90ch}
+#view-ttt .fill{transition:width .5s ease}
+#view-ttt .grid{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}
+@media (max-width:900px){#view-ttt .grid{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:no-preference){#view-ttt .fill{transition:width .5s ease}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">IMEC1402 · Ciencia e Ingeniería de Materiales</div>
+    <h1>Laboratorio virtual de materiales</h1>
+    <p class="lead">Dos simuladores conectados: el diagrama de fases dice qué hay en equilibrio al enfriar lento; el diagrama TTT dice qué pasa cuando el enfriamiento es rápido o se detiene a una temperatura.</p>
+  </header>
+  <div class="views" role="tablist">
+    <button class="view" role="tab" id="v-pd" aria-selected="true">Diagramas de fases</button>
+    <button class="view" role="tab" id="v-ttt" aria-selected="false">Tratamiento térmico (TTT)</button>
+  </div>
+  <div id="view-pd" style="display:grid;gap:18px">
+  <p class="lead" style="margin:0">Elige un sistema, toca el diagrama o mueve los controles. Lee qué fases hay, de qué composición y en qué cantidad (regla de la palanca), y cómo se ve la microestructura tras un enfriamiento lento.</p>
+
+  <div class="systems" id="systems" role="group" aria-label="Sistema de aleación"></div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="t-exp" aria-selected="true">Explorar</button>
+    <button class="tab" role="tab" id="t-pred" aria-selected="false">Modo clase: predecir</button>
+    <button class="tab" role="tab" id="t-reto" aria-selected="false">Retos</button>
+  </div>
+
+  <div class="grid">
+    <div style="display:grid;gap:18px;min-width:0">
+      <section class="card">
+        <svg class="chart" id="pd" viewBox="0 0 640 470" role="img" aria-label="Diagrama de fases del sistema seleccionado con el punto y la línea de unión"></svg>
+        <div class="row"><label for="cR" id="cLab">Composición C₀</label><input type="range" id="cR" min="0" max="100" step="0.1" value="40"><input type="number" id="cN" min="0" max="100" step="0.1" value="40" aria-label="Composición en % en peso"></div>
+        <div class="row"><label for="tR">Temperatura T</label><input type="range" id="tR" min="0" max="350" step="1" value="150"><input type="number" id="tN" min="0" max="350" step="1" value="150" aria-label="Temperatura en °C"></div>
+        <div class="presets" id="presets"></div>
+      </section>
+      <section class="card">
+        <h2>Ficha de solubilidad</h2>
+        <div class="ficha" id="ficha"></div>
+      </section>
+    </div>
+
+    <div style="display:grid;gap:18px;min-width:0">
+      <section class="card" id="predCard" hidden>
+        <div id="challengeBox"></div>
+        <div id="predBox">
+          <h2>Tu predicción</h2>
+          <div class="note">¿Qué fases hay en el punto marcado?</div>
+          <div class="opts" id="opts"></div>
+        </div>
+        <div style="margin-top:10px"><button class="btn primary" id="reveal" disabled>Revelar</button></div>
+        <div id="verdict"></div>
+      </section>
+
+      <section class="card">
+        <h2>Lectura del punto</h2>
+        <div id="answers">
+          <dl class="kv" id="kv"></dl>
+          <div class="lever" id="lever"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Microestructura (enfriamiento lento)</h2>
+        <div class="micro" id="microWrap">
+          <canvas id="mc" width="400" height="400" aria-label="Esquema de la microestructura"></canvas>
+          <div id="microTxt" class="note"></div>
+        </div>
+        <div class="legend" id="legend"></div>
+      </section>
+      <section class="card bridge" id="bridge" hidden>
+        <h2>De Fe–Fe₃C al TTT</h2>
+        <p id="bridgeTxt" style="margin:0 0 10px"></p>
+        <button class="btn primary" id="bridgeBtn">Templar desde este punto</button>
+      </section>
+    </div>
+  </div>
+
+  </div>
+  <div id="view-ttt" hidden style="display:grid;gap:18px">
+  <header style="display:grid;gap:4px">
+    <div class="eyebrow">Tratamientos térmicos · Nueve aceros</div>
+    <h2 style="font-family:var(--f-display);font-weight:700;font-size:clamp(26px,4vw,38px);line-height:1;margin:0">Transformaciones isotérmicas (TTT)</h2>
+    <p class="lead">Elige un acero, austenitiza a <b id="x-aus">760 °C</b>, diseña la secuencia de enfriamiento y <b>predice la microestructura antes de verla</b>.</p>
+    <div><button class="btn" id="x-back">Ver este acero en el diagrama Fe–Fe₃C</button></div>
+  </header>
+
+  <div class="systems" id="x-steels" role="group" aria-label="Acero"></div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="x-tab-pred" aria-selected="true">Predecir</button>
+    <button class="tab" role="tab" id="x-tab-reto" aria-selected="false">Retos de diseño</button>
+  </div>
+
+  <div class="grid">
+    <div style="display:grid;gap:18px;min-width:0">
+      <section class="card">
+        <svg class="chart" id="x-ttt" viewBox="0 0 640 470" role="img" aria-label="Diagrama de transformación isotérmica del acero seleccionado con la trayectoria del tratamiento"></svg>
+        <div class="legend">
+          <span><i class="sw" style="background:var(--start)"></i>Inicio (1 %)</span>
+          <span><i class="sw" style="background:var(--half)"></i>50 %</span>
+          <span><i class="sw" style="background:var(--finish)"></i>Fin (99 %)</span>
+          <span><i class="sw" style="background:var(--cafe)"></i>Inicio proeutectoide</span>
+          <span><i class="sw" style="background:var(--mart)"></i>M<sub>s</sub>, M<sub>50</sub>, M<sub>90</sub></span>
+          <span><i class="sw" style="background:var(--path)"></i>Tu tratamiento</span>
+        </div>
+        <p class="note" style="margin:6px 0 0">Toca o arrastra sobre el diagrama: fijas la temperatura y el momento en que termina el escalón activo (resaltado en naranja). Sin escalones, el toque crea uno.</p>
+        <style>#view-ttt .step.active{border-left:3px solid var(--naranja);padding-left:8px} #view-ttt .chart{cursor:crosshair;touch-action:none}</style>
+      </section>
+      <section class="card">
+        <h2>Ficha del acero</h2>
+        <div id="x-sficha" class="sficha"></div>
+      </section>
+    </div>
+
+    <div style="display:grid;gap:18px;min-width:0">
+      <section class="card">
+        <h2>1 · Tratamiento</h2>
+        <div id="x-challengeBox" hidden></div>
+        <div class="presets" id="x-presets"></div>
+        <div id="x-steps"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px;flex-wrap:wrap">
+          <button class="btn" id="x-add">+ Agregar escalón isotérmico</button>
+          <span class="note">Al final: temple a 25 °C</span>
+        </div>
+      </section>
+
+      <section class="card" id="x-predCard">
+        <h2>2 · Tu predicción</h2>
+        <fieldset id="x-predSet">
+          <legend>Marca los constituyentes que serán al menos 5 % de la probeta a 25 °C</legend>
+          <div class="opts" id="x-opts"></div>
+        </fieldset>
+        <div style="margin-top:12px"><button class="btn primary" id="x-reveal" disabled>Revelar resultado</button></div>
+      </section>
+
+      <section class="card" id="x-resCard" hidden>
+        <h2>3 · Resultado</h2>
+        <div id="x-verdict"></div>
+        <div class="bars" id="x-bars"></div>
+        <ol class="why" id="x-why"></ol>
+        <p class="note" style="margin-top:10px"><b>Reflexión:</b> si fallaste, ¿qué leíste mal: la temperatura, el tiempo, la escala logarítmica o la línea Mₛ?</p>
+      </section>
+    </div>
+  </div>
+
+  <p class="note" style="margin:0">Modelo didáctico. El acero Fe–0.76 C usa las curvas digitalizadas de Callister, Fig. 10.22, con su simplificación de libro (toda la austenita remanente se vuelve martensita). Los demás aceros usan curvas esquemáticas representativas: la forma y el orden de magnitud siguen las tendencias de los atlas de diagramas TTT (US Steel/ASM), pero los tiempos no son datos de diseño. A₁ y A₃ se calculan con las ecuaciones de Andrews (1965) a partir de la composición nominal; Mₛ con Andrews en los aceros de hasta 0.6 % C y estimado en los de más carbono. La martensita al templar sigue Koistinen–Marburger: f = 1 − exp[−0.011(Mₛ − T)]; lo que no se transforma queda como austenita retenida. Cada escalón usa su propio reloj.</p>
+</div>
+  <footer>Modelo didáctico. Los puntos clave (temperaturas de fusión, eutécticos y solubilidades máximas) vienen de Callister &amp; Rethwisch, 10.ª ed. (Figs. 9.3, 9.7 y 9.8) y del ASM Handbook, vol. 3; las curvas entre esos puntos son ajustes suaves y deben tratarse como esquemas. Ge–Si se dibuja en % en peso de forma esquemática. Fe–Fe₃C es el diagrama metaestable de Callister, Fig. 9.24, con líneas rectas entre sus puntos clave; la región δ es muy angosta a esta escala. Composiciones en % en peso del segundo componente. La micrografía es un esquema, no una imagen real.</footer>
+</div>
+
+<script>
+(function(){
+  // ================= Definición de sistemas =================
+  const iso=(o)=>Object.assign({type:'iso'},o);
+  const eut=(o)=>Object.assign({type:'eut'},o);
+  const SYS={
+    cuni:iso({id:'cuni',name:'Cu–Ni',A:'Cu',B:'Ni',tag:'Solubilidad total',sub:'Isomorfo metálico',
+      TA:1085,TB:1455,a:0.02245,b:0.00317,Tmin:1000,Tmax:1500,tstep:100,
+      ph:{A:'α'},phDesc:{A:'α (solución sólida Cu–Ni, FCC)'},
+      labels:[['L',20,1430],['α + L',52,1302],['α',65,1120]],
+      presets:[[35,1250],[35,1300],[35,1200],[70,1400],[20,1150]],
+      start:[35,1250],
+      hume:{rows:[['Cu','FCC','0.128'],['Ni','FCC','0.125']],diff:'2.3 %',verdict:'Cumple las cuatro reglas: misma estructura, radios casi iguales, electronegatividad y valencia parecidas. Resultado: un solo sólido α en todo el intervalo.'},
+      ind:'Cuproníquel de monedas (75Cu–25Ni) y aleaciones Monel (≈ 65Ni–33Cu): resistencia a la corrosión en agua de mar.',
+      src:'Callister 10.ª ed., Fig. 9.3 (punto B: 35 % Ni, 1250 °C → C_L = 31.5, C_α = 42.5)',
+      retos:[
+        {t:'A 1250 °C, encuentra la aleación que esté 50 % líquida y 50 % sólida.',hint:'Fija T = 1250 °C y busca C₀ a la mitad de la línea de unión.',chk:(C,T,S)=>Math.abs(T-1250)<=2&&S.r==='A+L'&&Math.abs(S.W2-.5)<=.04},
+        {t:'Encuentra la composición que empieza a solidificar justo a 1300 °C.',hint:'Esa aleación tiene su punto de líquidus en 1300 °C.',chk:(C,T,S,sys)=>Math.abs(sys.TL(C)-1300)<=4&&Math.abs(T-1300)<=4},
+        {t:'Para 35 % Ni, ¿a qué temperatura la última gota de líquido desaparece?',hint:'Baja por la vertical de 35 % Ni hasta tocar el sólidus.',chk:(C,T,S,sys)=>Math.abs(C-35)<=0.6&&Math.abs(T-sys.TS(35))<=4}]}),
+    gesi:iso({id:'gesi',name:'Ge–Si',A:'Ge',B:'Si',tag:'Solubilidad total',sub:'Isomorfo semiconductor',
+      TA:938,TB:1414,a:0.025,b:-0.025,Tmin:800,Tmax:1500,tstep:100,
+      ph:{A:'α'},phDesc:{A:'α (solución sólida Ge–Si, cúbica diamante)'},
+      labels:[['L',25,1420],['α + L',50,1180],['α',75,980]],
+      presets:[[50,1180],[50,1300],[50,1050],[20,1000],[80,1350]],
+      start:[50,1180],
+      hume:{rows:[['Ge','Cúbica diamante','0.122'],['Si','Cúbica diamante','0.118']],diff:'3.3 %',verdict:'Ambos son semiconductores con la misma estructura y enlace covalente: se disuelven en cualquier proporción. El intervalo de solidificación es mucho más ancho que en Cu–Ni.'},
+      ind:'Capas de SiGe en transistores de alta frecuencia y materiales termoeléctricos para generación en sondas espaciales.',
+      src:'Puntos de fusión: Ge 938 °C, Si 1414 °C. Forma de las curvas esquemática (el diagrama real suele darse en % atómico).',
+      retos:[
+        {t:'¿A qué temperatura una aleación de 50 % Si está mitad líquida y mitad sólida?',hint:'Recorre la vertical de 50 % y vigila W_α.',chk:(C,T,S)=>Math.abs(C-50)<=0.6&&S.r==='A+L'&&Math.abs(S.W2-.5)<=.04},
+        {t:'Encuentra una aleación cuyo intervalo de solidificación (líquidus − sólidus) sea mayor de 120 °C.',hint:'Compara el ancho vertical de la lente en distintas composiciones.',chk:(C,T,S,sys)=>sys.TL(C)-sys.TS(C)>120&&S.r==='A+L'}]}),
+    pbsn:eut({id:'pbsn',name:'Pb–Sn',A:'Pb',B:'Sn',tag:'Solubilidad parcial',sub:'Eutéctico, soldadura',
+      TA:327,TB:232,TE:183,CE:61.9,Ca:18.3,Cb:97.8,pLA:1,pLB:1,ps:1.94,
+      solvA:[150,11],solvB:[150,98],Tmin:0,Tmax:350,tstep:50,
+      ph:{A:'α',B:'β'},phDesc:{A:'α (rica en Pb)',B:'β (rica en Sn)'},
+      labels:[['L',45,280],['α',4,230],['β',98.6,205],['α + L',22,230],['β + L',80,198],['α + β',52,90]],
+      presets:[[40,150],[40,220],[61.9,182],[30,182],[80,182],[10,50]],
+      start:[40,150],
+      hume:{rows:[['Pb','FCC','0.175'],['Sn','Tetragonal','0.151']],diff:'13.7 %',verdict:'Radios cerca del límite de 15 % y estructuras distintas: solubilidad limitada en ambos lados (18.3 % Sn en α, 2.2 % Pb en β).'},
+      ind:'Soldadura eléctrica 63Sn–37Pb, casi eutéctica: funde en un punto a 183 °C. Hoy se sustituye por Sn–Ag–Cu sin plomo.',
+      src:'Callister 10.ª ed., Fig. 9.8 y Ejemplos 9.2–9.3',
+      retos:[
+        {t:'Elige una aleación que, a 182 °C, tenga 50 % de microconstituyente eutéctico y sea hipoeutéctica.',hint:'Fija T en 182 °C y usa W_e = (C₀ − 18.3)/(61.9 − 18.3).',chk:(C,T,S,sys)=>{const m=micro(C,T);return Math.abs(T-182)<=3&&m.type==='hipo'&&Math.abs((1-m.frac)-.5)<=.04;}},
+        {t:'Encuentra el punto a 250 °C donde la aleación sea 75 % líquido y 25 % α.',hint:'Traza la línea de unión a 250 °C y aplica la palanca al revés.',chk:(C,T,S)=>Math.abs(T-250)<=2&&S.r==='A+L'&&Math.abs(S.W2-.75)<=.04},
+        {t:'Una soldadura debe fundir a una sola temperatura, sin intervalo pastoso. ¿Qué composición eliges?',hint:'Busca dónde el líquido pasa directo a sólido.',chk:(C)=>Math.abs(C-61.9)<=1},
+        {t:'A 100 °C, una sola fase con el máximo de Sn posible del lado del Pb.',hint:'Sigue la línea de solvus de α hasta 100 °C.',chk:(C,T,S,sys)=>Math.abs(T-100)<=2&&S.r==='A'&&C>sys.solvA(100)-0.6}]}),
+    cuag:eut({id:'cuag',name:'Cu–Ag',A:'Cu',B:'Ag',tag:'Solubilidad parcial',sub:'Eutéctico, soldadura fuerte',
+      TA:1085,TB:962,TE:779,CE:71.9,Ca:8.0,Cb:91.2,pLA:1,pLB:1,ps:2,
+      solvA:[400,1],solvB:[400,99],Tmin:200,Tmax:1200,tstep:100,
+      ph:{A:'α',B:'β'},phDesc:{A:'α (rica en Cu)',B:'β (rica en Ag)'},
+      labels:[['L',40,1080],['α',2.5,620],['β',98.6,620],['α + L',22,930],['β + L',86,840],['α + β',50,500]],
+      presets:[[50,800],[50,778],[71.9,778],[85,820],[5,500],[30,950]],
+      start:[50,778],
+      hume:{rows:[['Cu','FCC','0.128'],['Ag','FCC','0.144']],diff:'12.5 %',verdict:'Misma estructura y radios por debajo de 15 %, y aun así la solubilidad es parcial (8 % Ag en α). Las reglas de Hume-Rothery son necesarias, no suficientes: buen tema de discusión.'},
+      ind:'Aleación de soldadura fuerte 72Ag–28Cu (eutéctica): une tubería de cobre y piezas de acero a 779 °C sin fundirlas.',
+      src:'Callister 10.ª ed., Fig. 9.7 (eutéctico 779 °C, 71.9 % Ag; solubilidades 8.0 y 91.2 % Ag)',
+      retos:[
+        {t:'Elige la aleación que, a 778 °C, tenga 50 % de eutéctico y sea hipoeutéctica.',hint:'W_e = (C₀ − 8.0)/(71.9 − 8.0).',chk:(C,T)=>{const m=micro(C,T);return Math.abs(T-778)<=3&&m.type==='hipo'&&Math.abs((1-m.frac)-.5)<=.04;}},
+        {t:'¿Cuánta plata cabe como máximo disuelta en el cobre sólido? Pon el punto ahí.',hint:'Es el extremo izquierdo de la isoterma eutéctica.',chk:(C,T)=>Math.abs(C-8)<=0.5&&Math.abs(T-779)<=4}]}),
+    alsi:eut({id:'alsi',name:'Al–Si',A:'Al',B:'Si',tag:'Solubilidad muy limitada',sub:'Eutéctico, fundición',
+      TA:660,TB:1414,TE:577,CE:12.6,Ca:1.65,Cb:100,pLA:1,pLB:1.25,ps:2,
+      solvA:[250,0.1],solvB:null,Tmin:200,Tmax:1500,tstep:100,
+      ph:{A:'α',B:'Si'},phDesc:{A:'α (Al con algo de Si, FCC)',B:'Si (prácticamente puro)'},
+      labels:[['L',40,1300],['Si + L',72,900],['α + Si',45,400],['α + L',6,640]],
+      presets:[[7,576],[12.6,576],[20,576],[20,650],[1,450],[50,900]],
+      start:[7,576],
+      hume:{rows:[['Al','FCC','0.143'],['Si','Cúbica diamante','0.118']],diff:'17.5 %',verdict:'Rompe dos reglas: estructuras distintas y radios con diferencia mayor de 15 %. El Al disuelve como máximo 1.65 % Si, y el Si casi nada de Al: la segunda fase es Si prácticamente puro.'},
+      ind:'Pistones y cabezas de motor. A356 (≈ 7 % Si, hipoeutéctica) para colar piezas complejas; A390 (≈ 17 % Si, hipereutéctica) con cristales de Si primario para resistir el desgaste.',
+      src:'ASM Handbook, vol. 3: Al 660 °C, Si 1414 °C, eutéctico 577 °C a 12.6 % Si, solubilidad máxima de Si en Al 1.65 %',
+      retos:[
+        {t:'Una aleación de pistón debe tener 10 % de Si primario a 576 °C. ¿Qué composición eliges?',hint:'Hipereutéctica: W_Si primario = (C₀ − 12.6)/(100 − 12.6).',chk:(C,T)=>{const m=micro(C,T);return Math.abs(T-576)<=3&&m.type==='hiper'&&Math.abs(m.frac-.10)<=.02;}},
+        {t:'Una aleación de colada debe tener 50 % de eutéctico a 576 °C. ¿Qué composición eliges?',hint:'W_e = (C₀ − 1.65)/(12.6 − 1.65). Compárala con la A356.',chk:(C,T)=>{const m=micro(C,T);return Math.abs(T-576)<=3&&m.type==='hipo'&&Math.abs((1-m.frac)-.5)<=.04;}}]}),
+    fec:{type:'fec',id:'fec',name:'Fe–Fe₃C',A:'Fe',B:'C',tag:'Solubilidad intersticial',sub:'Aceros y fundiciones',
+      Cmax:6.7,xstep:1,Tmin:400,Tmax:1600,tstep:100,
+      phDesc:{A:'α ferrita / δ (BCC)',G:'γ austenita (FCC)',B:'Fe₃C cementita'},
+      labels:[['L',3.4,1460],['γ + L',1.8,1300],['L + Fe₃C',5.6,1185],['γ',0.75,1040],['γ + Fe₃C',3.6,950],['α + Fe₃C',3.6,560],['α + γ',0.3,790]],
+      presets:[[0.35,726],[0.76,726],[1.2,726],[0.4,790],[0.76,800],[1.2,900],[3.0,1200],[4.3,1146],[3.0,726]],
+      start:[0.35,726],
+      hume:{rows:[['Fe α (ferrita)','BCC','0.124'],['Fe γ (austenita)','FCC','—'],['C (soluto)','Intersticial','0.071']],diff:'Intersticial',verdict:'El carbono no sustituye al hierro: se acomoda en los huecos intersticiales. Los huecos de la red FCC (γ) son mayores que los de la BCC (α), por eso γ disuelve hasta 2.14 % C y α solo 0.022 %. Esa diferencia es la base de todos los tratamientos térmicos.'},
+      ind:'Aceros al carbono (hasta 2.14 % C) y fundiciones (2.14–6.70 % C). El diagrama indica a qué temperatura austenizar antes de templar, recocer o normalizar; el TTT dice qué pasa al enfriar rápido.',
+      src:'Callister 10.ª ed., Fig. 9.24 y Ejemplo 9.4: eutectoide 727 °C y 0.76 % C; eutéctico 1147 °C y 4.30 % C; solubilidad máxima 0.022 % C en α y 2.14 % C en γ; peritéctico 1493 °C; Fe₃C con 6.70 % C. Diagrama metaestable Fe–Fe₃C; el líquidus del lado de la cementita es aproximado',
+      retos:[
+        {t:'Elige un acero que, justo bajo 727 °C, tenga 50 % de perlita.',hint:'Hipoeutectoide: W_p = (C₀ − 0.022)/(0.76 − 0.022).',chk:(C,T)=>{const m=micro(C,T);return Math.abs(T-726)<=3&&m.type==='hipoeut'&&Math.abs(m.perl-.5)<=.04;}},
+        {t:'Elige un acero hipereutectoide con 5 % de cementita proeutectoide a 726 °C.',hint:'W_Fe₃C\' = (C₀ − 0.76)/(6.70 − 0.76).',chk:(C,T)=>{const m=micro(C,T);return Math.abs(T-726)<=3&&m.type==='hipereut'&&Math.abs(m.frac-.05)<=.01;}},
+        {t:'¿Cuál es la temperatura mínima para austenizar por completo un acero 1040 (0.40 % C)? Pon el punto ahí.',hint:'Sube por la vertical de 0.40 % C hasta salir de α + γ (línea A₃).',chk:(C,T,st,sys)=>Math.abs(C-0.40)<=0.02&&st.r==='γ'&&T-sys.T_A3(0.40)<=12},
+        {t:'Pon el punto exactamente en la reacción eutectoide.',hint:'γ (0.76 % C) → α + Fe₃C a 727 °C.',chk:(C,T)=>Math.abs(C-0.76)<=0.03&&Math.abs(T-727)<=4}]}
+  };
+
+  // ---- Funciones por sistema ----
+  function build(s){
+    if(s.type==='fec'){buildFe(s);return s;}
+    if(s.type==='iso'){
+      s.TL=x=>s.TA+(s.TB-s.TA)*x/100+s.a*x*(100-x);
+      s.TS=x=>s.TA+(s.TB-s.TA)*x/100+s.b*x*(100-x);
+      const inv=(f,T)=>{let lo=0,hi=100;for(let i=0;i<50;i++){const m=(lo+hi)/2;(f(m)<T)?lo=m:hi=m;}return (lo+hi)/2;};
+      s.xL=T=>inv(s.TL,T); s.xS=T=>inv(s.TS,T);
+    } else {
+      s.liqA=T=>s.CE*Math.pow((s.TA-T)/(s.TA-s.TE),s.pLA);
+      s.liqB=T=>s.CE+(100-s.CE)*Math.pow((T-s.TE)/(s.TB-s.TE),s.pLB);
+      s.solA=T=>s.Ca*(1-Math.pow((T-s.TE)/(s.TA-s.TE),s.ps));
+      s.solB=T=>s.Cb>=100?100:100-(100-s.Cb)*(1-Math.pow((T-s.TE)/(s.TB-s.TE),s.ps));
+      const kA=Math.log(s.Ca/s.solvA[1])/(s.TE-s.solvA[0]);
+      s.solvA=T=>s.Ca*Math.exp(-kA*(s.TE-T));
+      if(s.Cb>=100) s.solvB=()=>100; else {const kB=Math.log((100-s.Cb)/(100-s.solvB[1]))/(s.TE-s.solvB[0]);s.solvB=T=>100-(100-s.Cb)*Math.exp(-kB*(s.TE-T));}
+    }
+    return s;
+  }
+  Object.values(SYS).forEach(build);
+
+
+  function buildFe(s){
+    const lin=(x1,y1,x2,y2)=>T=>x1+(x2-x1)*(T-y1)/(y2-y1);
+    s.liqL=T=>T>=1493?0.53*(1538-T)/45:0.53+(4.30-0.53)*(1493-T)/346;
+    s.liqR=lin(4.30,1147,6.70,1250);
+    s.dSol=T=>0.09*(1538-T)/45;
+    s.dG_d=T=>0.09*(T-1394)/99; s.dG_g=T=>0.17*(T-1394)/99;
+    s.gSol=T=>0.17+(2.14-0.17)*(1493-T)/346;
+    s.A3=T=>0.76*(912-T)/185; s.aG=T=>0.022*(912-T)/185;
+    s.Acm=T=>0.76+(2.14-0.76)*(T-727)/420;
+    const k=Math.log(4.4)/327; s.aSolv=T=>0.022*Math.exp(-k*(727-T));
+    s.T_A3=C=>912-C*185/0.76;
+  }
+  function stateFe(C,T){
+    const F=S,two=(r,c1,c2,p1,p2)=>({r,c1,c2,p1,p2,W2:(C-c1)/(c2-c1)});
+    if(T>=1538) return {r:'L'};
+    if(T>=1493){ if(C<=F.dSol(T)) return {r:'δ'}; if(C<F.liqL(T)) return two('δ + L',F.dSol(T),F.liqL(T),'δ','L'); return {r:'L'}; }
+    if(T>=1394){ if(C<=F.dG_d(T)) return {r:'δ'}; if(C<F.dG_g(T)) return two('δ + γ',F.dG_d(T),F.dG_g(T),'δ','γ');
+      if(C<=F.gSol(T)) return {r:'γ'}; if(C<F.liqL(T)) return two('γ + L',F.gSol(T),F.liqL(T),'γ','L'); return {r:'L'}; }
+    if(T>=1147){ if(C<=F.gSol(T)) return {r:'γ'}; if(C<F.liqL(T)) return two('γ + L',F.gSol(T),F.liqL(T),'γ','L');
+      if(T<1250&&C>F.liqR(T)) return two('L + Fe₃C',F.liqR(T),6.70,'L','Fe₃C'); return {r:'L'}; }
+    if(T>=912){ if(C<=F.Acm(T)) return {r:'γ'}; return two('γ + Fe₃C',F.Acm(T),6.70,'γ','Fe₃C'); }
+    if(T>=727){ if(C<=F.aG(T)) return {r:'α'}; if(C<F.A3(T)) return two('α + γ',F.aG(T),F.A3(T),'α','γ');
+      if(C<=F.Acm(T)) return {r:'γ'}; return two('γ + Fe₃C',F.Acm(T),6.70,'γ','Fe₃C'); }
+    if(C<=F.aSolv(T)) return {r:'α'}; if(C>=6.69) return {r:'Fe₃C'};
+    return two('α + Fe₃C',F.aSolv(T),6.70,'α','Fe₃C');
+  }
+  const FB=(0.76-0.022)/(6.70-0.022);
+  function microFe(C,T){
+    const s=stateFe(C,T),p=x=>(x*100).toFixed(0)+' %';
+    const A='--alfa',G='--gam',K='--beta',Lq='--liq';
+    const W1=s.c1!==undefined?1-s.W2:0;
+    switch(s.r){
+      case 'L':return {type:'L',spec:{k:'single',c:Lq,gb:false},txt:'Todo líquido.'};
+      case 'δ':return {type:'δ',spec:{k:'single',c:A},txt:'Granos de ferrita δ (BCC) de alta temperatura.'};
+      case 'γ':return {type:'γ',spec:{k:'single',c:G},txt:`Granos de austenita γ (FCC) con ${fC(C)} % C disuelto. Es el punto de partida de todo temple.`};
+      case 'α':return {type:'α',spec:{k:'single',c:A},txt:'Granos de ferrita α (BCC); casi no disuelve carbono.'};
+      case 'Fe₃C':return {type:'cem',spec:{k:'single',c:K},txt:'Cementita Fe₃C pura.'};
+      case 'δ + L':return {type:'2',spec:{k:'blobs',f:W1,in:A,m:Lq},txt:`Ferrita δ (${p(W1)}) en el líquido.`};
+      case 'δ + γ':return {type:'2',spec:{k:'blobs',f:W1,in:A,m:G},txt:`Ferrita δ (${p(W1)}) y austenita (${p(1-W1)}).`};
+      case 'γ + L':return {type:'2',spec:{k:'blobs',f:W1,in:G,m:Lq},txt:`Dendritas de austenita (${p(W1)}) creciendo en el líquido.`};
+      case 'L + Fe₃C':return {type:'2',spec:{k:'blobs',f:s.W2,in:K,m:Lq},txt:`Cementita primaria (${p(s.W2)}) en el líquido.`};
+      case 'α + γ':return {type:'2',spec:{k:'blobs',f:W1,in:A,m:G},txt:`Ferrita (${p(W1)}) naciendo en los límites de grano de la austenita (${p(1-W1)}). Al seguir enfriando, la austenita restante formará perlita.`};
+      case 'γ + Fe₃C':if(C>2.14){const pr=C<4.3?(4.30-C)/(4.30-2.14):(C-4.30)/(6.70-4.30);const near43=Math.abs(C-4.3)<=0.05;return {type:'2',spec:{k:'primLed',f:near43?0:pr,prim:C<4.3?'gam':'cem',dot:G},txt:near43?'Ledeburita: austenita y cementita formadas juntas a 1147 °C.':(C<4.3?`Austenita primaria (${p(pr)}) rodeada de ledeburita (austenita + cementita).`:`Cementita primaria (${p(pr)}) rodeada de ledeburita.`)};}
+        return {type:'2',spec:{k:'network',f:s.W2,net:K,in:{k:'single',c:G}},txt:`Austenita (${p(1-s.W2)}) con cementita (${p(s.W2)}) en los límites de grano.`};
+    }
+    // α + Fe3C bajo 727 °C: microconstituyentes
+    if(C<0.022) return {type:'αprec',spec:{k:'prec',m:A,pc:K,f:s.W2},txt:'Ferrita con algo de cementita terciaria en los límites de grano.'};
+    if(C<0.74){const Wp=(C-0.022)/(0.76-0.022);return {type:'hipoeut',perl:Wp,frac:1-Wp,spec:{k:'primLam',f:1-Wp,prim:A,a:A,b:K,fb:FB},txt:`Acero hipoeutectoide. Ferrita proeutectoide: ${p(1-Wp)}. Perlita: ${p(Wp)}. W_p = (C₀ − 0.022)/(0.76 − 0.022).`};}
+    if(C<=0.78) return {type:'perlita',perl:1,frac:0,spec:{k:'primLam',f:0,prim:A,a:A,b:K,fb:FB},txt:'Acero eutectoide: 100 % perlita, láminas alternas de ferrita y cementita.'};
+    if(C<=2.14){const Wc=(C-0.76)/(6.70-0.76);return {type:'hipereut',frac:Wc,perl:1-Wc,spec:{k:'network',f:Wc,net:K,in:{k:'lam',a:A,b:K,fb:FB}},txt:`Acero hipereutectoide. Cementita proeutectoide en límites de grano: ${p(Wc)}. Perlita: ${p(1-Wc)}. W_Fe₃C' = (C₀ − 0.76)/(6.70 − 0.76).`};}
+    if(C<4.25){const Wl=(C-2.14)/(4.30-2.14);return {type:'fund',frac:1-Wl,spec:{k:'primLed',f:1-Wl,prim:'lam'},txt:`Fundición blanca hipoeutéctica. Ledeburita transformada: ${p(Wl)}. Perlita proveniente de la austenita primaria: ${p(1-Wl)}.`};}
+    if(C<=4.35) return {type:'led',frac:0,spec:{k:'primLed',f:0,prim:'lam'},txt:'Fundición blanca eutéctica: 100 % ledeburita transformada (cementita con islas de perlita).'};
+    const Wc=(C-4.30)/(6.70-4.30);return {type:'fund',frac:Wc,spec:{k:'primLed',f:Wc,prim:'cem'},txt:`Fundición blanca hipereutéctica. Cementita primaria: ${p(Wc)}. Ledeburita transformada: ${p(1-Wc)}.`};
+  }
+
+  let S=SYS.pbsn, C=40, T=150, mode='exp', revealed=false, ch=0;
+
+  // ================= Estado de fases =================
+  function state(C,T){
+    if(S.type==='fec') return stateFe(C,T);
+    let r,c1,c2;
+    if(S.type==='iso'){
+      if(T>=S.TL(C)) r='L'; else if(T<=S.TS(C)) r='A'; else {r='A+L';c1=S.xL(T);c2=S.xS(T);}
+      // c1 = líquido (menos B), c2 = sólido (más B) si TB > TA
+      if(r==='A+L'){const o={r,c1,c2,p1:'L',p2:'A'};o.W2=(C-c1)/(c2-c1);
+        // W2 aquí es fracción de α; para el reto pedimos fracción de α o de líquido indistinto a 0.5
+        return o;}
+      return {r};
+    }
+    if(T>=S.TE){
+      const inA=T<S.TA, inB=T<S.TB;
+      if(inA&&C<=S.solA(T)) return {r:'A'};
+      if(inA&&C<S.liqA(T)){c1=S.solA(T);c2=S.liqA(T);return {r:'A+L',c1,c2,p1:'A',p2:'L',W2:(C-c1)/(c2-c1)};}
+      if(!inB||C<=S.liqB(T)) return {r:'L'};
+      if(C<S.solB(T)){c1=S.liqB(T);c2=S.solB(T);return {r:'L+B',c1,c2,p1:'L',p2:'B',W2:(C-c1)/(c2-c1)};}
+      return {r:'B'};
+    }
+    if(C<=S.solvA(T)) return {r:'A'};
+    if(C>=S.solvB(T)) return {r:'B'};
+    c1=S.solvA(T);c2=S.solvB(T);return {r:'A+B',c1,c2,p1:'A',p2:'B',W2:(C-c1)/(c2-c1)};
+  }
+  const pn=k=>S.type==='fec'?k:(k==='L'?'L':S.ph[k]);
+  const rname=r=>S.type==='fec'?r:({L:'L',A:pn('A'),B:pn('B'),'A+L':pn('A')+' + L','L+B':pn('B')+' + L','A+B':pn('A')+' + '+pn('B')})[r];
+  const fC=x=>x<0.1?x.toFixed(3):x.toFixed(2);
+  const f1=x=>S.type==='fec'?fC(x):x.toFixed(1), pc=x=>(Math.abs(x)<0.05&&x!==0?(x*100).toFixed(1):(x*100).toFixed(0))+' %';
+
+  // ================= Microestructura =================
+  function micro(C,T){
+    if(S.type==='fec') return microFe(C,T);
+    const s=state(C,T),a=pn('A'),b=S.ph.B?pn('B'):'';
+    if(s.r==='L') return {type:'L',txt:'Todo líquido.'};
+    if(s.r==='A') return {type:'α',txt:`Granos de ${a} de composición ${f1(C)} % ${S.B}. Una sola fase.`};
+    if(s.r==='B') return {type:'β',txt:`Granos de ${b} (${f1(C)} % ${S.B}). Una sola fase.`};
+    if(s.r==='A+L'){const Wa=s.p1==='A'?1-s.W2:s.W2;return {type:'α+L',frac:Wa,txt:`Cristales de ${a} (${pc(Wa)}) creciendo dentro del líquido (${pc(1-Wa)}).`};}
+    if(s.r==='L+B'){const Wb=s.W2;return {type:'L+β',frac:Wb,txt:`Cristales de ${b} (${pc(Wb)}) creciendo dentro del líquido (${pc(1-Wb)}).`};}
+    if(C<S.Ca) return {type:'αprec',frac:s.W2,txt:`Granos de ${a} con precipitados de ${b} (${pc(s.W2)}). La aleación cruzó la línea de solvus al enfriar.`};
+    if(C>S.Cb) return {type:'βprec',frac:1-s.W2,txt:`Granos de ${b} con precipitados de ${a} (${pc(1-s.W2)}), por cruce de la línea de solvus.`};
+    if(Math.abs(C-S.CE)<0.5) return {type:'eut',frac:0,txt:`100 % microconstituyente eutéctico: ${a} y ${b} alternados, formados a ${S.TE} °C.`};
+    if(C<S.CE){const We=(C-S.Ca)/(S.CE-S.Ca);return {type:'hipo',frac:1-We,txt:`Hipoeutéctica. ${a} primaria: ${pc(1-We)}. Eutéctico: ${pc(We)}. W_e = (C₀ − ${S.Ca})/(${S.CE} − ${S.Ca}).`};}
+    const We=(S.Cb-C)/(S.Cb-S.CE);return {type:'hiper',frac:1-We,txt:`Hipereutéctica. ${b} primario: ${pc(1-We)}. Eutéctico: ${pc(We)}. W_e = (${S.Cb} − C₀)/(${S.Cb} − ${S.CE}).`};
+  }
+  const cv=document.getElementById('mc'),ctx=cv.getContext('2d'),W=400;
+  function rng(seed){return ()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646;};}
+  function col(v){const c=getComputedStyle(document.documentElement).getPropertyValue(v).trim();const n=parseInt(c.slice(1),16);return [n>>16&255,n>>8&255,n&255];}
+  function drawMicro(m){
+    if(m.spec) return drawSpec(m.spec);
+    const img=ctx.createImageData(W,W),d=img.data,liq=col('--liq'),a=col('--alfa'),b=col('--beta'),gb=col('--gb');
+    const r=rng(7);const seeds=[];for(let i=0;i<22;i++)seeds.push([r()*W,r()*W,r()*Math.PI]);
+    const near=(x,y)=>{let d1=1e9,d2=1e9,k=0;for(let i=0;i<seeds.length;i++){const dx=x-seeds[i][0],dy=y-seeds[i][1],q=dx*dx+dy*dy;if(q<d1){d2=d1;d1=q;k=i;}else if(q<d2)d2=q;}return [Math.sqrt(d1),Math.sqrt(d2)-Math.sqrt(d1),k];};
+    let thr=0;
+    if(['α+L','L+β','hipo','hiper'].includes(m.type)){const ds=[];for(let y=0;y<W;y+=4)for(let x=0;x<W;x+=4)ds.push(near(x,y)[0]);ds.sort((p,q)=>p-q);thr=m.frac<=0?-1:ds[Math.min(ds.length-1,Math.floor(m.frac*ds.length))];}
+    const prim=(m.type==='hiper'||m.type==='L+β')?b:a;
+    const fb=S.type==='eut'?(S.CE-S.Ca)/(S.Cb-S.Ca):0;
+    for(let y=0;y<W;y++)for(let x=0;x<W;x++){
+      let c;const [d1,edge,k]=near(x,y);
+      switch(m.type){
+        case 'L':c=liq;break;
+        case 'α':c=edge<1.6?gb:a;break;
+        case 'β':c=edge<1.6?gb:b;break;
+        case 'α+L':case 'L+β':c=d1<thr?prim:liq;break;
+        case 'αprec':c=edge<1.6?b:a;break;
+        case 'βprec':c=edge<1.6?a:b;break;
+        default:{ if(d1<thr){c=prim;break;}
+          const th=seeds[k][2],u=(x*Math.cos(th)+y*Math.sin(th))/5.2; c=(u-Math.floor(u))<fb?b:a; }
+      }
+      const i=(y*W+x)*4;d[i]=c[0];d[i+1]=c[1];d[i+2]=c[2];d[i+3]=255;
+    }
+    ctx.putImageData(img,0,0);
+    if(m.type==='αprec'||m.type==='βprec'){const pcol=m.type==='αprec'?b:a;ctx.fillStyle=`rgb(${pcol})`;const rr=rng(11);const n=Math.min(1200,Math.round(m.frac*6000));for(let i=0;i<n;i++){ctx.beginPath();ctx.arc(rr()*W,rr()*W,1.8,0,7);ctx.fill();}}
+  }
+
+
+  function drawSpec(sp){
+    const img=ctx.createImageData(W,W),d=img.data,gb=col('--gb');
+    const r=rng(7);const seeds=[];for(let i=0;i<22;i++)seeds.push([r()*W,r()*W,r()*Math.PI]);
+    const near=(x,y)=>{let d1=1e9,d2=1e9,k=0;for(let i=0;i<seeds.length;i++){const dx=x-seeds[i][0],dy=y-seeds[i][1],q=dx*dx+dy*dy;if(q<d1){d2=d1;d1=q;k=i;}else if(q<d2)d2=q;}return [Math.sqrt(d1),Math.sqrt(d2)-Math.sqrt(d1),k];};
+    const q=(fn,f)=>{if(f<=0)return -1;const ds=[];for(let y=0;y<W;y+=4)for(let x=0;x<W;x+=4)ds.push(fn(near(x,y)));ds.sort((a,b)=>a-b);return ds[Math.min(ds.length-1,Math.floor(f*ds.length))];};
+    const C=v=>col(v);
+    const lam=(x,y,k,a,b,fb)=>{const th=seeds[k][2],u=(x*Math.cos(th)+y*Math.sin(th))/5.2;return (u-Math.floor(u))<fb?C(b):C(a);};
+    const led=(x,y)=>{const cs=11,cx=(x%cs)-cs/2,cy=(y%cs)-cs/2;return (cx*cx+cy*cy)<9?C(sp.dot||'--alfa'):C('--beta');};
+    let thr=-1;
+    if(sp.k==='blobs'||sp.k==='primLam'||sp.k==='primLed') thr=q(n=>n[0],sp.f);
+    if(sp.k==='network') thr=q(n=>n[1],sp.f);
+    for(let y=0;y<W;y++)for(let x=0;x<W;x++){
+      const [d1,edge,k]=near(x,y);let c;
+      switch(sp.k){
+        case 'single':c=(sp.gb!==false&&edge<1.6)?gb:C(sp.c);break;
+        case 'blobs':c=d1<thr?C(sp.in):C(sp.m);break;
+        case 'prec':c=edge<2.2?C(sp.pc):C(sp.m);break;
+        case 'primLam':c=d1<thr?C(sp.prim):lam(x,y,k,sp.a,sp.b,sp.fb);break;
+        case 'network':c=edge<thr?C(sp.net):(sp.in.k==='lam'?lam(x,y,k,sp.in.a,sp.in.b,sp.in.fb):C(sp.in.c));break;
+        case 'primLed':c=d1<thr?(sp.prim==='cem'?C('--beta'):sp.prim==='gam'?(edge<1.6?gb:C('--gam')):lam(x,y,k,'--alfa','--beta',FB)):led(x,y);break;
+      }
+      const i=(y*W+x)*4;d[i]=c[0];d[i+1]=c[1];d[i+2]=c[2];d[i+3]=255;
+    }
+    ctx.putImageData(img,0,0);
+  }
+
+  // ================= Diagrama =================
+  const svg=document.getElementById('pd'),L=56,R=618,T0=16,B0=416,NS='http://www.w3.org/2000/svg';
+  const CM=()=>S.Cmax||100;
+  const X=c=>L+c/CM()*(R-L), Y=t=>B0-(t-S.Tmin)/(S.Tmax-S.Tmin)*(B0-T0);
+  const Cx=px=>(px-L)/(R-L)*CM(), Ty=py=>S.Tmin+(B0-py)/(B0-T0)*(S.Tmax-S.Tmin);
+  function el(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;}
+  function pathXT(fx,t0,t1,n){let d='';for(let i=0;i<=n;i++){const t=t0+(t1-t0)*i/n;d+=(d?'L':'M')+X(fx(t)).toFixed(1)+','+Y(t).toFixed(1);}return d;}
+  function pathTX(ft){let d='';for(let x=0;x<=100;x+=1){d+=(d?'L':'M')+X(x).toFixed(1)+','+Y(ft(x)).toFixed(1);}return d;}
+  function drawBase(){
+    svg.innerHTML='';
+    for(let c=0;c<=CM()+1e-9;c+=(S.xstep||10)){el('line',{x1:X(c),x2:X(c),y1:T0,y2:B0,stroke:'var(--line)'});const t=el('text',{x:X(c),y:B0+16,'text-anchor':'middle'});t.textContent=c;}
+    for(let t=S.Tmin;t<=S.Tmax;t+=S.tstep){el('line',{x1:L,x2:R,y1:Y(t),y2:Y(t),stroke:'var(--line)'});const s=el('text',{x:L-8,y:Y(t)+4,'text-anchor':'end'});s.textContent=t;}
+    const xl=el('text',{x:(L+R)/2,y:B0+38,'text-anchor':'middle'});xl.textContent=`${S.A} · Composición (% en peso de ${S.B}) · ${S.B}`;
+    const yl=el('text',{x:14,y:(T0+B0)/2,'text-anchor':'middle',transform:`rotate(-90 14 ${(T0+B0)/2})`});yl.textContent='Temperatura (°C)';
+    const st={fill:'none',stroke:'var(--curve)','stroke-width':2};
+    const ann=(txt,c,t,anchor)=>{const e=el('text',{x:X(c),y:Y(t),'text-anchor':anchor||'start'});e.textContent=txt;};
+    if(S.type==='fec'){
+      const P=(pts)=>{el('path',{...st,d:pts.map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join('')});};
+      P([[0,1538],[0.53,1493],[4.30,1147],[6.70,1250]]); // líquidus
+      P([[0,1538],[0.09,1493]]); P([[0.09,1493],[0.53,1493]]); // sólidus δ y peritéctico
+      P([[0,1394],[0.09,1493]]); P([[0,1394],[0.17,1493]]); P([[0.17,1493],[2.14,1147]]);
+      P([[2.14,1147],[6.70,1147]]); // eutéctico
+      P([[0,912],[0.76,727]]); P([[0,912],[0.022,727]]); P([[0.76,727],[2.14,1147]]);
+      P([[0.022,727],[6.70,727]]); // eutectoide
+      el('path',{...st,d:pathXT(S.aSolv,727,S.Tmin,60)});
+      P([[6.70,S.Tmin],[6.70,1250]]);
+      ann('1538 °C',0.05,1555);ann('912 °C',0.05,925);ann('727 °C',3.2,740,'middle');ann('1147 °C',5.6,1120,'middle');
+      ann('0.76',0.76,700,'middle');ann('2.14',2.14,1170,'middle');ann('4.30',4.30,1120,'middle');ann('6.70 · Fe₃C',6.68,1575,'end');
+    } else if(S.type==='iso'){
+      el('path',{...st,d:pathTX(S.TL)});el('path',{...st,d:pathTX(S.TS),'stroke-dasharray':'0'});
+      ann(S.TA+' °C',1,S.TA+(S.Tmax-S.Tmin)*0.02);ann(S.TB+' °C',99,S.TB+(S.Tmax-S.Tmin)*0.02,'end');
+      const lt=el('text',{x:X(30),y:Y(S.TL(30))-8,'text-anchor':'middle'});lt.textContent='líquidus';
+      const sd=el('text',{x:X(70),y:Y(S.TS(70))+16,'text-anchor':'middle'});sd.textContent='sólidus';
+    } else {
+      el('path',{...st,d:pathXT(S.liqA,Math.min(S.TA,S.Tmax),S.TE,120)});
+      el('path',{...st,d:pathXT(S.liqB,S.TE,Math.min(S.TB,S.Tmax),120)});
+      el('path',{...st,d:pathXT(S.solA,S.TA,S.TE,120)});
+      if(S.Cb<100) el('path',{...st,d:pathXT(S.solB,S.TB,S.TE,120)});
+      el('path',{...st,d:pathXT(S.solvA,S.TE,S.Tmin,120)});
+      if(S.Cb<100) el('path',{...st,d:pathXT(S.solvB,S.TE,S.Tmin,120)});
+      el('line',{...st,x1:X(S.Ca),x2:X(S.Cb),y1:Y(S.TE),y2:Y(S.TE)});
+      const dy=(S.Tmax-S.Tmin)*0.02;
+      ann(S.TA+' °C',1,S.TA+dy);ann(S.TB+' °C',99,Math.min(S.TB,S.Tmax-2*dy)+dy,'end');
+      ann(S.TE+' °C',(S.CE<50?S.CE+18:S.CE-25),S.TE+dy,'middle');
+      ann(String(S.CE),S.CE,S.TE-4*dy,'middle');ann(String(S.Ca),S.Ca+1,S.TE+dy);
+      if(S.Cb<100) ann(String(S.Cb),S.Cb,S.TE+dy,'end');
+    }
+    S.labels.forEach(([s,c,t])=>{const e=el('text',{x:X(c),y:Y(t),class:'reg','text-anchor':'middle'});e.textContent=s;});
+  }
+  function drawPoint(){
+    drawBase();const g=el('g',{});
+    el('line',{x1:X(C),x2:X(C),y1:T0,y2:B0,stroke:'var(--naranja)','stroke-dasharray':'4 4',opacity:.6},g);
+    const s=state(C,T);
+    if(s.c1!==undefined&&(mode==='exp'||revealed)){
+      el('line',{x1:X(s.c1),x2:X(s.c2),y1:Y(T),y2:Y(T),stroke:'var(--tie)','stroke-width':3},g);
+      [s.c1,s.c2].forEach(c=>el('circle',{cx:X(c),cy:Y(T),r:4.5,fill:'var(--panel)',stroke:'var(--tie)','stroke-width':2},g));
+    }
+    el('circle',{cx:X(C),cy:Y(T),r:7,fill:'var(--naranja)',stroke:'var(--panel)','stroke-width':2},g);
+  }
+
+  // ================= Lectura =================
+  const sub=h=>h.replace(/([CW])_([^\s=,)<:]+)/g,'$1<sub>$2</sub>');
+  function read(){
+    const s=state(C,T),kv=document.getElementById('kv'),lv=document.getElementById('lever');
+    let rows=`<dt>Punto</dt><dd>C₀ = ${f1(C)} % ${S.B}, T = ${Math.round(T)} °C</dd><dt>Región</dt><dd>${rname(s.r)}</dd>`;
+    if(s.c1===undefined){
+      const ph=rname(s.r);rows+=`<dt>Composición</dt><dd>${ph}: ${f1(C)} % ${S.B}</dd><dt>Fracción</dt><dd>W_${ph} = 1.00</dd>`;
+      lv.innerHTML='Una sola fase: su composición es la de la aleación y no se aplica la regla de la palanca.';
+    } else {
+      const n1=pn(s.p1),n2=pn(s.p2),W1=(s.c2-C)/(s.c2-s.c1),W2=(C-s.c1)/(s.c2-s.c1);
+      rows+=`<dt>Composiciones</dt><dd>C_${n1} = ${f1(s.c1)} %, C_${n2} = ${f1(s.c2)} % ${S.B}</dd><dt>Fracciones</dt><dd>W_${n1} = ${W1.toFixed(2)}, W_${n2} = ${W2.toFixed(2)}</dd>`;
+      lv.innerHTML=`Regla de la palanca (brazo opuesto):<br>W_${n1} = (C_${n2} − C₀)/(C_${n2} − C_${n1}) = (${f1(s.c2)} − ${f1(C)})/(${f1(s.c2)} − ${f1(s.c1)}) = <b>${W1.toFixed(2)}</b><br>W_${n2} = (C₀ − C_${n1})/(C_${n2} − C_${n1}) = (${f1(C)} − ${f1(s.c1)})/(${f1(s.c2)} − ${f1(s.c1)}) = <b>${W2.toFixed(2)}</b>`;
+    }
+    kv.innerHTML=sub(rows);lv.innerHTML=sub(lv.innerHTML);
+    const m=micro(C,T);document.getElementById('microTxt').innerHTML=m.txt.replace(/W_e/g,'W<sub>e</sub>');drawMicro(m);
+    const br=document.getElementById('bridge');br.hidden=S.type!=='fec';
+    if(S.type==='fec'){const PL=[[0.20,'1020','AISI 1020'],[0.45,'1045','AISI 1045'],[0.76,'cal','Fe–0.76 C (Callister)'],[0.80,'1080','AISI 1080'],[0.95,'1095','AISI 1095'],[1.05,'w1','AISI W1']];
+      let best=null;PL.forEach(q=>{const d=Math.abs(C-q[0]);if(d<=0.02&&(!best||d<best.d))best={d,id:q[1],n:q[2]};});
+      const ok=s.r==='γ'&&!!best,bb=document.getElementById('bridgeBtn');bb.disabled=!ok;window.__bridge=best;
+      document.getElementById('bridgeTxt').textContent=ok?`Austenita de ${best.n} a ${Math.round(T)} °C: lista para templar. Abre su diagrama TTT con esta temperatura de austenitización.`:(best?`Composición de ${best.n}: sube el punto a la región γ para austenizar por completo.`:'Lleva el punto a la composición de un acero al carbono del TTT (0.20, 0.45, 0.76, 0.80, 0.95 o 1.05 % C) dentro de la región γ.');}
+    const hide=(mode==='pred'&&!revealed);
+    ['answers','microWrap'].forEach(id=>document.getElementById(id).classList.toggle('hidden-ans',hide));
+  }
+
+  // ================= Ficha, selector y controles =================
+  function renderFicha(){
+    const h=S.hume;
+    document.getElementById('ficha').innerHTML=`<div><span class="badge">${S.tag}</span> <span class="note">${S.sub}</span></div>
+      <div class="tbl"><table><tr><th>Elemento</th><th>Estructura</th><th>Radio (nm)</th></tr>${h.rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="num">${r[2]}</td></tr>`).join('')}<tr><td colspan="2">Diferencia de radios</td><td class="num">${h.diff}</td></tr></table></div>
+      <p style="margin:0">${h.verdict}</p>
+      <p style="margin:0"><b>En la industria:</b> ${S.ind}</p>
+      <p class="note" style="margin:0">Fuente: ${S.src}. Radios atómicos de Callister (verificar en tu edición).</p>`;
+    document.getElementById('legend').innerHTML=`<span><i style="background:var(--liq)"></i>Líquido</span><span><i style="background:var(--alfa)"></i>${S.phDesc.A}</span>`+(S.phDesc.G?`<span><i style="background:var(--gam)"></i>${S.phDesc.G}</span>`:'')+(S.phDesc.B?`<span><i style="background:var(--beta)"></i>${S.phDesc.B}</span>`:'');
+  }
+  const sysEl=document.getElementById('systems');
+  sysEl.innerHTML=Object.values(SYS).map(s=>`<button class="sys" data-s="${s.id}" aria-pressed="false"><span class="tag">${s.tag}</span>${s.name}<small>${s.sub}</small></button>`).join('');
+  sysEl.onclick=e=>{const b=e.target.closest('[data-s]');if(b)selectSys(b.dataset.s);};
+
+  const cR=document.getElementById('cR'),cN=document.getElementById('cN'),tR=document.getElementById('tR'),tN=document.getElementById('tN');
+  function set(c,t,fromUser){C=Math.max(0,Math.min(CM(),+c));T=Math.max(S.Tmin,Math.min(S.Tmax,+t));cR.value=cN.value=+C.toFixed(S.type==='fec'?3:1);tR.value=tN.value=Math.round(T);
+    if(fromUser&&mode==='pred'){revealed=false;resetPred();}
+    drawPoint();read();}
+  cR.oninput=()=>set(cR.value,T,true);cN.onchange=()=>set(cN.value,T,true);tR.oninput=()=>set(C,tR.value,true);tN.onchange=()=>set(C,tN.value,true);
+  document.getElementById('presets').onclick=e=>{const b=e.target.closest('[data-c]');if(b)set(b.dataset.c,b.dataset.t,true);};
+  let drag=false;
+  function fromEvt(e){const r=svg.getBoundingClientRect(),sx=640/r.width,sy=470/r.height;const px=(e.clientX-r.left)*sx,py=(e.clientY-r.top)*sy;if(px<L||px>R||py<T0||py>B0)return;set(Cx(px),Ty(py),true);}
+  svg.addEventListener('pointerdown',e=>{drag=true;svg.setPointerCapture(e.pointerId);fromEvt(e);});
+  svg.addEventListener('pointermove',e=>{if(drag)fromEvt(e);});
+  svg.addEventListener('pointerup',()=>drag=false);
+
+  const opts=document.getElementById('opts'),rev=document.getElementById('reveal'),ver=document.getElementById('verdict');
+  function renderOpts(){const keys=S.type==='fec'?['L','γ','α','δ','γ + L','L + Fe₃C','α + γ','γ + Fe₃C','α + Fe₃C','δ + γ','δ + L']:S.type==='iso'?['L','A','A+L']:['L','A','B','A+L','L+B','A+B'];
+    opts.innerHTML=keys.map(k=>`<label class="opt"><input type="radio" name="ph" value="${k}">${rname(k)}</label>`).join('');}
+  opts.onchange=()=>rev.disabled=false;
+  function resetPred(){opts.querySelectorAll('input').forEach(i=>i.checked=false);rev.disabled=mode==='pred';ver.innerHTML='';}
+  function renderCh(){const R=S.retos;document.getElementById('challengeBox').innerHTML=`<div class="challenge"><b>${S.name} · Reto ${ch+1} de ${R.length}</b><br>${R[ch].t}<div class="note" style="margin-top:4px">Pista: ${sub(R[ch].hint)}</div><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${R.map((c,i)=>`<button class="btn" data-ch="${i}" ${i===ch?'style="border-color:var(--naranja)"':''}>Reto ${i+1}</button>`).join('')}</div></div>`;
+    document.querySelectorAll('[data-ch]').forEach(b=>b.onclick=()=>{ch=+b.dataset.ch;ver.innerHTML='';renderCh();});}
+  rev.onclick=()=>{
+    const st=state(C,T);
+    if(mode==='pred'){const p=(opts.querySelector('input:checked')||{}).value;revealed=true;const ok=p===st.r;
+      ver.className='verdict '+(ok?'ok':'bad');ver.textContent=ok?'Correcto. Ahora explica las composiciones con la línea de unión.':`No: la región es ${rname(st.r)}. Revisa en qué curvas cae el punto.`;}
+    else{const ok=S.retos[ch].chk(C,T,st,S);ver.className='verdict '+(ok?'ok':'bad');ver.textContent=ok?'Reto cumplido.':'Aún no. Ajusta el punto y vuelve a evaluar.';}
+    drawPoint();read();};
+  function setMode(m){mode=m;revealed=m!=='pred';[['t-exp','exp'],['t-pred','pred'],['t-reto','reto']].forEach(([id,v])=>document.getElementById(id).setAttribute('aria-selected',v===m));
+    document.getElementById('predCard').hidden=m==='exp';document.getElementById('predBox').hidden=m!=='pred';
+    document.getElementById('challengeBox').hidden=m!=='reto';if(m==='reto'){ch=Math.min(ch,S.retos.length-1);renderCh();}
+    rev.textContent=m==='pred'?'Revelar':'Evaluar mi punto';resetPred();rev.disabled=m==='pred';
+    drawPoint();read();}
+  document.getElementById('t-exp').onclick=()=>setMode('exp');document.getElementById('t-pred').onclick=()=>setMode('pred');document.getElementById('t-reto').onclick=()=>setMode('reto');
+
+  function selectSys(id){
+    S=SYS[id];ch=0;revealed=mode!=='pred';
+    sysEl.querySelectorAll('.sys').forEach(b=>b.setAttribute('aria-pressed',b.dataset.s===id));
+    document.getElementById('cLab').textContent=`% ${S.B} (C₀)`;
+    cR.max=cN.max=CM();cR.step=cN.step=S.type==='fec'?0.005:0.1;
+    tR.min=tN.min=S.Tmin;tR.max=tN.max=S.Tmax;
+    document.getElementById('presets').innerHTML=S.presets.map(([c,t])=>`<button class="btn" data-c="${c}" data-t="${t}">${c} % ${S.B} · ${t} °C</button>`).join('');
+    renderFicha();renderOpts();resetPred();if(mode==='reto')renderCh();
+    try{localStorage.setItem('pd-sys',id);}catch(e){}
+    set(S.start[0],S.start[1],false);
+  }
+  document.getElementById('bridgeBtn').onclick=()=>{if(window.TTT&&window.__bridge)window.TTT.load(window.__bridge.id,T);window.showView('ttt');};
+  window.PD={go:(c,t)=>{selectSys('fec');set(c,t,false);}};
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>read());
+  let first='pbsn';try{const v=localStorage.getItem('pd-sys');if(v&&SYS[v])first=v;}catch(e){}
+  selectSys(first);
+})();
+</script>
+<script>
+(function(){
+  // ================= Aceros =================
+  const andA1=s=>Math.round(723-10.7*(s.Mn||0)-16.9*(s.Ni||0)+29.1*(s.Si||0)+16.9*(s.Cr||0));
+  const andA3=s=>Math.round(910-203*Math.sqrt(s.C)-15.2*(s.Ni||0)+44.7*(s.Si||0)+31.5*(s.Mo||0));
+  const andMs=s=>Math.round(539-423*s.C-30.4*(s.Mn||0)-17.7*(s.Ni||0)-12.1*(s.Cr||0)-7.5*(s.Mo||0));
+  const TAB=[[722,900,3e4],[710,80,4000],[700,25,1000],[675,8,200],[650,4,40],[600,1.5,15],[540,.7,6],
+             [500,.9,12],[450,1.5,40],[400,4,150],[350,12,900],[300,40,4000],[250,150,3e4],[220,250,7e4]];
+  const STEELS=[
+    {id:'cal',name:'Fe–0.76 C',cls:'Eutectoide',sub:'Modelo de Callister',C:0.76,comp:'0.76 % C, sin aleantes',table:true,A1:727,Ms:220,M50:165,M90:130,aus:760,
+      uses:'El diagrama de libro (Callister, Fig. 10.22). Úsalo para los ejemplos A, B y C.',vs:'Es la referencia contra la que se comparan los demás.'},
+    {id:'1080',name:'AISI 1080',cls:'Eutectoide',sub:'Al carbono',C:0.80,Mn:0.75,Si:0.25,comp:'0.80 C · 0.75 Mn · 0.25 Si',Ms:210,msEst:true,
+      X:null,P:[540,1.0],B:[440,2.0,540],rP:12,rB:40,
+      uses:'Rieles, resortes, alambre para cuerda de piano.',vs:'Casi igual al de Callister; el Mn retrasa un poco las curvas.'},
+    {id:'1020',name:'AISI 1020',cls:'Hipoeutectoide',sub:'Bajo carbono',C:0.20,Mn:0.45,Si:0.25,comp:'0.20 C · 0.45 Mn · 0.25 Si',
+      X:[620,0.15],P:[560,0.4],B:[470,0.6,600],rP:15,rB:40,
+      uses:'Piezas estructurales, tornillería común y piezas que se cementan.',vs:'La nariz está tan a la izquierda que en la práctica no se puede templar a martensita completa salvo en secciones muy delgadas. Mₛ es alto.'},
+    {id:'1045',name:'AISI 1045',cls:'Hipoeutectoide',sub:'Medio carbono',C:0.45,Mn:0.75,Si:0.25,comp:'0.45 C · 0.75 Mn · 0.25 Si',
+      X:[600,0.3],P:[550,0.6],B:[450,1.0,580],rP:12,rB:40,
+      uses:'Ejes, flechas, engranes y pernos de resistencia media.',vs:'Aparece la curva de ferrita proeutectoide entre A₁ y A₃.'},
+    {id:'1095',name:'AISI 1095',cls:'Hipereutectoide',sub:'Alto carbono',C:0.95,Mn:0.40,Si:0.25,comp:'0.95 C · 0.40 Mn · 0.25 Si',Ms:185,msEst:true,Acm:785,
+      X:[620,0.5],P:[550,0.8],B:[400,3,520],rP:12,rB:50,
+      uses:'Resortes planos, cuchillas, hojas de corte.',vs:'Aparece la cementita proeutectoide entre A₁ y A_cm. Mₛ bajo: al templar queda austenita retenida.'},
+    {id:'w1',name:'AISI W1',cls:'Hipereutectoide',sub:'Herramienta, temple en agua',C:1.05,Mn:0.25,Si:0.25,comp:'1.05 C · 0.25 Mn · 0.25 Si',Ms:170,msEst:true,Acm:800,
+      X:[620,0.4],P:[550,0.6],B:[400,3,520],rP:12,rB:50,
+      uses:'Punzones, brocas manuales, cinceles; se templa en agua porque la nariz es muy rápida.',vs:'Todavía más austenita retenida que el 1095.'},
+    {id:'4140',name:'AISI 4140',cls:'Aleado',sub:'Cr–Mo',C:0.40,Mn:0.87,Si:0.25,Cr:0.95,Mo:0.20,comp:'0.40 C · 0.87 Mn · 0.95 Cr · 0.20 Mo',
+      X:[680,3],P:[650,8],B:[480,5,560],rP:15,rB:50,
+      uses:'Cigüeñales, semiejes, pernos de alta resistencia; buena opción para piezas de un FSAE.',vs:'El Cr y el Mo mueven las curvas a la derecha: hay más tiempo para templar en aceite.'},
+    {id:'4340',name:'AISI 4340',cls:'Aleado',sub:'Ni–Cr–Mo',C:0.40,Mn:0.70,Si:0.25,Ni:1.83,Cr:0.80,Mo:0.25,comp:'0.40 C · 0.70 Mn · 1.83 Ni · 0.80 Cr · 0.25 Mo',
+      X:[680,200],P:[650,500],B:[450,40,530],rP:10,rB:30,
+      uses:'Trenes de aterrizaje, ejes muy cargados, componentes que necesitan tenacidad en secciones gruesas.',vs:'La perlita se separa de la bainita y aparece una “bahía” entre ambas narices: es el ejemplo clásico de alta templabilidad.'},
+    {id:'52100',name:'AISI 52100',cls:'Aleado',sub:'Alto C–Cr',C:1.00,Mn:0.35,Si:0.25,Cr:1.45,comp:'1.00 C · 0.35 Mn · 1.45 Cr',Ms:200,msEst:true,Acm:820,acmEst:true,
+      X:[700,15],P:[680,30],B:[400,50,480],rP:10,rB:40,
+      uses:'Rodamientos de bolas y rodillos.',vs:'Hipereutectoide y aleado: nariz perlítica alta y lenta, bainita muy lenta.'}
+  ];
+  STEELS.forEach(s=>{
+    if(!s.table){ s.A1=andA1(s); if(s.C<0.72){s.Atop=andA3(s);s.topName='A₃';s.xName='ferrita';} else if(s.C>0.85){s.Atop=s.Acm;s.topName='A_cm';s.xName='cementita';}
+      if(!s.Ms) s.Ms=andMs(s); s.M50=s.Ms-63; s.M90=s.Ms-209;
+      s.aus=Math.round(((s.Atop||s.A1)+45)/10)*10; }
+  });
+  let S=STEELS[0];
+
+  // ================= Cinética =================
+  function interp(T,col){for(let i=0;i<TAB.length-1;i++){const a=TAB[i],b=TAB[i+1];
+      if(T<=a[0]&&T>=b[0]){const u=(T-b[0])/(a[0]-b[0]);return Math.pow(10,Math.log10(b[col])+u*(Math.log10(a[col])-Math.log10(b[col])));}}return null;}
+  function cc(T,Tn,tn,Ttop,q){ if(T>=Ttop) return Infinity; if(T>=Tn) return tn*Math.pow(10,0.25*(T-Tn)/(Ttop-T)); return tn*Math.pow(10,q*Math.pow((Tn-T)/100,2)); }
+  // devuelve {ts,tf,mech:'P'|'B'} para T < A1
+  function kin(T){
+    if(S.table){ if(T>722||T<220) return null; const ts=interp(T,1),tf=interp(T,2); return {ts,tf,mech:T>=540?'P':'B'}; }
+    if(T>=S.A1) return null;
+    const tP=cc(T,S.P[0],S.P[1],S.A1,1.3), tX=S.X?cc(T,S.X[0],S.X[1],S.Atop,1.3):Infinity, tB=cc(T,S.B[0],S.B[1],S.B[2],0.7);
+    const tD=Math.min(tP,tX);
+    if(tD<=tB) return {ts:tD,tf:tP*S.rP,mech:'P'}; return {ts:tB,tf:tB*S.rB,mech:'B'};
+  }
+  function kinX(T){ if(!S.X||T>=S.Atop||T<S.A1) return null; const ts=cc(T,S.X[0],S.X[1],S.Atop,1.3); return {ts,tf:ts*S.rP}; }
+  function avr(ts,tf){const n=Math.log(Math.log(.01)/Math.log(.99))/Math.log(tf/ts);const k=-Math.log(.99)/Math.pow(ts,n);return {n,k,t50:Math.pow(Math.log(2)/k,1/n)};}
+  const yAt=(ts,tf,t)=>{if(!isFinite(ts))return 0;const a=avr(ts,tf);return 1-Math.exp(-a.k*Math.pow(t,a.n));};
+  function mFrac(T){ if(T>=S.Ms) return 0;
+    if(S.table){const P=[[220,0],[165,.5],[130,.9],[25,1]];for(let i=0;i<P.length-1;i++){if(T<=P[i][0]&&T>=P[i+1][0]){const u=(P[i][0]-T)/(P[i][0]-P[i+1][0]);return P[i][1]+u*(P[i+1][1]-P[i][1]);}}return 1;}
+    return 1-Math.exp(-0.011*(S.Ms-T)); }
+  // fracción proeutectoide de equilibrio
+  function feqInter(T){ // entre A1 y Atop
+    const f=(S.Atop-T)/(S.Atop-S.A1);
+    if(S.C<0.76){const Cg=S.C+(0.76-S.C)*f;return Math.max(0,(Cg-S.C)/(Cg-0.02));}
+    const Cg=S.C-(S.C-0.76)*f;return Math.max(0,(S.C-Cg)/(6.7-Cg)); }
+  const feqA1=()=>S.C<0.72?(0.76-S.C)/0.74:S.C>0.85?(S.C-0.76)/5.94:0;
+
+  // ================= Estado =================
+  let steps=[], mode='pred', challenge=0, active=-1;
+  const fmt=t=>{if(t>=1000){const e=Math.floor(Math.log10(t)),m=t/Math.pow(10,e);const SUP='⁰¹²³⁴⁵⁶⁷⁸⁹';return (Math.abs(m-1)<.05?'':m.toFixed(1)+'×')+'10'+String(e).split('').map(d=>SUP[+d]).join('');}return (t<10?t.toFixed(1):Math.round(t)).toString();};
+  const pc=x=>(x>0&&x<0.05?(x*100).toFixed(1):Math.round(x*100))+' %';
+  function presetsFor(s){
+    if(s.table) return {'Ejemplo A · 350 °C':[{T:350,t:1e4}],'Ejemplo B · 250 °C':[{T:250,t:100}],'Ejemplo C · 650 → 400 °C':[{T:650,t:20},{T:400,t:1000}],'Temple directo':[]};
+    const o={'Temple directo':[]};
+    o['Perlita fina · '+(s.P[0]+40)+' °C']=[{T:Math.min(s.A1-15,s.P[0]+40),t:1e5}];
+    const tb=Math.max(s.Ms+30,s.B[0]-60);o['Austemperizado · '+tb+' °C']=[{T:tb,t:1e5}];
+    if(s.X) o['Intercrítico · '+Math.round((s.A1+s.Atop)/2)+' °C']=[{T:Math.round((s.A1+s.Atop)/2),t:1e4}];
+    return o;
+  }
+
+  function simulate(){
+    let A=1,F=0,Cp=0,P=0,B=0,M=0,Tlow=S.aus;const why=[];
+    const xn=S.xName||'';
+    steps.forEach((st,i)=>{
+      const T=st.T,t=st.t;const Tprev=Tlow;Tlow=Math.min(Tlow,T);
+      if(T<S.Ms&&T<Tprev){const fp=mFrac(Tprev);const dM=fp>=1?0:A*(mFrac(T)-fp)/(1-fp);M+=dM;A-=dM;why.push(`Escalón ${i+1}: ${T} °C está por debajo de Mₛ = ${S.Ms} °C. Se forma de inmediato ${pc(dM)} de martensita.`);}
+      if(T>=(S.Atop||S.A1)){why.push(`Escalón ${i+1}: a ${T} °C el acero sigue siendo austenita estable (por encima de ${S.Atop?S.topName:'A₁'} = ${S.Atop||S.A1} °C). No pasa nada.`);return;}
+      if(T>=S.A1){const k=kinX(T);const y=yAt(k.ts,k.tf,t);const cap=feqInter(T);const prev=S.C<0.72?F:Cp;const d=Math.max(0,Math.min(A,cap*y-prev));
+        if(S.C<0.76)F+=d;else Cp+=d;A-=d;
+        why.push(`Escalón ${i+1}: ${T} °C está entre A₁ (${S.A1} °C) y ${S.topName} (${S.Atop} °C). Solo puede formarse ${xn} proeutectoide, como máximo ${pc(cap)} (regla de la palanca). Inicia en ≈${fmt(k.ts)} s; en ${fmt(t)} s se forma ${pc(d)}${prev>0.005?` (ya había ${pc(prev)} de escalones anteriores)`:''}. La austenita restante se enriquece y no se transforma a esta temperatura.`);return;}
+      const k=kin(T);
+      if(!k){why.push(`Escalón ${i+1}: a ${T} °C no hay transformación difusional en el intervalo del modelo.`);return;}
+      const y=yAt(k.ts,k.tf,t),d=A*y;
+      if(k.mech==='P'){const target=S.table?0:feqA1()*Math.max(0,Math.min(1,(T-S.B[0])/(S.A1-S.B[0])));const prevX=S.C<0.72?F:Cp;const dx=Math.min(d,Math.max(0,target-prevX)*y);
+        if(S.C<0.76)F+=dx;else Cp+=dx;P+=d-dx;
+        why.push(y<.01?`Escalón ${i+1}: a ${T} °C la transformación necesita ≈${fmt(k.ts)} s para iniciar; ${fmt(t)} s no alcanzan.`:
+          `Escalón ${i+1}: a ${T} °C (zona perlítica) inicia en ≈${fmt(k.ts)} s y termina en ≈${fmt(k.tf)} s. Se transforma ${pc(y)} de la austenita disponible: ${dx>0.005?pc(dx)+' de '+xn+' proeutectoide y ':''}${pc(d-dx)} de perlita.`);}
+      else {B+=d;why.push(y<.01?`Escalón ${i+1}: a ${T} °C la bainita necesita ≈${fmt(k.ts)} s para iniciar; ${fmt(t)} s no alcanzan.`:`Escalón ${i+1}: a ${T} °C (zona bainítica) inicia en ≈${fmt(k.ts)} s y termina en ≈${fmt(k.tf)} s. Se forma ${pc(d)} de bainita.`);}
+      A-=d;
+    });
+    // temple final
+    const fPrev=mFrac(Tlow),fEnd=mFrac(25);const rel=fPrev>=1?0:(fEnd-fPrev)/(1-fPrev);const dM=A*rel;M+=dM;A-=dM;
+    if(A+dM>0.005) why.push(`Temple a 25 °C: la austenita remanente cruza Mₛ = ${S.Ms} °C. ${S.table?'Simplificación de libro: toda se vuelve martensita.':`Koistinen–Marburger: f = 1 − exp[−0.011(${S.Ms} − 25)] = ${pc(fEnd)}. Martensita: ${pc(dM)}; austenita retenida: ${pc(A)}.`}`);
+    else why.push('Temple a 25 °C: ya no queda austenita; la microestructura no cambia.');
+    return {F,Cp,P,B,M,RA:Math.max(0,A),why};
+  }
+  const KEYS=[['F','Ferrita proeutectoide','var(--alfa)'],['Cp','Cementita proeutectoide','var(--cafe)'],['P','Perlita','var(--gb)'],['B','Bainita','var(--denim)'],['M','Martensita','var(--mart)'],['RA','Austenita retenida','var(--gam)']];
+  const present=r=>KEYS.map(k=>k[0]).filter(k=>r[k]>=0.05);
+
+  // ================= Diagrama =================
+  const svg=document.getElementById('x-ttt'),L=58,R=618,T0=14,B0=420,TM=900;
+  const X=lt=>L+(lt+1)/6*(R-L), Y=T=>B0-T/TM*(B0-T0), NS='http://www.w3.org/2000/svg';
+  function el(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;}
+  function txt(s,x,y,a,cls,fill){const e=el('text',{x,y,'text-anchor':a||'start'});if(cls)e.setAttribute('class',cls);if(fill)e.style.fill=fill;e.textContent=s;return e;}
+  function curve(fn,T1,T2,color,dash){let d='';for(let T=T1;T>=T2;T-=1){const t=fn(T);if(!t||!isFinite(t))continue;const lt=Math.log10(t);if(lt>5||lt<-1){continue;}d+=(d?'L':'M')+X(lt).toFixed(1)+','+Y(T).toFixed(1);}
+    if(d)el('path',{d,fill:'none',stroke:color,'stroke-width':2,'stroke-dasharray':dash||'0'});}
+  function drawBase(){
+    svg.innerHTML='';
+    for(let d=-1;d<=5;d++){el('line',{x1:X(d),x2:X(d),y1:T0,y2:B0,stroke:'var(--line)'});txt(d===-1?'0.1':d===0?'1':d===1?'10':'10'+['','','','²','³','⁴','⁵'][d+1],X(d),B0+18,'middle');}
+    for(let T=0;T<=TM;T+=100){el('line',{x1:L,x2:R,y1:Y(T),y2:Y(T),stroke:'var(--line)'});txt(String(T),L-8,Y(T)+4,'end');}
+    txt('Tiempo (s), escala logarítmica',(L+R)/2,B0+40,'middle');
+    el('text',{x:14,y:(T0+B0)/2,'text-anchor':'middle',transform:`rotate(-90 14 ${(T0+B0)/2})`}).textContent='Temperatura (°C)';
+    el('line',{x1:L,x2:R,y1:Y(S.A1),y2:Y(S.A1),stroke:'var(--muted)','stroke-dasharray':'6 4'});txt(`A₁ = ${S.A1} °C`,R-4,Y(S.A1)-5,'end');
+    if(S.Atop){el('line',{x1:L,x2:R,y1:Y(S.Atop),y2:Y(S.Atop),stroke:'var(--muted)','stroke-dasharray':'2 4'});txt(`${S.topName} = ${S.Atop} °C`,R-4,Y(S.Atop)-5,'end');}
+    [[S.Ms,'Mₛ'],[S.M50,'M(50 %)'],[S.M90,'M(90 %)']].forEach(([T,l],i)=>{if(T<=5)return;el('line',{x1:L,x2:R,y1:Y(T),y2:Y(T),stroke:'var(--mart)','stroke-dasharray':i?'3 4':'0','stroke-width':i?1:1.5});txt(`${l}${i?'':' = '+S.Ms+' °C'}`,L+6,Y(T)-4,'start',null,'var(--mart)');});
+    const top=S.table?722:S.A1-1;
+    curve(T=>{const k=kin(T);return k&&k.ts;},top,Math.max(S.table?220:S.M90>0?S.M90:20,20),'var(--start)');
+    curve(T=>{const k=kin(T);return k&&isFinite(k.ts)?avr(k.ts,k.tf).t50:null;},top,Math.max(S.table?220:20,20),'var(--half)','6 4');
+    curve(T=>{const k=kin(T);return k&&k.tf;},top,Math.max(S.table?220:20,20),'var(--finish)');
+    if(S.X) curve(T=>T>=S.Atop?null:cc(T,S.X[0],S.X[1],S.Atop,1.3),S.Atop-1,S.P[0],'var(--cafe)','8 3');
+    const labX=(T,f)=>{const k=kin(T);return k?Math.log10(k.tf)+f:3.5;};
+    txt('A',X(-0.75),Y(Math.max(S.Ms+40,(S.Ms+S.A1)/2)),'middle','reg');
+    if(!S.table){const pl=S.C<0.72?'F + P':S.C>0.85?'Fe₃C + P':'P';txt(pl,X(Math.min(4.5,labX(S.P[0]+30,0.4))),Y(S.P[0]+40),'middle','reg');
+      txt('B',X(Math.min(4.6,labX(S.B[0]-30,0.4))),Y(S.B[0]-30),'middle','reg');}
+    else {txt('P',X(3.4),Y(640),'middle','reg');txt('B',X(3.9),Y(420),'middle','reg');}
+    if(S.Ms-70>20) txt('M',X(1.6),Y(Math.max(30,S.Ms-90)),'middle','reg');
+  }
+  function drawPath(){
+    const g=el('g',{});let cum=.1,T=S.aus;let d=`M${X(-1)},${Y(T)}`;
+    const ends=[];steps.forEach(s=>{d+=`L${X(Math.log10(cum))},${Y(s.T)}`;cum+=s.t;T=s.T;d+=`L${X(Math.min(5,Math.log10(cum)))},${Y(T)}`;ends.push([X(Math.min(5,Math.log10(cum))),Y(T)]);});
+    d+=`L${X(Math.min(5,Math.log10(cum)))},${Y(25)}`;
+    el('path',{d,fill:'none',stroke:'var(--path)','stroke-width':3,'stroke-linejoin':'round'},g);
+    el('circle',{cx:X(-1),cy:Y(S.aus),r:5,fill:'var(--path)'},g);
+    ends.forEach(([x,y],i)=>el('circle',{cx:x,cy:y,r:i===active?8:5,fill:i===active?'var(--panel)':'var(--path)',stroke:'var(--path)','stroke-width':3},g));
+  }
+  function draw(){drawBase();drawPath();}
+
+
+  // ---- clic / arrastre en el diagrama ----
+  let dragging=false;
+  function fromEvt(e){
+    const r=svg.getBoundingClientRect(),px=(e.clientX-r.left)*640/r.width,py=(e.clientY-r.top)*470/r.height;
+    if(px<L||px>R||py<T0||py>B0)return;
+    let T=Math.round((B0-py)/(B0-T0)*TM/5)*5;T=Math.max(100,Math.min(S.aus-10,T));
+    const tAbs=Math.pow(10,(px-L)/(R-L)*6-1);
+    let created=false;
+    if(!steps.length){steps.push({T,t:10});active=0;created=true;}
+    const i=(active<0||active>=steps.length)?steps.length-1:active;active=i;
+    let before=0.1;for(let j=0;j<i;j++)before+=steps[j].t;
+    const t=Math.max(0.1,Math.min(1e5,tAbs-before));
+    steps[i].T=T;steps[i].t=+t.toPrecision(2);
+    if(created){renderSteps();}
+    else{const w=stepsEl.querySelectorAll('.step')[i];if(w){w.querySelector('#xtr'+i).value=T;w.querySelector('#xtn'+i).value=T;w.querySelector('#xsr'+i).value=Math.log10(steps[i].t);w.querySelector('#xsn'+i).value=steps[i].t;w.querySelector('.step-head span').textContent=`Escalón ${i+1} · ${zone(T)}`;}}
+    changed();
+  }
+  svg.addEventListener('pointerdown',e=>{dragging=true;try{svg.setPointerCapture(e.pointerId);}catch(_){}fromEvt(e);});
+  svg.addEventListener('pointermove',e=>{if(dragging)fromEvt(e);});
+  svg.addEventListener('pointerup',()=>dragging=false);svg.addEventListener('pointercancel',()=>dragging=false);
+
+  // ================= Ficha y selector =================
+  function renderFicha(){
+    const rows=[['Clase',S.cls+' · '+S.sub],['Composición nominal (% en peso)',S.comp],['A₁',S.A1+' °C'+(S.table?'':' (Andrews)')]];
+    if(S.Atop) rows.push([S.topName,S.Atop+' °C'+(S.topName==='A₃'?' (Andrews)':(S.acmEst?' (estimado)':' (línea A_cm de Fe–Fe₃C)'))]);
+    rows.push(['Mₛ',S.Ms+' °C'+(S.table?' (Callister)':S.msEst?' (estimado; Andrews no aplica sobre 0.6 % C)':' (Andrews)')]);
+    rows.push(['Austenitización',S.aus+' °C']);
+    document.getElementById('x-sficha').innerHTML=`<div class="tbl"><table>${rows.map(r=>`<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join('')}</table></div>
+      <p style="margin:8px 0 0"><b>Qué cambia:</b> ${S.vs}</p><p style="margin:6px 0 0"><b>Usos:</b> ${S.uses}</p>`;
+  }
+  const stEl=document.getElementById('x-steels');
+  stEl.innerHTML=STEELS.map(s=>`<button class="sys" data-steel="${s.id}" aria-pressed="false"><span class="tag">${s.cls}</span>${s.name}<small>${s.sub}</small></button>`).join('');
+  stEl.onclick=e=>{const b=e.target.closest('[data-steel]');if(b)selectSteel(b.dataset.steel);};
+
+  // ================= Escalones =================
+  const stepsEl=document.getElementById('x-steps');
+  const zone=T=>T>=(S.Atop||S.A1)?'austenita estable':T>=S.A1?'zona intercrítica':T<S.Ms?'bajo Mₛ':((kin(T)||{}).mech==='B'?'zona bainítica':'zona perlítica');
+  function setActive(i){if(active===i)return;active=i;stepsEl.querySelectorAll('.step').forEach((el,j)=>el.classList.toggle('active',j===i));draw();}
+  function renderSteps(){
+    if(active>=steps.length||active<0)active=steps.length-1;
+    stepsEl.innerHTML='';
+    if(!steps.length) stepsEl.innerHTML='<p class="note" style="margin:8px 0 0">Sin escalones: temple directo desde la austenitización.</p>';
+    steps.forEach((s,i)=>{
+      const w=document.createElement('div');w.className='step'+(i===active?' active':'');w.addEventListener('focusin',()=>setActive(i));w.addEventListener('pointerdown',()=>setActive(i));
+      w.innerHTML=`<div class="step-head"><span>Escalón ${i+1} · ${zone(s.T)}</span><button class="x" data-rm="${i}" aria-label="Quitar escalón ${i+1}">Quitar</button></div>
+      <div class="row"><label for="xtr${i}">Temperatura</label><input type="range" id="xtr${i}" min="100" max="${S.aus-10}" step="5" value="${s.T}"><input type="number" id="xtn${i}" min="100" max="${S.aus-10}" step="5" value="${s.T}" aria-label="Temperatura en °C"></div>
+      <div class="row"><label for="xsr${i}">Tiempo</label><input type="range" id="xsr${i}" min="-1" max="5" step="0.05" value="${Math.log10(s.t)}"><input type="number" id="xsn${i}" min="0.1" max="100000" step="any" value="${+s.t.toPrecision(3)}" aria-label="Tiempo en segundos"></div>`;
+      stepsEl.appendChild(w);
+      const tr=w.querySelector('#xtr'+i),tn=w.querySelector('#xtn'+i),sr=w.querySelector('#xsr'+i),sn=w.querySelector('#xsn'+i),hd=w.querySelector('.step-head span');
+      const lab=()=>hd.textContent=`Escalón ${i+1} · ${zone(s.T)}`;
+      tr.oninput=()=>{s.T=+tr.value;tn.value=s.T;lab();changed();};
+      tn.onchange=()=>{s.T=Math.min(S.aus-10,Math.max(100,+tn.value||100));tn.value=tr.value=s.T;lab();changed();};
+      sr.oninput=()=>{s.t=+Math.pow(10,+sr.value).toPrecision(2);sn.value=s.t;changed();};
+      sn.onchange=()=>{s.t=Math.min(1e5,Math.max(.1,+sn.value||.1));sn.value=s.t;sr.value=Math.log10(s.t);changed();};
+    });
+    stepsEl.querySelectorAll('[data-rm]').forEach(b=>b.onclick=e=>{e.stopPropagation();steps.splice(+b.dataset.rm,1);active=steps.length-1;renderSteps();changed();});
+    document.getElementById('x-add').disabled=steps.length>=3;
+  }
+  document.getElementById('x-add').onclick=()=>{if(steps.length<3){const last=steps[steps.length-1];steps.push({T:last?Math.max(S.Ms+20,last.T-150):Math.min(S.A1-40,S.table?650:S.P[0]+40),t:100});active=steps.length-1;renderSteps();changed();}};
+  const presEl=document.getElementById('x-presets');
+  function renderPresets(){const P=presetsFor(S);presEl.innerHTML=Object.keys(P).map(k=>`<button class="btn" data-p="${k}">${k}</button>`).join('');
+    presEl.onclick=e=>{const b=e.target.closest('[data-p]');if(!b)return;steps=P[b.dataset.p].map(s=>({...s}));active=steps.length-1;renderSteps();changed();};}
+
+  // ================= Predicción, resultado y retos =================
+  const optsEl=document.getElementById('x-opts'),reveal=document.getElementById('x-reveal');
+  optsEl.innerHTML=KEYS.map(([k,l])=>`<label class="opt"><input type="checkbox" value="${k}">${l}</label>`).join('');
+  optsEl.onchange=()=>{reveal.disabled=!optsEl.querySelector('input:checked');};
+  function changed(){draw();document.getElementById('x-resCard').hidden=true;
+    if(mode==='pred'){optsEl.querySelectorAll('input').forEach(r=>r.checked=false);reveal.disabled=true;}}
+  const CH=[
+    {txt:'Obtén al menos 95 % de bainita.',chk:r=>r.B>=.95,hint:'Mantén el tiempo suficiente por debajo de la nariz y por arriba de Mₛ.'},
+    {txt:'Obtén ≈50 % de bainita y ≈50 % de martensita (± 10 puntos).',chk:r=>Math.abs(r.B-.5)<=.1&&Math.abs(r.M-.5)<=.1,hint:'Interrumpe la transformación bainítica a la mitad y templa.'},
+    {txt:'Obtén la estructura más blanda: ni bainita ni martensita (menos de 2 % de cada una).',chk:r=>r.B<.02&&r.M<.02,hint:'Transforma todo en la zona perlítica antes de templar.'},
+    {txt:'Obtén al menos 10 % de austenita retenida.',chk:r=>r.RA>=.10,hint:'Piensa qué aceros tienen Mₛ bajo. En el modelo de Callister no es posible.'}];
+  reveal.onclick=()=>{
+    const r=simulate(),v=document.getElementById('x-verdict');
+    if(mode==='pred'){const pick=[...optsEl.querySelectorAll('input:checked')].map(i=>i.value).sort().join(),real=present(r).sort().join(),ok=pick===real;
+      v.className='verdict '+(ok?'ok':'bad');const nm=k=>KEYS.find(q=>q[0]===k)[1].toLowerCase();v.textContent=(ok?'Predicción correcta. ':'Tu predicción no coincide. ')+'Constituyentes con 5 % o más: '+(present(r).map(nm).join(', ')||'ninguno')+'.';}
+    else{const ok=CH[challenge].chk(r);v.className='verdict '+(ok?'ok':'bad');v.textContent=ok?`Reto cumplido con ${S.name}.`:`Aún no con ${S.name}. Ajusta el tratamiento o prueba otro acero.`;}
+    document.getElementById('x-bars').innerHTML=KEYS.filter(k=>r[k[0]]>0.0005||['P','B','M'].includes(k[0])).map(([k,l,c])=>`<div class="bar"><span>${l}</span><div class="track"><div class="fill" style="width:${(r[k]*100).toFixed(1)}%;background:${c}"></div></div><span class="pct">${pc(r[k])}</span></div>`).join('');
+    document.getElementById('x-why').innerHTML=r.why.map(s=>`<li>${s}</li>`).join('');
+    document.getElementById('x-resCard').hidden=false;};
+  const tp=document.getElementById('x-tab-pred'),tr=document.getElementById('x-tab-reto'),cb=document.getElementById('x-challengeBox');
+  function renderChallenge(){cb.innerHTML=`<div class="challenge"><b>Reto ${challenge+1} de ${CH.length} · ${S.name}</b><br>${CH[challenge].txt}<div class="note" style="margin-top:4px">Pista: ${CH[challenge].hint}</div><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${CH.map((c,i)=>`<button class="btn" data-c="${i}" ${i===challenge?'style="border-color:var(--naranja)"':''}>Reto ${i+1}</button>`).join('')}</div></div>`;
+    cb.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{challenge=+b.dataset.c;renderChallenge();changed();});}
+  function setMode(m){mode=m;tp.setAttribute('aria-selected',m==='pred');tr.setAttribute('aria-selected',m==='reto');
+    document.getElementById('x-predCard').querySelector('h2').textContent=m==='pred'?'2 · Tu predicción':'2 · Verifica tu diseño';
+    document.getElementById('x-predSet').hidden=m!=='pred';cb.hidden=m!=='reto';if(m==='reto')renderChallenge();
+    reveal.textContent=m==='pred'?'Revelar resultado':'Evaluar mi tratamiento';changed();reveal.disabled=m==='pred';}
+  tp.onclick=()=>setMode('pred');tr.onclick=()=>setMode('reto');
+
+  function selectSteel(id,aus){
+    S=STEELS.find(s=>s.id===id)||STEELS[0];
+    if(aus){S.aus=Math.round(aus);}
+    stEl.querySelectorAll('.sys').forEach(b=>b.setAttribute('aria-pressed',b.dataset.steel===S.id));
+    const ae=document.getElementById('x-aus');if(ae)ae.textContent=S.aus+' °C';
+    const P=presetsFor(S);steps=(P[Object.keys(P)[S.table?0:1]]||[]).map(s=>({...s}));active=steps.length-1;
+    renderFicha();renderPresets();renderSteps();if(mode==='reto')renderChallenge();changed();
+    try{localStorage.setItem('ttt-steel',S.id);}catch(e){}
+  }
+  window.TTT={load:(id,aus)=>selectSteel(id,aus),setAus:t=>selectSteel(S.id,t),steel:()=>S};
+  const back=document.getElementById('x-back');if(back)back.onclick=()=>{window.showView&&window.showView('pd');window.PD&&window.PD.go(S.C,S.aus);};
+  let first='cal';try{const v=localStorage.getItem('ttt-steel');if(v&&STEELS.find(s=>s.id===v))first=v;}catch(e){}
+  selectSteel(first);
+})();
+</script>
+<script>
+(function(){
+  window.showView=v=>{document.getElementById('view-pd').hidden=v!=='pd';document.getElementById('view-ttt').hidden=v!=='ttt';
+    document.getElementById('v-pd').setAttribute('aria-selected',v==='pd');document.getElementById('v-ttt').setAttribute('aria-selected',v==='ttt');
+    try{localStorage.setItem('lab-view',v);}catch(e){}};
+  document.getElementById('v-pd').onclick=()=>showView('pd');document.getElementById('v-ttt').onclick=()=>showView('ttt');
+  let v=location.hash==='#ttt'?'ttt':'pd';try{if(!location.hash){const s=localStorage.getItem('lab-view');if(s==='ttt')v='ttt';}}catch(e){}
+  showView(v);
+})();
+</script>
+
+</body></html>
