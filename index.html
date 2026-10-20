@@ -1,4 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta charset="utf-8">
 <title>Laboratorio virtual de materiales</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -6,21 +7,21 @@
 <style>
 /* Layout: banco de laboratorio — selector de sistema arriba, diagrama a la izquierda, lectura, micrografía y ficha de solubilidad a la derecha */
 :root{
-  --bg:#f6f7f9; --panel:#ffffff; --ink:#0e2a3f; --muted:#56687a; --line:#d5dde5; --soft:#eef2f6;
-  --denim:#0f66ab; --naranja:#ff5900; --cafe:#6b3f23; --ok:#1d7a4f; --bad:#b3261e;
-  --curve:#0e2a3f; --tie:#ff5900; --liq:#cfe3f3; --alfa:#e9d6c3; --beta:#40556b; --gb:#6b3f23; --gam:#cfe6cf; --start:#b3261e; --finish:#1d7a4f; --half:#0f66ab; --path:#ff5900; --mart:#7a5aa6;
+  --bg:#F6F3EE; --panel:#FCFAF6; --ink:#17252F; --muted:#5B6770; --line:#DCD5C9; --soft:#EDE8DF;
+  --denim:#3D4A55; --naranja:#B2683C; --cafe:#8A5A3B; --ok:#4F6B4A; --bad:#A33B2B; --btn:#9C5A31; --btn-ink:#FCFAF6;
+  --curve:#17252F; --tie:#B2683C; --liq:#E4E1DA; --alfa:#E3CBA8; --beta:#3D4A55; --gb:#4A3426; --gam:#C9D6C1; --start:#A33B2B; --finish:#4F6B4A; --half:#6E7B85; --path:#B2683C; --mart:#6B4E71;
   --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --f-body:"Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0b1823; --panel:#11222f; --ink:#e6edf3; --muted:#9db0c1; --line:#27404f; --soft:#172c3b;
-  --denim:#5aa7e6; --naranja:#ff7a33; --cafe:#c9946c; --ok:#4cc28a; --bad:#ef6b62;
-  --curve:#e6edf3; --tie:#ff7a33; --liq:#28506e; --alfa:#d8bea3; --beta:#2a3a4a; --gb:#8a5a38; --gam:#3d6a4c; --start:#ef6b62; --finish:#4cc28a; --half:#5aa7e6; --path:#ff7a33; --mart:#b39ae0; color-scheme:dark}}
+  --bg:#17252F; --panel:#1F303C; --ink:#F6F3EE; --muted:#A9B3BA; --line:#3D4A55; --soft:#2A3944;
+  --denim:#A9B3BA; --naranja:#C97F4E; --cafe:#D9A27A; --ok:#8FB38A; --bad:#E07A66; --btn:#C97F4E; --btn-ink:#17252F;
+  --curve:#F6F3EE; --tie:#C97F4E; --liq:#3A4650; --alfa:#D9BE97; --beta:#4A5762; --gb:#9C7356; --gam:#5E7A5A; --start:#E07A66; --finish:#8FB38A; --half:#A9B3BA; --path:#C97F4E; --mart:#B49AC0; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0b1823; --panel:#11222f; --ink:#e6edf3; --muted:#9db0c1; --line:#27404f; --soft:#172c3b;
-  --denim:#5aa7e6; --naranja:#ff7a33; --cafe:#c9946c; --ok:#4cc28a; --bad:#ef6b62;
-  --curve:#e6edf3; --tie:#ff7a33; --liq:#28506e; --alfa:#d8bea3; --beta:#2a3a4a; --gb:#8a5a38; --gam:#3d6a4c; --start:#ef6b62; --finish:#4cc28a; --half:#5aa7e6; --path:#ff7a33; --mart:#b39ae0; color-scheme:dark}
+  --bg:#17252F; --panel:#1F303C; --ink:#F6F3EE; --muted:#A9B3BA; --line:#3D4A55; --soft:#2A3944;
+  --denim:#A9B3BA; --naranja:#C97F4E; --cafe:#D9A27A; --ok:#8FB38A; --bad:#E07A66; --btn:#C97F4E; --btn-ink:#17252F;
+  --curve:#F6F3EE; --tie:#C97F4E; --liq:#3A4650; --alfa:#D9BE97; --beta:#4A5762; --gb:#9C7356; --gam:#5E7A5A; --start:#E07A66; --finish:#8FB38A; --half:#A9B3BA; --path:#C97F4E; --mart:#B49AC0; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
@@ -50,7 +51,7 @@ h1{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,5vw,46px);l
 .presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .btn{font:600 14px var(--f-body);border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:7px 12px;border-radius:6px;cursor:pointer}
 .btn:hover{border-color:var(--denim)}
-.btn.primary{background:var(--naranja);border-color:var(--naranja);color:#fff}
+.btn.primary{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
 .btn.primary:disabled{opacity:.45;cursor:not-allowed}
 .btn:focus-visible,.tab:focus-visible,.sys:focus-visible,input:focus-visible{outline:2px solid var(--denim);outline-offset:2px}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:15px}
@@ -79,6 +80,12 @@ th{color:var(--muted);font-weight:600}
 td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 footer{font-size:13px;color:var(--muted);max-width:90ch}
 [hidden]{display:none!important}
+.theme-btn{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);right:calc(env(safe-area-inset-right,0px) + 12px);z-index:20;display:inline-flex;align-items:center;gap:6px;font:600 14px var(--f-body);padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:0 1px 3px rgba(23,37,47,.15)}
+.wrap > header > .eyebrow{padding-right:150px;min-height:40px}
+.theme-btn:hover{border-color:var(--naranja)}
+.theme-btn:focus-visible{outline:2px solid var(--naranja);outline-offset:2px}
+.theme-btn .ic{font-size:16px;line-height:1;color:var(--naranja)}
+
 .views{display:flex;gap:0;border-bottom:2px solid var(--line);flex-wrap:wrap}
 .view{font:600 20px var(--f-display);letter-spacing:.02em;background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;color:var(--muted);padding:8px 16px;cursor:pointer}
 .view[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--naranja)}
@@ -100,7 +107,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
 #view-ttt .presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 #view-ttt .btn{font:600 14px var(--f-body);border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:7px 12px;border-radius:6px;cursor:pointer}
 #view-ttt .btn:hover{border-color:var(--denim)}
-#view-ttt .btn.primary{background:var(--naranja);border-color:var(--naranja);color:#fff}
+#view-ttt .btn.primary{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
 #view-ttt .btn.primary:disabled{opacity:.45;cursor:not-allowed}
 #view-ttt .btn:focus-visible,#view-ttt .tab:focus-visible,#view-ttt input:focus-visible{outline:2px solid var(--denim);outline-offset:2px}
 #view-ttt .step{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;display:grid;gap:6px}
@@ -133,6 +140,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
 @media (prefers-reduced-motion:no-preference){#view-ttt .fill{transition:width .5s ease}}
 </style>
 
+<button class="theme-btn" id="themeBtn" type="button" aria-pressed="false"><span class="ic" aria-hidden="true">☾</span><span id="themeLbl">Modo oscuro</span></button>
 <div class="wrap">
   <header>
     <div class="eyebrow">IMEC1402 · Ciencia e Ingeniería de Materiales</div>
@@ -232,8 +240,13 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
           <span><i class="sw" style="background:var(--mart)"></i>M<sub>s</sub>, M<sub>50</sub>, M<sub>90</sub></span>
           <span><i class="sw" style="background:var(--path)"></i>Tu tratamiento</span>
         </div>
-        <p class="note" style="margin:6px 0 0">Toca o arrastra sobre el diagrama: fijas la temperatura y el momento en que termina el escalón activo (resaltado en naranja). Sin escalones, el toque crea uno.</p>
-        <style>#view-ttt .step.active{border-left:3px solid var(--naranja);padding-left:8px} #view-ttt .chart{cursor:crosshair;touch-action:none}</style>
+        <div class="player">
+          <button class="btn" id="play" type="button" aria-label="Reproducir el tratamiento">▶ Reproducir</button>
+          <input type="range" id="scrub" min="0" max="1000" step="1" value="1000" aria-label="Avance del tratamiento en el tiempo">
+        </div>
+        <div class="live" id="live" aria-live="polite"></div>
+        <p class="note" style="margin:6px 0 0">Toca o arrastra sobre el diagrama para fijar la temperatura y la duración del escalón activo (resaltado en cobre). Cada escalón se lee desde t = 0: al cambiar de temperatura el reloj vuelve a empezar y solo se transforma la austenita que queda (línea punteada).</p>
+        <style>#view-ttt .ra-card{margin-top:16px} #view-ttt .ra-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px} @media (max-width:900px){#view-ttt .ra-grid{grid-template-columns:1fr}} #view-ttt .ra-card h3{font-family:var(--f-display);font-size:19px;margin:14px 0 6px} #view-ttt .ra-text p,#view-ttt .ra-list{margin:0 0 8px;line-height:1.5} #view-ttt .ra-list{padding-left:20px;display:grid;gap:6px} #view-ttt .ra-eq{font-family:var(--f-mono);background:var(--soft);padding:8px 12px;border-radius:8px;text-align:center} #view-ttt #raPlot{width:100%;height:auto;display:block} #view-ttt .ra-tq{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0} #view-ttt .ra-tq .btn[aria-pressed=true]{background:var(--btn);color:var(--btn-ink)} #view-ttt .ra-calc{background:var(--soft);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:14px;line-height:1.5} #view-ttt .ra-calc .mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums} #view-ttt .ra-tab-wrap{overflow-x:auto} #view-ttt .ra-tab{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums} #view-ttt .ra-tab th,#view-ttt .ra-tab td{padding:4px 6px;border-bottom:1px solid var(--line);text-align:right} #view-ttt .ra-tab th:first-child,#view-ttt .ra-tab td:first-child{text-align:left} #view-ttt .ra-tab tr.cur td{background:var(--soft);font-weight:700} #view-ttt .ra-q{margin-top:12px} #view-ttt .ra-q summary{cursor:pointer;font-weight:600} #view-ttt .ra-q li{margin:8px 0;line-height:1.5} #view-ttt .ra-q .tag{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em} #view-ttt .player{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center;margin-top:10px} #view-ttt .player input{width:100%;accent-color:var(--naranja)} #view-ttt .live{margin-top:8px;background:var(--soft);border-radius:8px;padding:10px 12px;display:grid;gap:6px;font-size:14px} #view-ttt .live .lv-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px} #view-ttt .live .lv-a{font-family:var(--f-display);font-size:26px;font-weight:700;line-height:1} #view-ttt .live .lv-a small{font:500 13px var(--f-body);color:var(--muted)} #view-ttt .live .lv-now{display:grid;gap:4px;border-top:1px solid var(--line);padding-top:6px} #view-ttt .step-live{margin-top:10px;padding:8px 10px;border-radius:8px;background:var(--soft);display:grid;gap:4px;font-size:13px} #view-ttt .step-live.now{outline:2px solid var(--naranja)} #view-ttt .step-live .sl-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline} #view-ttt .step-live .sl-top b{font-family:var(--f-display);font-size:22px;color:var(--naranja-ink,var(--ink))} #view-ttt .step-live .sl-note{color:var(--muted)} #view-ttt .step-live .lv-ybar,#view-ttt .live .lv-ybar{height:8px;border-radius:4px;background:var(--panel);overflow:hidden;border:1px solid var(--line)} #view-ttt .step-live .lv-ybar span,#view-ttt .live .lv-ybar span{display:block;height:100%;background:var(--naranja)} #view-ttt .live .lv-mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums} #view-ttt .ledger{display:grid;gap:10px} #view-ttt .lrow{border-top:1px solid var(--line);padding-top:8px;display:grid;gap:4px} #view-ttt .lhead{display:flex;justify-content:space-between;gap:8px;font-weight:600;font-size:14px} #view-ttt .lread{font-size:13px;color:var(--muted)} #view-ttt .lcalc{font-family:var(--f-mono);font-size:12.5px;background:var(--soft);border-radius:4px;padding:6px 8px;overflow-wrap:anywhere} #view-ttt .stack{display:flex;height:14px;border-radius:3px;overflow:hidden;border:1px solid var(--line)} #view-ttt .stack span{height:100%} #view-ttt .lkey{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted)} #view-ttt .lkey i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px} #view-ttt .step.active{border-left:3px solid var(--naranja);padding-left:8px} #view-ttt .chart{cursor:crosshair;touch-action:none}</style>
       </section>
       <section class="card">
         <h2>Ficha del acero</h2>
@@ -266,13 +279,64 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
         <h2>3 · Resultado</h2>
         <div id="x-verdict"></div>
         <div class="bars" id="x-bars"></div>
-        <ol class="why" id="x-why"></ol>
+        <h3 style="font-family:var(--f-display);font-size:20px;margin:14px 0 6px">Cómo se calcula, paso a paso</h3>
+        <p class="note" style="margin:0 0 8px">Cada fila lee el diagrama y aplica Δ = A × y: la austenita disponible (A) por la fracción que se transforma en ese escalón (y). La barra muestra cómo va quedando la probeta.</p>
+        <div id="ledger" class="ledger"></div>
+        <details style="margin-top:10px"><summary class="note" style="cursor:pointer">Explicación en texto</summary><ol class="why" id="x-why"></ol></details>
         <p class="note" style="margin-top:10px"><b>Reflexión:</b> si fallaste, ¿qué leíste mal: la temperatura, el tiempo, la escala logarítmica o la línea Mₛ?</p>
       </section>
     </div>
   </div>
 
-  <p class="note" style="margin:0">Modelo didáctico. El acero Fe–0.76 C usa las curvas digitalizadas de Callister, Fig. 10.22, con su simplificación de libro (toda la austenita remanente se vuelve martensita). Los demás aceros usan curvas esquemáticas representativas: la forma y el orden de magnitud siguen las tendencias de los atlas de diagramas TTT (US Steel/ASM), pero los tiempos no son datos de diseño. A₁ y A₃ se calculan con las ecuaciones de Andrews (1965) a partir de la composición nominal; Mₛ con Andrews en los aceros de hasta 0.6 % C y estimado en los de más carbono. La martensita al templar sigue Koistinen–Marburger: f = 1 − exp[−0.011(Mₛ − T)]; lo que no se transforma queda como austenita retenida. Cada escalón usa su propio reloj.</p>
+  <section class="card ra-card" id="raCard" aria-labelledby="raTitle">
+    <h2 id="raTitle">4 · Austenita retenida: por qué a veces queda</h2>
+    <div class="ra-grid">
+      <div class="ra-text">
+        <h3>Qué es</h3>
+        <p>Es austenita (γ, FCC) que sigue presente a temperatura ambiente después del temple. No se transformó en perlita ni en bainita, porque no hubo tiempo, y tampoco alcanzó a convertirse en martensita.</p>
+        <h3>Por qué queda</h3>
+        <p>La martensita es una transformación <b>atérmica</b>: la cantidad que se forma depende de cuántos grados bajas por debajo de M<sub>s</sub>, no de cuánto tiempo esperas (Callister, Sec. 10.5, martensita). La ecuación de Koistinen–Marburger (1959) describe esa dependencia:</p>
+        <p class="ra-eq">f<sub>M</sub> = 1 − exp[−0.011 (M<sub>s</sub> − T<sub>q</sub>)]</p>
+        <p>T<sub>q</sub> es la temperatura más baja a la que llega el temple. Si el temple termina a 25 °C, la fracción que <b>no</b> se transforma es exp[−0.011 (M<sub>s</sub> − 25)]. Cuanto más bajo está M<sub>s</sub>, más cerca queda de la temperatura ambiente y más austenita sobrevive.</p>
+        <p><b>¿Qué baja M<sub>s</sub>?</b> Sobre todo el carbono disuelto en la austenita, y después Mn, Ni, Cr y Mo. Para aceros de bajo carbono suele usarse la ecuación de Andrews: M<sub>s</sub> = 539 − 423 C − 30.4 Mn − 17.7 Ni − 12.1 Cr − 7.5 Mo (°C, % en peso). Por eso la austenita retenida es un problema de los aceros de alto carbono y aleados, y casi no existe en un 1020.</p>
+        <h3>Por qué en algunos tratamientos sí y en otros no</h3>
+        <ul class="ra-list">
+          <li><b>Temple directo de un acero de alto carbono</b> (1095, W1, 52100): toda la probeta es austenita al cruzar M<sub>s</sub>, y con M<sub>s</sub> ≈ 170–200 °C la exponencial deja alrededor de 15 a 20 % sin transformar.</li>
+          <li><b>Escalón isotérmico completo</b> (perlita o bainita al 100 %): ya no queda austenita al templar, así que tampoco puede quedar retenida.</li>
+          <li><b>Escalón interrumpido</b>: solo la austenita que sobrevivió al escalón llega a M<sub>s</sub>. La retenida es esa fracción multiplicada por exp[−0.011 (M<sub>s</sub> − 25)].</li>
+          <li><b>Hipereutectoide austenizado entre A₁ y A<sub>cm</sub></b>: parte del carbono queda en la cementita sin disolver. La austenita tiene menos carbono, su M<sub>s</sub> sube y retiene menos. Austenizar por encima de A<sub>cm</sub> disuelve todo el carbono y aumenta la retenida.</li>
+        </ul>
+        <h3>Por qué importa y cómo se reduce</h3>
+        <ul class="ra-list">
+          <li>Es blanda frente a la martensita y metaestable: con el tiempo o bajo carga puede transformarse en martensita fresca, frágil y sin revenir. El cambio de volumen que acompaña a esa transformación produce <b>inestabilidad dimensional</b> y grietas, un problema en rodamientos, calibres y moldes.</li>
+          <li><b>Tratamiento subcero</b>: continuar el temple a −80 °C (hielo seco) o −196 °C (nitrógeno líquido) justo después de templar, para avanzar más por debajo de M<sub>s</sub>.</li>
+          <li><b>Revenido</b>: descompone la austenita retenida. En aceros de herramienta muy aleados se reviene dos o tres veces, porque parte de la austenita se transforma al enfriar después de cada revenido.</li>
+        </ul>
+      </div>
+      <div class="ra-side">
+        <h3>Calcúlala con el acero seleccionado</h3>
+        <svg id="raPlot" viewBox="0 0 360 230" role="img" aria-label="Fracción de martensita contra temperatura de temple según Koistinen–Marburger"></svg>
+        <div class="ra-tq" role="group" aria-label="Temperatura final del temple">
+          <span class="note">Temple hasta:</span>
+          <button class="btn" data-tq="25" aria-pressed="true">25 °C</button>
+          <button class="btn" data-tq="0" aria-pressed="false">0 °C</button>
+          <button class="btn" data-tq="-80" aria-pressed="false">−80 °C</button>
+          <button class="btn" data-tq="-196" aria-pressed="false">−196 °C</button>
+        </div>
+        <div id="raCalc" class="ra-calc"></div>
+        <div id="raMine" class="ra-calc"></div>
+        <h3 style="margin-top:14px">Temple directo de los nueve aceros</h3>
+        <div class="ra-tab-wrap"><table class="ra-tab" id="raTable"></table></div>
+        <p class="note">M<sub>s</sub> de 1080, 1095, W1 y 52100 es estimado: la ecuación de Andrews no es confiable por encima de ~0.6 % C. Verifica contra la ficha técnica del proveedor antes de usar estos valores fuera del aula.</p>
+      </div>
+    </div>
+    <details class="ra-q"><summary>Preguntas para la clase (con respuesta)</summary>
+      <ol id="raQs"></ol>
+    </details>
+    <p class="note">Limitaciones del modelo: no incluye la estabilización térmica de la austenita (enfriamientos lentos o pausas cerca de M<sub>s</sub>) ni el enriquecimiento en carbono de la austenita durante la formación de bainita. Ambos efectos aumentan la retenida real. El acero Fe–0.76 C usa la simplificación de Callister, Fig. 10.22, en la que toda la austenita remanente se vuelve martensita.</p>
+  </section>
+
+  <p class="note" style="margin:0">Modelo didáctico. El acero Fe–0.76 C usa las curvas digitalizadas de Callister, Fig. 10.22, con su simplificación de libro (toda la austenita remanente se vuelve martensita). Los demás aceros usan curvas esquemáticas representativas: la forma y el orden de magnitud siguen las tendencias de los atlas de diagramas TTT (US Steel/ASM), pero los tiempos no son datos de diseño. A₁ y A₃ se calculan con las ecuaciones de Andrews (1965) a partir de la composición nominal; Mₛ con Andrews en los aceros de hasta 0.6 % C y estimado en los de más carbono. La martensita al templar sigue Koistinen–Marburger: f = 1 − exp[−0.011(Mₛ − T)]; lo que no se transforma queda como austenita retenida. Cada escalón isotérmico se lee desde t = 0 (reloj reiniciado) y solo transforma la austenita que dejó el escalón anterior; es la simplificación de libro (Callister, Ejemplo 10.1) y no considera la incubación acumulada (regla de aditividad de Scheil).</p>
 </div>
   <footer>Modelo didáctico. Los puntos clave (temperaturas de fusión, eutécticos y solubilidades máximas) vienen de Callister &amp; Rethwisch, 10.ª ed. (Figs. 9.3, 9.7 y 9.8) y del ASM Handbook, vol. 3; las curvas entre esos puntos son ajustes suaves y deben tratarse como esquemas. Ge–Si se dibuja en % en peso de forma esquemática. Fe–Fe₃C es el diagrama metaestable de Callister, Fig. 9.24, con líneas rectas entre sus puntos clave; la región δ es muy angosta a esta escala. Composiciones en % en peso del segundo componente. La micrografía es un esquema, no una imagen real.</footer>
 </div>
@@ -689,6 +753,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   document.getElementById('bridgeBtn').onclick=()=>{if(window.TTT&&window.__bridge)window.TTT.load(window.__bridge.id,T);window.showView('ttt');};
   window.PD={go:(c,t)=>{selectSys('fec');set(c,t,false);}};
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>read());
+  window.addEventListener('lab-theme',()=>read());
   let first='pbsn';try{const v=localStorage.getItem('pd-sys');if(v&&SYS[v])first=v;}catch(e){}
   selectSys(first);
 })();
@@ -762,8 +827,10 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   const feqA1=()=>S.C<0.72?(0.76-S.C)/0.74:S.C>0.85?(S.C-0.76)/5.94:0;
 
   // ================= Estado =================
-  let steps=[], mode='pred', challenge=0, active=-1;
+  let steps=[], mode='pred', challenge=0, active=-1, lastMarks=[], calcShown=false, head=1, playing=false, rafId=0;
+  const scrubEl=()=>document.getElementById('scrub');
   const fmt=t=>{if(t>=1000){const e=Math.floor(Math.log10(t)),m=t/Math.pow(10,e);const SUP='⁰¹²³⁴⁵⁶⁷⁸⁹';return (Math.abs(m-1)<.05?'':m.toFixed(1)+'×')+'10'+String(e).split('').map(d=>SUP[+d]).join('');}return (t<10?t.toFixed(1):Math.round(t)).toString();};
+  const p1=x=>(x*100).toFixed(1)+' %';
   const pc=x=>(x>0&&x<0.05?(x*100).toFixed(1):Math.round(x*100))+' %';
   function presetsFor(s){
     if(s.table) return {'Ejemplo A · 350 °C':[{T:350,t:1e4}],'Ejemplo B · 250 °C':[{T:250,t:100}],'Ejemplo C · 650 → 400 °C':[{T:650,t:20},{T:400,t:1000}],'Temple directo':[]};
@@ -774,31 +841,43 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     return o;
   }
 
-  function simulate(){
-    let A=1,F=0,Cp=0,P=0,B=0,M=0,Tlow=S.aus;const why=[];
+  function simulate(list,opt){list=list||steps;opt=opt||{};
+    let A=1,F=0,Cp=0,P=0,B=0,M=0,Tlow=S.aus;const why=[],led=[],marks=[];
+    const snap=Ao=>({F,Cp,P,B,M,A:Ao===undefined?A:Ao});
+    const row=(head,read,calc,Ao)=>led.push({head,read,calc,snap:snap(Ao)});
+    const P2=x=>(x*100).toFixed(1)+' %';
+    row(`Inicio · austenitización a ${S.aus} °C`,'Toda la probeta es austenita γ.','A = 100 %');
     const xn=S.xName||'';
-    steps.forEach((st,i)=>{
+    list.forEach((st,i)=>{
       const T=st.T,t=st.t;const Tprev=Tlow;Tlow=Math.min(Tlow,T);
-      if(T<S.Ms&&T<Tprev){const fp=mFrac(Tprev);const dM=fp>=1?0:A*(mFrac(T)-fp)/(1-fp);M+=dM;A-=dM;why.push(`Escalón ${i+1}: ${T} °C está por debajo de Mₛ = ${S.Ms} °C. Se forma de inmediato ${pc(dM)} de martensita.`);}
-      if(T>=(S.Atop||S.A1)){why.push(`Escalón ${i+1}: a ${T} °C el acero sigue siendo austenita estable (por encima de ${S.Atop?S.topName:'A₁'} = ${S.Atop||S.A1} °C). No pasa nada.`);return;}
+      if(T<S.Ms&&T<Tprev){const fp=mFrac(Tprev);const Ain=A;const dM=fp>=1?0:A*(mFrac(T)-fp)/(1-fp);M+=dM;A-=dM;
+        row(`Escalón ${i+1} · ${T} °C, bajo Mₛ`,`Al cruzar Mₛ = ${S.Ms} °C la austenita se vuelve martensita de inmediato, sin esperar.`,S.table?`ΔM = ${P2(dM)} (curva de Callister)  →  A = ${P2(Ain)} − ${P2(dM)} = ${P2(A)}`:`ΔM = A × [f(${T}) − f(${Tprev})] / [1 − f(${Tprev})] = ${P2(Ain)} × ${(mFrac(T)-fp).toFixed(3)} / ${(1-fp).toFixed(3)} = ${P2(dM)}  →  A = ${P2(A)}`);why.push(`Escalón ${i+1}: ${T} °C está por debajo de Mₛ = ${S.Ms} °C. Se forma de inmediato ${pc(dM)} de martensita.`);}
+      if(T>=(S.Atop||S.A1)){row(`Escalón ${i+1} · ${T} °C, ${fmt(t)} s`,'Por encima de la temperatura crítica: la austenita es estable.',`Δ = 0  →  A = ${P2(A)}`);why.push(`Escalón ${i+1}: a ${T} °C el acero sigue siendo austenita estable (por encima de ${S.Atop?S.topName:'A₁'} = ${S.Atop||S.A1} °C). No pasa nada.`);return;}
       if(T>=S.A1){const k=kinX(T);const y=yAt(k.ts,k.tf,t);const cap=feqInter(T);const prev=S.C<0.72?F:Cp;const d=Math.max(0,Math.min(A,cap*y-prev));
-        if(S.C<0.76)F+=d;else Cp+=d;A-=d;
+        const Ain=A;if(S.C<0.76)F+=d;else Cp+=d;A-=d;marks[i]={ts:k.ts,t50:avr(k.ts,k.tf).t50,tf:k.tf,y,prox:true};
+        row(`Escalón ${i+1} · ${T} °C, ${fmt(t)} s · intercrítico`,`Lectura: la curva proeutectoide inicia en ${fmt(k.ts)} s → y = ${pc(y)}. Palanca entre A₁ y ${S.topName}: como máximo ${pc(cap)} de ${xn}.`,`Δ${xn==='ferrita'?'F':'Fe₃C'} = mín(A, f_eq × y − previo) = mín(${P2(Ain)}, ${P2(cap)} × ${y.toFixed(3)} − ${P2(prev)}) = ${P2(d)}  →  A = ${P2(A)}`);
         why.push(`Escalón ${i+1}: ${T} °C está entre A₁ (${S.A1} °C) y ${S.topName} (${S.Atop} °C). Solo puede formarse ${xn} proeutectoide, como máximo ${pc(cap)} (regla de la palanca). Inicia en ≈${fmt(k.ts)} s; en ${fmt(t)} s se forma ${pc(d)}${prev>0.005?` (ya había ${pc(prev)} de escalones anteriores)`:''}. La austenita restante se enriquece y no se transforma a esta temperatura.`);return;}
       const k=kin(T);
-      if(!k){why.push(`Escalón ${i+1}: a ${T} °C no hay transformación difusional en el intervalo del modelo.`);return;}
-      const y=yAt(k.ts,k.tf,t),d=A*y;
+      if(!k){row(`Escalón ${i+1} · ${T} °C, ${fmt(t)} s`,'Fuera del intervalo de curvas del modelo.',`Δ = 0  →  A = ${P2(A)}`);why.push(`Escalón ${i+1}: a ${T} °C no hay transformación difusional en el intervalo del modelo.`);return;}
+      const y=yAt(k.ts,k.tf,t),d=A*y,Ain=A;marks[i]={ts:k.ts,t50:avr(k.ts,k.tf).t50,tf:k.tf,y};
+      const lect=`Lectura: inicia en ${fmt(k.ts)} s, 50 % en ${fmt(avr(k.ts,k.tf).t50)} s, fin en ${fmt(k.tf)} s. En ${fmt(t)} s → y = ${pc(y)}.`;
       if(k.mech==='P'){const target=S.table?0:feqA1()*Math.max(0,Math.min(1,(T-S.B[0])/(S.A1-S.B[0])));const prevX=S.C<0.72?F:Cp;const dx=Math.min(d,Math.max(0,target-prevX)*y);
         if(S.C<0.76)F+=dx;else Cp+=dx;P+=d-dx;
+        row(`Escalón ${i+1} · ${T} °C, ${fmt(t)} s · zona perlítica`,lect,`Δ = A × y = ${P2(Ain)} × ${y.toFixed(3)} = ${P2(d)}`+(dx>0.0005?`  (${xn} proeutectoide ${P2(dx)} + perlita ${P2(d-dx)})`:'  de perlita')+`  →  A = ${P2(Ain-d)}`,Ain-d);
         why.push(y<.01?`Escalón ${i+1}: a ${T} °C la transformación necesita ≈${fmt(k.ts)} s para iniciar; ${fmt(t)} s no alcanzan.`:
-          `Escalón ${i+1}: a ${T} °C (zona perlítica) inicia en ≈${fmt(k.ts)} s y termina en ≈${fmt(k.tf)} s. Se transforma ${pc(y)} de la austenita disponible: ${dx>0.005?pc(dx)+' de '+xn+' proeutectoide y ':''}${pc(d-dx)} de perlita.`);}
-      else {B+=d;why.push(y<.01?`Escalón ${i+1}: a ${T} °C la bainita necesita ≈${fmt(k.ts)} s para iniciar; ${fmt(t)} s no alcanzan.`:`Escalón ${i+1}: a ${T} °C (zona bainítica) inicia en ≈${fmt(k.ts)} s y termina en ≈${fmt(k.tf)} s. Se forma ${pc(d)} de bainita.`);}
+          `Escalón ${i+1} (reloj desde t = 0): a ${T} °C (zona perlítica) inicia en ≈${fmt(k.ts)} s, llega al 50 % en ≈${fmt(avr(k.ts,k.tf).t50)} s y termina en ≈${fmt(k.tf)} s. Se transforma ${pc(y)} de la austenita disponible: ${dx>0.005?pc(dx)+' de '+xn+' proeutectoide y ':''}${pc(d-dx)} de perlita.`);}
+      else {B+=d;row(`Escalón ${i+1} · ${T} °C, ${fmt(t)} s · zona bainítica`,lect,`ΔB = A × y = ${P2(Ain)} × ${y.toFixed(3)} = ${P2(d)}  →  A = ${P2(Ain-d)}`,Ain-d);why.push(y<.01?`Escalón ${i+1}: a ${T} °C la bainita necesita ≈${fmt(k.ts)} s para iniciar; ${fmt(t)} s no alcanzan.`:`Escalón ${i+1} (reloj desde t = 0): a ${T} °C (zona bainítica) inicia en ≈${fmt(k.ts)} s, llega al 50 % en ≈${fmt(avr(k.ts,k.tf).t50)} s y termina en ≈${fmt(k.tf)} s. De la austenita que quedaba (${pc(A)}) se transforma ${pc(y)}: ${pc(d)} de bainita.`);}
       A-=d;
     });
     // temple final
-    const fPrev=mFrac(Tlow),fEnd=mFrac(25);const rel=fPrev>=1?0:(fEnd-fPrev)/(1-fPrev);const dM=A*rel;M+=dM;A-=dM;
+    if(opt.noQuench) return {F,Cp,P,B,M,A,Tlow};
+    const fPrev=mFrac(Tlow),fEnd=mFrac(25);const rel=fPrev>=1?0:(fEnd-fPrev)/(1-fPrev);const Aq=A;const dM=A*rel;M+=dM;A-=dM;
+    row('Temple a 25 °C',Aq<0.0005?'Ya no queda austenita.':S.table?`La austenita restante cruza Mₛ = ${S.Ms} °C. Simplificación de libro: toda se vuelve martensita.`:`La austenita restante cruza Mₛ = ${S.Ms} °C. Koistinen–Marburger: f(25) = 1 − exp[−0.011(${S.Ms} − 25)] = ${fEnd.toFixed(3)}.`,
+      Aq<0.0005?'ΔM = 0':S.table?`ΔM = A = ${P2(Aq)}  →  A = 0 %`:(fPrev>0?`ΔM = A × [f(25) − f(T_mín)] / [1 − f(T_mín)] = ${P2(Aq)} × ${rel.toFixed(3)}`:`ΔM = A × f(25) = ${P2(Aq)} × ${rel.toFixed(3)}`)+` = ${P2(dM)}  →  austenita retenida = ${P2(A)}`);
     if(A+dM>0.005) why.push(`Temple a 25 °C: la austenita remanente cruza Mₛ = ${S.Ms} °C. ${S.table?'Simplificación de libro: toda se vuelve martensita.':`Koistinen–Marburger: f = 1 − exp[−0.011(${S.Ms} − 25)] = ${pc(fEnd)}. Martensita: ${pc(dM)}; austenita retenida: ${pc(A)}.`}`);
     else why.push('Temple a 25 °C: ya no queda austenita; la microestructura no cambia.');
-    return {F,Cp,P,B,M,RA:Math.max(0,A),why};
+    if(list===steps) lastMarks=marks;
+    return {F,Cp,P,B,M,RA:Math.max(0,A),why,led};
   }
   const KEYS=[['F','Ferrita proeutectoide','var(--alfa)'],['Cp','Cementita proeutectoide','var(--cafe)'],['P','Perlita','var(--gb)'],['B','Bainita','var(--denim)'],['M','Martensita','var(--mart)'],['RA','Austenita retenida','var(--gam)']];
   const present=r=>KEYS.map(k=>k[0]).filter(k=>r[k]>=0.05);
@@ -832,14 +911,27 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     if(S.Ms-70>20) txt('M',X(1.6),Y(Math.max(30,S.Ms-90)),'middle','reg');
   }
   function drawPath(){
-    const g=el('g',{});let cum=.1,T=S.aus;let d=`M${X(-1)},${Y(T)}`;
-    const ends=[];steps.forEach(s=>{d+=`L${X(Math.log10(cum))},${Y(s.T)}`;cum+=s.t;T=s.T;d+=`L${X(Math.min(5,Math.log10(cum)))},${Y(T)}`;ends.push([X(Math.min(5,Math.log10(cum))),Y(T)]);});
-    d+=`L${X(Math.min(5,Math.log10(cum)))},${Y(25)}`;
-    el('path',{d,fill:'none',stroke:'var(--path)','stroke-width':3,'stroke-linejoin':'round'},g);
-    el('circle',{cx:X(-1),cy:Y(S.aus),r:5,fill:'var(--path)'},g);
+    // Cada escalón isotérmico se lee desde t = 0 (reloj reiniciado), como en el cálculo.
+    const g=el('g',{});const x0=X(-1);let prevX=x0,prevT=S.aus;const ends=[];
+    el('circle',{cx:x0,cy:Y(S.aus),r:5,fill:'var(--path)'},g);
+    steps.forEach((s,i)=>{
+      const xe=X(Math.min(5,Math.log10(Math.max(0.1,s.t))));
+      if(i===0){el('path',{d:`M${x0},${Y(prevT)}L${x0},${Y(s.T)}`,fill:'none',stroke:'var(--path)','stroke-width':3},g);}
+      else{ // salto del reloj: del final del escalón anterior al inicio (t = 0) del nuevo
+        el('path',{d:`M${prevX},${Y(prevT)}L${x0},${Y(s.T)}`,fill:'none',stroke:'var(--path)','stroke-width':1.5,'stroke-dasharray':'4 5',opacity:.8},g);
+        const tt=el('text',{x:x0+6,y:Y(s.T)-8});tt.textContent='t = 0';tt.style.fill='var(--path)';}
+      el('path',{d:`M${x0},${Y(s.T)}L${xe},${Y(s.T)}`,fill:'none',stroke:'var(--path)','stroke-width':3},g);
+      const lb=el('text',{x:(x0+xe)/2,y:Y(s.T)-8,'text-anchor':'middle'});lb.textContent=String(i+1);lb.style.fill='var(--path)';lb.style.fontWeight='700';
+      ends.push([xe,Y(s.T)]);prevX=xe;prevT=s.T;
+    });
+    el('path',{d:`M${prevX},${Y(prevT)}L${prevX},${Y(25)}`,fill:'none',stroke:'var(--path)','stroke-width':3},g);
     ends.forEach(([x,y],i)=>el('circle',{cx:x,cy:y,r:i===active?8:5,fill:i===active?'var(--panel)':'var(--path)',stroke:'var(--path)','stroke-width':3},g));
+    if(calcShown) steps.forEach((s,i)=>{const m=lastMarks[i];if(!m)return;const yy=Y(s.T);
+      [['ts','var(--start)','inicio'],['t50','var(--half)','50 %'],['tf','var(--finish)','fin']].forEach(([k,c])=>{const t=m[k];if(!t||!isFinite(t))return;const lt=Math.log10(t);if(lt<-1||lt>5)return;
+        el('line',{x1:X(lt),x2:X(lt),y1:yy-9,y2:yy+9,stroke:c,'stroke-width':3},g);});
+      const [xe]=ends[i];const lab=el('text',{x:Math.min(xe+10,R-4),y:yy+18,'text-anchor':xe+10>R-60?'end':'start'});lab.textContent=`y = ${pc(m.y)}`;lab.style.fill='var(--ink)';lab.style.fontWeight='700';lab.style.fontSize='12px';});
   }
-  function draw(){drawBase();drawPath();}
+  function draw(){drawBase();drawPath();if(typeof drawHead==='function')drawHead();}
 
 
   // ---- clic / arrastre en el diagrama ----
@@ -852,8 +944,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     let created=false;
     if(!steps.length){steps.push({T,t:10});active=0;created=true;}
     const i=(active<0||active>=steps.length)?steps.length-1:active;active=i;
-    let before=0.1;for(let j=0;j<i;j++)before+=steps[j].t;
-    const t=Math.max(0.1,Math.min(1e5,tAbs-before));
+    const t=Math.max(0.1,Math.min(1e5,tAbs));
     steps[i].T=T;steps[i].t=+t.toPrecision(2);
     if(created){renderSteps();}
     else{const w=stepsEl.querySelectorAll('.step')[i];if(w){w.querySelector('#xtr'+i).value=T;w.querySelector('#xtn'+i).value=T;w.querySelector('#xsr'+i).value=Math.log10(steps[i].t);w.querySelector('#xsn'+i).value=steps[i].t;w.querySelector('.step-head span').textContent=`Escalón ${i+1} · ${zone(T)}`;}}
@@ -862,6 +953,114 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   svg.addEventListener('pointerdown',e=>{dragging=true;try{svg.setPointerCapture(e.pointerId);}catch(_){}fromEvt(e);});
   svg.addEventListener('pointermove',e=>{if(dragging)fromEvt(e);});
   svg.addEventListener('pointerup',()=>dragging=false);svg.addEventListener('pointercancel',()=>dragging=false);
+
+
+  // ================= Reproductor en tiempo real =================
+  function segments(){ // tramos del recorrido: enfriamiento inicial, escalones, temple
+    const seg=[{k:'cool',w:0.12}];steps.forEach((s,i)=>seg.push({k:'hold',i,w:1}));seg.push({k:'quench',w:0.6});
+    const tot=seg.reduce((a,b)=>a+b.w,0);let acc=0;seg.forEach(g=>{g.a=acc/tot;acc+=g.w;g.b=acc/tot;});return seg;}
+  function stateAt(h){
+    const seg=segments();const g=seg.find(x=>h<=x.b+1e-9)||seg[seg.length-1];const u=g.b>g.a?(h-g.a)/(g.b-g.a):1;
+    if(g.k==='cool'){const T1=steps.length?steps[0].T:25;const T=S.aus-(S.aus-(steps.length?T1:S.aus))*u;
+      return {lab:steps.length?'Enfriamiento rápido hasta el escalón 1':'Temple directo',T:steps.length?T:S.aus,t:null,x:X(-1),r:{F:0,Cp:0,P:0,B:0,M:0,A:1},quench:false};}
+    if(g.k==='hold'){const st=steps[g.i];const lt=-1+u*(Math.log10(Math.max(0.1,st.t))+1);const tau=Math.pow(10,lt);
+      const r=simulate(steps.slice(0,g.i).concat([{T:st.T,t:tau}]),{noQuench:true});
+      const r0=simulate(steps.slice(0,g.i),{noQuench:true});
+      const dif=k=>Math.max(0,r[k]-r0[k]);const prods=[['F','ferrita proeutectoide'],['Cp','cementita proeutectoide'],['P','perlita'],['B','bainita'],['M','martensita']].filter(([k])=>dif(k)>0.0005).map(([k,n])=>`${n} ${p1(dif(k))}`);
+      const kk=kin(st.T);const into=st.T>=S.A1?null:st.T<S.Ms?'martensita':kk?(kk.mech==='B'?'bainita':'perlita'):null;
+      return {lab:`Escalón ${g.i+1} · reloj desde t = 0`,T:st.T,t:tau,x:X(Math.min(5,lt)),r,quench:false,A0:r0.A,dA:Math.max(0,r0.A-r.A),prods,into};}
+    const base=simulate(steps,{noQuench:true});const Tlast=steps.length?steps[steps.length-1].T:S.aus;const T=Tlast-(Tlast-25)*u;
+    const fp=mFrac(base.Tlow),fT=mFrac(Math.min(T,base.Tlow));const rel=fp>=1?0:Math.max(0,(fT-fp)/(1-fp));const dM=base.A*rel;
+    const xq=steps.length?X(Math.min(5,Math.log10(Math.max(0.1,steps[steps.length-1].t)))):X(-1);
+    return {lab:'Temple hasta 25 °C',T,t:null,x:xq,r:{...base,M:base.M+dM,A:base.A-dM},quench:true,A0:base.A,dA:dM,prods:dM>0.0005?[`martensita ${p1(dM)}`]:[],into:'martensita'};
+  }
+  const LIVESEG=[['F','var(--alfa)','Ferrita proeut.'],['Cp','var(--cafe)','Cementita proeut.'],['P','var(--gb)','Perlita'],['B','var(--denim)','Bainita'],['M','var(--mart)','Martensita'],['A','var(--gam)','Austenita']];
+  const liveOn=()=>mode!=='pred'||calcShown;
+  function renderStepLive(){
+    const seg=segments();
+    stepsEl.querySelectorAll('[data-sl]').forEach(box=>{
+      const i=+box.dataset.sl,g=seg[i+1];if(!g)return;
+      if(!liveOn()){box.innerHTML=`<div class="sl-top"><span>Transformado en este escalón</span><b>y = ?</b></div><div class="sl-note">Revela tu predicción para ver el porcentaje.</div>`;return;}
+      const started=head>g.a+1e-6;const st=stateAt(started?Math.min(head,g.b):g.a+1e-6);
+      const y=st.A0>0.0005?st.dA/st.A0:0;const now=head>g.a+1e-6&&head<g.b-1e-6;
+      const note=!started?'Pendiente: aún no llega a este escalón.':st.A0<0.0005?'Ya no queda austenita que transformar.':st.dA<0.0005?(st.into?`Incubación: todavía no cruza la curva de inicio (${st.into}).`:'Austenita estable a esta temperatura.'):`${p1(y)} de ${p1(st.A0)} disponible → ${p1(st.dA)} de la probeta (${st.prods.join(' · ')})${now?'':' · final del escalón'}`;
+      box.className='step-live'+(now?' now':'');
+      box.innerHTML=`<div class="sl-top"><span>Transformado en este escalón${now?` · t = ${fmt(st.t)} s`:''}</span><b>y = ${started?p1(y):'—'}</b></div><div class="lv-ybar"><span style="width:${started?(y*100).toFixed(2):0}%"></span></div><div class="sl-note">${note}</div>`;
+    });
+  }
+  function renderLive(){
+    renderStepLive();renderRA();
+    const st=stateAt(head),liveEl=document.getElementById('live');
+    const zona=st.quench?(st.T<S.Ms?'bajo Mₛ: se forma martensita':'enfriando, aún sobre Mₛ'):st.t===null?'sin transformación (enfriamiento rápido)':zone(st.T);
+    if(!liveOn()){liveEl.innerHTML=`<div class="lv-top"><span><b>${st.lab}</b> · ${zona}</span><span class="lv-mono">T = ${Math.round(st.T)} °C${st.t!==null?` · t = ${fmt(st.t)} s`:''}</span></div><div class="note">Revela tu predicción para ver en tiempo real cuánta austenita queda.</div>`;return;}
+    const r=st.r;const parts=LIVESEG.filter(q=>q[0]!=='A'&&r[q[0]]>0.0005).map(q=>`${q[2].toLowerCase()} ${pc(r[q[0]])}`).join(' · ')||'sin productos todavía';
+    liveEl.innerHTML=`<div class="lv-top"><span><b>${st.lab}</b> · ${zona}</span><span class="lv-mono">T = ${Math.round(st.T)} °C${st.t!==null?` · t = ${fmt(st.t)} s`:''}</span></div>
+      <div class="lv-top"><span class="lv-a">${pc(Math.max(0,r.A))} <small>de austenita sin transformar</small></span><span class="note">${parts}</span></div>
+      ${st.A0!==undefined?(()=>{const y=st.A0>0.0005?st.dA/st.A0:0;
+        const txt=st.A0<0.0005?'Ya no queda austenita que transformar.':st.dA<0.0005?(st.into?`Aún no inicia la transformación a ${st.into} (antes de la curva de inicio).`:'La austenita es estable a esta temperatura.'):
+        `<b>Se ha transformado ${p1(y)}</b> de la austenita disponible al iniciar este ${st.quench?'temple':'escalón'} (${pc(st.A0)} de la probeta) → ${p1(st.dA)} de la probeta: ${st.prods.join(' · ')}`;
+        return `<div class="lv-now"><div class="lv-ybar" role="img" aria-label="Fracción transformada en este tramo: ${p1(y)}"><span style="width:${(y*100).toFixed(2)}%"></span></div><span class="lv-ytxt">${txt}</span></div>`;})():''}
+      <div class="stack" role="img" aria-label="Composición en este instante">${LIVESEG.map(([k,c])=>r[k]>0.0005?`<span style="width:${(Math.max(0,r[k])*100).toFixed(2)}%;background:${c}"></span>`:'').join('')}</div>`;
+  }
+  function drawHead(){
+    if(head>=0.9999&&!playing)return;const st=stateAt(head);const g=el('g',{});
+    el('circle',{cx:st.x,cy:Y(st.T),r:9,fill:'var(--naranja)',stroke:'var(--panel)','stroke-width':3},g);
+    if(liveOn()){const t=el('text',{x:Math.min(st.x+14,R-4),y:Y(st.T)-12,'text-anchor':st.x+14>R-90?'end':'start'},g);t.textContent=`A = ${pc(Math.max(0,st.r.A))}`+(st.A0>0.0005&&st.dA>0.0005?` · y = ${p1(st.dA/st.A0)}`:'');t.style.fill='var(--ink)';t.style.fontWeight='700';t.style.fontSize='13px';}
+  }
+  const scrub=scrubEl(),playBtn=document.getElementById('play');
+  function setHead(h){head=Math.max(0,Math.min(1,h));scrub.value=Math.round(head*1000);draw();renderLive();}
+  scrub.addEventListener('input',()=>{stop();setHead(+scrub.value/1000);});
+  function stop(){playing=false;cancelAnimationFrame(rafId);playBtn.textContent='▶ Reproducir';}
+  playBtn.addEventListener('click',()=>{
+    if(playing){stop();return;}
+    if(head>=0.999)head=0;playing=true;playBtn.textContent='❚❚ Pausa';
+    const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,dur=reduce?4000:12000+6000*steps.length;let last=performance.now();
+    const tick=now=>{if(!playing)return;const dt=now-last;last=now;setHead(head+dt/dur);if(head>=1){stop();setHead(1);return;}rafId=requestAnimationFrame(tick);};
+    rafId=requestAnimationFrame(tick);
+  });
+
+
+  // ================= Austenita retenida =================
+  let raTq=25;
+  const kmF=(Ms,T)=>T>=Ms?0:1-Math.exp(-0.011*(Ms-T));
+  function renderRA(){
+    const card=document.getElementById('raCard');if(!card||typeof S==='undefined'||!S)return;
+    const Ms=S.Ms,f=kmF(Ms,raTq),ra=1-f;
+    // gráfica f vs T
+    const W=360,H=230,l=40,r=350,t=12,b=190,Tmax=Math.max(Ms+40,480),Tmin=-200;
+    const x=T=>l+(Tmax-T)/(Tmax-Tmin)*(r-l),y=v=>b-v*(b-t);
+    let g='';[0,.25,.5,.75,1].forEach(v=>{g+=`<line x1="${l}" x2="${r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${l-6}" y="${y(v)+4}" text-anchor="end" font-size="10" fill="var(--muted)">${v*100}%</text>`;});
+    [400,200,25,-80,-196].filter(T=>T<=Tmax).forEach(T=>{g+=`<line x1="${x(T)}" x2="${x(T)}" y1="${t}" y2="${b}" stroke="var(--line)" stroke-dasharray="${T===25?'':'3 3'}"/><text x="${x(T)}" y="${b+14}" text-anchor="middle" font-size="10" fill="var(--muted)">${T}</text>`;});
+    g+=`<text x="${(l+r)/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="var(--muted)">Temperatura final del temple, T_q (°C) ← más frío</text>`;
+    let d='';for(let T=Tmax;T>=Tmin;T-=2){d+=(d?'L':'M')+x(T).toFixed(1)+','+y(kmF(Ms,T)).toFixed(1);}
+    g+=`<path d="M${l},${y(1)}H${r}" stroke="var(--line)"/><path d="${d}" fill="none" stroke="var(--mart)" stroke-width="2.5"/>`;
+    g+=`<line x1="${x(Ms)}" x2="${x(Ms)}" y1="${t}" y2="${b}" stroke="var(--mart)" stroke-dasharray="4 3"/><text x="${x(Ms)+4}" y="${b-8}" font-size="10" fill="var(--mart)">Ms = ${Ms} °C</text>`;
+    g+=`<line x1="${x(raTq)}" x2="${x(raTq)}" y1="${y(f)}" y2="${y(1)}" stroke="var(--gam)" stroke-width="5"/><circle cx="${x(raTq)}" cy="${y(f)}" r="5" fill="var(--naranja)" stroke="var(--panel)" stroke-width="2"/>`;
+    g+=`<text x="${x(raTq)-8}" y="${y(f)+18}" text-anchor="end" font-size="11" font-weight="700" fill="var(--ink)">retenida ${p1(ra)}</text>`;
+    document.getElementById('raPlot').innerHTML=g;
+    document.getElementById('raCalc').innerHTML=`<b>${S.name}</b> (${S.C} % C) · M<sub>s</sub> = ${Ms} °C${S.msEst?' (estimado)':''}<br>
+      <span class="mono">f<sub>M</sub> = 1 − exp[−0.011 (${Ms} − ${raTq<0?'('+String(raTq).replace('-','−')+')':raTq})] = 1 − exp(−${(0.011*(Ms-raTq)).toFixed(3)}) = ${f.toFixed(3)}</span><br>
+      Si toda la probeta era austenita al cruzar M<sub>s</sub>: <b>austenita retenida = ${p1(ra)}</b>, martensita = ${p1(f)}.`+(S.table?`<br><span class="note">En el simulador este acero usa la simplificación de libro (retenida = 0 %). Aquí ves lo que predice Koistinen–Marburger con el mismo M<sub>s</sub>.</span>`:'');
+    // tu tratamiento
+    const mine=document.getElementById('raMine');
+    if(!liveOn()){mine.innerHTML='<b>En tu tratamiento:</b> revela tu predicción para ver cuánta austenita queda retenida.';}
+    else{const base=simulate(steps,{noQuench:true}),Aq=Math.max(0,base.A);const fp=kmF(Ms,Math.min(base.Tlow,Ms)),f25=kmF(Ms,25);
+      const rel=fp>=1?0:(f25-fp)/(1-fp),raM=S.table?0:Aq*(1-rel);
+      mine.innerHTML=`<b>En tu tratamiento (temple a 25 °C):</b> `+(Aq<0.0005?`los escalones transformaron toda la austenita, así que no llega nada a M<sub>s</sub>: <b>retenida = 0 %</b>.`:
+        S.table?`llega ${p1(Aq)} de austenita a M<sub>s</sub>. Con la simplificación de libro toda se vuelve martensita (retenida = 0 %). Con Koistinen–Marburger quedarían ${p1(Aq*(1-rel))}.`:
+        `llega <span class="mono">A = ${p1(Aq)}</span> de austenita al temple${fp>0?` (ya se había formado una fracción ${fp.toFixed(3)} de martensita en el escalón bajo M<sub>s</sub>)`:''}. <span class="mono">Retenida = A × ${fp>0?`[1 − (f(25) − f(T_mín)) / (1 − f(T_mín))]`:`exp[−0.011 (${Ms} − 25)]`} = ${p1(Aq)} × ${(1-rel).toFixed(3)} = </span><b>${p1(raM)}</b>.`);}
+    // tabla
+    const rows=STEELS.map(s=>{const fr=kmF(s.Ms,25);return `<tr class="${s.id===S.id?'cur':''}"><td>${s.name}</td><td>${s.C}</td><td>${s.Ms}${s.msEst?'*':''}</td><td>${p1(1-fr)}</td><td>${p1(1-kmF(s.Ms,-80))}</td><td>${p1(1-kmF(s.Ms,-196))}</td></tr>`;}).join('');
+    document.getElementById('raTable').innerHTML=`<thead><tr><th>Acero</th><th>% C</th><th>M<sub>s</sub> (°C)</th><th>Ret. 25 °C</th><th>Ret. −80 °C</th><th>Ret. −196 °C</th></tr></thead><tbody>${rows}</tbody>`;
+    // preguntas
+    const g52=STEELS.find(s=>s.id==='52100'),g20=STEELS.find(s=>s.id==='1020');
+    const r52=1-kmF(g52.Ms,25),r52c=1-kmF(g52.Ms,-80),r20=1-kmF(g20.Ms,25);
+    document.getElementById('raQs').innerHTML=`
+      <li><span class="tag">Aplicar</span><br>Un 52100 (M<sub>s</sub> ≈ ${g52.Ms} °C) se templa directo hasta 25 °C. ¿Qué fracción de austenita queda retenida?<br><i>Respuesta:</i> exp[−0.011 (${g52.Ms} − 25)] = exp(−${(0.011*(g52.Ms-25)).toFixed(3)}) = ${(r52).toFixed(3)} → <b>${p1(r52)}</b>.</li>
+      <li><span class="tag">Analizar</span><br>¿Por qué un 1020 templado casi no tiene austenita retenida y un 52100 sí, si ambos se enfrían hasta 25 °C?<br><i>Respuesta:</i> el 1020 tiene poco carbono, así que su M<sub>s</sub> ≈ ${g20.Ms} °C está muy por encima del ambiente y el exponente es grande: retenida = ${p1(r20)}. El carbono y el cromo del 52100 bajan M<sub>s</sub> a ≈ ${g52.Ms} °C, y el temple no avanza lo suficiente por debajo de M<sub>s</sub>.</li>
+      <li><span class="tag">Evaluar</span><br>Un calibre de 52100 debe conservar sus medidas durante años. ¿Basta un revenido a baja temperatura o conviene un tratamiento subcero antes del revenido? Justifica con números.<br><i>Respuesta:</i> conviene el subcero inmediatamente después del temple. A −80 °C la retenida baja de ${p1(r52)} a ${p1(r52c)}. Después se reviene para quitar la fragilidad de la martensita, incluida la que se formó en el subcero. Si solo se reviene, parte de la austenita puede transformarse después, en servicio, y cambiar las dimensiones.</li>`;
+  }
+  document.querySelectorAll('#raCard [data-tq]').forEach(bt=>bt.addEventListener('click',()=>{raTq=+bt.dataset.tq;document.querySelectorAll('#raCard [data-tq]').forEach(o=>o.setAttribute('aria-pressed',o===bt));renderRA();}));
 
   // ================= Ficha y selector =================
   function renderFicha(){
@@ -889,6 +1088,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       w.innerHTML=`<div class="step-head"><span>Escalón ${i+1} · ${zone(s.T)}</span><button class="x" data-rm="${i}" aria-label="Quitar escalón ${i+1}">Quitar</button></div>
       <div class="row"><label for="xtr${i}">Temperatura</label><input type="range" id="xtr${i}" min="100" max="${S.aus-10}" step="5" value="${s.T}"><input type="number" id="xtn${i}" min="100" max="${S.aus-10}" step="5" value="${s.T}" aria-label="Temperatura en °C"></div>
       <div class="row"><label for="xsr${i}">Tiempo</label><input type="range" id="xsr${i}" min="-1" max="5" step="0.05" value="${Math.log10(s.t)}"><input type="number" id="xsn${i}" min="0.1" max="100000" step="any" value="${+s.t.toPrecision(3)}" aria-label="Tiempo en segundos"></div>`;
+      w.insertAdjacentHTML('beforeend',`<div class="step-live" data-sl="${i}"></div>`);
       stepsEl.appendChild(w);
       const tr=w.querySelector('#xtr'+i),tn=w.querySelector('#xtn'+i),sr=w.querySelector('#xsr'+i),sn=w.querySelector('#xsn'+i),hd=w.querySelector('.step-head span');
       const lab=()=>hd.textContent=`Escalón ${i+1} · ${zone(s.T)}`;
@@ -899,6 +1099,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     });
     stepsEl.querySelectorAll('[data-rm]').forEach(b=>b.onclick=e=>{e.stopPropagation();steps.splice(+b.dataset.rm,1);active=steps.length-1;renderSteps();changed();});
     document.getElementById('x-add').disabled=steps.length>=3;
+    if(typeof renderLive==='function'&&document.getElementById('live'))renderLive();
   }
   document.getElementById('x-add').onclick=()=>{if(steps.length<3){const last=steps[steps.length-1];steps.push({T:last?Math.max(S.Ms+20,last.T-150):Math.min(S.A1-40,S.table?650:S.P[0]+40),t:100});active=steps.length-1;renderSteps();changed();}};
   const presEl=document.getElementById('x-presets');
@@ -909,7 +1110,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   const optsEl=document.getElementById('x-opts'),reveal=document.getElementById('x-reveal');
   optsEl.innerHTML=KEYS.map(([k,l])=>`<label class="opt"><input type="checkbox" value="${k}">${l}</label>`).join('');
   optsEl.onchange=()=>{reveal.disabled=!optsEl.querySelector('input:checked');};
-  function changed(){draw();document.getElementById('x-resCard').hidden=true;
+  function changed(){calcShown=false;playing=false;cancelAnimationFrame(rafId);{const b=document.getElementById('play');if(b)b.textContent='▶ Reproducir';}head=1;{const sc=scrubEl();if(sc)sc.value=1000;}draw();if(typeof renderLive==='function'&&document.getElementById('live'))renderLive();document.getElementById('x-resCard').hidden=true;
     if(mode==='pred'){optsEl.querySelectorAll('input').forEach(r=>r.checked=false);reveal.disabled=true;}}
   const CH=[
     {txt:'Obtén al menos 95 % de bainita.',chk:r=>r.B>=.95,hint:'Mantén el tiempo suficiente por debajo de la nariz y por arriba de Mₛ.'},
@@ -923,6 +1124,12 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     else{const ok=CH[challenge].chk(r);v.className='verdict '+(ok?'ok':'bad');v.textContent=ok?`Reto cumplido con ${S.name}.`:`Aún no con ${S.name}. Ajusta el tratamiento o prueba otro acero.`;}
     document.getElementById('x-bars').innerHTML=KEYS.filter(k=>r[k[0]]>0.0005||['P','B','M'].includes(k[0])).map(([k,l,c])=>`<div class="bar"><span>${l}</span><div class="track"><div class="fill" style="width:${(r[k]*100).toFixed(1)}%;background:${c}"></div></div><span class="pct">${pc(r[k])}</span></div>`).join('');
     document.getElementById('x-why').innerHTML=r.why.map(s=>`<li>${s}</li>`).join('');
+    const SEG=[['F','var(--alfa)','Ferrita proeut.'],['Cp','var(--cafe)','Cementita proeut.'],['P','var(--gb)','Perlita'],['B','var(--denim)','Bainita'],['M','var(--mart)','Martensita'],['A','var(--gam)','Austenita']];
+    const stack=sn=>`<div class="stack" role="img" aria-label="${SEG.filter(q=>sn[q[0]]>0.0005).map(q=>q[2]+' '+pc(sn[q[0]])).join(', ')}">${SEG.map(([k,c])=>sn[k]>0.0005?`<span style="width:${(sn[k]*100).toFixed(2)}%;background:${c}"></span>`:'').join('')}</div>`;
+    document.getElementById('ledger').innerHTML=r.led.map(l=>`<div class="lrow"><div class="lhead"><span>${l.head}</span><span class="pct">A = ${pc(l.snap.A)}</span></div><div class="lread">${l.read}</div><div class="lcalc">${l.calc}</div>${stack(l.snap)}</div>`).join('')
+      +`<div class="lkey">${SEG.map(([k,c,n])=>`<span><i style="background:${c}"></i>${n}</span>`).join('')}</div>`
+      +`<div class="lcalc">Suma final: ${KEYS.filter(k=>r[k[0]]>0.0005).map(k=>k[1].toLowerCase()+' '+(r[k[0]]*100).toFixed(1)+' %').join(' + ')} = 100 %</div>`;
+    calcShown=true;draw();renderLive();
     document.getElementById('x-resCard').hidden=false;};
   const tp=document.getElementById('x-tab-pred'),tr=document.getElementById('x-tab-reto'),cb=document.getElementById('x-challengeBox');
   function renderChallenge(){cb.innerHTML=`<div class="challenge"><b>Reto ${challenge+1} de ${CH.length} · ${S.name}</b><br>${CH[challenge].txt}<div class="note" style="margin-top:4px">Pista: ${CH[challenge].hint}</div><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${CH.map((c,i)=>`<button class="btn" data-c="${i}" ${i===challenge?'style="border-color:var(--naranja)"':''}>Reto ${i+1}</button>`).join('')}</div></div>`;
@@ -956,6 +1163,17 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   document.getElementById('v-pd').onclick=()=>showView('pd');document.getElementById('v-ttt').onclick=()=>showView('ttt');
   let v=location.hash==='#ttt'?'ttt':'pd';try{if(!location.hash){const s=localStorage.getItem('lab-view');if(s==='ttt')v='ttt';}}catch(e){}
   showView(v);
+})();
+</script>
+<script>
+(function(){
+  const root=document.documentElement,btn=document.getElementById('themeBtn'),lbl=document.getElementById('themeLbl'),ic=btn.querySelector('.ic');
+  const mq=matchMedia('(prefers-color-scheme: dark)');
+  const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':mq.matches;
+  function paint(){const d=isDark();btn.setAttribute('aria-pressed',d);lbl.textContent=d?'Modo claro':'Modo oscuro';ic.textContent=d?'☀':'☾';btn.title=d?'Cambiar a modo claro':'Cambiar a modo oscuro';}
+  try{const v=localStorage.getItem('lab-theme');if(v==='dark'||v==='light')root.dataset.theme=v;}catch(e){}
+  btn.addEventListener('click',()=>{const next=isDark()?'light':'dark';root.dataset.theme=next;try{localStorage.setItem('lab-theme',next);}catch(e){}paint();window.dispatchEvent(new Event('lab-theme'));});
+  mq.addEventListener?.('change',paint);paint();window.dispatchEvent(new Event('lab-theme'));
 })();
 </script>
 
