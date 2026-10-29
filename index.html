@@ -1,4 +1,3 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <meta charset="utf-8">
 <title>Laboratorio virtual de materiales</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -9,7 +8,7 @@
 :root{
   --bg:#F6F3EE; --panel:#FCFAF6; --ink:#17252F; --muted:#5B6770; --line:#DCD5C9; --soft:#EDE8DF;
   --denim:#3D4A55; --naranja:#B2683C; --cafe:#8A5A3B; --ok:#4F6B4A; --bad:#A33B2B; --btn:#9C5A31; --btn-ink:#FCFAF6;
-  --curve:#17252F; --tie:#B2683C; --liq:#E4E1DA; --alfa:#E3CBA8; --beta:#3D4A55; --gb:#4A3426; --gam:#C9D6C1; --start:#A33B2B; --finish:#4F6B4A; --half:#6E7B85; --path:#B2683C; --mart:#6B4E71;
+  --curve:#17252F; --tie:#B2683C; --liq:#E4E1DA; --alfa:#E3CBA8; --beta:#3D4A55; --gb:#4A3426; --gam:#C9D6C1; --start:#A33B2B; --finish:#4F6B4A; --half:#6E7B85; --path:#B2683C; --mart:#6B4E71; --q1:#E3CBA8; --q2:#C9D6C1; --q3:#7C8C99; --q4:#CDB8D4; --q5:#DDA985; --q6:#A9C2CF; --q7:#CDBA72; --q8:#B79680;
   --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --f-body:"Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -17,11 +16,11 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#17252F; --panel:#1F303C; --ink:#F6F3EE; --muted:#A9B3BA; --line:#3D4A55; --soft:#2A3944;
   --denim:#A9B3BA; --naranja:#C97F4E; --cafe:#D9A27A; --ok:#8FB38A; --bad:#E07A66; --btn:#C97F4E; --btn-ink:#17252F;
-  --curve:#F6F3EE; --tie:#C97F4E; --liq:#3A4650; --alfa:#D9BE97; --beta:#4A5762; --gb:#9C7356; --gam:#5E7A5A; --start:#E07A66; --finish:#8FB38A; --half:#A9B3BA; --path:#C97F4E; --mart:#B49AC0; color-scheme:dark}}
+  --curve:#F6F3EE; --tie:#C97F4E; --liq:#3A4650; --alfa:#D9BE97; --beta:#4A5762; --gb:#9C7356; --gam:#5E7A5A; --start:#E07A66; --finish:#8FB38A; --half:#A9B3BA; --path:#C97F4E; --mart:#B49AC0; --q1:#D9BE97; --q2:#5E7A5A; --q3:#6F7E8B; --q4:#8F7499; --q5:#B9754A; --q6:#4F7384; --q7:#8F7D3F; --q8:#9C7356; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#17252F; --panel:#1F303C; --ink:#F6F3EE; --muted:#A9B3BA; --line:#3D4A55; --soft:#2A3944;
   --denim:#A9B3BA; --naranja:#C97F4E; --cafe:#D9A27A; --ok:#8FB38A; --bad:#E07A66; --btn:#C97F4E; --btn-ink:#17252F;
-  --curve:#F6F3EE; --tie:#C97F4E; --liq:#3A4650; --alfa:#D9BE97; --beta:#4A5762; --gb:#9C7356; --gam:#5E7A5A; --start:#E07A66; --finish:#8FB38A; --half:#A9B3BA; --path:#C97F4E; --mart:#B49AC0; color-scheme:dark}
+  --curve:#F6F3EE; --tie:#C97F4E; --liq:#3A4650; --alfa:#D9BE97; --beta:#4A5762; --gb:#9C7356; --gam:#5E7A5A; --start:#E07A66; --finish:#8FB38A; --half:#A9B3BA; --path:#C97F4E; --mart:#B49AC0; --q1:#D9BE97; --q2:#5E7A5A; --q3:#6F7E8B; --q4:#8F7499; --q5:#B9754A; --q6:#4F7384; --q7:#8F7D3F; --q8:#9C7356; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
@@ -71,6 +70,17 @@ canvas{width:200px;height:200px;border-radius:50%;border:3px solid var(--line);d
 .challenge b{font-family:var(--f-display);font-size:19px;font-weight:600}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);margin-top:8px}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line)}
+.sysgrp{grid-column:1/-1;font:600 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--cafe);margin-top:8px}
+.sysgrp:first-child{margin-top:0}
+.chart .reg.sm{font-size:14px}.chart .reg.xs{font-size:11px}
+.opts.many{max-height:260px;overflow:auto;padding-right:4px}
+.rxtog{display:flex;gap:8px;align-items:center;margin-top:12px;font-size:14px;cursor:pointer}
+.rxtog input{width:18px;height:18px;accent-color:var(--naranja)}
+#rxTbl{width:100%;border-collapse:collapse;font-size:14px}
+#rxTbl th{text-align:left;font:600 12px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:4px 8px 6px 0;border-bottom:1px solid var(--line)}
+#rxTbl td{padding:6px 8px 6px 0;border-bottom:1px solid var(--line);vertical-align:top}
+#rxTbl td.n{font:700 14px var(--f-mono);color:var(--naranja)}
+#rxTbl td.r{font-family:var(--f-mono);font-size:13px}
 .ficha{display:grid;gap:10px;font-size:15px}
 .badge{display:inline-block;font:600 12px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:var(--soft);color:var(--cafe);border:1px solid var(--line)}
 .tbl{overflow-x:auto}
@@ -169,10 +179,16 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
         <div class="row"><label for="cR" id="cLab">Composición C₀</label><input type="range" id="cR" min="0" max="100" step="0.1" value="40"><input type="number" id="cN" min="0" max="100" step="0.1" value="40" aria-label="Composición en % en peso"></div>
         <div class="row"><label for="tR">Temperatura T</label><input type="range" id="tR" min="0" max="350" step="1" value="150"><input type="number" id="tN" min="0" max="350" step="1" value="150" aria-label="Temperatura en °C"></div>
         <div class="presets" id="presets"></div>
+        <label class="rxtog" id="rxTog" hidden><input type="checkbox" id="rxChk"> Mostrar las reacciones invariantes (respuesta de A.1)</label>
       </section>
       <section class="card">
         <h2>Ficha de solubilidad</h2>
         <div class="ficha" id="ficha"></div>
+      </section>
+      <section class="card" id="rxCard" hidden>
+        <h2>Reacciones invariantes</h2>
+        <div class="tbl"><table id="rxTbl"></table></div>
+        <p class="note" style="margin:8px 0 0">Composiciones en % en peso del segundo componente. La reacción se escribe al enfriar.</p>
       </section>
     </div>
 
@@ -197,7 +213,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       </section>
 
       <section class="card">
-        <h2>Microestructura (enfriamiento lento)</h2>
+        <h2 id="microH">Microestructura (enfriamiento lento)</h2>
         <div class="micro" id="microWrap">
           <canvas id="mc" width="400" height="400" aria-label="Esquema de la microestructura"></canvas>
           <div id="microTxt" class="note"></div>
@@ -338,7 +354,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
 
   <p class="note" style="margin:0">Modelo didáctico. El acero Fe–0.76 C usa las curvas digitalizadas de Callister, Fig. 10.22, con su simplificación de libro (toda la austenita remanente se vuelve martensita). Los demás aceros usan curvas esquemáticas representativas: la forma y el orden de magnitud siguen las tendencias de los atlas de diagramas TTT (US Steel/ASM), pero los tiempos no son datos de diseño. A₁ y A₃ se calculan con las ecuaciones de Andrews (1965) a partir de la composición nominal; Mₛ con Andrews en los aceros de hasta 0.6 % C y estimado en los de más carbono. La martensita al templar sigue Koistinen–Marburger: f = 1 − exp[−0.011(Mₛ − T)]; lo que no se transforma queda como austenita retenida. Cada escalón isotérmico se lee desde t = 0 (reloj reiniciado) y solo transforma la austenita que dejó el escalón anterior; es la simplificación de libro (Callister, Ejemplo 10.1) y no considera la incubación acumulada (regla de aditividad de Scheil).</p>
 </div>
-  <footer>Modelo didáctico. Los puntos clave (temperaturas de fusión, eutécticos y solubilidades máximas) vienen de Callister &amp; Rethwisch, 10.ª ed. (Figs. 9.3, 9.7 y 9.8) y del ASM Handbook, vol. 3; las curvas entre esos puntos son ajustes suaves y deben tratarse como esquemas. Ge–Si se dibuja en % en peso de forma esquemática. Fe–Fe₃C es el diagrama metaestable de Callister, Fig. 9.24, con líneas rectas entre sus puntos clave; la región δ es muy angosta a esta escala. Composiciones en % en peso del segundo componente. La micrografía es un esquema, no una imagen real.</footer>
+  <footer>Modelo didáctico. Los puntos clave (temperaturas de fusión, eutécticos y solubilidades máximas) vienen de Callister &amp; Rethwisch, 10.ª ed. (Figs. 9.3, 9.7 y 9.8) y del ASM Handbook, vol. 3; las curvas entre esos puntos son ajustes suaves y deben tratarse como esquemas. Ge–Si se dibuja en % en peso de forma esquemática. Fe–Fe₃C es el diagrama metaestable de Callister, Fig. 9.24, con líneas rectas entre sus puntos clave; la región δ es muy angosta a esta escala. Composiciones en % en peso del segundo componente. Los diagramas de la actividad y de la evaluación (Ti–Al, Cr–Ni, Al–Cu, Cu–Zn, Al–Zn y Al–Mg) se calcularon con CALPHAD (pycalphad); en los sistemas calculados el esquema inferior muestra las fases en equilibrio a la temperatura elegida, no la microestructura final. La micrografía es un esquema, no una imagen real.</footer>
 </div>
 
 <script>
@@ -346,6 +362,9 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   // ================= Definición de sistemas =================
   const iso=(o)=>Object.assign({type:'iso'},o);
   const eut=(o)=>Object.assign({type:'eut'},o);
+  const tab=(o)=>Object.assign({type:'tab',labels:[]},o);
+  // Fronteras de fase de los diagramas calculados con CALPHAD (pycalphad): tr = [fase izq, fase der, T[], c_izq[], c_der[]], composiciones en % en peso
+  const CAL={"tial":{"ph":["HCP_A3","ALM_D019","ALTI","AL2TI","AL3M_D022","FCC_A1","LIQUID","BCC_A2","AL11TI5"],"tr":[[0,1,[500.0,570.0,645.0,710.0,780.0,850.0,920.0,975.0,1025.0,1065.0,1100.0,1126.1,1150.0,1165.0,1175.0,1180.0,1184.0,1187.0,1188.0,1189.99],[6.57,7.11,7.74,8.34,9.06,9.88,10.83,11.71,12.65,13.55,14.51,15.39,16.41,17.25,18.0,18.5,19.01,19.55,19.82,20.69],[13.26,13.11,13.06,13.13,13.32,13.63,14.07,14.54,15.08,15.63,16.23,16.81,17.51,18.11,18.65,19.01,19.39,19.8,20.01,20.69]],[1,2,[500.0,845.0,1126.1],[22.57,25.04,27.08],[35.73,35.19,34.55]],[2,3,[500.0,735.0,930.0,1075.0,1181.17],[43.4,44.37,45.32,46.22,47.09],[52.99,52.99,52.99,52.99,52.99]],[3,4,[500.0,805.0,905.0,995.89],[52.99,52.99,52.99,52.99],[62.84,62.73,62.58,62.33]],[4,5,[500.0,580.0,664.83],[62.84,62.84,62.84],[99.53,99.19,98.71]],[5,6,[660.01,661.0,664.83],[99.89,99.8,98.72],[99.89,99.98,99.87]],[4,6,[664.93,760.0,840.0,910.0,940.0,970.0,1000.0,1025.0,1050.0,1075.0,1100.0,1120.0,1140.0,1160.0,1181.17,1200.0,1220.0,1240.0,1260.0,1275.0,1290.0,1305.0,1320.0,1330.0,1335.0,1345.0,1350.0,1355.0,1360.0,1365.0,1370.0,1372.72],[62.84,62.84,62.84,62.84,62.84,62.84,62.83,62.83,62.83,62.82,62.81,62.8,62.78,62.77,62.74,62.71,62.67,62.61,62.54,62.47,62.38,62.26,62.1,61.97,61.89,61.7,61.58,61.43,61.25,61.0,60.62,60.16],[99.87,99.63,99.21,98.58,98.21,97.75,97.2,96.66,96.02,95.27,94.4,93.59,92.68,91.63,90.37,89.09,87.56,85.8,83.81,82.13,80.28,78.22,75.92,74.21,73.28,71.25,70.12,68.87,67.45,65.76,63.46,61.1]],[7,0,[880.01,884.0,920.0,945.0,975.0,1020.0,1145.0,1220.0,1290.0,1443.45,1502.69],[0.1,0.08,1.44,2.51,3.94,6.28,13.1,17.06,20.6,28.12,31.09],[0.1,0.12,2.12,3.46,5.06,7.47,14.26,18.24,21.82,29.43,32.42]],[3,8,[995.99,1181.17],[52.99,52.99],[54.5,54.5]],[8,4,[995.99,1110.0,1210.0,1300.0,1340.0,1372.72],[54.5,54.5,54.5,54.5,54.5,54.5],[62.33,61.89,61.31,60.53,60.08,59.63]],[1,0,[1126.2,1155.0,1165.0,1175.0,1181.17,1185.0,1187.0,1188.0,1189.99],[27.08,24.95,24.14,23.22,22.54,22.0,21.64,21.4,20.69],[27.92,25.68,24.79,23.75,22.95,22.31,21.87,21.58,20.69]],[0,2,[1126.2,1180.0,1225.0,1270.0,1310.0,1345.0,1380.0,1415.0,1443.45],[27.93,28.89,29.77,30.76,31.75,32.71,33.8,35.05,36.23],[34.55,35.03,35.51,36.09,36.72,37.36,38.13,39.05,39.94]],[2,8,[1181.27,1285.0,1378.68],[47.09,47.46,47.89],[54.5,54.5,54.5]],[8,6,[1372.82,1375.0,1378.68],[54.5,54.5,54.5],[58.77,57.93,55.64]],[6,4,[1372.82,1373.81],[58.88,59.27],[59.65,59.27]],[2,6,[1378.78,1390.0,1400.0,1410.0,1420.0,1425.0,1430.0,1435.0,1440.0,1443.45],[47.89,46.99,46.09,45.08,43.9,43.23,42.49,41.66,40.7,39.95],[55.57,53.8,52.1,50.27,48.25,47.15,45.97,44.68,43.25,42.14]],[0,6,[1443.55,1475.0,1502.69],[36.23,34.3,32.43],[42.12,39.44,36.87]],[7,6,[1502.79,1525.0,1550.0,1575.0,1595.0,1615.0,1630.0,1645.0,1660.0,1673.0,1685.0,1690.0,1695.0,1700.0,1705.0,1709.0,1711.0,1713.0,1714.0,1715.99],[31.1,30.15,29.01,27.78,26.7,25.53,24.56,23.5,22.3,21.12,19.83,19.22,18.53,17.75,16.82,15.89,15.3,14.54,14.02,12.4],[36.86,35.55,33.98,32.28,30.82,29.23,27.93,26.51,24.93,23.37,21.7,20.91,20.03,19.04,17.86,16.68,15.95,15.01,14.37,12.4]],[6,7,[1668.01,1669.0,1685.0,1690.0,1695.0,1700.0,1705.0,1709.0,1711.0,1712.0,1713.0,1714.0,1715.99],[0.2,0.19,2.77,3.63,4.56,5.61,6.84,8.06,8.81,9.26,9.78,10.42,12.4],[0.2,0.22,3.25,4.22,5.24,6.31,7.51,8.64,9.32,9.72,10.17,10.73,12.4]]],"uni":[[1716.0,1750.0,6]],"inv":[664.88,995.94,1126.15,1181.22,1372.77,1378.73,1443.5,1502.74],"iso":[[1502.7,31.09,36.86],[1443.5,36.22,42.12],[1378.7,47.89,55.58],[1372.8,54.49,59.62],[1181.2,47.08,54.49],[1126.2,27.08,34.55],[995.9,52.99,62.32],[664.9,62.83,99.87]],"lab":[["AL11TI5|AL3M_D022",58.39,1064.6,22.1],["AL2TI|AL3M_D022",57.68,586.0,28.1],["AL3M_D022|FCC_A1",67.67,581.5,27.1],["AL3M_D022|LIQUID",79.45,957.3,94.3],["ALM_D019",19.83,921.5,32.2],["ALM_D019|ALTI",29.47,603.9,34.3],["ALTI",40.54,1118.3,34.1],["ALTI|AL11TI5",50.89,1248.0,20.1],["ALTI|AL2TI",48.39,581.5,26.1],["ALTI|LIQUID",48.04,1400.1,7.0],["BCC_A2",13.05,1485.1,73.1],["BCC_A2|LIQUID",31.97,1534.3,10.7],["HCP_A3",4.84,845.4,27.9],["HCP_A3|ALM_D019",10.2,554.7,18.1],["HCP_A3|ALTI",31.97,1176.4,17.0],["HCP_A3|LIQUID",36.97,1467.2,8.6],["LIQUID",58.75,1561.1,60.0]]},"crni":{"ph":["BCC_A2","FCC_A1","LIQUID"],"tr":[[0,1,[700.0,760.0,815.0,865.0,910.0,950.0,985.0,1015.0,1030.0,1045.0,1065.0,1080.0,1095.0,1105.0,1110.0,1120.0,1130.0,1140.0,1160.0,1170.0,1175.0,1180.0,1190.0,1200.0,1210.0,1220.0,1235.0,1250.0,1265.0,1280.0,1300.0,1320.0,1345.13],[0.78,1.24,1.84,2.59,3.48,4.51,5.66,6.92,7.66,8.52,9.87,11.09,12.55,13.71,14.35,15.8,17.49,19.41,23.54,25.4,26.23,27.01,28.39,29.6,30.66,31.61,32.87,33.99,34.99,35.9,37.02,38.06,39.27],[67.8,65.88,64.07,62.4,60.9,59.59,58.46,57.53,57.08,56.64,56.07,55.66,55.28,55.03,54.92,54.69,54.48,54.28,53.95,53.81,53.75,53.69,53.58,53.48,53.4,53.33,53.23,53.16,53.11,53.07,53.05,53.06,53.1]],[0,2,[1345.23,1355.0,1365.0,1375.0,1385.0,1395.0,1405.0,1415.0,1425.0,1435.0,1447.0,1458.0,1470.0,1495.0,1520.0,1550.0,1585.0,1625.0,1670.0,1725.0,1785.0,1865.0,1914.0,1914.99],[39.26,37.26,35.33,33.5,31.78,30.18,28.68,27.29,26.0,24.79,23.46,22.34,21.2,19.1,17.27,15.34,13.35,11.33,9.28,6.97,4.64,1.73,0.02,0.04],[49.17,48.09,47.05,46.06,45.12,44.21,43.32,42.46,41.61,40.78,39.79,38.89,37.92,35.9,33.88,31.46,28.61,25.31,21.54,16.86,11.65,4.53,0.06,0.04]],[2,1,[1345.23,1355.0,1365.0,1375.0,1380.0,1390.0,1395.0,1400.0,1405.0,1410.0,1415.0,1420.0,1425.0,1430.0,1435.0,1440.0,1450.0,1455.0,1455.99],[49.19,52.38,55.8,59.41,61.3,65.28,67.39,69.58,71.86,74.23,76.72,79.32,82.03,84.85,87.77,90.79,96.94,99.94,99.94],[53.12,55.99,59.08,62.34,64.06,67.69,69.61,71.62,73.73,75.93,78.25,80.67,83.21,85.87,88.62,91.46,97.21,99.95,99.94]]],"uni":[[1915.0,1950.0,2]],"inv":[1345.18],"iso":[[1345.2,39.27,53.1]],"lab":[["BCC_A2",11.98,1322.8,68.2],["BCC_A2|FCC_A1",40.54,982.8,90.5],["BCC_A2|LIQUID",24.12,1537.5,27.1],["FCC_A1",79.81,1054.4,114.3],["LIQUID",51.96,1658.2,94.3]]},"alcu":{"ph":["FCC_A1","ALCU_THETA","ALCU_ETA","LIQUID","ALCU_EPSILON"],"tr":[[0,1,[250.0,300.0,350.0,390.0,430.0,465.0,495.0,525.0,547.54],[0.24,0.48,0.87,1.34,1.99,2.75,3.61,4.71,5.78],[53.96,53.84,53.67,53.49,53.26,53.01,52.77,52.51,52.29]],[1,2,[250.0,450.0,525.0,595.8],[54.07,53.96,53.81,53.57],[70.2,70.33,70.48,70.68]],[0,3,[547.64,560.0,570.0,575.0,582.65,590.0,600.0,610.0,615.0,625.0,632.0,640.0,650.0,660.0,660.99],[5.78,4.78,4.1,3.79,3.36,2.97,2.48,2.02,1.8,1.37,1.09,0.77,0.39,0.01,0.07],[33.28,30.75,28.52,27.34,25.45,23.53,20.74,17.75,16.18,12.89,10.48,7.62,3.93,0.12,0.07]],[3,1,[547.64,560.0,570.0,575.0,579.21,582.65,585.0,590.0,595.0,595.8],[33.31,36.83,39.89,41.55,43.03,44.34,45.3,47.65,51.17,52.3],[52.29,52.53,52.74,52.86,52.96,53.05,53.12,53.28,53.49,53.56]],[3,2,[595.9,624.87],[52.41,55.44],[70.68,71.0]],[3,4,[624.97,632.0,632.99],[55.44,55.95,64.75],[73.5,73.56,64.75]]],"uni":[[661.0,700.0,3]],"inv":[547.59,564.73,579.26,582.7,595.85,624.92,686.55,781.06,836.17,850.92,877.35,959.23,1020.26,1036.13],"iso":[[1036.1,90.8,92.34],[1020.3,83.26,84.53],[959.2,78.22,82.53],[877.4,79.72,81.78],[850.9,71.81,76.87],[836.2,76.52,80.41],[781.1,83.78,86.55],[686.6,75.85,79.89],[624.9,55.44,73.49],[595.9,52.4,70.68],[582.7,74.22,77.94],[579.3,71.1,74.22],[564.7,84.06,90.12],[547.6,5.78,52.29]],"lab":[["ALCU_THETA",53.23,514.3,8.0],["ALCU_THETA|ALCU_ETA",54.21,585.0,8.0],["FCC_A1",2.55,541.6,26.1],["FCC_A1|ALCU_THETA",14.68,398.7,132.9],["FCC_A1|LIQUID",7.64,593.0,40.8],["LIQUID",33.47,626.7,65.7],["LIQUID|ALCU_ETA",54.21,602.7,7.1],["LIQUID|ALCU_THETA",50.49,570.5,21.4]]},"cuzn":{"ph":["FCC_A1","BCC_B2","CUZN_GAMMA","HCP_A3","HCP_ZN","LIQUID"],"tr":[[0,1,[300.0,340.0,375.0,395.0,415.0,435.0,440.0,445.0,520.0,585.0,650.0,710.0,765.0,815.0,860.0,902.1],[37.65,38.52,39.09,39.3,39.43,39.45,39.5,39.46,38.78,38.12,37.36,36.54,35.65,34.69,33.65,32.48],[45.38,45.61,45.72,45.71,45.64,45.49,45.4,45.34,44.43,43.52,42.47,41.34,40.12,38.83,37.46,35.97]],[1,2,[300.0,345.0,385.0,425.0,465.0,565.0,665.0,715.0,760.0,800.0,835.16],[50.14,49.74,49.53,49.52,49.79,51.16,52.82,53.77,54.7,55.62,56.5],[58.35,57.58,57.09,56.82,56.79,57.14,57.69,58.06,58.46,58.87,59.29]],[2,3,[300.0,420.0,490.0,558.78],[67.95,69.03,69.52,69.93],[79.54,78.87,78.5,78.17]],[3,4,[300.0,421.24],[86.94,87.74],[98.89,98.16]],[4,5,[415.01,420.0,421.24],[99.61,99.57,98.23],[99.61,99.65,98.43]],[3,5,[421.34,445.0,470.0,495.0,515.0,535.0,558.88,580.0,600.21],[87.74,86.81,85.81,84.78,83.92,83.03,81.89,80.81,79.67],[98.36,97.72,96.86,95.79,94.77,93.6,91.97,90.3,88.49]],[2,1,[558.88,625.0,699.1],[69.93,69.25,68.39],[75.38,74.09,72.5]],[1,3,[558.88,580.0,590.0,600.21],[75.39,76.48,77.08,77.79],[78.17,78.83,79.21,79.67]],[1,5,[600.31,625.0,650.0,675.0,699.1],[77.79,76.62,75.36,73.98,72.5],[88.48,86.81,84.96,82.91,80.72]],[2,5,[699.2,715.0,730.0,745.0,755.0,765.0,775.0,785.0,795.0,805.0,810.0,815.0,820.0,825.0,830.0,835.0,835.16],[68.39,67.89,67.38,66.82,66.41,65.97,65.5,64.97,64.37,63.68,63.28,62.84,62.33,61.72,60.92,59.44,59.33],[80.71,79.44,78.16,76.76,75.76,74.69,73.54,72.28,70.89,69.3,68.4,67.41,66.28,64.96,63.25,60.16,59.93]],[1,5,[835.26,845.0,850.0,855.0,865.0,875.0,885.0,895.0,902.1],[56.49,54.16,52.86,51.48,48.52,45.33,41.97,38.51,35.98],[59.85,57.23,55.79,54.29,51.13,47.77,44.28,40.67,38.03]],[0,5,[902.2,930.0,945.0,960.0,985.0,1000.0,1010.0,1030.0,1040.0,1050.0,1060.0,1070.0,1077.0,1084.0,1084.99],[32.47,28.16,25.74,23.26,18.99,16.34,14.55,10.87,8.98,7.06,5.09,3.07,1.62,0.13,0.16],[38.0,33.35,30.73,28.03,23.33,20.36,18.31,14.01,11.74,9.36,6.86,4.22,2.26,0.19,0.16]]],"uni":[[1085.0,1100.0,5]],"inv":[421.29,558.83,600.26,699.15,835.21,902.15],"iso":[[902.2,32.48,38.01],[835.2,56.5,59.86],[699.2,68.39,80.71],[600.3,77.79,88.48],[558.8,69.93,78.17],[421.3,87.74,98.36]],"lab":[["BCC_B2",47.32,781.5,41.4],["BCC_B2|CUZN_GAMMA",53.75,343.9,22.1],["BCC_B2|LIQUID",80.17,644.2,22.2],["CUZN_GAMMA",63.03,455.5,36.1],["CUZN_GAMMA|BCC_B2",72.31,587.0,14.1],["CUZN_GAMMA|HCP_A3",73.74,361.1,30.1],["CUZN_GAMMA|LIQUID",71.24,741.5,21.4],["FCC_A1",19.48,515.5,108.5],["FCC_A1|BCC_B2",42.32,346.8,20.1],["FCC_A1|LIQUID",31.97,921.7,7.4],["HCP_A3",83.38,412.5,24.2],["HCP_A3|HCP_ZN",93.02,361.1,31.4],["HCP_A3|LIQUID",90.88,478.3,27.9],["LIQUID",83.74,918.8,91.4]]},"alzn":{"ph":["FCC_A1","HCP_A3","FCC_A1#2","LIQUID"],"tr":[[0,1,[200.0,215.0,225.0,235.0,245.0,255.0,260.0,265.0,270.0,277.19],[13.14,15.21,16.74,18.44,20.32,22.43,23.6,24.86,26.24,28.47],[99.73,99.67,99.63,99.58,99.53,99.47,99.44,99.41,99.38,99.33]],[0,2,[277.29,285.0,295.0,305.0,310.0,315.0,320.0,325.0,330.0,335.0,340.0,345.0,347.0,348.0,349.0,350.0,351.0,352.0,352.99],[28.5,30.03,32.16,34.49,35.75,37.08,38.49,40.02,41.68,43.52,45.63,48.19,49.43,50.13,50.91,51.8,52.88,54.4,56.61],[77.74,76.86,75.59,74.16,73.36,72.49,71.55,70.5,69.32,67.97,66.36,64.31,63.27,62.67,61.99,61.2,60.23,58.81,56.61]],[2,1,[277.29,285.0,290.0,300.0,310.0,330.0,352.0,352.99],[77.75,78.53,78.96,79.71,80.34,81.4,82.32,90.61],[99.33,99.29,99.27,99.21,99.16,99.04,98.9,90.61]],[0,1,[352.01,353.0,380.81],[90.63,82.36,83.3],[90.63,98.89,98.7]],[0,3,[380.91,390.0,395.0,400.0,405.0,410.0,414.0,418.0,422.0,425.0,430.0,435.0,440.0,450.0,455.0,460.0,465.0,470.0,475.0,480.0,485.0,490.0,495.0,500.0,505.0,515.0,520.0,530.0,535.0,545.0,555.0,565.0,575.0,585.0,595.0,605.0,620.0,630.0,640.0,650.0,660.0,660.99],[83.3,81.59,80.54,79.41,78.16,76.79,75.59,74.28,72.85,71.68,69.56,67.17,64.55,58.95,56.26,53.78,51.54,49.52,47.68,45.99,44.41,42.93,41.52,40.16,38.85,36.3,35.06,32.61,31.4,28.96,26.53,24.07,21.6,19.11,16.61,14.08,10.28,7.74,5.2,2.65,0.12,0.2],[94.84,94.08,93.63,93.14,92.63,92.09,91.63,91.15,90.65,90.26,89.58,88.88,88.15,86.58,85.75,84.86,83.93,82.94,81.89,80.78,79.59,78.32,76.98,75.55,74.04,70.78,69.03,65.31,63.35,59.26,54.96,50.48,45.84,41.06,36.13,31.06,23.18,17.72,12.09,6.28,0.28,0.2]],[3,1,[380.91,390.0,400.0,414.0,419.0,419.99],[94.85,96.26,97.65,99.37,99.94,99.96],[98.7,98.99,99.33,99.81,99.98,99.96]]],"uni":[[661.0,700.0,3]],"inv":[277.24,380.86],"iso":[[380.9,83.31,98.7],[277.2,28.49,99.33]],"lab":[["FCC_A1",20.55,413.4,115.0],["FCC_A1#2",76.95,325.9,22.8],["FCC_A1#2|HCP_A3",86.23,313.5,30.0],["FCC_A1|FCC_A1#2",56.6,315.2,30.3],["FCC_A1|HCP_A3",29.83,238.5,31.4],["FCC_A1|LIQUID",54.11,508.0,37.6],["LIQUID",84.09,591.9,87.1],["LIQUID|HCP_A3",97.66,388.4,7.0]]},"almg":{"ph":["FCC_A1","ALMG_BETA","ALMG_GAMMA","HCP_A3","ALMG_EPSILON","LIQUID"],"tr":[[0,1,[150.0,195.0,235.0,275.0,315.0,355.0,390.0,420.0,435.0,451.95],[2.18,3.24,4.4,5.75,7.34,9.19,11.06,12.92,13.95,15.21],[36.41,36.41,36.41,36.41,36.41,36.41,36.41,36.41,36.41,36.41]],[1,2,[150.0,200.0,249.78],[36.41,36.41,36.41],[53.11,52.1,51.0]],[2,3,[150.0,180.0,215.0,249.88,285.0,320.0,360.0,400.0,438.46],[56.03,56.04,56.06,56.1,56.16,56.25,56.37,56.52,56.69],[98.14,97.46,96.53,95.47,94.27,92.96,91.34,89.6,87.83]],[1,4,[249.88,433.84],[36.41,36.41],[40.85,40.85]],[4,2,[249.88,315.0,365.0,385.0,405.0,420.0,433.84],[40.85,40.85,40.85,40.85,40.85,40.85,40.85],[51.0,49.58,48.25,47.61,46.89,46.26,45.58]],[1,2,[433.94,451.74],[36.41,36.41],[45.58,44.82]],[2,5,[438.56,445.0,450.0,453.05,455.0,457.0,458.0,459.0,460.0,461.99],[56.69,55.79,54.94,54.32,53.85,53.27,52.92,52.52,51.99,50.27],[66.92,64.44,62.12,60.44,59.18,57.66,56.76,55.72,54.4,50.27]],[5,3,[438.56,468.0,495.0,525.0,550.0,575.0,600.0,625.0,649.0,649.99],[66.94,70.71,74.34,78.61,82.39,86.39,90.64,95.18,99.83,99.89],[87.83,89.47,90.94,92.58,93.96,95.38,96.84,98.37,99.94,99.89]],[1,5,[451.84,451.95],[36.41,36.41],[38.94,38.76]],[5,2,[451.84,454.05,456.0,457.0,458.0,459.0,460.0,461.99],[39.06,40.47,41.91,42.74,43.68,44.77,46.12,50.27],[44.84,45.6,46.35,46.77,47.24,47.77,48.42,50.27]],[0,5,[452.05,463.0,475.0,500.0,530.0,550.0,565.0,590.0,610.0,635.0,660.0,660.99],[15.21,14.06,12.89,10.67,8.33,6.91,5.9,4.29,3.05,1.54,0.03,0.06],[34.18,32.61,30.88,27.22,22.69,19.55,17.13,12.93,9.43,4.85,0.09,0.06]],[5,1,[452.05,453.04],[36.41,37.5],[38.58,37.5]]],"uni":[[661.0,700.0,5]],"inv":[249.83,433.89,438.51,451.79,452.0],"iso":[[452.0,15.23,36.41],[451.8,36.41,44.8],[438.5,56.69,87.83],[433.9,36.41,45.58],[249.8,36.41,51.0]],"lab":[["ALMG_BETA|ALMG_EPSILON",38.4,266.9,12.0],["ALMG_BETA|ALMG_GAMMA",43.04,200.1,37.1],["ALMG_EPSILON|ALMG_GAMMA",45.54,286.5,26.1],["ALMG_GAMMA",51.61,420.1,28.1],["ALMG_GAMMA|HCP_A3",74.45,292.4,104.3],["ALMG_GAMMA|LIQUID",57.32,447.6,7.1],["FCC_A1",6.98,447.6,39.4],["FCC_A1|ALMG_BETA",21.26,266.9,85.2],["FCC_A1|LIQUID",18.05,500.6,33.8],["HCP_A3",94.09,435.8,32.7],["LIQUID",61.6,577.2,90.0],["LIQUID|HCP_A3",83.38,488.8,37.1]]}};
   const SYS={
     cuni:iso({id:'cuni',name:'Cu–Ni',A:'Cu',B:'Ni',tag:'Solubilidad total',sub:'Isomorfo metálico',
       TA:1085,TB:1455,a:0.02245,b:0.00317,Tmin:1000,Tmax:1500,tstep:100,
@@ -429,9 +448,118 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
         {t:'Pon el punto exactamente en la reacción eutectoide.',hint:'γ (0.76 % C) → α + Fe₃C a 727 °C.',chk:(C,T)=>Math.abs(C-0.76)<=0.03&&Math.abs(T-727)<=4}]}
   };
 
+  // ---- Sistemas de la actividad en equipo y de la evaluación a casa (diagramas calculados con CALPHAD) ----
+  const rxn=(n,T,x,tipo,txt,xs,off)=>({n,T,x,tipo,txt,xs,off});
+  Object.assign(SYS,{
+    tial:tab({id:'tial',name:'Ti–Al',A:'Ti',B:'Al',grp:'act',tag:'Intermetálicos',sub:'Actividad · Diagrama 1',
+      cal:'tial',Cmax:100,xstep:10,Tmin:500,Tmax:1750,tstep:100,
+      nm:{LIQUID:['L','Líquido','--liq'],BCC_A2:['β','β (Ti, BCC)','--q3'],HCP_A3:['α','α (Ti, HCP)','--q1'],ALM_D019:['α₂','α₂ (Ti₃Al)','--q5'],ALTI:['γ','γ (TiAl)','--q2'],
+        AL2TI:['TiAl₂','TiAl₂','--q4'],AL11TI5:['Ti₅Al₁₁','Ti₅Al₁₁','--q7'],AL3M_D022:['TiAl₃','TiAl₃','--q6'],FCC_A1:['(Al)','(Al), FCC','--q8']},
+      presets:[[34,1300,'A'],[34,1000,'B'],[60,800,'C']],start:[34,1300],
+      hume:{rows:[['Ti','HCP (α) / BCC (β)','0.147'],['Al','FCC','0.143']],diff:'2.7 %',verdict:'Los radios casi coinciden, pero las estructuras son distintas (HCP/BCC contra FCC) y los enlaces tienen carácter parcialmente covalente: en lugar de una solución sólida continua aparecen compuestos intermetálicos ordenados (α₂, γ, TiAl₂, TiAl₃) y varias reacciones invariantes.'},
+      ind:'Ti–6Al–4V en estructuras aeroespaciales (≈ 6 % Al) y aluminuros γ-TiAl (≈ 34 % Al en peso, 48 % atómico) en álabes de turbina de baja presión.',
+      src:'Diagrama calculado con COST 507 (evaluación Al–Ti de N. Saunders), Ansara, Dinsdale y Rand (eds.), Comisión Europea, 1998; cálculo propio con pycalphad. Es el diagrama 1 de la actividad en equipo',
+      rx:[rxn(1,1502.7,32.42,'Peritéctica','L (36.9) + β (31.1) → α (32.4)',[31.09,36.86]),rxn(2,1443.5,39.93,'Peritéctica','L (42.1) + α (36.2) → γ (39.9)',[36.22,42.12]),
+        rxn(3,1378.7,54.49,'Peritéctica','L (55.6) + γ (47.9) → Ti₅Al₁₁ (54.5)',[47.89,55.58]),rxn(4,1372.8,58.75,'Eutéctica','L (58.8) → Ti₅Al₁₁ (54.5) + TiAl₃ (59.6)',[54.49,59.6]),
+        rxn(5,1181.2,52.99,'Peritectoide','γ (47.1) + Ti₅Al₁₁ (54.5) → TiAl₂ (53.0)',[47.1,54.49]),rxn(6,1126.2,27.92,'Eutectoide','α (27.9) → α₂ (27.1) + γ (34.6)',[27.1,34.6]),
+        rxn(7,995.9,54.49,'Eutectoide','Ti₅Al₁₁ (54.5) → TiAl₂ (53.0) + TiAl₃ (62.3)',[52.99,62.3],[-26,24]),rxn(8,664.9,98.69,'Peritéctica','L (99.9) + TiAl₃ (62.8) → (Al) (98.7)',[62.8,99.9])],
+      retos:[
+        {t:'Punto A de la actividad: coloca el punto en 34 % Al y 1300 °C y lee qué dos fases hay.',hint:'Traza la línea de unión: W_γ = (C₀ − C_α)/(C_γ − C_α).',chk:(C,T)=>Math.abs(C-34)<=0.6&&Math.abs(T-1300)<=6},
+        {t:'¿A qué temperatura termina de solidificar la aleación de 34 % Al? Pon el punto ahí.',hint:'Baja por la vertical de 34 % Al hasta que desaparezca el último líquido.',chk:(C,T,s,sys)=>Math.abs(C-34)<=0.6&&Math.abs(T-sys.tsol(34))<=6},
+        {t:'Pon el punto en la reacción peritéctica de ≈ 1444 °C, en la composición de la fase γ que se forma.',hint:'L + α → γ. La fase producto está en medio de las otras dos.',chk:(C,T)=>Math.abs(T-1443.5)<=3&&Math.abs(C-39.9)<=1.5},
+        {t:'Encuentra un punto con 50 % de α₂ y 50 % de γ en equilibrio.',hint:'Ubícate en la región α₂ + γ y mueve C₀ hasta la mitad de la línea de unión.',chk:(C,T,s)=>s.k1==='ALM_D019'&&s.k2==='ALTI'&&Math.abs(s.W2-.5)<=.04}]}),
+    crni:tab({id:'crni',name:'Cr–Ni',A:'Cr',B:'Ni',grp:'act',tag:'Eutéctico entre soluciones sólidas',sub:'Actividad · Diagrama 4',
+      cal:'crni',Cmax:100,xstep:10,Tmin:700,Tmax:1950,tstep:100,
+      hideLab:['BCC_A2|LIQUID'],man:[['(Cr) + L',15.5,1690],['L + (Ni)',66,1580,79.9,1420]],
+      nm:{LIQUID:['L','Líquido','--liq'],BCC_A2:['(Cr)','(Cr), BCC','--q1'],FCC_A1:['(Ni)','(Ni), FCC','--q2']},
+      presets:[[30,1500,'A'],[45,1000,'B'],[45,1340,'C']],start:[30,1500],
+      hume:{rows:[['Cr','BCC','0.125'],['Ni','FCC','0.125']],diff:'≈ 0 %',verdict:'Radios iguales y electronegatividades parecidas, pero la estructura es distinta (BCC contra FCC): no hay solubilidad total. Cada metal disuelve mucho del otro y el diagrama tiene un eutéctico a 1345 °C.'},
+      ind:'Nicromo 80Ni–20Cr en resistencias eléctricas que trabajan al rojo vivo (> 1000 °C) y base de los aceros inoxidables y las superaleaciones de níquel.',
+      src:'Diagrama calculado con la base Al–Cr–Ni distribuida con pycalphad (cálculo propio); coincide con P. Nash, Bull. Alloy Phase Diagrams 7 (1986) 466–476. No muestra el ordenamiento Ni₂Cr bajo 590 °C. Es el diagrama 4 de la actividad',
+      rx:[rxn(1,1345.2,49.18,'Eutéctica','L (49.2) → (Cr) (39.3) + (Ni) (53.1)',[39.27,53.1])],
+      retos:[
+        {t:'Punto A de la actividad: 30 % Ni a 1500 °C. Colócalo y lee las fracciones de (Cr) y de líquido.',hint:'La línea de unión va del sólidus (Cr) al líquidus.',chk:(C,T)=>Math.abs(C-30)<=0.6&&Math.abs(T-1500)<=6},
+        {t:'Una aleación de 80Ni–20Cr (el nicromo) tiene 80 % Ni. ¿A qué temperatura empieza a fundir? Pon el punto ahí.',hint:'Sube por la vertical de 80 % Ni hasta el sólidus.',chk:(C,T,s,sys)=>Math.abs(C-80)<=0.8&&Math.abs(T-sys.tsol(80))<=6},
+        {t:'Pon el punto en la composición del líquido de la reacción eutéctica, justo en la isoterma.',hint:'Es el vértice donde se juntan las tres fases.',chk:(C,T)=>Math.abs(C-49.2)<=1&&Math.abs(T-1345)<=4},
+        {t:'A 1000 °C, encuentra una aleación con 50 % de (Cr) y 50 % de (Ni).',hint:'Está en la región (Cr) + (Ni); busca la mitad de la línea de unión.',chk:(C,T,s)=>s.k1==='BCC_A2'&&s.k2==='FCC_A1'&&Math.abs(T-1000)<=6&&Math.abs(s.W2-.5)<=.04}]}),
+    alcu:tab({id:'alcu',name:'Al–Cu',A:'Al',B:'Cu',grp:'eva',tag:'Eutéctico, endurecimiento',sub:'Evaluación · Diagrama 1',
+      cal:'alcu',Cmax:55,xstep:5,Tmin:250,Tmax:700,tstep:50,
+      hideLab:['ALCU_THETA|ALCU_ETA','LIQUID|ALCU_ETA'],
+      nm:{LIQUID:['L','Líquido','--liq'],FCC_A1:['α','α (Al, FCC)','--q1'],ALCU_THETA:['θ','θ (Al₂Cu)','--q3'],ALCU_ETA:['η','η (AlCu)','--q4'],ALCU_EPSILON:['ε','ε','--q5']},
+      presets:[[4.4,300,'A'],[15,600,'B'],[40,540,'C']],start:[4.4,300],
+      hume:{rows:[['Al','FCC','0.143'],['Cu','FCC','0.128']],diff:'10.5 %',verdict:'Misma estructura y radios dentro del 15 %, pero la solubilidad del Cu en Al es baja (≈ 5.7 % en peso a 548 °C) y el Cu forma compuestos intermetálicos (θ = Al₂Cu). Las reglas de Hume-Rothery son necesarias, no suficientes.'},
+      ind:'Serie 2xxx de uso aeronáutico, como la 2024 (Al–4.4Cu): se solubiliza, se templa y envejece para que precipite θ y endurezca la aleación.',
+      src:'Diagrama calculado con COST 507 (evaluación Al–Cu de N. Saunders), Ansara, Dinsdale y Rand (eds.), Comisión Europea, 1998; cálculo propio con pycalphad. Solo la porción rica en Al (0–55 % Cu). Es el diagrama 1 de la evaluación a casa',
+      rx:[rxn(1,547.6,33.29,'Eutéctica','L (33.3) → α (5.8) + θ (52.3)',[5.78,52.3]),rxn(2,595.9,53.56,'Peritéctica','L (52.4) + η (70.7) → θ (53.6)  [η queda fuera de la figura]',[52.4,55])],
+      retos:[
+        {t:'La aleación 2024 tiene 4.4 % Cu. ¿A qué temperatura se disuelve el último θ al calentarla (solvus)? Pon el punto ahí.',hint:'Sube por la vertical de 4.4 % Cu hasta que la región α + θ se vuelva α.',chk:(C,T,s,sys)=>Math.abs(C-4.4)<=0.4&&Math.abs(T-sys.tfirst(4.4,q=>q.single&&q.k1==='FCC_A1'))<=6},
+        {t:'Pon el punto en la composición del líquido de la reacción eutéctica, justo en la isoterma.',hint:'L → α + θ. El líquido está en medio de las otras dos.',chk:(C,T)=>Math.abs(C-33.3)<=1.2&&Math.abs(T-548)<=3},
+        {t:'A 400 °C, encuentra una aleación con 20 % de θ en peso.',hint:'Región α + θ: W_θ = (C₀ − C_α)/(C_θ − C_α).',chk:(C,T,s)=>s.k1==='FCC_A1'&&s.k2==='ALCU_THETA'&&Math.abs(T-400)<=5&&Math.abs(s.W2-.20)<=.02},
+        {t:'Comparación de la pregunta A.3: coloca la 2024 (4.4 % Cu) a 600 °C y verifica qué fases hay.',hint:'Compárala con 530 °C: ¿hay líquido a 600 °C?',chk:(C,T)=>Math.abs(C-4.4)<=0.4&&Math.abs(T-600)<=5}]}),
+    cuzn:tab({id:'cuzn',name:'Cu–Zn',A:'Cu',B:'Zn',grp:'eva',tag:'Peritécticas en cadena',sub:'Evaluación · Diagrama 2',
+      cal:'cuzn',Cmax:100,xstep:10,Tmin:300,Tmax:1100,tstep:100,
+      man:[['β + L',43,985,48.2,870]],
+      nm:{LIQUID:['L','Líquido','--liq'],FCC_A1:['α','α (Cu, FCC)','--q1'],BCC_B2:['β','β / β′ / δ (BCC)','--q2',[65,'δ']],CUZN_GAMMA:['γ','γ','--q3'],HCP_A3:['ε','ε (HCP)','--q4'],HCP_ZN:['η','η (Zn, HCP)','--q5']},
+      presets:[[40,600,'A'],[53,450,'B'],[92,350,'C']],start:[40,600],
+      hume:{rows:[['Cu','FCC','0.128'],['Zn','HCP','0.133']],diff:'3.8 %',verdict:'Radios muy parecidos, pero estructuras distintas (FCC contra HCP): el Cu disuelve hasta ≈ 38 % de Zn en α y, después, aparecen fases intermedias (β, γ, δ, ε) y seis reacciones invariantes.'},
+      ind:'Latones. El 70/30 (≈ 30 % Zn, α) se trabaja en frío; el Muntz 60/40 (≈ 40 % Zn, α + β) se forja en caliente a ≈ 750 °C.',
+      src:'Diagrama calculado con COST 507 (sistema Cu–Zn) con pycalphad. La fase β se ordena (β′) por debajo de ≈ 460 °C; ese ordenamiento no es una reacción de tres fases. Es el diagrama 2 de la evaluación a casa',
+      rx:[rxn(1,902.2,35.97,'Peritéctica','L (38.0) + α (32.5) → β (36.0)',[32.48,38.01]),rxn(2,835.2,59.29,'Peritéctica','L (59.9) + β (56.5) → γ (59.3)',[56.5,59.86]),
+        rxn(3,699.2,72.49,'Peritéctica','L (80.7) + γ (68.4) → δ (72.5)',[68.39,80.71]),rxn(4,600.3,79.67,'Peritéctica','L (88.5) + δ (77.8) → ε (79.7)',[77.79,88.48]),
+        rxn(5,558.8,75.38,'Eutectoide','δ (75.4) → γ (69.9) + ε (78.2)',[69.93,78.17]),rxn(6,421.3,98.16,'Peritéctica','L (98.4) + ε (87.7) → η (98.2)',[87.74,98.36])],
+      retos:[
+        {t:'Latón 70/30 (30 % Zn): ¿a qué temperatura termina de solidificar? Pon el punto ahí.',hint:'Baja por la vertical de 30 % Zn hasta que desaparezca el último líquido.',chk:(C,T,s,sys)=>Math.abs(C-30)<=0.6&&Math.abs(T-sys.tsol(30))<=6},
+        {t:'Latón Muntz 60/40: coloca el punto en 40 % Zn a 750 °C y lee qué fases hay.',hint:'Pregunta A.3: ¿es monofásico o bifásico a la temperatura de forja?',chk:(C,T)=>Math.abs(C-40)<=0.6&&Math.abs(T-750)<=6},
+        {t:'Pon el punto en la reacción peritéctica de ≈ 902 °C, en la composición de la fase β que se forma.',hint:'L + α → β.',chk:(C,T)=>Math.abs(C-36)<=1.5&&Math.abs(T-902)<=3},
+        {t:'A 450 °C, encuentra una aleación con 50 % de β y 50 % de γ.',hint:'Región β + γ: busca la mitad de la línea de unión.',chk:(C,T,s)=>s.k1==='BCC_B2'&&s.k2==='CUZN_GAMMA'&&Math.abs(T-450)<=6&&Math.abs(s.W2-.5)<=.04}]}),
+    alzn:tab({id:'alzn',name:'Al–Zn',A:'Al',B:'Zn',grp:'eva',tag:'Laguna de miscibilidad',sub:'Evaluación · Diagrama 3',
+      cal:'alzn',Cmax:100,xstep:10,Tmin:200,Tmax:700,tstep:50,
+      hideLab:['LIQUID|HCP_A3'],man:[['L + η',88,470,98.3,395]],
+      nm:{LIQUID:['L','Líquido','--liq'],FCC_A1:['α','α (rica en Al, FCC)','--q1'],'FCC_A1#2':['α′','α′ (rica en Zn, FCC)','--q2'],HCP_A3:['η','η (Zn, HCP)','--q3']},
+      presets:[[73,250,'A'],[50,330,'B'],[96,300,'C']],start:[73,250],
+      hume:{rows:[['Al','FCC','0.143'],['Zn','HCP','0.133']],diff:'7.0 %',verdict:'Radios dentro del 15 %. A alta temperatura el Al y el Zn forman una sola solución FCC, pero por debajo de ≈ 352 °C se separa en dos soluciones FCC (α y α′): una laguna de miscibilidad.'},
+      ind:'Aleaciones de colada ZA (Zn–Al), como la ZA-27 (73 % Zn), y recubrimientos galvanizados Zn–Al.',
+      src:'Diagrama calculado con la evaluación Al–Zn de S. an Mey, Z. Metallkd. 84 (1993) 451–455 (archivo de NIMS distribuido con pycalphad; cálculo propio). Es el diagrama 3 de la evaluación a casa',
+      rx:[rxn(1,380.9,94.84,'Eutéctica','L (94.8) → α′ (83.3) + η (98.7)',[83.31,98.7]),rxn(2,277.2,77.75,'Monotectoide','α′ (77.8) → α (28.5) + η (99.3)',[28.49,99.33])],
+      retos:[
+        {t:'ZA-27 (73 % Zn): al enfriar, ¿a qué temperatura deja de ser monofásica? Pon el punto ahí.',hint:'Baja por la vertical de 73 % Zn hasta entrar a la laguna de miscibilidad o a α′ + η.',chk:(C,T,s,sys)=>Math.abs(C-73)<=0.6&&Math.abs(T-sys.tlast(73,q=>q.single,400))<=6},
+        {t:'Pon el punto en la composición del líquido de la reacción eutéctica, justo en la isoterma.',hint:'L → α′ + η.',chk:(C,T)=>Math.abs(C-94.8)<=1.2&&Math.abs(T-381)<=3},
+        {t:'Dentro de la laguna de miscibilidad, encuentra a 300 °C un punto con 50 % de α y 50 % de α′.',hint:'Las dos fases son FCC; su diferencia está en la composición.',chk:(C,T,s)=>s.k1==='FCC_A1'&&s.k2==='FCC_A1#2'&&Math.abs(T-300)<=6&&Math.abs(s.W2-.5)<=.04}]}),
+    almg:tab({id:'almg',name:'Al–Mg',A:'Al',B:'Mg',grp:'eva',tag:'Intermetálicos y eutécticos',sub:'Evaluación · Diagrama 4',
+      cal:'almg',Cmax:100,xstep:10,Tmin:150,Tmax:700,tstep:50,
+      nm:{LIQUID:['L','Líquido','--liq'],FCC_A1:['α','α (Al, FCC)','--q1'],ALMG_BETA:['β','β (Al₃Mg₂)','--q3'],ALMG_EPSILON:['ε','ε','--q4'],ALMG_GAMMA:['γ','γ (Mg₁₇Al₁₂)','--q2'],HCP_A3:['(Mg)','(Mg), HCP','--q5']},
+      presets:[[91,300,'A'],[80,500,'B'],[80,430,'C']],start:[91,300],
+      hume:{rows:[['Al','FCC','0.143'],['Mg','HCP','0.160']],diff:'10.6 %',verdict:'Radios dentro del 15 %, pero estructuras distintas: el Mg disuelve poco Al y viceversa, y se forman tres compuestos (β, ε, γ) con varios eutécticos y reacciones en estado sólido.'},
+      ind:'Serie 5xxx (Al–Mg) en lanchas y cascos: con ≈ 5 % Mg trabaja bien en agua de mar, pero a temperaturas moderadas puede precipitar β en los límites de grano.',
+      src:'Diagrama calculado con la evaluación de Y. Zhong, M. Yang y Z.-K. Liu, CALPHAD 29 (2005) 303–311 (archivo de NIMS distribuido con pycalphad; cálculo propio). Las reacciones 1 y 2 ocurren a 452.0 y 451.8 °C. Es el diagrama 4 de la evaluación a casa',
+      rx:[rxn(1,452.0,34.21,'Eutéctica','L (34.2) → α (15.2) + β (36.4)',[15.23,36.41]),rxn(2,451.8,38.99,'Eutéctica','L (39.0) → β (36.4) + γ (44.8)',[36.41,44.8]),
+        rxn(3,438.5,66.94,'Eutéctica','L (66.9) → γ (56.7) + (Mg) (87.8)',[56.69,87.83]),rxn(4,433.9,40.85,'Peritectoide','β (36.4) + γ (45.6) → ε (40.9)',[36.4,45.6]),
+        rxn(5,249.8,40.85,'Eutectoide','ε (40.9) → β (36.4) + γ (51.0)',[36.4,51.0],[-26,24])],
+      retos:[
+        {t:'Lancha 5xxx con 5 % Mg: coloca el punto en 5 % Mg a 200 °C y lee cuánta β puede precipitar.',hint:'Región α + β: W_β = (C₀ − C_α)/(C_β − C_α).',chk:(C,T)=>Math.abs(C-5)<=0.4&&Math.abs(T-200)<=5},
+        {t:'Pon el punto en la composición del líquido del eutéctico que produce γ + (Mg), justo en la isoterma.',hint:'Es el eutéctico de ≈ 438 °C, del lado rico en Mg.',chk:(C,T)=>Math.abs(C-66.9)<=1.5&&Math.abs(T-438.5)<=3},
+        {t:'Encuentra la solubilidad máxima del Mg en el Al sólido: pon el punto en el extremo de la línea de unión eutéctica.',hint:'Es el extremo izquierdo de la isoterma de ≈ 452 °C.',chk:(C,T)=>Math.abs(C-15.2)<=0.8&&Math.abs(T-452)<=3},
+        {t:'Pon el punto en la reacción eutectoide más baja (ε → β + γ).',hint:'Está a ≈ 250 °C, cerca de 41 % Mg.',chk:(C,T)=>Math.abs(C-40.85)<=1.5&&Math.abs(T-249.8)<=3}]})
+  });
+  // Los sistemas clásicos que también aparecen en la actividad
+  SYS.cuni.grp=SYS.gesi.grp=SYS.pbsn.grp=SYS.alsi.grp='curso';
+  SYS.cuag.grp=SYS.fec.grp='act';
+  SYS.cuag.sub='Actividad · Diagrama 2';SYS.fec.sub='Actividad · Diagrama 3';
+  SYS.cuag.presets=[[50,820,'A'],[50,775,'B'],[92.5,400,'C']].concat(SYS.cuag.presets);
+  SYS.fec.presets=[[0.40,800,'A'],[0.40,725,'B'],[3.0,1200,'C']].concat(SYS.fec.presets);
+  SYS.cuag.rx=[rxn(1,779,71.9,'Eutéctica','L (71.9) → α (8.0) + β (91.2)',[8.0,91.2])];
+  SYS.fec.rx=[rxn(1,1493,0.17,'Peritéctica','δ (0.09) + L (0.53) → γ (0.17)',[0.09,0.53]),rxn(2,1147,4.30,'Eutéctica (ledeburita)','L (4.30) → γ (2.14) + Fe₃C (6.70)',[2.14,6.70]),rxn(3,727,0.76,'Eutectoide (perlita)','γ (0.76) → α (0.022) + Fe₃C (6.70)',[0.022,6.70])];
+  SYS.fec1=Object.assign({},SYS.fec,{id:'fec1',name:'Fe–Fe₃C (0–1 % C)',tag:'Zona de aceros',sub:'Aceros hasta 1 % C',grp:'act',Cmax:1,xstep:0.1,
+    labels:[['L',0.5,1572],['γ + L',0.8,1440],['γ',0.6,1100],['α + γ',0.2,820],['α + Fe₃C',0.5,560],['γ + Fe₃C',0.93,745]],
+    presets:[[0.20,800],[0.40,800],[0.40,725],[0.76,726],[0.76,800],[0.9,900]],start:[0.40,800],
+    retos:SYS.fec.retos.filter((q,i)=>i!==1)});
+  const GRP=[['curso','Sistemas del curso'],['act','Actividad en equipo · Parte A'],['eva','Evaluación a casa · Parte A']];
+  const ORD={act:['tial','cuag','fec','fec1','crni'],eva:['alcu','cuzn','alzn','almg']};
+
   // ---- Funciones por sistema ----
   function build(s){
     if(s.type==='fec'){buildFe(s);return s;}
+    if(s.type==='tab'){buildTab(s);return s;}
     if(s.type==='iso'){
       s.TL=x=>s.TA+(s.TB-s.TA)*x/100+s.a*x*(100-x);
       s.TS=x=>s.TA+(s.TB-s.TA)*x/100+s.b*x*(100-x);
@@ -463,6 +591,67 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     const k=Math.log(4.4)/327; s.aSolv=T=>0.022*Math.exp(-k*(727-T));
     s.T_A3=C=>912-C*185/0.76;
   }
+  // ---- Sistemas tabulados: fronteras de fase calculadas con CALPHAD ----
+  function segsAt(s,T){
+    let Tq=T;
+    for(const ti of s.invT){ if(T>ti-0.05&&T<ti+0.05) Tq=T>=ti?ti+0.05:ti-0.05; }
+    const out=[];
+    for(const tr of s.tracks){
+      const Ts=tr.T,n=Ts.length;
+      if(Tq<Ts[0]-1e-9||Tq>Ts[n-1]+1e-9) continue;
+      let j=0;while(j<n-2&&Ts[j+1]<=Tq+1e-9) j++;
+      const u=Ts[j+1]!==Ts[j]?(Tq-Ts[j])/(Ts[j+1]-Ts[j]):0;
+      out.push({lo:tr.c1[j]+u*(tr.c1[j+1]-tr.c1[j]),hi:tr.c2[j]+u*(tr.c2[j+1]-tr.c2[j]),a:tr.a,b:tr.b});
+    }
+    return out.sort((p,q)=>p.lo-q.lo);
+  }
+  function stateTab(C,T,s){
+    s=s||S;const g=segsAt(s,T);
+    const one=code=>({r:s.pname(code,C),code,single:true,k1:code});
+    if(!g.length){for(const [t0,t1,p] of s.uni) if(T>=t0-6&&T<=t1+6) return one(p);return {r:'?',single:true};}
+    if(C<g[0].lo) return one(g[0].a);
+    for(let i=0;i<g.length;i++){
+      const q=g[i];
+      if(C>=q.lo&&C<=q.hi){
+        if(q.hi-q.lo<1e-6) return one(q.a);
+        const n1=s.pname(q.a,q.lo),n2=s.pname(q.b,q.hi);
+        return {r:n1+' + '+n2,c1:q.lo,c2:q.hi,p1:n1,p2:n2,k1:q.a,k2:q.b,W2:(C-q.lo)/(q.hi-q.lo)};
+      }
+      const nxt=i+1<g.length?g[i+1].lo:Infinity;
+      if(C>q.hi&&C<nxt) return one(q.b);
+    }
+    return {r:'?',single:true};
+  }
+  const hasL=q=>q.single?q.code==='LIQUID':(q.k1==='LIQUID'||q.k2==='LIQUID');
+  function buildTab(s){
+    const D=CAL[s.cal];
+    s.tracks=D.tr.map(([a,b,T,c1,c2])=>({a:D.ph[a],b:D.ph[b],T,c1,c2}));
+    s.uni=D.uni.map(([t0,t1,p])=>[t0,t1,D.ph[p]]);
+    s.invT=D.inv;s.lab=D.lab;s.labels=[];
+    s.iso=D.iso.filter(r=>r[0]>s.Tmin&&r[0]<s.Tmax&&r[1]<s.Cmax);
+    s.pname=(code,c)=>{const e=s.nm[code];if(!e)return code;return (e[3]&&c>e[3][0])?e[3][1]:e[0];};
+    s.tsol=C=>{for(let t=s.Tmax;t>=s.Tmin;t-=0.5){if(!hasL(stateTab(C,t,s)))return t;}return s.Tmin;};
+    s.tfirst=(C,pred)=>{for(let t=s.Tmin;t<=s.Tmax;t+=0.5){if(pred(stateTab(C,t,s)))return t;}return s.Tmax;};
+    s.tlast=(C,pred,from)=>{for(let t=from;t>=s.Tmin;t-=0.5){if(!pred(stateTab(C,t,s)))return t;}return s.Tmin;};
+  }
+  function regionsOf(s){
+    const set=new Set();
+    for(let i=0;i<=80;i++)for(let j=0;j<=120;j++){const C=s.Cmax*(0.003+0.994*i/80),T=s.Tmin+1+(s.Tmax-s.Tmin-2)*j/120;const q=stateTab(C,T,s);if(q.r&&q.r!=='?')set.add(q.r);}
+    s.lab.forEach(([key,c,t])=>{const q=stateTab(c,t,s);if(q.r&&q.r!=='?')set.add(q.r);});
+    s.presets.forEach(([c,t])=>{const q=stateTab(c,t,s);if(q.r&&q.r!=='?')set.add(q.r);});
+    return [...set].sort((a,b)=>(a==='L'?-1:b==='L'?1:0)||(a.split(' + ').length-b.split(' + ').length)||a.localeCompare(b,'es'));
+  }
+  function microTab(C,T){
+    const s=stateTab(C,T),v=k=>S.nm[k]?S.nm[k][2]:'--alfa',p=x=>(x*100).toFixed(0)+' %';
+    if(s.single){
+      if(s.code==='LIQUID') return {type:'L',spec:{k:'single',c:'--liq',gb:false},txt:'Todo líquido.'};
+      return {type:'tab1',spec:{k:'single',c:v(s.code)},txt:`Granos de ${s.r}, una sola fase en equilibrio (${f1(C)} % ${S.B}).`};
+    }
+    const W1=1-s.W2,minorIs2=s.W2<=W1,f=minorIs2?s.W2:W1;
+    return {type:'tab2',spec:{k:'blobs',f,in:v(minorIs2?s.k2:s.k1),m:v(minorIs2?s.k1:s.k2)},
+      txt:`${s.p1} (${p(W1)}) y ${s.p2} (${p(s.W2)}) en equilibrio a ${Math.round(T)} °C. Es un esquema de las fases presentes, no de la microestructura final tras enfriar.`};
+  }
+
   function stateFe(C,T){
     const F=S,two=(r,c1,c2,p1,p2)=>({r,c1,c2,p1,p2,W2:(C-c1)/(c2-c1)});
     if(T>=1538) return {r:'L'};
@@ -506,11 +695,12 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     const Wc=(C-4.30)/(6.70-4.30);return {type:'fund',frac:Wc,spec:{k:'primLed',f:Wc,prim:'cem'},txt:`Fundición blanca hipereutéctica. Cementita primaria: ${p(Wc)}. Ledeburita transformada: ${p(1-Wc)}.`};
   }
 
-  let S=SYS.pbsn, C=40, T=150, mode='exp', revealed=false, ch=0;
+  let S=SYS.pbsn, C=40, T=150, mode='exp', revealed=false, ch=0, showRx=false;
 
   // ================= Estado de fases =================
   function state(C,T){
     if(S.type==='fec') return stateFe(C,T);
+    if(S.type==='tab') return stateTab(C,T);
     let r,c1,c2;
     if(S.type==='iso'){
       if(T>=S.TL(C)) r='L'; else if(T<=S.TS(C)) r='A'; else {r='A+L';c1=S.xL(T);c2=S.xS(T);}
@@ -532,14 +722,15 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     if(C>=S.solvB(T)) return {r:'B'};
     c1=S.solvA(T);c2=S.solvB(T);return {r:'A+B',c1,c2,p1:'A',p2:'B',W2:(C-c1)/(c2-c1)};
   }
-  const pn=k=>S.type==='fec'?k:(k==='L'?'L':S.ph[k]);
-  const rname=r=>S.type==='fec'?r:({L:'L',A:pn('A'),B:pn('B'),'A+L':pn('A')+' + L','L+B':pn('B')+' + L','A+B':pn('A')+' + '+pn('B')})[r];
+  const pn=k=>(S.type==='fec'||S.type==='tab')?k:(k==='L'?'L':S.ph[k]);
+  const rname=r=>(S.type==='fec'||S.type==='tab')?r:({L:'L',A:pn('A'),B:pn('B'),'A+L':pn('A')+' + L','L+B':pn('B')+' + L','A+B':pn('A')+' + '+pn('B')})[r];
   const fC=x=>x<0.1?x.toFixed(3):x.toFixed(2);
-  const f1=x=>S.type==='fec'?fC(x):x.toFixed(1), pc=x=>(Math.abs(x)<0.05&&x!==0?(x*100).toFixed(1):(x*100).toFixed(0))+' %';
+  const f1=x=>S.type==='fec'?fC(x):S.type==='tab'?x.toFixed(2):x.toFixed(1), pc=x=>(Math.abs(x)<0.05&&x!==0?(x*100).toFixed(1):(x*100).toFixed(0))+' %';
 
   // ================= Microestructura =================
   function micro(C,T){
     if(S.type==='fec') return microFe(C,T);
+    if(S.type==='tab') return microTab(C,T);
     const s=state(C,T),a=pn('A'),b=S.ph.B?pn('B'):'';
     if(s.r==='L') return {type:'L',txt:'Todo líquido.'};
     if(s.r==='A') return {type:'α',txt:`Granos de ${a} de composición ${f1(C)} % ${S.B}. Una sola fase.`};
@@ -619,24 +810,42 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   function pathTX(ft){let d='';for(let x=0;x<=100;x+=1){d+=(d?'L':'M')+X(x).toFixed(1)+','+Y(ft(x)).toFixed(1);}return d;}
   function drawBase(){
     svg.innerHTML='';
-    for(let c=0;c<=CM()+1e-9;c+=(S.xstep||10)){el('line',{x1:X(c),x2:X(c),y1:T0,y2:B0,stroke:'var(--line)'});const t=el('text',{x:X(c),y:B0+16,'text-anchor':'middle'});t.textContent=c;}
+    for(let c=0;c<=CM()+1e-9;c+=(S.xstep||10)){el('line',{x1:X(c),x2:X(c),y1:T0,y2:B0,stroke:'var(--line)'});const t=el('text',{x:X(c),y:B0+16,'text-anchor':'middle'});t.textContent=+c.toFixed(2);}
     for(let t=S.Tmin;t<=S.Tmax;t+=S.tstep){el('line',{x1:L,x2:R,y1:Y(t),y2:Y(t),stroke:'var(--line)'});const s=el('text',{x:L-8,y:Y(t)+4,'text-anchor':'end'});s.textContent=t;}
     const xl=el('text',{x:(L+R)/2,y:B0+38,'text-anchor':'middle'});xl.textContent=`${S.A} · Composición (% en peso de ${S.B}) · ${S.B}`;
     const yl=el('text',{x:14,y:(T0+B0)/2,'text-anchor':'middle',transform:`rotate(-90 14 ${(T0+B0)/2})`});yl.textContent='Temperatura (°C)';
     const st={fill:'none',stroke:'var(--curve)','stroke-width':2};
     const ann=(txt,c,t,anchor)=>{const e=el('text',{x:X(c),y:Y(t),'text-anchor':anchor||'start'});e.textContent=txt;};
     if(S.type==='fec'){
-      const P=(pts)=>{el('path',{...st,d:pts.map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join('')});};
+      const clipF=el('clipPath',{id:'fclip'});el('rect',{x:L,y:T0,width:R-L,height:B0-T0},clipF);const gc=el('g',{'clip-path':'url(#fclip)'});const annc=(t,c,y,a)=>{if(c<=CM())ann(t,c,y,a);};
+      const P=(pts)=>{el('path',{...st,d:pts.map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join('')},gc);};
       P([[0,1538],[0.53,1493],[4.30,1147],[6.70,1250]]); // líquidus
       P([[0,1538],[0.09,1493]]); P([[0.09,1493],[0.53,1493]]); // sólidus δ y peritéctico
       P([[0,1394],[0.09,1493]]); P([[0,1394],[0.17,1493]]); P([[0.17,1493],[2.14,1147]]);
       P([[2.14,1147],[6.70,1147]]); // eutéctico
       P([[0,912],[0.76,727]]); P([[0,912],[0.022,727]]); P([[0.76,727],[2.14,1147]]);
       P([[0.022,727],[6.70,727]]); // eutectoide
-      el('path',{...st,d:pathXT(S.aSolv,727,S.Tmin,60)});
+      el('path',{...st,d:pathXT(S.aSolv,727,S.Tmin,60)},gc);
       P([[6.70,S.Tmin],[6.70,1250]]);
-      ann('1538 °C',0.05,1555);ann('912 °C',0.05,925);ann('727 °C',3.2,740,'middle');ann('1147 °C',5.6,1120,'middle');
-      ann('0.76',0.76,700,'middle');ann('2.14',2.14,1170,'middle');ann('4.30',4.30,1120,'middle');ann('6.70 · Fe₃C',6.68,1575,'end');
+      annc('1538 °C',0.05,1555);annc('912 °C',0.05,925);annc('727 °C',3.2,740,'middle');annc('1147 °C',5.6,1120,'middle');
+      annc('0.76',0.76,700,'middle');annc('2.14',2.14,1170,'middle');annc('4.30',4.30,1120,'middle');annc('6.70 · Fe₃C',6.68,1575,'end');
+    } else if(S.type==='tab'){
+      const clip=el('clipPath',{id:'pdclip'});el('rect',{x:L,y:T0,width:R-L,height:B0-T0},clip);
+      const g=el('g',{'clip-path':'url(#pdclip)'});
+      const st2={...st,'stroke-width':1.7};
+      const pth=(Ts,cs)=>Ts.map((t,i)=>(i?'L':'M')+X(cs[i]).toFixed(1)+','+Y(t).toFixed(1)).join('');
+      S.tracks.forEach(tr=>{el('path',{...st2,d:pth(tr.T,tr.c1)},g);el('path',{...st2,d:pth(tr.T,tr.c2)},g);});
+      S.iso.forEach(([t,x0,x1])=>el('line',{...st2,x1:X(x0),x2:X(Math.min(x1,S.Cmax)),y1:Y(t),y2:Y(t)},g));
+      const nm=(key,c)=>key.split('|').map(k=>S.pname(k,c)).join(' + ');
+      (S.lab||[]).filter(l=>!(S.hideLab||[]).includes(l[0])).forEach(([key,c,t,r])=>{
+        const txt=nm(key,c),two=key.includes('|');
+        if(two&&r<30){const ps=txt.split(' + '),e=el('text',{x:X(c),y:Y(t)-1,class:'reg xs','text-anchor':'middle'});
+          const a=el('tspan',{x:X(c),dy:0},e);a.textContent=ps[0]+' +';const b=el('tspan',{x:X(c),dy:12},e);b.textContent=ps[1];}
+        else{const e=el('text',{x:X(c),y:Y(t)+5,class:'reg'+(r>=30?'':r>=14?' sm':' xs'),'text-anchor':'middle'});e.textContent=txt;}
+      });
+      (S.man||[]).forEach(([txt,c,t,tc,tt,cls])=>{
+        if(tc!==undefined) el('line',{x1:X(c),y1:Y(t)+7,x2:X(tc),y2:Y(tt),stroke:'var(--muted)','stroke-width':1});
+        const e=el('text',{x:X(c),y:Y(t)+4,class:'reg '+(cls||'sm'),'text-anchor':'middle'});e.textContent=txt;});
     } else if(S.type==='iso'){
       el('path',{...st,d:pathTX(S.TL)});el('path',{...st,d:pathTX(S.TS),'stroke-dasharray':'0'});
       ann(S.TA+' °C',1,S.TA+(S.Tmax-S.Tmin)*0.02);ann(S.TB+' °C',99,S.TB+(S.Tmax-S.Tmin)*0.02,'end');
@@ -657,6 +866,17 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       if(S.Cb<100) ann(String(S.Cb),S.Cb,S.TE+dy,'end');
     }
     S.labels.forEach(([s,c,t])=>{const e=el('text',{x:X(c),y:Y(t),class:'reg','text-anchor':'middle'});e.textContent=s;});
+    if(showRx&&S.rx){
+      S.rx.forEach(r=>{
+        const y=Y(r.T),bx=X(r.x);
+        if(r.xs) el('line',{x1:X(Math.max(0,r.xs[0])),x2:X(Math.min(CM(),r.xs[1])),y1:y,y2:y,stroke:'var(--naranja)','stroke-width':2.2,'stroke-dasharray':'6 3'});
+        const dx=r.off?r.off[0]:(bx>L+(R-L)*0.8?-22:22),dy=r.off?r.off[1]:(y<T0+44?22:-22);
+        el('line',{x1:bx,y1:y,x2:bx+dx,y2:y+dy,stroke:'var(--naranja)','stroke-width':1.4});
+        el('circle',{cx:bx,cy:y,r:4,fill:'var(--naranja)'});
+        el('circle',{cx:bx+dx,cy:y+dy,r:9.5,fill:'var(--panel)',stroke:'var(--naranja)','stroke-width':1.6});
+        const t=el('text',{x:bx+dx,y:y+dy+4,'text-anchor':'middle',style:'fill:var(--naranja);font-weight:700;font-size:11px'});t.textContent=r.n;
+      });
+    }
   }
   function drawPoint(){
     drawBase();const g=el('g',{});
@@ -675,10 +895,10 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     const s=state(C,T),kv=document.getElementById('kv'),lv=document.getElementById('lever');
     let rows=`<dt>Punto</dt><dd>C₀ = ${f1(C)} % ${S.B}, T = ${Math.round(T)} °C</dd><dt>Región</dt><dd>${rname(s.r)}</dd>`;
     if(s.c1===undefined){
-      const ph=rname(s.r);rows+=`<dt>Composición</dt><dd>${ph}: ${f1(C)} % ${S.B}</dd><dt>Fracción</dt><dd>W_${ph} = 1.00</dd>`;
+      const ph=rname(s.r);rows+=`<dt>Composición</dt><dd>${ph}: ${f1(C)} % ${S.B}</dd><dt>Fracción</dt><dd>W_${ph.replace(/[()]/g,'')} = 1.00</dd>`;
       lv.innerHTML='Una sola fase: su composición es la de la aleación y no se aplica la regla de la palanca.';
     } else {
-      const n1=pn(s.p1),n2=pn(s.p2),W1=(s.c2-C)/(s.c2-s.c1),W2=(C-s.c1)/(s.c2-s.c1);
+      const qn=n=>n.replace(/[()]/g,''),n1=qn(pn(s.p1)),n2=qn(pn(s.p2)),W1=(s.c2-C)/(s.c2-s.c1),W2=(C-s.c1)/(s.c2-s.c1);
       rows+=`<dt>Composiciones</dt><dd>C_${n1} = ${f1(s.c1)} %, C_${n2} = ${f1(s.c2)} % ${S.B}</dd><dt>Fracciones</dt><dd>W_${n1} = ${W1.toFixed(2)}, W_${n2} = ${W2.toFixed(2)}</dd>`;
       lv.innerHTML=`Regla de la palanca (brazo opuesto):<br>W_${n1} = (C_${n2} − C₀)/(C_${n2} − C_${n1}) = (${f1(s.c2)} − ${f1(C)})/(${f1(s.c2)} − ${f1(s.c1)}) = <b>${W1.toFixed(2)}</b><br>W_${n2} = (C₀ − C_${n1})/(C_${n2} − C_${n1}) = (${f1(C)} − ${f1(s.c1)})/(${f1(s.c2)} − ${f1(s.c1)}) = <b>${W2.toFixed(2)}</b>`;
     }
@@ -701,10 +921,11 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       <p style="margin:0">${h.verdict}</p>
       <p style="margin:0"><b>En la industria:</b> ${S.ind}</p>
       <p class="note" style="margin:0">Fuente: ${S.src}. Radios atómicos de Callister (verificar en tu edición).</p>`;
+    if(S.type==='tab'){document.getElementById('legend').innerHTML=CAL[S.cal].ph.filter(k=>S.nm[k]).map(k=>`<span><i style="background:var(${S.nm[k][2]})"></i>${S.nm[k][1]}</span>`).join('');return;}
     document.getElementById('legend').innerHTML=`<span><i style="background:var(--liq)"></i>Líquido</span><span><i style="background:var(--alfa)"></i>${S.phDesc.A}</span>`+(S.phDesc.G?`<span><i style="background:var(--gam)"></i>${S.phDesc.G}</span>`:'')+(S.phDesc.B?`<span><i style="background:var(--beta)"></i>${S.phDesc.B}</span>`:'');
   }
   const sysEl=document.getElementById('systems');
-  sysEl.innerHTML=Object.values(SYS).map(s=>`<button class="sys" data-s="${s.id}" aria-pressed="false"><span class="tag">${s.tag}</span>${s.name}<small>${s.sub}</small></button>`).join('');
+  sysEl.innerHTML=GRP.map(([g,lab])=>{const ids=ORD[g]||Object.values(SYS).filter(s=>s.grp===g).map(s=>s.id);return ids.map(id=>{const s=SYS[id];return `<button class="sys" data-s="${s.id}" aria-pressed="false"><span class="tag">${s.tag}</span>${s.name}<small>${s.sub}</small></button>`;}).join('');}).join('');
   sysEl.onclick=e=>{const b=e.target.closest('[data-s]');if(b)selectSys(b.dataset.s);};
 
   const cR=document.getElementById('cR'),cN=document.getElementById('cN'),tR=document.getElementById('tR'),tN=document.getElementById('tN');
@@ -720,7 +941,8 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   svg.addEventListener('pointerup',()=>drag=false);
 
   const opts=document.getElementById('opts'),rev=document.getElementById('reveal'),ver=document.getElementById('verdict');
-  function renderOpts(){const keys=S.type==='fec'?['L','γ','α','δ','γ + L','L + Fe₃C','α + γ','γ + Fe₃C','α + Fe₃C','δ + γ','δ + L']:S.type==='iso'?['L','A','A+L']:['L','A','B','A+L','L+B','A+B'];
+  function renderOpts(){const keys=S.type==='tab'?S.regions:S.type==='fec'?['L','γ','α','δ','γ + L','L + Fe₃C','α + γ','γ + Fe₃C','α + Fe₃C','δ + γ','δ + L']:S.type==='iso'?['L','A','A+L']:['L','A','B','A+L','L+B','A+B'];
+    opts.className='opts'+(keys.length>16?' many':'');
     opts.innerHTML=keys.map(k=>`<label class="opt"><input type="radio" name="ph" value="${k}">${rname(k)}</label>`).join('');}
   opts.onchange=()=>rev.disabled=false;
   function resetPred(){opts.querySelectorAll('input').forEach(i=>i.checked=false);rev.disabled=mode==='pred';ver.innerHTML='';}
@@ -739,19 +961,28 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     drawPoint();read();}
   document.getElementById('t-exp').onclick=()=>setMode('exp');document.getElementById('t-pred').onclick=()=>setMode('pred');document.getElementById('t-reto').onclick=()=>setMode('reto');
 
+  function renderRx(){
+    const card=document.getElementById('rxCard');card.hidden=!(showRx&&S.rx);
+    if(card.hidden) return;
+    document.getElementById('rxTbl').innerHTML='<tr><th>#</th><th>T (°C)</th><th>Reacción al enfriar</th><th>Tipo</th></tr>'+S.rx.map(r=>`<tr><td class="n">${r.n}</td><td class="r">${r.T}</td><td class="r">${r.txt}</td><td>${r.tipo}</td></tr>`).join('');
+  }
+  document.getElementById('rxChk').onchange=e=>{showRx=e.target.checked;renderRx();drawPoint();};
   function selectSys(id){
     S=SYS[id];ch=0;revealed=mode!=='pred';
     sysEl.querySelectorAll('.sys').forEach(b=>b.setAttribute('aria-pressed',b.dataset.s===id));
     document.getElementById('cLab').textContent=`% ${S.B} (C₀)`;
     cR.max=cN.max=CM();cR.step=cN.step=S.type==='fec'?0.005:0.1;
     tR.min=tN.min=S.Tmin;tR.max=tN.max=S.Tmax;
-    document.getElementById('presets').innerHTML=S.presets.map(([c,t])=>`<button class="btn" data-c="${c}" data-t="${t}">${c} % ${S.B} · ${t} °C</button>`).join('');
+    if(S.type==='tab'&&!S.regions) S.regions=regionsOf(S);
+    showRx=false;document.getElementById('rxChk').checked=false;document.getElementById('rxTog').hidden=!S.rx;renderRx();
+    document.getElementById('microH').textContent=S.type==='tab'?'Fases en equilibrio (esquema)':'Microestructura (enfriamiento lento)';
+    document.getElementById('presets').innerHTML=S.presets.map(([c,t,l])=>`<button class="btn" data-c="${c}" data-t="${t}">${l?'<b>'+l+'</b> · ':''}${c} % ${S.B} · ${t} °C</button>`).join('');
     renderFicha();renderOpts();resetPred();if(mode==='reto')renderCh();
     try{localStorage.setItem('pd-sys',id);}catch(e){}
     set(S.start[0],S.start[1],false);
   }
   document.getElementById('bridgeBtn').onclick=()=>{if(window.TTT&&window.__bridge)window.TTT.load(window.__bridge.id,T);window.showView('ttt');};
-  window.PD={go:(c,t)=>{selectSys('fec');set(c,t,false);}};
+  window.PD={go:(c,t)=>{selectSys('fec');set(c,t,false);},probe:(id,c,t)=>{selectSys(id);const q=state(c,t);return {r:q.r,c1:q.c1,c2:q.c2,W2:q.W2,k1:q.k1,k2:q.k2,single:q.single};}};
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>read());
   window.addEventListener('lab-theme',()=>read());
   let first='pbsn';try{const v=localStorage.getItem('pd-sys');if(v&&SYS[v])first=v;}catch(e){}
@@ -1176,5 +1407,3 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   mq.addEventListener?.('change',paint);paint();window.dispatchEvent(new Event('lab-theme'));
 })();
 </script>
-
-</body></html>
