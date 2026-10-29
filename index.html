@@ -48,6 +48,11 @@ h1{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,5vw,46px);l
 .row input[type=range]{width:100%;accent-color:var(--denim)}
 .row input[type=number]{width:100%;font:500 14px var(--f-mono);padding:4px 6px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink)}
 .presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.exh{font:600 15px var(--f-body);margin:14px 0 6px}.exb{border-top:1px solid var(--line);padding:8px 0}.exr{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.exf{display:grid;gap:2px;font-size:12.5px;color:var(--muted);flex:1 1 84px;min-width:84px;position:relative}
+.exf input,.exf select{font:500 14px var(--f-mono);padding:4px 6px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);width:100%;min-width:0;box-sizing:border-box}
+.exf.ok input,.exf.ok select{border-color:var(--ok);border-width:2px}.exf.bad input,.exf.bad select{border-color:var(--bad);border-width:2px}
+.exm{position:absolute;right:6px;bottom:4px;font-size:14px;pointer-events:none}.exf.ok .exm{color:var(--ok)}.exf.bad .exm{color:var(--bad)}
 .btn{font:600 14px var(--f-body);border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:7px 12px;border-radius:6px;cursor:pointer}
 .btn:hover{border-color:var(--denim)}
 .btn.primary{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
@@ -193,6 +198,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     </div>
 
     <div style="display:grid;gap:18px;min-width:0">
+      <section class="card" id="exCard" hidden></section>
       <section class="card" id="predCard" hidden>
         <div id="challengeBox"></div>
         <div id="predBox">
@@ -204,7 +210,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
         <div id="verdict"></div>
       </section>
 
-      <section class="card">
+      <section class="card" id="lecCard">
         <h2>Lectura del punto</h2>
         <div id="answers">
           <dl class="kv" id="kv"></dl>
@@ -212,7 +218,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
         </div>
       </section>
 
-      <section class="card">
+      <section class="card" id="micCard">
         <h2 id="microH">Microestructura (enfriamiento lento)</h2>
         <div class="micro" id="microWrap">
           <canvas id="mc" width="400" height="400" aria-label="Esquema de la microestructura"></canvas>
@@ -553,6 +559,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     labels:[['L',0.5,1572],['γ + L',0.8,1440],['γ',0.6,1100],['α + γ',0.2,820],['α + Fe₃C',0.5,560],['γ + Fe₃C',0.93,745]],
     presets:[[0.20,800],[0.40,800],[0.40,725],[0.76,726],[0.76,800],[0.9,900]],start:[0.40,800],
     retos:SYS.fec.retos.filter((q,i)=>i!==1)});
+  SYS.alcu.ex={micro:{i:2,eC:33.29,pC:52.3,lab:'θ'}};SYS.cuzn.ex={};SYS.alzn.ex={};SYS.almg.ex={micro:{i:2,eC:66.94,pC:87.83,lab:'(Mg)'}};
   const GRP=[['curso','Sistemas del curso'],['act','Actividad en equipo · Parte A'],['eva','Evaluación a casa · Parte A']];
   const ORD={act:['tial','cuag','fec','fec1','crni'],eva:['alcu','cuzn','alzn','almg']};
 
@@ -882,7 +889,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     drawBase();const g=el('g',{});
     el('line',{x1:X(C),x2:X(C),y1:T0,y2:B0,stroke:'var(--naranja)','stroke-dasharray':'4 4',opacity:.6},g);
     const s=state(C,T);
-    if(s.c1!==undefined&&(mode==='exp'||revealed)){
+    if(s.c1!==undefined&&!S.ex&&(mode==='exp'||revealed)){
       el('line',{x1:X(s.c1),x2:X(s.c2),y1:Y(T),y2:Y(T),stroke:'var(--tie)','stroke-width':3},g);
       [s.c1,s.c2].forEach(c=>el('circle',{cx:X(c),cy:Y(T),r:4.5,fill:'var(--panel)',stroke:'var(--tie)','stroke-width':2},g));
     }
@@ -967,6 +974,60 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     document.getElementById('rxTbl').innerHTML='<tr><th>#</th><th>T (°C)</th><th>Reacción al enfriar</th><th>Tipo</th></tr>'+S.rx.map(r=>`<tr><td class="n">${r.n}</td><td class="r">${r.T}</td><td class="r">${r.txt}</td><td>${r.tipo}</td></tr>`).join('');
   }
   document.getElementById('rxChk').onchange=e=>{showRx=e.target.checked;renderRx();drawPoint();};
+  // ===== Modo evaluación (diagramas del examen): sin respuestas, solo verificación =====
+  const EXV={};
+  const TIPOS=['Eutéctica','Eutectoide','Peritéctica','Peritectoide','Monotéctica','Monotectoide'];
+  const exNums=t=>[...t.matchAll(/\(([\d.]+)\)/g)].map(m=>+m[1]);
+  const exPh=()=>{const D=CAL[S.cal],o=[];D.ph.forEach(k=>{const e=S.nm[k];if(!e)return;[e[0]].concat(e[3]?[e[3][1]]:[]).forEach(n=>{if(!o.includes(n))o.push(n);});});return o;};
+  const exF=(k,lab,html)=>`<label class="exf" data-f="${k}"><span>${lab}</span>${html}<b class="exm" aria-hidden="true"></b></label>`;
+  const exI=(k,v)=>`<input type="number" step="any" inputmode="decimal" data-k="${k}" value="${v[k]===undefined?'':v[k]}">`;
+  const exS=(k,v,opts)=>`<select data-k="${k}"><option value="">—</option>${opts.map(o=>`<option${v[k]===o?' selected':''}>${o}</option>`).join('')}</select>`;
+  function renderEx(){
+    const card=document.getElementById('exCard');card.hidden=!S.ex;if(!S.ex)return;
+    const v=EXV[S.id]||(EXV[S.id]={}),ph=exPh(),B=S.B;
+    let h=`<h2>Verifica tus resultados</h2><p class="note" style="margin:0 0 10px">Resuelve en papel y escribe aquí tus resultados. El simulador solo marca ✓ o ✗; no muestra la respuesta. Tolerancias: ±1 de composición, ±10 °C y ±2.5 % en fracciones. Composiciones en % en peso de ${B}. La reacción escrita y A.3 van en tu desarrollo.</p>`;
+    h+=`<h3 class="exh">A.1 · Reacciones invariantes (flechas del examen)</h3>`;
+    S.rx.forEach(r=>{h+=`<div class="exb"><b>Reacción ${r.n}</b><div class="exr">${exF('t'+r.n,'T (°C)',exI('t'+r.n,v))}${[0,1,2].map(i=>exF('c'+r.n+i,'C fase '+(i+1),exI('c'+r.n+i,v))).join('')}${exF('y'+r.n,'Tipo',exS('y'+r.n,v,TIPOS))}</div></div>`;});
+    h+=`<h3 class="exh">A.2 · Regla de la palanca</h3>`;
+    S.presets.slice(0,3).forEach((p,i)=>{const L='ABC'[i];
+      h+=`<div class="exb"><b>Punto ${L}</b> · ${p[0]} % ${B}, ${p[1]} °C <button class="btn" data-go="${i}" style="margin-left:6px;padding:3px 8px">Ver en el diagrama</button><div class="exr">${[1,2].map(j=>exF(L+'p'+j,'Fase '+j,exS(L+'p'+j,v,ph))+exF(L+'c'+j,'C fase '+j,exI(L+'c'+j,v))+exF(L+'w'+j,'W fase '+j+' (%)',exI(L+'w'+j,v))).join('')}</div>`;
+      if(S.ex.micro&&S.ex.micro.i===i)h+=`<div class="exr">${exF(L+'mp','W '+S.ex.micro.lab+' primaria (%)',exI(L+'mp',v))}${exF(L+'me','W eutéctico (%)',exI(L+'me',v))}</div>`;
+      h+=`</div>`;});
+    h+=`<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="exChk">Comprobar</button><button class="btn" id="exClr">Borrar mis respuestas</button></div><div id="exSum" class="verdict" aria-live="polite"></div>`;
+    card.innerHTML=h;
+  }
+  function exCheck(){
+    const v=EXV[S.id]||{},res={};let ok=0,n=0,blank=0;
+    const num=k=>{const s=v[k];return (s===undefined||s==='')?NaN:parseFloat(s);};
+    const mark=(k,good,filled)=>{if(!filled){blank++;return;}res[k]=good;n++;if(good)ok++;};
+    S.rx.forEach(r=>{const tr=exNums(r.txt),used=[0,0,0],i0=r.n;
+      const t=num('t'+i0);mark('t'+i0,Math.abs(t-r.T)<=10,!isNaN(t));
+      [0,1,2].forEach(i=>{const x=num('c'+i0+i);let g=false;if(!isNaN(x))for(let j=0;j<tr.length;j++)if(!used[j]&&Math.abs(x-tr[j])<=1){used[j]=1;g=true;break;}mark('c'+i0+i,g,!isNaN(x));});
+      mark('y'+i0,v['y'+i0]===r.tipo,!!v['y'+i0]);});
+    S.presets.slice(0,3).forEach((p,i)=>{const L='ABC'[i],C0=p[0],st=stateTab(C0,p[1],S);
+      if(st.single){return;}
+      const tru=[{n:st.p1,c:st.c1,w:(1-st.W2)*100},{n:st.p2,c:st.c2,w:st.W2*100}];
+      const stu=[1,2].map(j=>({n:v[L+'p'+j]||'',c:num(L+'c'+j),w:num(L+'w'+j)}));
+      const cOk=(a,b)=>!isNaN(a.c)&&Math.abs(a.c-b.c)<=1;
+      const wOk=(a,b,o)=>{if(isNaN(a.w))return false;if(Math.abs(a.w-b.w)<=2.5)return true;
+        if(!isNaN(o.c)&&!isNaN(a.c)&&cOk(a,b)&&cOk(o,tru[0]===b?tru[1]:tru[0])){const s=a===stu[0]?(o.c-C0)/(o.c-a.c)*100:(C0-o.c)/(a.c-o.c)*100;return Math.abs(a.w-s)<=1;}return false;};
+      const score=pm=>stu.reduce((t,a,j)=>{const b=tru[pm[j]];return t+(a.n===b.n)+cOk(a,b)+wOk(a,b,stu[1-j]);},0);
+      const pm=score([0,1])>=score([1,0])?[0,1]:[1,0];
+      stu.forEach((a,j)=>{const b=tru[pm[j]],jj=j+1;
+        mark(L+'p'+jj,a.n===b.n,!!a.n);mark(L+'c'+jj,cOk(a,b),!isNaN(a.c));mark(L+'w'+jj,wOk(a,b,stu[1-j]),!isNaN(a.w));});
+      if(S.ex.micro&&S.ex.micro.i===i){const m=S.ex.micro,wp=(C0-m.eC)/(m.pC-m.eC)*100,a=num(L+'mp'),b=num(L+'me');
+        mark(L+'mp',Math.abs(a-wp)<=2.5,!isNaN(a));mark(L+'me',Math.abs(b-(100-wp))<=2.5,!isNaN(b));}});
+    document.querySelectorAll('#exCard [data-f]').forEach(f=>{const k=f.dataset.f,m=f.querySelector('.exm');f.classList.remove('ok','bad');m.textContent='';
+      if(k in res){f.classList.add(res[k]?'ok':'bad');m.textContent=res[k]?'✓':'✗';}});
+    const s=document.getElementById('exSum');
+    s.className='verdict '+(n&&ok===n&&!blank?'ok':'bad');
+    s.textContent=n===0?'Escribe al menos un resultado para comprobar.':`${ok} de ${n} campos correctos`+(blank?` · ${blank} sin llenar`:'')+(ok<n?'. Revisa los marcados con ✗.':'.');
+  }
+  document.getElementById('exCard').addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.k;if(!k)return;(EXV[S.id]||(EXV[S.id]={}))[k]=e.target.value;const f=e.target.closest('[data-f]');if(f){f.classList.remove('ok','bad');f.querySelector('.exm').textContent='';}});
+  document.getElementById('exCard').addEventListener('click',e=>{
+    const g=e.target.closest('[data-go]');if(g){const p=S.presets[+g.dataset.go];set(p[0],p[1],true);return;}
+    if(e.target.id==='exChk')exCheck();
+    if(e.target.id==='exClr'){EXV[S.id]={};renderEx();}});
   function selectSys(id){
     S=SYS[id];ch=0;revealed=mode!=='pred';
     sysEl.querySelectorAll('.sys').forEach(b=>b.setAttribute('aria-pressed',b.dataset.s===id));
@@ -974,7 +1035,9 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     cR.max=cN.max=CM();cR.step=cN.step=S.type==='fec'?0.005:0.1;
     tR.min=tN.min=S.Tmin;tR.max=tN.max=S.Tmax;
     if(S.type==='tab'&&!S.regions) S.regions=regionsOf(S);
-    showRx=false;document.getElementById('rxChk').checked=false;document.getElementById('rxTog').hidden=!S.rx;renderRx();
+    showRx=false;document.getElementById('rxChk').checked=false;document.getElementById('rxTog').hidden=!S.rx||!!S.ex;renderRx();
+    ['lecCard','micCard'].forEach(i=>document.getElementById(i).hidden=!!S.ex);['t-pred','t-reto'].forEach(i=>document.getElementById(i).hidden=!!S.ex);
+    if(S.ex&&mode!=='exp')setMode('exp');renderEx();
     document.getElementById('microH').textContent=S.type==='tab'?'Fases en equilibrio (esquema)':'Microestructura (enfriamiento lento)';
     document.getElementById('presets').innerHTML=S.presets.map(([c,t,l])=>`<button class="btn" data-c="${c}" data-t="${t}">${l?'<b>'+l+'</b> · ':''}${c} % ${S.B} · ${t} °C</button>`).join('');
     renderFicha();renderOpts();resetPred();if(mode==='reto')renderCh();
