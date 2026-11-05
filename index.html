@@ -101,6 +101,103 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
 .theme-btn:focus-visible{outline:2px solid var(--naranja);outline-offset:2px}
 .theme-btn .ic{font-size:16px;line-height:1;color:var(--naranja)}
 
+/* ===== Clasificación de materiales ===== */
+#view-clas h3{font:600 20px var(--f-display);margin:16px 0 6px}
+#view-clas h3:first-child{margin-top:0}
+#view-clas p{margin:0 0 8px}
+#view-clas .cl-g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+#view-clas .cl-g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+#view-clas .cl-fam{border:1px solid var(--line);border-top:5px solid var(--q3);border-radius:8px;padding:12px;background:var(--panel);display:grid;gap:8px;align-content:start}
+#view-clas .cl-fam.pol{border-top-color:var(--q5)} #view-clas .cl-fam.cer{border-top-color:var(--q2)}
+#view-clas .cl-fam h4{font:600 22px var(--f-display);margin:0}
+#view-clas .cl-chip{font:600 14px var(--f-body);text-align:left;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:6px;padding:7px 10px;cursor:pointer;display:grid;gap:1px}
+#view-clas .cl-chip small{font:400 12.5px var(--f-body);color:var(--muted)}
+#view-clas .cl-chip:hover{border-color:var(--naranja)}
+#view-clas .cl-tbl{overflow-x:auto}
+#view-clas .cl-tbl table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+#view-clas .cl-tbl th,#view-clas .cl-tbl td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+#view-clas .cl-tbl th{font:600 12.5px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--cafe)}
+#view-clas .cl-fig{border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:8px;display:grid;gap:4px;align-content:start}
+#view-clas .cl-fig svg{width:100%;height:auto;display:block}
+#view-clas .cl-fig figcaption{font-size:13px;color:var(--muted)}
+#view-clas .cl-fig figcaption b{color:var(--ink)}
+#view-clas figure{margin:0}
+#view-clas .cl-dec{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#view-clas .cl-dec input,#view-clas .cl-sel{font:500 18px var(--f-mono);padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:9ch}
+#view-clas .cl-out{margin-top:10px;border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg);display:grid;gap:4px}
+#view-clas .cl-dig{display:inline-flex;gap:3px;font:700 26px var(--f-mono)}
+#view-clas .cl-dig span{padding:0 6px;border-radius:4px;background:var(--soft);border:1px solid var(--line)}
+#view-clas .cl-dig .a{border-color:var(--naranja)} #view-clas .cl-dig .b{border-color:var(--ok)}
+#view-clas .btn.link{background:none;border:none;color:var(--btn);text-decoration:underline;padding:2px 4px;cursor:pointer;font-weight:600}
+#view-clas .cl-hint{background:var(--soft);border-left:4px solid var(--naranja);padding:8px 10px;border-radius:0 6px 6px 0;font-size:14px}
+#view-clas .cl-score{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#view-clas .cl-score span{font:600 13px var(--f-mono);padding:4px 8px;border:1px solid var(--line);border-radius:999px;background:var(--soft)}
+#view-clas .cl-play{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--bg);display:grid;gap:10px}
+#view-clas .cl-card{border:2px solid var(--denim);border-radius:10px;padding:14px;text-align:center;background:var(--panel)}
+#view-clas .cl-card b{font:700 clamp(24px,5vw,34px) var(--f-display);display:block}
+#view-clas .cl-card small{color:var(--muted);font-size:14px}
+#view-clas .cl-bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}
+#view-clas .cl-bin{font:600 15px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:10px 8px;border-radius:8px;cursor:pointer;text-align:center}
+#view-clas .cl-bin:hover:not(:disabled){border-color:var(--naranja)}
+#view-clas .cl-bin:disabled{cursor:default}
+#view-clas .cl-bin.ok{border:2px solid var(--ok);color:var(--ok)} #view-clas .cl-bin.bad{border:2px solid var(--bad);color:var(--bad)}
+#view-clas .cl-bar{height:8px;border-radius:4px;background:var(--soft);overflow:hidden} #view-clas .cl-bar i{display:block;height:100%;background:var(--naranja);transition:width .3s}
+#view-clas .cl-fb{min-height:1.6em}
+#view-clas .cl-fb.ok{color:var(--ok)} #view-clas .cl-fb.bad{color:var(--bad)} #view-clas .cl-fb{font-weight:600}
+#view-clas .cl-sub{display:flex;flex-wrap:wrap;gap:6px}
+#view-clas input[type=range]{width:100%;accent-color:var(--naranja)}
+/* ===== Propiedades mecánicas (Clase 1) ===== */
+#view-mec h3{font:600 20px var(--f-display);margin:16px 0 6px}
+#view-mec h3:first-child{margin-top:0}
+#view-mec p{margin:0 0 8px}
+#view-mec .mc-g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;align-items:start}
+#view-mec .mc-ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end;margin-bottom:12px}
+#view-mec label.mc-f{display:grid;gap:3px;font-size:12.5px;color:var(--muted)}
+#view-mec .mc-f input[type=number],#view-mec .mc-f select,#view-mec .mc-in{font:500 14px var(--f-mono);padding:5px 7px;border:1px solid var(--line);border-radius:5px;background:var(--bg);color:var(--ink);width:100%;min-width:0;box-sizing:border-box}
+#view-mec .mc-chk{display:flex;gap:6px;align-items:center;font-size:13.5px;color:var(--ink)}
+#view-mec .mc-fig{border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:8px}
+#view-mec .mc-fig svg{width:100%;height:auto;display:block}
+#view-mec .mc-ax{stroke:var(--muted);stroke-width:1.5;fill:none}
+#view-mec .mc-grid{stroke:var(--line);stroke-width:1}
+#view-mec .mc-t{font:11.5px var(--f-mono);fill:var(--muted)}
+#view-mec .mc-tl{font:600 12.5px var(--f-body);fill:var(--ink)}
+#view-mec .mc-c1{stroke:var(--denim);stroke-width:2.8;fill:none}
+#view-mec .mc-c2{stroke:var(--naranja);stroke-width:2.4;fill:none;stroke-dasharray:6 4}
+#view-mec .mc-off{stroke:var(--cafe);stroke-width:1.6;fill:none;stroke-dasharray:3 4}
+#view-mec .mc-unl{stroke:var(--ok);stroke-width:2.2;fill:none}
+#view-mec .mc-dot{fill:var(--naranja);stroke:var(--bg);stroke-width:2}
+#view-mec .mc-mk{fill:var(--cafe)}
+#view-mec .mc-grip{fill:var(--q3);stroke:var(--ink);stroke-width:1.2}
+#view-mec .mc-spec{fill:var(--q1);stroke:var(--ink);stroke-width:1.6}
+#view-mec .mc-slide{width:100%;accent-color:var(--naranja)}
+#view-mec .mc-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:10px 0}
+#view-mec .mc-o{border:1px solid var(--line);border-radius:6px;padding:6px 9px;background:var(--soft)}
+#view-mec .mc-o small{display:block;font:11.5px var(--f-mono);color:var(--muted)}
+#view-mec .mc-o b{font:600 17px var(--f-mono)}
+#view-mec .mc-reg{font:600 14px var(--f-body);padding:6px 10px;border-radius:6px;background:var(--soft);border:1px solid var(--line);display:inline-block}
+#view-mec .mc-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+#view-mec .mc-tbl{overflow-x:auto}
+#view-mec .mc-tbl table{border-collapse:collapse;width:100%;font-size:14px}
+#view-mec .mc-tbl th,#view-mec .mc-tbl td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+#view-mec .mc-tbl th{font:600 12.5px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--cafe)}
+#view-mec .mc-fm{font:500 15px var(--f-mono);background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:8px 10px;margin:6px 0;overflow-x:auto}
+#view-mec .mc-fl{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0}
+#view-mec .mc-fl .mc-f{flex:1 1 130px;position:relative}
+#view-mec .mc-fl .mc-f.ok .mc-in{border-color:var(--ok);border-width:2px}
+#view-mec .mc-fl .mc-f.bad .mc-in{border-color:var(--bad);border-width:2px}
+#view-mec .mc-mark{position:absolute;right:8px;bottom:6px;font-size:15px;pointer-events:none}
+#view-mec .mc-f.ok .mc-mark{color:var(--ok)}#view-mec .mc-f.bad .mc-mark{color:var(--bad)}
+#view-mec .mc-sol{border-left:4px solid var(--naranja);padding:6px 12px;margin:8px 0;background:var(--soft);border-radius:0 6px 6px 0}
+#view-mec .mc-sol ol{margin:4px 0 4px 18px;padding:0}
+#view-mec .mc-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin:10px 0}
+#view-mec .mc-opt{font:600 14px var(--f-body);text-align:left;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:6px;padding:9px 11px;cursor:pointer}
+#view-mec .mc-opt:hover{border-color:var(--naranja)}
+#view-mec .mc-opt.ok{border-color:var(--ok);border-width:2px}#view-mec .mc-opt.bad{border-color:var(--bad);border-width:2px}
+#view-mec .mc-score{font:600 14px var(--f-mono);color:var(--cafe)}
+#view-mec details{border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--panel)}
+#view-mec summary{cursor:pointer;font-weight:600}
+#view-mec #mc-gbox .mc-fig{max-width:620px}
+#view-mec #mc-gbox .mc-fig svg{max-height:330px}
 .views{display:flex;gap:0;border-bottom:2px solid var(--line);flex-wrap:wrap}
 .view{font:600 20px var(--f-display);letter-spacing:.02em;background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;color:var(--muted);padding:8px 16px;cursor:pointer}
 .view[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--naranja)}
@@ -160,11 +257,13 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   <header>
     <div class="eyebrow">IMEC1402 · Ciencia e Ingeniería de Materiales</div>
     <h1>Laboratorio virtual de materiales</h1>
-    <p class="lead">Dos simuladores conectados: el diagrama de fases dice qué hay en equilibrio al enfriar lento; el diagrama TTT dice qué pasa cuando el enfriamiento es rápido o se detiene a una temperatura.</p>
+    <p class="lead">Dos simuladores conectados: el diagrama de fases dice qué hay en equilibrio al enfriar lento; el diagrama TTT dice qué pasa cuando el enfriamiento es rápido o se detiene a una temperatura. Además, una sección de clasificación de materiales con juegos y otra de propiedades mecánicas con simulador de ensayo de tensión, dureza y ejercicios.</p>
   </header>
   <div class="views" role="tablist">
     <button class="view" role="tab" id="v-pd" aria-selected="true">Diagramas de fases</button>
     <button class="view" role="tab" id="v-ttt" aria-selected="false">Tratamiento térmico (TTT)</button>
+    <button class="view" role="tab" id="v-clas" aria-selected="false">Clasificación de materiales</button>
+    <button class="view" role="tab" id="v-mec" aria-selected="false">Propiedades mecánicas</button>
   </div>
   <div id="view-pd" style="display:grid;gap:18px">
   <p class="lead" style="margin:0">Elige un sistema, toca el diagrama o mueve los controles. Lee qué fases hay, de qué composición y en qué cantidad (regla de la palanca), y cómo se ve la microestructura tras un enfriamiento lento.</p>
@@ -360,6 +459,346 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
 
   <p class="note" style="margin:0">Modelo didáctico. El acero Fe–0.76 C usa las curvas digitalizadas de Callister, Fig. 10.22, con su simplificación de libro (toda la austenita remanente se vuelve martensita). Los demás aceros usan curvas esquemáticas representativas: la forma y el orden de magnitud siguen las tendencias de los atlas de diagramas TTT (US Steel/ASM), pero los tiempos no son datos de diseño. A₁ y A₃ se calculan con las ecuaciones de Andrews (1965) a partir de la composición nominal; Mₛ con Andrews en los aceros de hasta 0.6 % C y estimado en los de más carbono. La martensita al templar sigue Koistinen–Marburger: f = 1 − exp[−0.011(Mₛ − T)]; lo que no se transforma queda como austenita retenida. Cada escalón isotérmico se lee desde t = 0 (reloj reiniciado) y solo transforma la austenita que dejó el escalón anterior; es la simplificación de libro (Callister, Ejemplo 10.1) y no considera la incubación acumulada (regla de aditividad de Scheil).</p>
 </div>
+  <div id="view-clas" hidden style="display:grid;gap:18px">
+    <p class="lead" style="margin:0">Los materiales de ingeniería se agrupan en familias según su enlace y su estructura. Explora el mapa, mira cómo se ve la estructura de cada familia y practica con los juegos al final.</p>
+    <div class="tabs" id="cl-tabs" role="tablist">
+      <button class="tab" role="tab" data-p="mapa" aria-selected="true">Mapa de familias</button>
+      <button class="tab" role="tab" data-p="metales" aria-selected="false">Metales</button>
+      <button class="tab" role="tab" data-p="pol" aria-selected="false">Polímeros</button>
+      <button class="tab" role="tab" data-p="cer" aria-selected="false">Cerámicos</button>
+      <button class="tab" role="tab" data-p="juego" aria-selected="false">Juego</button>
+    </div>
+
+    <section class="card" id="cl-mapa">
+      <h2>Mapa de familias</h2>
+      <p class="note">Toca una rama para ir a su sección.</p>
+      <div class="cl-g3">
+        <div class="cl-fam"><h4>Metales</h4><span class="note">Enlace metálico · conductores · dúctiles</span>
+          <button class="cl-chip" data-go="metales" data-sub="fer">Ferrosos<small>Aceros y fundiciones (base hierro)</small></button>
+          <button class="cl-chip" data-go="metales" data-sub="nof">No ferrosos<small>Al, Cu, Ti, Mg, Ni, Zn y sus aleaciones</small></button></div>
+        <div class="cl-fam pol"><h4>Polímeros</h4><span class="note">Cadenas covalentes · ligeros · aislantes</span>
+          <button class="cl-chip" data-go="pol" data-sub="tpl">Termoplásticos<small>Se funden y se reprocesan</small></button>
+          <button class="cl-chip" data-go="pol" data-sub="tfj">Termofijos<small>Red entrecruzada, no se refunden</small></button>
+          <button class="cl-chip" data-go="pol" data-sub="ela">Elastómeros<small>Se estiran y regresan</small></button></div>
+        <div class="cl-fam cer"><h4>Cerámicos</h4><span class="note">Enlace iónico/covalente · duros · frágiles</span>
+          <button class="cl-chip" data-go="cer" data-sub="tra">Tradicionales<small>Arcilla, vidrio, cemento, refractarios</small></button>
+          <button class="cl-chip" data-go="cer" data-sub="ava">Avanzados<small>Óxidos, carburos y nitruros de ingeniería</small></button></div>
+      </div>
+      <h3>Comparación general</h3>
+      <div class="cl-tbl"><table>
+        <tr><th></th><th>Metales</th><th>Polímeros</th><th>Cerámicos</th></tr>
+        <tr><td>Enlace dominante</td><td>Metálico</td><td>Covalente en la cadena; fuerzas secundarias entre cadenas</td><td>Iónico y/o covalente</td></tr>
+        <tr><td>Estructura típica</td><td>Cristalina (BCC, FCC, HCP)</td><td>Cadenas largas, amorfas o semicristalinas</td><td>Cristalina o amorfa (vidrios)</td></tr>
+        <tr><td>Conductividad eléctrica</td><td>Alta</td><td>Baja (aislantes)</td><td>Baja en general (aislantes)</td></tr>
+        <tr><td>Comportamiento mecánico</td><td>Resistentes y dúctiles</td><td>Ligeros, flexibles; resistencia variable</td><td>Duros, rígidos y frágiles</td></tr>
+        <tr><td>Resistencia a la temperatura</td><td>Media a alta</td><td>Baja</td><td>Muy alta</td></tr>
+      </table></div>
+      <p class="note" style="margin-top:6px">Los compuestos (por ejemplo fibra de carbono con epóxico) combinan dos o más de estas familias y se estudian aparte.</p>
+      <h3>Clave rápida de identificación</h3>
+      <ol style="margin:0;padding-left:20px;display:grid;gap:3px">
+        <li>¿Conduce la electricidad y se deforma antes de romper? Probablemente es un <b>metal</b>. ¿Tiene hierro como base? <b>Ferroso</b>; si no, <b>no ferroso</b>.</li>
+        <li>¿Está hecho de cadenas largas de carbono y es ligero? Es un <b>polímero</b>. ¿Se ablanda al calentarlo? <b>Termoplástico</b>. ¿Se carboniza sin fundirse? <b>Termofijo</b>. ¿Se estira mucho y regresa? <b>Elastómero</b>.</li>
+        <li>¿Es duro, frágil, aislante y resiste altas temperaturas? Es un <b>cerámico</b>. ¿Viene de arcilla, sílice o cemento? <b>Tradicional</b>. ¿Es un óxido, carburo o nitruro puro de alto desempeño? <b>Avanzado</b>.</li>
+      </ol>
+    </section>
+
+    <div id="cl-metales" hidden style="display:grid;gap:18px">
+      <section class="card">
+        <h2>Metales: ferrosos y no ferrosos</h2>
+        <div class="cl-g2">
+          <div class="cl-fam"><h4>Ferrosos (base hierro)</h4>
+            <p style="margin:0"><b>Aceros:</b> hasta 2.14 % C (casi siempre menos de 1 %). <b>Fundiciones:</b> de 2.14 a 6.70 % C (las comerciales, entre 3 y 4.5 % C aprox.). Ambas se leen en el diagrama Fe–Fe₃C.</p>
+            <div><button class="btn" id="cl-gofec">Abrir el diagrama Fe–Fe₃C en el simulador</button></div></div>
+          <div class="cl-fam"><h4>No ferrosos</h4>
+            <p style="margin:0">Aluminio, cobre, titanio, magnesio, níquel, zinc y metales refractarios o preciosos. Se usan cuando se busca poco peso, conductividad, resistencia a la corrosión o desempeño a alta temperatura.</p></div>
+        </div>
+        <p class="note" style="margin-top:8px">Fuente: Callister y Rethwisch, 10.ª ed., cap. 11; Askeland y Wright (2015), capítulos de aleaciones ferrosas y no ferrosas (verifica la numeración en tu edición).</p>
+      </section>
+
+      <section class="card" id="cl-fer">
+        <h2>Clasificación de los aceros</h2>
+        <div class="cl-tbl"><table>
+          <tr><th>Tipo</th><th>Composición</th><th>Estructura típica</th><th>Ejemplos AISI</th><th>Usos</th></tr>
+          <tr><td>Bajo carbono</td><td>Menos de 0.25 % C</td><td>Ferrita + perlita</td><td>1010, 1020</td><td>Láminas de carrocería, perfiles estructurales, piezas cementadas</td></tr>
+          <tr><td>Medio carbono</td><td>0.25 a 0.60 % C</td><td>Ferrita + perlita; martensita revenida tras temple</td><td>1045, 4140</td><td>Ejes, engranes, flechas, tornillería</td></tr>
+          <tr><td>Alto carbono</td><td>0.60 a 1.4 % C</td><td>Perlita (+ cementita proeutectoide); martensita</td><td>1080, 1095</td><td>Resortes, herramientas de corte, alambre</td></tr>
+          <tr><td>Baja aleación</td><td>Aceros con Cr, Ni y/o Mo en pequeña cantidad</td><td>Mayor templabilidad</td><td>4340, 5160, 8620, 52100</td><td>Tren de aterrizaje, muelles, engranes cementados, rodamientos</td></tr>
+          <tr><td>Inoxidables</td><td>Más de 11 % Cr</td><td>Austenítica, ferrítica, martensítica</td><td>304, 316 (austeníticos); 430 (ferrítico); 410, 420 (martensíticos)</td><td>Equipo de alimentos, quirúrgico, químico</td></tr>
+          <tr><td>Herramienta</td><td>Aleados con W, Mo, Cr, V; alto C</td><td>Martensita revenida con carburos</td><td>W1, O1, A2, D2, H13, M2</td><td>Dados, matrices, brocas</td></tr>
+        </table></div>
+        <p class="note">Rangos de carbono según Callister (cap. 11). Los AISI de ejemplo son grados comunes; verifica la composición exacta en la norma SAE J403 o en el ASM Handbook.</p>
+
+        <h3>Nomenclatura AISI/SAE: decodifica un acero</h3>
+        <p>Cuatro dígitos <b>XXYY</b>: los dos primeros indican el tipo de acero (elementos de aleación principales) y los dos últimos, el carbono en centésimas de por ciento. Ejemplo: <b>4140</b> = serie 41 (Cr–Mo) con 0.40 % C.</p>
+        <div class="cl-dec"><label for="cl-code">Código:</label><input id="cl-code" value="4140" maxlength="6" autocomplete="off" inputmode="text" aria-describedby="cl-dout"><span class="note">Prueba: 1045, 4340, 8620, 52100, 304L, 316, 420, 440C, 2205, 17-4PH, H13</span></div>
+        <div class="cl-out" id="cl-dout" aria-live="polite"></div>
+        <details style="margin-top:10px"><summary style="cursor:pointer;font-weight:600">Tabla de series</summary>
+          <div class="cl-tbl"><table id="cl-ser"></table></div>
+          <p class="note">Designaciones UNS: letra G + cinco dígitos (1045 es G10450). Los contenidos exactos de aleación están en SAE J403 y en Callister, tabla 11.1.</p></details>
+      </section>
+
+      <section class="card" id="cl-inox">
+        <h2>Nomenclatura de los aceros inoxidables</h2>
+        <p>Un acero es inoxidable cuando tiene más de 11 % Cr: el cromo forma una película delgada y adherente de óxido (capa pasiva) que protege al metal. Se designan con <b>tres dígitos</b> AISI; <b>el número no indica el carbono</b>, solo la serie y el grado.</p>
+        <div class="cl-tbl"><table>
+          <tr><th>Familia</th><th>Serie y grados</th><th>Composición aproximada</th><th>Características</th><th>Usos</th></tr>
+          <tr><td>Austenítico Cr–Ni</td><td>3xx: 304, 304L, 316, 316L, 321, 310</td><td>304: ≈ 18 % Cr y 8 % Ni (“18-8”). 316: agrega ≈ 2–3 % Mo. 310: ≈ 25 % Cr y 20 % Ni</td><td>FCC, no magnético, muy dúctil y soldable. No se endurece por temple (sí por deformación en frío)</td><td>Alimentos, tanques, marino (316), hornos (310)</td></tr>
+          <tr><td>Austenítico Cr–Mn–Ni</td><td>2xx: 201, 202</td><td>Parte del Ni se sustituye por Mn y N</td><td>Austenítico de menor costo y menor resistencia a la corrosión</td><td>Utensilios, electrodomésticos</td></tr>
+          <tr><td>Ferrítico</td><td>4xx: 409, 430</td><td>409: ≈ 11 % Cr. 430: ≈ 16–18 % Cr</td><td>BCC, magnético, sin Ni (más barato). No se endurece por temple</td><td>Escapes automotrices (409), molduras y electrodomésticos (430)</td></tr>
+          <tr><td>Martensítico</td><td>4xx: 410, 420, 440C</td><td>410: ≈ 12 % Cr. 420: ≈ 12–14 % Cr con más C. 440C: ≈ 17 % Cr y ≈ 1 % C</td><td>Magnético; <b>se endurece por temple</b>. Menor resistencia a la corrosión</td><td>Cuchillería, instrumental, válvulas, rodamientos</td></tr>
+          <tr><td>Dúplex</td><td>2205</td><td>≈ 22 % Cr, 5 % Ni, 3 % Mo</td><td>Mezcla de austenita y ferrita: mayor resistencia mecánica que los austeníticos y buena resistencia a cloruros</td><td>Petroquímica, plataformas marinas</td></tr>
+          <tr><td>Endurecible por precipitación (PH)</td><td>17-4 PH (AISI 630)</td><td>≈ 17 % Cr, 4 % Ni, 4 % Cu</td><td>Se endurece por envejecido (precipitados)</td><td>Aeronáutica, ejes, válvulas</td></tr>
+        </table></div>
+        <h3>Cómo leer el nombre</h3>
+        <div class="cl-tbl"><table>
+          <tr><th>Parte</th><th>Significado</th><th>Ejemplo</th></tr>
+          <tr><td>Primer dígito</td><td>2 y 3: austeníticos; 4: ferríticos o martensíticos</td><td>304 → serie 3xx, austenítico</td></tr>
+          <tr><td>Sufijo L</td><td>Bajo carbono (≈ 0.03 % C máx.): evita que el Cr se combine con el C en la soldadura (sensibilización)</td><td>304L, 316L</td></tr>
+          <tr><td>Sufijo H</td><td>Carbono más alto: mejor resistencia a alta temperatura</td><td>304H</td></tr>
+          <tr><td>Sufijo N</td><td>Nitrógeno agregado: más resistencia</td><td>316N</td></tr>
+          <tr><td>Ti o Nb</td><td>Grados estabilizados con titanio (321) o niobio (347)</td><td>321</td></tr>
+          <tr><td>Otros sistemas</td><td>UNS: letra S + cinco dígitos. EN: 1.xxxx</td><td>304 = S30400 = EN 1.4301; 316 = EN 1.4401</td></tr>
+        </table></div>
+        <p class="note">Prueba rápida con un imán: los austeníticos recocidos casi no son magnéticos; los ferríticos y martensíticos sí. Composiciones aproximadas: verifica en ASTM A240 o en el ASM Handbook. Fuente: Callister y Rethwisch, 10.ª ed., cap. 11.</p>
+      </section>
+
+      <section class="card">
+        <h2>Fundiciones (hierros fundidos)</h2>
+        <div class="cl-tbl"><table>
+          <tr><th>Tipo</th><th>Cómo es el carbono</th><th>Características</th><th>Usos</th></tr>
+          <tr><td>Gris</td><td>Grafito en hojuelas</td><td>Buen amortiguamiento y maquinado; frágil en tensión</td><td>Bloques de motor, bases de máquina, discos de freno</td></tr>
+          <tr><td>Dúctil (nodular)</td><td>Grafito en esferas (se agrega Mg o Ce)</td><td>Resistencia y ductilidad mayores que la gris</td><td>Cigüeñales, engranes, tuberías a presión</td></tr>
+          <tr><td>Blanca</td><td>Carbono como cementita (Fe₃C)</td><td>Muy dura y frágil</td><td>Revestimientos y bolas de molino; base de la maleable</td></tr>
+          <tr><td>Maleable</td><td>Grafito en nódulos irregulares (tratamiento térmico de la blanca)</td><td>Más dúctil que la blanca</td><td>Conexiones, piezas de herramienta de mano</td></tr>
+        </table></div>
+      </section>
+
+      <section class="card" id="cl-nof">
+        <h2>Metales no ferrosos: ejemplos</h2>
+        <div class="cl-tbl"><table>
+          <tr><th>Metal</th><th>Densidad (g/cm³)</th><th>Estructura</th><th>Aleaciones y ejemplos</th><th>Usos</th><th>Simulador</th></tr>
+          <tr><td>Aluminio</td><td>≈ 2.7</td><td>FCC</td><td>Series 1xxx (puro), 2xxx (Cu, 2024), 5xxx (Mg, 5083), 6xxx (Mg–Si, 6061), 7xxx (Zn, 7075)</td><td>Aeronáutica, chasis, perfiles, latas</td><td><button class="btn link" data-pd="alcu">Al–Cu</button> <button class="btn link" data-pd="almg">Al–Mg</button> <button class="btn link" data-pd="alzn">Al–Zn</button></td></tr>
+          <tr><td>Cobre</td><td>≈ 8.9</td><td>FCC</td><td>Latones (Cu–Zn), bronces (Cu–Sn), cuproníquel (Cu–Ni)</td><td>Cables, tubería, intercambiadores, casquillos</td><td><button class="btn link" data-pd="cuzn">Cu–Zn</button></td></tr>
+          <tr><td>Titanio</td><td>≈ 4.5</td><td>HCP (α) hasta 882 °C; BCC (β) arriba</td><td>Ti–6Al–4V</td><td>Aeronáutica, implantes biomédicos</td><td><button class="btn link" data-pd="tial">Ti–Al</button></td></tr>
+          <tr><td>Magnesio</td><td>≈ 1.74</td><td>HCP</td><td>AZ31, AZ91 (Mg–Al–Zn)</td><td>Carcasas ligeras, autopartes</td><td><button class="btn link" data-pd="almg">Al–Mg</button></td></tr>
+          <tr><td>Níquel</td><td>≈ 8.9</td><td>FCC</td><td>Inconel 718, Monel (Ni–Cu), Nitinol (Ni–Ti)</td><td>Turbinas, química, memoria de forma</td><td>—</td></tr>
+          <tr><td>Zinc</td><td>≈ 7.1</td><td>HCP</td><td>ZA-27 (Zn–Al), galvanizado</td><td>Fundición a presión, protección contra la corrosión</td><td><button class="btn link" data-pd="alzn">Al–Zn</button></td></tr>
+        </table></div>
+        <p class="note">Densidades redondeadas de Callister (apéndice B). Verifica en tu edición antes de usarlas en un cálculo.</p>
+      </section>
+
+      <section class="card">
+        <h2>Estructura cristalina de los metales</h2>
+        <p>Los metales se ordenan en celdas unitarias que se repiten en el espacio. Las tres más comunes:</p>
+        <div class="cl-g3" id="cl-cells"></div>
+      </section>
+    </div>
+
+    <div id="cl-pol" hidden style="display:grid;gap:18px">
+      <section class="card">
+        <h2>Polímeros: termoplásticos, termofijos y elastómeros</h2>
+        <div class="cl-g3">
+          <div class="cl-fam pol"><h4>Termoplásticos</h4><p style="margin:0">Cadenas lineales o ramificadas unidas por fuerzas secundarias. Se ablandan al calentar y se pueden moldear de nuevo.</p>
+            <p class="note" style="margin:0"><b>PE</b> bolsas, tuberías · <b>PP</b> envases, autopartes · <b>PVC</b> tubería · <b>PS</b> desechables · <b>PET</b> botellas · <b>Nylon 6,6</b> engranes y fibras · <b>PMMA</b> acrílico · <b>PC</b> lentes y cascos · <b>PTFE</b> antiadherentes</p></div>
+          <div class="cl-fam pol"><h4>Termofijos</h4><p style="margin:0">Red tridimensional con enlaces covalentes entre cadenas. Una vez curados no se funden: al calentarlos se degradan.</p>
+            <p class="note" style="margin:0"><b>Epóxica</b> adhesivos y matriz de compuestos de fibra de carbono · <b>Fenólica</b> (baquelita) piezas eléctricas · <b>Poliéster insaturado</b> fibra de vidrio · <b>Melamina</b> laminados</p></div>
+          <div class="cl-fam pol"><h4>Elastómeros</h4><p style="margin:0">Cadenas largas con pocos entrecruzamientos. Se estiran mucho y regresan a su forma al soltarlos.</p>
+            <p class="note" style="margin:0"><b>Caucho natural</b> y <b>SBR</b> llantas · <b>NBR</b> sellos para aceite · <b>Neopreno</b> mangueras · <b>Silicón</b> sellos y biomédico · <b>EPDM</b> juntas</p></div>
+        </div>
+        <div class="cl-tbl" style="margin-top:12px"><table>
+          <tr><th>Prueba</th><th>Termoplástico</th><th>Termofijo</th><th>Elastómero</th></tr>
+          <tr><td>Al calentar</td><td>Se ablanda y fluye</td><td>No se funde; se degrada</td><td>No se funde; se degrada</td></tr>
+          <tr><td>Entrecruzamiento</td><td>Ninguno</td><td>Muy denso</td><td>Ligero (vulcanización)</td></tr>
+          <tr><td>¿Reciclable por fusión?</td><td>Sí</td><td>No</td><td>No</td></tr>
+          <tr><td>Rigidez</td><td>Baja a media</td><td>Alta</td><td>Muy baja; gran deformación elástica</td></tr>
+        </table></div>
+        <p class="hint cl-hint" style="margin-top:10px"><b>Aplicación biomédica:</b> el UHMWPE (polietileno de ultra alto peso molecular) se usa en prótesis articulares, el PMMA en cemento óseo, la silicona en catéteres e implantes blandos y el PLA en suturas y tornillos reabsorbibles.</p>
+        <p class="note" style="margin-top:6px">Fuente: Callister y Rethwisch, 10.ª ed., caps. 14 y 15.</p>
+      </section>
+
+      <section class="card">
+        <h2>Cómo se ven las cadenas</h2>
+        <p>Cada dibujo es un esquema: las líneas son cadenas poliméricas y los puntos naranja son entrecruzamientos.</p>
+        <div class="cl-g2" id="cl-polfig" style="grid-template-columns:repeat(auto-fit,minmax(380px,1fr))"></div>
+        <h3>Estira un elastómero</h3>
+        <div class="cl-g2">
+          <figure class="cl-fig"><div id="cl-stretch"></div><figcaption id="cl-strcap"></figcaption></figure>
+          <div style="display:grid;gap:8px;align-content:start">
+            <label for="cl-lam"><b>Deformación:</b> <span id="cl-lamv">1.0×</span></label>
+            <input type="range" id="cl-lam" min="1" max="1.5" step="0.05" value="1">
+            <p class="note" style="margin:0">Al estirar, las cadenas se alinean en la dirección de la fuerza. Al soltar, la agitación térmica las regresa a su forma enredada, y por eso el elastómero recupera su forma. Los entrecruzamientos impiden que las cadenas se deslicen definitivamente.</p>
+          </div>
+        </div>
+        <h3>De qué está hecha una cadena</h3>
+        <p>Una cadena es una repetición de unidades llamadas <b>meros</b>. Cambia el grupo lateral R y obtienes otro polímero:</p>
+        <div class="cl-sub" id="cl-merbtn"></div>
+        <figure class="cl-fig" style="margin-top:8px;max-width:560px"><div id="cl-mer"></div><figcaption id="cl-mercap"></figcaption></figure>
+      </section>
+    </div>
+
+    <div id="cl-cer" hidden style="display:grid;gap:18px">
+      <section class="card">
+        <h2>Cerámicos: tradicionales y avanzados</h2>
+        <div class="cl-g2">
+          <div class="cl-fam cer"><h4>Tradicionales</h4><p style="margin:0">Se hacen con materias primas naturales: arcilla, sílice y feldespato. Son los más antiguos y de mayor volumen.</p>
+            <p class="note" style="margin:0"><b>Porcelana</b> (caolín, cuarzo y feldespato) · <b>ladrillo y tejas</b> · <b>loza sanitaria</b> · <b>refractarios</b> de sílice o alúmina–sílice · <b>cemento Portland</b> · <b>vidrio</b> sodocálcico</p></div>
+          <div class="cl-fam cer"><h4>Avanzados (de ingeniería)</h4><p style="margin:0">Compuestos sintéticos de alta pureza con propiedades diseñadas: óxidos, carburos y nitruros.</p>
+            <p class="note" style="margin:0"><b>Al₂O₃</b> aislantes e implantes · <b>ZrO₂</b> coronas dentales y sensores de oxígeno · <b>SiC</b> abrasivos, sellos y frenos · <b>Si₃N₄</b> rodamientos · <b>AlN</b> disipadores · <b>BaTiO₃</b> capacitores y piezoeléctricos · <b>hidroxiapatita</b> biocerámico</p></div>
+        </div>
+        <div class="cl-tbl" style="margin-top:12px"><table>
+          <tr><th>Característica</th><th>Tradicionales</th><th>Avanzados</th></tr>
+          <tr><td>Materia prima</td><td>Natural (arcilla, sílice, feldespato)</td><td>Polvos sintéticos de alta pureza</td></tr>
+          <tr><td>Composición</td><td>Silicatos, mezclas complejas</td><td>Óxidos, carburos o nitruros definidos</td></tr>
+          <tr><td>Procesamiento</td><td>Conformado, secado y cocción; fusión y vaciado para vidrio</td><td>Compactación de polvos y sinterizado controlado</td></tr>
+          <tr><td>Aplicaciones</td><td>Construcción, vajilla, hornos</td><td>Electrónica, corte, desgaste, biomédica, aeroespacial</td></tr>
+        </table></div>
+        <p class="note" style="margin-top:6px">Fuente: Callister y Rethwisch, 10.ª ed., caps. 12 y 13. Por su enlace iónico o covalente, los cerámicos son duros pero frágiles: casi no se deforman plásticamente.</p>
+      </section>
+
+      <section class="card">
+        <h2>Estructura de los cerámicos</h2>
+        <p>Las mismas unidades pueden ordenarse (cristal) o quedar desordenadas (vidrio). Los dibujos son cortes bidimensionales esquemáticos.</p>
+        <div class="cl-g3" id="cl-cerfig"></div>
+      </section>
+    </div>
+
+    <section class="card" id="cl-juego" hidden>
+      <h2>Juego: clasifica, decodifica, reconoce y selecciona</h2>
+      <div class="cl-score"><span id="cl-total">Puntos totales: 0</span><span>+10 por acierto · +5 por cada 3 seguidos</span></div>
+      <div class="tabs" id="cl-gtabs" role="tablist" style="margin:10px 0">
+        <button class="tab" role="tab" data-g="g1" aria-selected="true">1 · Clasifica</button>
+        <button class="tab" role="tab" data-g="g2" aria-selected="false">2 · Descifra el acero</button>
+        <button class="tab" role="tab" data-g="g3" aria-selected="false">3 · Estructura misteriosa</button>
+        <button class="tab" role="tab" data-g="g4" aria-selected="false">4 · Elige el material</button>
+      </div>
+      <div class="cl-play" id="cl-g1"></div>
+      <div class="cl-play" id="cl-g2" hidden></div>
+      <div class="cl-play" id="cl-g3" hidden></div>
+      <div class="cl-play" id="cl-g4" hidden></div>
+    </section>
+    <p class="note" style="margin:0">Esquemas didácticos elaborados para el curso; no están a escala. Consulta los datos de aleaciones y propiedades en Callister y Rethwisch (10.ª ed.) y en Askeland y Wright (2015).</p>
+  </div>
+  <div id="view-mec" hidden style="display:grid;gap:18px">
+    <p class="lead" style="margin:0">Clase 1: propiedades mecánicas y ensayo de tensión. Estira una probeta virtual, lee la curva esfuerzo–deformación, calcula dureza Brinell y practica con problemas nuevos cada vez. Los materiales son ilustrativos (órdenes de magnitud), no datos de una aleación concreta.</p>
+    <div class="tabs" id="mc-tabs" role="tablist">
+      <button class="tab" role="tab" data-p="sim" aria-selected="true">Simulador de tensión</button>
+      <button class="tab" role="tab" data-p="real" aria-selected="false">Esfuerzo real</button>
+      <button class="tab" role="tab" data-p="dur" aria-selected="false">Dureza</button>
+      <button class="tab" role="tab" data-p="ej" aria-selected="false">Ejercicios</button>
+      <button class="tab" role="tab" data-p="juego" aria-selected="false">Juego</button>
+    </div>
+
+    <section class="card" id="mc-sim">
+      <h2>Simulador del ensayo de tensión</h2>
+      <p class="note">Mueve el deslizador para estirar la probeta. El deslizador no es lineal: la zona elástica ocupa una quinta parte del recorrido para que se vea, aunque en un acero real sea una fracción mínima de la deformación total. Con la escala real verás sus proporciones verdaderas.</p>
+      <div class="mc-ctl">
+        <label class="mc-f">Material<select id="mc-mat"></select></label>
+        <label class="mc-f">Diámetro d₀ (mm)<input type="number" id="mc-d0" value="12.8" min="2" max="40" step="0.1"></label>
+        <label class="mc-f">Longitud calibrada L₀ (mm)<input type="number" id="mc-l0" value="50" min="10" max="300" step="1"></label>
+        <label class="mc-f">Curva<select id="mc-view"><option value="eng">Ingenieril</option><option value="true">Real</option><option value="both">Ambas</option></select></label>
+        <label class="mc-f">Escala del eje ε<select id="mc-scale"><option value="did">Didáctica</option><option value="real">Real</option></select></label>
+      </div>
+      <div class="mc-row">
+        <label class="mc-chk"><input type="checkbox" id="mc-offc"> Mostrar el criterio del 0.2 % (solo escala real)</label>
+        <label class="mc-chk"><input type="checkbox" id="mc-mks" checked> Marcar σy, UTS y fractura</label>
+      </div>
+      <div class="mc-g2">
+        <div class="mc-fig"><svg id="mc-svg" viewBox="0 0 640 390" role="img" aria-label="Curva esfuerzo deformación"></svg></div>
+        <div>
+          <div class="mc-fig"><svg id="mc-spec" viewBox="0 0 460 200" role="img" aria-label="Probeta de tensión"></svg></div>
+          <input type="range" class="mc-slide" id="mc-p" min="0" max="1000" value="0" aria-label="Avance del ensayo">
+          <div class="mc-row">
+            <button class="btn" id="mc-play">Reproducir</button>
+            <button class="btn" id="mc-unl">Descargar desde este punto</button>
+            <button class="btn" id="mc-rst">Reiniciar</button>
+            <span class="mc-reg" id="mc-reg"></span>
+          </div>
+          <div class="mc-out" id="mc-out"></div>
+        </div>
+      </div>
+      <div class="mc-tbl" id="mc-card"></div>
+      <details style="margin-top:12px"><summary>Fórmulas de esta sección</summary>
+        <div class="mc-fm">σ = F / A₀    ε = ΔL / L₀    σ = E·ε (zona elástica)</div>
+        <div class="mc-fm">%EL = (L_f − L₀)/L₀ × 100    %RA = (A₀ − A_f)/A₀ × 100</div>
+        <div class="mc-fm">Poisson: μ = −ε_lat / ε_long    G = E / [2(1 + μ)]</div>
+        <div class="mc-fm">σ_real = σ(1 + ε)    ε_real = ln(1 + ε)    (hasta el UTS)</div>
+        <p class="note">Resiliencia ≈ σy² / (2E): energía por volumen que se recupera al descargar. Tenacidad: área total bajo la curva.</p>
+      </details>
+    </section>
+
+    <section class="card" id="mc-real" hidden>
+      <h2>Esfuerzo y deformación reales</h2>
+      <p class="note">Mientras el volumen se mantiene constante y no hay estricción (hasta el UTS): σ_real = σ(1 + ε) y ε_real = ln(1 + ε).</p>
+      <div class="mc-fl">
+        <label class="mc-f">σ ingenieril (MPa)<input type="number" class="mc-in" id="mc-r-s" value="400" step="10"></label>
+        <label class="mc-f">ε ingenieril (%)<input type="number" class="mc-in" id="mc-r-e" value="15" step="0.5"></label>
+      </div>
+      <div class="mc-out" id="mc-r-out"></div>
+      <h3>Endurecimiento por deformación: σ_real = K·ε_real<sup>n</sup></h3>
+      <p class="note">La estricción comienza cuando ε_real = n. Elige un material de la presentación 1.5 o escribe tus valores.</p>
+      <div class="mc-row" id="mc-kn-pre"></div>
+      <div class="mc-fl">
+        <label class="mc-f">K (MPa)<input type="number" class="mc-in" id="mc-k" value="180" step="1"></label>
+        <label class="mc-f">n<input type="number" class="mc-in" id="mc-n" value="0.2" step="0.01" min="0.01" max="1"></label>
+        <label class="mc-f">ε_real a evaluar<input type="number" class="mc-in" id="mc-er" value="0.1" step="0.01"></label>
+      </div>
+      <div class="mc-out" id="mc-kn-out"></div>
+      <div class="mc-fig"><svg id="mc-kn-svg" viewBox="0 0 640 330" role="img" aria-label="Curva real sigma igual K epsilon a la n"></svg></div>
+      <p class="note">Valores de K y n de la presentación 1.5 (Kalpakjian); el cobre y el aluminio corresponden a la condición recocida. El problema 5 de la presentación usa K = 100 000 psi (689.5 MPa) y n = 0.5.</p>
+    </section>
+
+    <section class="card" id="mc-dur" hidden>
+      <h2>Dureza Brinell</h2>
+      <p class="note">HB = 2F / [πD (D − √(D² − d²))], con F en kgf y D, d en mm. Mueve d y mira cómo cambian la dureza y la resistencia estimada.</p>
+      <div class="mc-ctl">
+        <label class="mc-f">Esfera D (mm)<select id="mc-bdia"><option value="10">10</option><option value="5">5</option><option value="2.5">2.5</option></select></label>
+        <label class="mc-f">Carga F (kgf)<input type="number" id="mc-bF" value="3000" min="10" step="10"></label>
+        <label class="mc-f">Huella d (mm)<input type="number" id="mc-bhue" value="4" min="0.1" step="0.05"></label>
+      </div>
+      <div class="mc-row"><button class="btn" id="mc-b30">Usar F = 30·D² (carga habitual para aceros)</button></div>
+      <input type="range" class="mc-slide" id="mc-bs" min="5" max="95" value="40" aria-label="Diámetro de la huella como porcentaje de D">
+      <div class="mc-g2">
+        <div class="mc-fig"><svg id="mc-bsvg" viewBox="0 0 360 230" role="img" aria-label="Esfera penetrando la superficie y huella de diámetro d"></svg></div>
+        <div>
+          <div class="mc-out" id="mc-bout"></div>
+          <p class="note" id="mc-bnote"></p>
+        </div>
+      </div>
+      <h3>Métodos de dureza</h3>
+      <div class="mc-tbl"><table>
+        <tr><th>Método</th><th>Indentador</th><th>Se mide</th><th>Uso típico</th></tr>
+        <tr><td>Brinell</td><td>Esfera de acero o carburo</td><td>Diámetro de la huella</td><td>Metales blandos y medios, fundiciones</td></tr>
+        <tr><td>Rockwell</td><td>Cono de diamante o esfera</td><td>Profundidad residual</td><td>Lectura rápida en taller (HRC, HRB)</td></tr>
+        <tr><td>Vickers</td><td>Pirámide de diamante</td><td>Diagonales</td><td>Todo rango, microdureza</td></tr>
+        <tr><td>Knoop</td><td>Pirámide alargada</td><td>Diagonal mayor</td><td>Materiales frágiles y capas delgadas</td></tr>
+        <tr><td>Shore</td><td>Durómetro</td><td>Penetración</td><td>Elastómeros y plásticos</td></tr>
+        <tr><td>Mohs</td><td>Rayado entre minerales</td><td>Escala ordinal 1 a 10</td><td>Mineralogía</td></tr>
+      </table></div>
+    </section>
+
+    <section class="card" id="mc-ej" hidden>
+      <h2>Ejercicios de práctica</h2>
+      <p class="note">Cada problema se genera con datos nuevos. Escribe tus resultados (usa punto o coma decimal), pulsa Comprobar y, si lo necesitas, revisa la solución paso a paso. Se acepta un margen de redondeo.</p>
+      <div class="mc-row">
+        <label class="mc-f" style="min-width:230px">Tipo<select id="mc-ejt"></select></label>
+        <button class="btn" id="mc-ejn">Nuevo problema</button>
+        <span class="mc-score" id="mc-ejs"></span>
+      </div>
+      <p id="mc-ejtxt" style="font-size:15.5px"></p>
+      <div class="mc-fl" id="mc-ejf"></div>
+      <div class="mc-row"><button class="btn" id="mc-ejc">Comprobar</button><button class="btn" id="mc-ejv">Ver solución</button></div>
+      <div id="mc-ejsol"></div>
+      <h3>Problemas de la clase con solución</h3>
+      <div id="mc-cls"></div>
+    </section>
+
+    <section class="card" id="mc-juego" hidden>
+      <h2>Juego: ¿qué material es?</h2>
+      <p class="note">Lee el UTS y la elongación a la fractura de la curva ingenieril (eje en escala real) y elige el material. Fichas de los materiales:</p>
+      <div class="mc-tbl" id="mc-gtbl"></div>
+      <div id="mc-gbox"></div>
+    </section>
+  </div>
   <footer>Modelo didáctico. Los puntos clave (temperaturas de fusión, eutécticos y solubilidades máximas) vienen de Callister &amp; Rethwisch, 10.ª ed. (Figs. 9.3, 9.7 y 9.8) y del ASM Handbook, vol. 3; las curvas entre esos puntos son ajustes suaves y deben tratarse como esquemas. Ge–Si se dibuja en % en peso de forma esquemática. Fe–Fe₃C es el diagrama metaestable de Callister, Fig. 9.24, con líneas rectas entre sus puntos clave; la región δ es muy angosta a esta escala. Composiciones en % en peso del segundo componente. Los diagramas de la actividad y de la evaluación (Ti–Al, Cr–Ni, Al–Cu, Cu–Zn, Al–Zn y Al–Mg) se calcularon con CALPHAD (pycalphad); en los sistemas calculados el esquema inferior muestra las fases en equilibrio a la temperatura elegida, no la microestructura final. La micrografía es un esquema, no una imagen real.</footer>
 </div>
 
@@ -1045,7 +1484,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     set(S.start[0],S.start[1],false);
   }
   document.getElementById('bridgeBtn').onclick=()=>{if(window.TTT&&window.__bridge)window.TTT.load(window.__bridge.id,T);window.showView('ttt');};
-  window.PD={go:(c,t)=>{selectSys('fec');set(c,t,false);},probe:(id,c,t)=>{selectSys(id);const q=state(c,t);return {r:q.r,c1:q.c1,c2:q.c2,W2:q.W2,k1:q.k1,k2:q.k2,single:q.single};}};
+  window.PD={open:id=>selectSys(id),go:(c,t)=>{selectSys('fec');set(c,t,false);},probe:(id,c,t)=>{selectSys(id);const q=state(c,t);return {r:q.r,c1:q.c1,c2:q.c2,W2:q.W2,k1:q.k1,k2:q.k2,single:q.single};}};
   matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>read());
   window.addEventListener('lab-theme',()=>read());
   let first='pbsn';try{const v=localStorage.getItem('pd-sys');if(v&&SYS[v])first=v;}catch(e){}
@@ -1451,13 +1890,393 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
 </script>
 <script>
 (function(){
-  window.showView=v=>{document.getElementById('view-pd').hidden=v!=='pd';document.getElementById('view-ttt').hidden=v!=='ttt';
-    document.getElementById('v-pd').setAttribute('aria-selected',v==='pd');document.getElementById('v-ttt').setAttribute('aria-selected',v==='ttt');
+  const VIEWS=['pd','ttt','clas','mec'];
+  window.showView=v=>{VIEWS.forEach(k=>{document.getElementById('view-'+k).hidden=v!==k;document.getElementById('v-'+k).setAttribute('aria-selected',v===k);});
     try{localStorage.setItem('lab-view',v);}catch(e){}};
-  document.getElementById('v-pd').onclick=()=>showView('pd');document.getElementById('v-ttt').onclick=()=>showView('ttt');
-  let v=location.hash==='#ttt'?'ttt':'pd';try{if(!location.hash){const s=localStorage.getItem('lab-view');if(s==='ttt')v='ttt';}}catch(e){}
+  VIEWS.forEach(k=>{document.getElementById('v-'+k).onclick=()=>showView(k);});
+  let v='pd';const hv=location.hash.slice(1);if(VIEWS.includes(hv))v=hv;else{try{const s=localStorage.getItem('lab-view');if(!location.hash&&VIEWS.includes(s))v=s;}catch(e){}}
   showView(v);
 })();
+
+(function(){
+  const $=(s,r)=>(r||document).querySelector(s),$$=(s,r)=>[...(r||document).querySelectorAll(s)];
+  const root=$('#view-clas');if(!root)return;
+  function rng(seed){let a=seed>>>0;return()=>{a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};}
+  const shuffle=(arr,r)=>{const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor((r||Math.random)()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  const fix=n=>+n.toFixed(1);
+
+  // ---------- pestañas ----------
+  function panel(p,sub){
+    ['mapa','metales','pol','cer','juego'].forEach(k=>{$('#cl-'+k).hidden=k!==p;});
+    $$('#cl-tabs .tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));
+    const t=sub?{fer:'cl-fer',nof:'cl-nof'}[sub]:null;
+    const el=t?document.getElementById(t):null;
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  $('#cl-tabs').onclick=e=>{const b=e.target.closest('[data-p]');if(b)panel(b.dataset.p);};
+  root.addEventListener('click',e=>{
+    const c=e.target.closest('[data-go]');if(c){panel(c.dataset.go,c.dataset.sub);return;}
+    const g=e.target.closest('[data-pd]');if(g&&window.PD&&PD.open){PD.open(g.dataset.pd);window.showView('pd');window.scrollTo({top:0,behavior:'smooth'});}
+  });
+  $('#cl-gofec').onclick=()=>{if(window.PD){PD.open('fec');window.showView('pd');window.scrollTo({top:0,behavior:'smooth'});}};
+
+  // ---------- AISI/SAE ----------
+  const SER={'10':['Carbono simple','Mn máx. ≈ 1 %; sin otros elementos de aleación'],'11':['Carbono resulfurado','Maquinado libre (azufre)'],'12':['Resulfurado y refosforado','Maquinado libre (azufre y fósforo)'],
+   '13':['Manganeso','Mn ≈ 1.75 %'],'15':['Carbono con Mn alto','Mn mayor que en la serie 10'],'23':['Níquel','Ni ≈ 3.5 % (poco usada)'],'25':['Níquel','Ni ≈ 5 % (poco usada)'],'31':['Ni–Cr','Níquel y cromo (poco usada)'],'33':['Ni–Cr','Níquel y cromo (poco usada)'],
+   '40':['Molibdeno','Mo ≈ 0.25 %'],'41':['Cr–Mo','Cromo y molibdeno'],'43':['Ni–Cr–Mo','Níquel, cromo y molibdeno'],'44':['Molibdeno','Mo ≈ 0.4 %'],'46':['Ni–Mo','Níquel y molibdeno'],'47':['Ni–Cr–Mo','Níquel, cromo y molibdeno'],'48':['Ni–Mo','Níquel y molibdeno'],
+   '50':['Cromo','Cr bajo'],'51':['Cromo','Cr medio'],'61':['Cr–V','Cromo y vanadio'],'81':['Ni–Cr–Mo','Níquel, cromo y molibdeno'],'86':['Ni–Cr–Mo','Níquel, cromo y molibdeno'],'87':['Ni–Cr–Mo','Níquel, cromo y molibdeno'],'88':['Ni–Cr–Mo','Níquel, cromo y molibdeno'],
+   '92':['Si–Mn','Silicio y manganeso (resortes)'],'93':['Ni–Cr–Mo','Níquel, cromo y molibdeno'],'94':['Ni–Cr–Mo','Níquel, cromo y molibdeno'],'97':['Ni–Cr–Mo','Níquel, cromo y molibdeno'],'98':['Ni–Cr–Mo','Níquel, cromo y molibdeno']};
+  const TOOL={W:'Herramienta, templado en agua (water-hardening)',O:'Herramienta, templado en aceite (oil-hardening)',A:'Herramienta, templado al aire (air-hardening)',D:'Herramienta, alto carbono y alto cromo',H:'Herramienta para trabajo en caliente',S:'Herramienta resistente al choque (shock-resisting)',M:'Acero rápido al molibdeno',T:'Acero rápido al tungsteno'};
+  const USO={'1020':'cementados, perfiles','1045':'ejes y flechas','1080':'resortes y herramientas','1095':'resortes y cuchillería','4130':'tubería estructural, chasis','4140':'ejes, engranes, tornillería','4340':'tren de aterrizaje, ejes de alta resistencia','5160':'resortes de hoja','52100':'rodamientos','6150':'resortes y ejes','8620':'engranes cementados','9260':'resortes','1117':'piezas de maquinado libre'};
+  const STN={'201':['Austenítico Cr–Mn–Ni (serie 2xx)','Parte del Ni se sustituye por Mn y N; más económico','utensilios y electrodomésticos','casi no magnético'],
+   '202':['Austenítico Cr–Mn–Ni (serie 2xx)','Parte del Ni se sustituye por Mn y N; más económico','utensilios y electrodomésticos','casi no magnético'],
+   '304':['Austenítico Cr–Ni (serie 3xx)','≈ 18 % Cr y 8 % Ni (“18-8”)','equipo de alimentos, tanques, cubiertos','casi no magnético'],
+   '310':['Austenítico Cr–Ni (serie 3xx)','≈ 25 % Cr y 20 % Ni; resiste la oxidación a alta temperatura','hornos y piezas calientes','casi no magnético'],
+   '316':['Austenítico Cr–Ni–Mo (serie 3xx)','Como el 304 pero con ≈ 2–3 % Mo: mejor resistencia a picaduras por cloruros','industria marina, química e instrumental quirúrgico','casi no magnético'],
+   '321':['Austenítico Cr–Ni estabilizado con Ti','Tipo 18-8 con titanio, que evita la sensibilización','escapes e intercambiadores a alta temperatura','casi no magnético'],
+   '347':['Austenítico Cr–Ni estabilizado con Nb','Tipo 18-8 con niobio, que evita la sensibilización','piezas soldadas a alta temperatura','casi no magnético'],
+   '409':['Ferrítico (serie 4xx)','≈ 11 % Cr; sin Ni','escapes automotrices','magnético'],
+   '430':['Ferrítico (serie 4xx)','≈ 16–18 % Cr; sin Ni','electrodomésticos y molduras','magnético'],
+   '410':['Martensítico (serie 4xx)','≈ 12 % Cr; se endurece por temple','cubertería básica, válvulas y flechas','magnético'],
+   '420':['Martensítico (serie 4xx)','≈ 12–14 % Cr con más C que el 410; se endurece por temple','cuchillería e instrumental','magnético'],
+   '440':['Martensítico (serie 4xx)','≈ 17 % Cr; el 440C tiene ≈ 1 % C; se endurece por temple','cuchillería de alta dureza y rodamientos','magnético'],
+   '2205':['Dúplex (austenita + ferrita)','≈ 22 % Cr, 5 % Ni y 3 % Mo','petroquímica y plataformas marinas','magnético (contiene ferrita)'],
+   '630':['Endurecible por precipitación (17-4 PH)','≈ 17 % Cr, 4 % Ni y 4 % Cu; endurece por envejecido','aeronáutica, ejes y válvulas','magnético']};
+  const SUF={L:'Sufijo L: bajo carbono (≈ 0.03 % C máx.); evita la sensibilización al soldar.',H:'Sufijo H: carbono más alto; mejor resistencia a alta temperatura.',N:'Sufijo N: con nitrógeno agregado; más resistencia.',LN:'Sufijo LN: bajo carbono y con nitrógeno.'};
+  const cclass=c=>c<0.25?'bajo carbono (menos de 0.25 % C)':c<=0.60?'medio carbono (0.25 a 0.60 % C)':'alto carbono (más de 0.60 % C)';
+  function decode(raw){
+    const s=raw.trim().toUpperCase().replace(/\s+/g,'').replace(/^(AISI|SAE)/,'');
+    if(!s)return {html:'<span class="note">Escribe un código.</span>'};
+    if(/^[WOASDHMT]\d{1,3}$/.test(s))return {html:`<b>${s}</b>: ${TOOL[s[0]]}. La letra indica el tipo y el número distingue el grado.`};
+    {let m=s.replace(/-/g,''),key=null,suf='';
+      if(/^174PH$/.test(m)||m==='630'||m==='17-4PH')key='630';
+      else if(m==='2205')key='2205';
+      else{const q=m.match(/^(\d{3})(LN|L|H|N|C|S)?$/);if(q){let b=q[1];if(b==='440')key='440';else if(STN[b])key=b;if(key&&q[2]&&q[2]!=='C')suf=SUF[q[2]]||'';}}
+      if(key){const I=STN[key],mt=I[3];const dig=s.split('').map((ch,i)=>`<span class="${i<1&&key!=='630'&&key!=='2205'?'a':'b'}">${ch}</span>`).join('');
+        return {html:`<div class="cl-dig">${dig}</div><div><b>${I[0]}</b>. ${I[1]}.</div><div>Uso típico: ${I[2]}. Comportamiento magnético: ${mt}.${suf?'<br>'+suf:''}</div><div class="note">En los inoxidables el número no indica el carbono: indica la serie y el grado. Composición aproximada; verifica en ASTM A240.</div>`};}}
+    if(/^[234]\d\d$/.test(s)){const k=s[0];const d={'2':'Inoxidable austenítico Cr–Ni–Mn (serie 2xx)','3':'Inoxidable austenítico Cr–Ni (serie 3xx): 304 y 316 son los más comunes','4':'Inoxidable ferrítico o martensítico, con Cr (serie 4xx): 430 es ferrítico; 410 y 420 son martensíticos'}[k];
+      return {html:`<b>${s}</b>: ${d}. En los inoxidables el número no indica el carbono; son aceros con más de 11 % Cr.`};}
+    if(/^\d{4}$/.test(s)||/^5[0-2]\d{3}$/.test(s)){
+      const five=s.length===5,key=five?s.slice(0,2):s.slice(0,2),c=five?+s.slice(2)/100:+s.slice(2)/100;
+      const info=five?(['50','51','52'].includes(key)?['Cromo, alto C','aceros para rodamientos: 50100, 51100 y 52100']:null):SER[key];
+      if(!info)return {html:`No reconozco la serie <b>${s.slice(0,2)}</b>. Revisa la tabla de series.`};
+      const dig=s.split('').map((ch,i)=>`<span class="${i<(five?2:2)?'a':'b'}">${ch}</span>`).join('');
+      const u=USO[s]?`<br>Uso típico: ${USO[s]}.`:'';
+      return {html:`<div class="cl-dig">${dig}</div><div>Primeros dos dígitos <b>${s.slice(0,2)}</b>: <b>${info[0]}</b> (${info[1]}).</div><div>${five?'Últimos tres':'Últimos dos'} dígitos <b>${s.slice(2)}</b>: <b>${c.toFixed(2)} % C</b> aprox., es decir, ${cclass(c)}.${u}</div>`};
+    }
+    return {html:'Formato no reconocido. Usa cuatro dígitos (1045), cinco (52100), tres para inoxidables (304, 316L), 2205, 17-4PH o letra y número para herramienta (H13).'};
+  }
+  const code=$('#cl-code'),dout=$('#cl-dout');
+  const upd=()=>{dout.innerHTML=decode(code.value).html;};code.oninput=upd;upd();
+  $('#cl-ser').innerHTML='<tr><th>Serie</th><th>Tipo</th><th>Elementos principales</th></tr>'+Object.keys(SER).map(k=>`<tr><td>${k}xx</td><td>${SER[k][0]}</td><td>${SER[k][1]}</td></tr>`).join('')+'<tr><td>50100–52100</td><td>Cromo (alto C)</td><td>Rodamientos; ≈ 1 % C</td></tr>';
+
+  // ---------- celdas unitarias ----------
+  function cell(type){
+    const A=0.3,Tl=0.62,s=70,pts=[],edges=[],atoms=[];
+    const P=(x,y,z)=>{const xr=x*Math.cos(A)-y*Math.sin(A),d=x*Math.sin(A)+y*Math.cos(A);return {x:xr*s,y:-z*Math.cos(Tl)*s-d*Math.sin(Tl)*s,d};};
+    if(type==='hcp'){
+      const R=0.62,h=R*1.633,V=k=>[R*Math.cos(k*Math.PI/3),R*Math.sin(k*Math.PI/3)];
+      for(let z of [0,h]){for(let k=0;k<6;k++){const a=V(k),b=V((k+1)%6);edges.push([[a[0],a[1],z],[b[0],b[1],z]]);atoms.push([a[0],a[1],z,0]);}atoms.push([0,0,z,1]);}
+      for(let k=0;k<6;k++){const a=V(k);edges.push([[a[0],a[1],0],[a[0],a[1],h]]);}
+      for(let k of [1,3,5]){atoms.push([R/Math.sqrt(3)*Math.cos((k*60-30)*Math.PI/180),R/Math.sqrt(3)*Math.sin((k*60-30)*Math.PI/180),h/2,2]);}
+    } else {
+      const c=[[0,0,0],[1,0,0],[1,1,0],[0,1,0],[0,0,1],[1,0,1],[1,1,1],[0,1,1]].map(p=>p.map(v=>v-0.5));
+      [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]].forEach(([i,j])=>edges.push([c[i],c[j]]));
+      c.forEach(p=>atoms.push([p[0],p[1],p[2],0]));
+      if(type==='bcc')atoms.push([0,0,0,1]);
+      else [[0,0,-.5],[0,0,.5],[-.5,0,0],[.5,0,0],[0,-.5,0],[0,.5,0]].forEach(p=>atoms.push([...p,1]));
+    }
+    const proj=a=>P(a[0],a[1],a[2]);
+    const all=atoms.map(a=>({p:proj(a),k:a[3]}));
+    let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;all.forEach(({p})=>{x0=Math.min(x0,p.x);x1=Math.max(x1,p.x);y0=Math.min(y0,p.y);y1=Math.max(y1,p.y);});
+    const pad=16,vb=`${(x0-pad).toFixed(1)} ${(y0-pad).toFixed(1)} ${(x1-x0+2*pad).toFixed(1)} ${(y1-y0+2*pad).toFixed(1)}`;
+    let g=edges.map(([a,b])=>{const p=proj(a),q=proj(b);return `<line x1="${p.x.toFixed(1)}" y1="${p.y.toFixed(1)}" x2="${q.x.toFixed(1)}" y2="${q.y.toFixed(1)}" stroke="var(--muted)" stroke-width="1.4"/>`;}).join('');
+    g+=all.sort((u,v)=>v.p.d-u.p.d).map(({p,k})=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${k===0?5.5:6.5}" fill="${k===0?'var(--q3)':'var(--naranja)'}" stroke="var(--ink)" stroke-width="1"/>`).join('');
+    return `<svg viewBox="${vb}" role="img" aria-label="Celda unitaria ${type.toUpperCase()}">${g}</svg>`;
+  }
+  const CELLS=[['bcc','BCC (cúbica centrada en el cuerpo)','2 átomos por celda · coordinación 8 · FEA 0.68','α-Fe (ferrita), Cr, W'],
+    ['fcc','FCC (cúbica centrada en las caras)','4 átomos por celda · coordinación 12 · FEA 0.74','Al, Cu, Ni, γ-Fe (austenita)'],
+    ['hcp','HCP (hexagonal compacta)','6 átomos por celda · coordinación 12 · FEA 0.74','Ti (α), Mg, Zn']];
+  $('#cl-cells').innerHTML=CELLS.map(c=>`<figure class="cl-fig">${cell(c[0])}<figcaption><b>${c[1]}</b><br>${c[2]}<br>Ejemplos: ${c[3]}</figcaption></figure>`).join('');
+
+  // ---------- cadenas poliméricas ----------
+  function chains(seed,n,steps,step,W,H,thr,maxX){
+    const r=rng(seed),out=[];
+    for(let c=0;c<n;c++){let x=8+r()*(W-16),y=8+r()*(H-16),a=r()*6.283;const pts=[[x,y]];
+      for(let i=0;i<steps;i++){a+=(r()-.5)*1.7;x+=Math.cos(a)*step;y+=Math.sin(a)*step;
+        if(x<6){x=6;a=Math.PI-a;}if(x>W-6){x=W-6;a=Math.PI-a;}if(y<6){y=6;a=-a;}if(y>H-6){y=H-6;a=-a;}pts.push([x,y]);}
+      out.push(pts);}
+    const xl=[];
+    if(thr)for(let a=0;a<n;a++)for(let b=a+1;b<n;b++)for(let i=0;i<out[a].length;i+=2)for(let j=0;j<out[b].length;j+=2){
+      const p=out[a][i],q=out[b][j];if((p[0]-q[0])**2+(p[1]-q[1])**2<thr*thr&&xl.every(o=>(o[0]-p[0])**2+(o[1]-p[1])**2>(thr*1.6)**2))xl.push([(p[0]+q[0])/2,(p[1]+q[1])/2]);}
+    return {out,xl:shuffle(xl,r).slice(0,maxX)};
+  }
+  function drawChains(d,lam,W,H,sw){
+    const cx=W/2,cy=H/2,T=p=>[cx+(p[0]-cx)*lam,cy+(p[1]-cy)/Math.sqrt(lam)];
+    const line=pts=>'M'+pts.map(p=>{const q=T(p);return q[0].toFixed(1)+' '+q[1].toFixed(1);}).join('L');
+    return d.out.map(c=>`<path d="${line(c)}" fill="none" stroke="var(--denim)" stroke-width="${sw||1.5}" stroke-linejoin="round" stroke-linecap="round"/>`).join('')+
+      d.xl.map(p=>{const q=T(p);return `<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="3.6" fill="var(--naranja)" stroke="var(--ink)" stroke-width=".8"/>`;}).join('');
+  }
+  const svgW=(w,h,body,label)=>`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}">${body}</svg>`;
+  function folded(x0,y0,w,h){let d=`M${x0} ${y0}`,up=false;for(let x=x0;x<x0+w;x+=7){d+=up?` V${y0} Q${x+3.5} ${y0-7} ${x+7} ${y0}`:` V${y0+h} Q${x+3.5} ${y0+h+7} ${x+7} ${y0+h}`;up=!up;}return d;}
+  function figThermoplastic(seed){const d=chains(seed,6,70,7,300,200,0,0);return svgW(300,200,drawChains(d,1,300,200),'Cadenas enredadas sin entrecruzamientos');}
+  function figSemi(){
+    const r=rng(7);let g='';
+    g+=`<path d="${folded(26,40,56,70)}" fill="none" stroke="var(--denim)" stroke-width="1.6"/><path d="${folded(210,50,56,70)}" fill="none" stroke="var(--denim)" stroke-width="1.6"/>`;
+    g+=`<rect x="18" y="26" width="76" height="106" rx="6" fill="none" stroke="var(--naranja)" stroke-dasharray="4 3"/><rect x="202" y="36" width="76" height="106" rx="6" fill="none" stroke="var(--naranja)" stroke-dasharray="4 3"/>`;
+    const d=chains(11,3,60,6,300,200,0,0);
+    g+=d.out.map(c=>`<path d="M${c.map(p=>[(p[0]*0.38+105).toFixed(1),(p[1]*0.7+35).toFixed(1)].join(' ')).join('L')}" fill="none" stroke="var(--muted)" stroke-width="1.3"/>`).join('');
+    g+=`<text x="56" y="152" text-anchor="middle" font-size="11" fill="var(--ink)">cristalina</text><text x="240" y="162" text-anchor="middle" font-size="11" fill="var(--ink)">cristalina</text><text x="150" y="190" text-anchor="middle" font-size="11" fill="var(--ink)">región amorfa en medio</text>`;
+    return svgW(300,200,g,'Cadena plegada: regiones cristalinas y amorfas');
+  }
+  function figThermoset(){const d=chains(23,14,34,7,300,200,7.5,60);return svgW(300,200,drawChains(d,1,300,200,1.2),'Red tridimensional densamente entrecruzada');}
+  const ELA=chains(5,9,90,8,240,170,8,10);
+  function figElastomer(lam){return svgW(360,200,`<g transform="translate(60 15)">${drawChains(ELA,lam,240,170)}</g>`,'Elastómero con pocos entrecruzamientos');}
+  const POLF=[['Termoplástico lineal',figThermoplastic(3),'Cadenas independientes unidas por fuerzas secundarias: al calentar se deslizan y el material fluye.'],
+    ['Termoplástico semicristalino',figSemi(),'Tramos de cadena plegados forman cristales (naranja) rodeados de zonas amorfas. Ejemplo: PE y nylon.'],
+    ['Termofijo',figThermoset(),'Red tridimensional: muchos enlaces covalentes entre cadenas. Ejemplo: epóxica y baquelita.'],
+    ['Elastómero (relajado)',figElastomer(1),'Pocos entrecruzamientos: las cadenas están enredadas y pueden estirarse mucho.']];
+  $('#cl-polfig').innerHTML=POLF.map(f=>`<figure class="cl-fig">${f[1]}<figcaption><b>${f[0]}.</b> ${f[2]}</figcaption></figure>`).join('');
+  const lam=$('#cl-lam'),sw=$('#cl-stretch');
+  const rs=()=>{const v=+lam.value;sw.innerHTML=figElastomer(v);$('#cl-lamv').textContent=v.toFixed(1)+'×';$('#cl-strcap').innerHTML=v<1.1?'<b>Relajado:</b> cadenas enredadas.':v<1.45?'<b>Estirando:</b> las cadenas se desenredan y empiezan a alinearse.':'<b>Muy estirado:</b> cadenas alineadas; al soltar vuelven a enredarse.';};
+  lam.oninput=rs;rs();
+
+  // mero
+  const MER={PE:['Polietileno','H',null,'Bolsas, tuberías, botellas'],PP:['Polipropileno','CH₃',null,'Envases, autopartes'],PVC:['Policloruro de vinilo','Cl',null,'Tubería, perfiles'],PS:['Poliestireno','C₆H₅','ring','Desechables, aislante (EPS)']};
+  function merSvg(k){
+    const [,R,ring]=MER[k];let g='',n=6,dx=46,x0=34,yU=72,yL=110;
+    const pt=i=>[x0+i*dx,i%2?yL:yU];
+    for(let i=0;i<n-1;i++){const a=pt(i),b=pt(i+1);g+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="var(--ink)" stroke-width="2"/>`;}
+    g+=`<line x1="${pt(0)[0]-22}" y1="${yL}" x2="${pt(0)[0]}" y2="${yU}" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 3"/><line x1="${pt(n-1)[0]}" y1="${pt(n-1)[1]}" x2="${pt(n-1)[0]+22}" y2="${yU}" stroke="var(--ink)" stroke-width="2" stroke-dasharray="3 3"/>`;
+    for(let i=0;i<n;i++){const [x,y]=pt(i);g+=`<circle cx="${x}" cy="${y}" r="9" fill="var(--q3)" stroke="var(--ink)"/><text x="${x}" y="${y+4}" text-anchor="middle" font-size="11" fill="var(--ink)" font-weight="700">C</text>`;
+      const up=i%2===0,sub=i%2===1; // R en carbonos inferiores; H en los demás
+      if(sub){const ty=y+34;g+=`<line x1="${x}" y1="${y+9}" x2="${x}" y2="${ty-12}" stroke="var(--ink)" stroke-width="2"/>`;
+        if(ring){g+=`<polygon points="${[0,1,2,3,4,5].map(a=>[(x+Math.cos(a*Math.PI/3+Math.PI/6)*16).toFixed(1),(ty+4+Math.sin(a*Math.PI/3+Math.PI/6)*16).toFixed(1)].join(',')).join(' ')}" fill="none" stroke="var(--naranja)" stroke-width="2"/><circle cx="${x}" cy="${ty+4}" r="8" fill="none" stroke="var(--naranja)"/>`;}
+        else g+=`<text x="${x}" y="${ty+4}" text-anchor="middle" font-size="15" font-weight="700" fill="var(--naranja)">${R}</text>`;}
+      else{g+=`<line x1="${x}" y1="${y-9}" x2="${x}" y2="${y-24}" stroke="var(--ink)" stroke-width="2"/><text x="${x}" y="${y-28}" text-anchor="middle" font-size="13" fill="var(--muted)">H</text>`;}
+    }
+    return svgW(320,180,g,'Cadena de '+MER[k][0]);
+  }
+  $('#cl-merbtn').innerHTML=Object.keys(MER).map(k=>`<button class="btn" data-mer="${k}">${k}</button>`).join('');
+  const merShow=k=>{$('#cl-mer').innerHTML=merSvg(k);$('#cl-mercap').innerHTML=`<b>${MER[k][0]} (${k}):</b> grupo lateral R = ${MER[k][1]}${MER[k][2]?' (anillo de benceno)':''}. Usos: ${MER[k][3]}. Los enlaces sin dibujar son C–H.`;$$('#cl-merbtn .btn').forEach(b=>b.classList.toggle('primary',b.dataset.mer===k));};
+  $('#cl-merbtn').onclick=e=>{const b=e.target.closest('[data-mer]');if(b)merShow(b.dataset.mer);};merShow('PE');
+
+  // ---------- cristales 2D y cerámicos ----------
+  function figMetal(seed){const r=rng(seed||2);let g='';const D=22;
+    for(let j=0;j<8;j++)for(let i=0;i<14;i++){const x=22+i*D+(j%2?D/2:0),y=20+j*D*0.866;if(x>292)continue;
+      g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9.5" fill="var(--q3)" stroke="var(--ink)" stroke-width=".8"/>`;}
+    for(let k=0;k<46;k++)g+=`<circle cx="${(10+r()*280).toFixed(1)}" cy="${(10+r()*170).toFixed(1)}" r="1.8" fill="var(--naranja)"/>`;
+    return svgW(300,200,g,'Átomos metálicos ordenados en una red con electrones libres');}
+  function figSalt(){let g='';const D=26;for(let j=0;j<6;j++)for(let i=0;i<10;i++){const x=34+i*D,y=30+j*D,cl=(i+j)%2===0;
+    if(i<9)g+=`<line x1="${x}" y1="${y}" x2="${x+D}" y2="${y}" stroke="var(--muted)" stroke-width="1"/>`;if(j<5)g+=`<line x1="${x}" y1="${y}" x2="${x}" y2="${y+D}" stroke="var(--muted)" stroke-width="1"/>`;}
+    for(let j=0;j<6;j++)for(let i=0;i<10;i++){const x=34+i*D,y=30+j*D,cl=(i+j)%2===0;g+=`<circle cx="${x}" cy="${y}" r="${cl?10:6.5}" fill="${cl?'var(--q2)':'var(--naranja)'}" stroke="var(--ink)" stroke-width=".8"/>`;}
+    return svgW(300,200,g,'Red iónica alternando cationes y aniones');}
+  function silica(amorf,seed){const r=rng(seed||9),nodes={};let g='';const key=(i,j)=>i+','+j;
+    const pos=(i,j)=>{const x=24+i*29,y=22+j*26,jit=amorf?13:0;return [x+(r()-.5)*jit*1.6,y+(r()-.5)*jit*1.6];};
+    for(let j=0;j<7;j++)for(let i=0;i<10;i++)nodes[key(i,j)]=pos(i,j);
+    const nb=(i,j)=>{const o=[[i+1,j]];if((i+j)%2===0)o.push([i,j+1]);return o;};
+    for(let j=0;j<7;j++)for(let i=0;i<10;i++){const a=nodes[key(i,j)];nb(i,j).forEach(([p,q])=>{const b=nodes[key(p,q)];if(!b)return;
+      if(amorf&&r()<0.1)return;const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2;
+      g+=`<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="var(--muted)" stroke-width="1.2"/><circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="3.6" fill="var(--bad)" stroke="var(--ink)" stroke-width=".5"/>`;});}
+    for(let j=0;j<7;j++)for(let i=0;i<10;i++){const a=nodes[key(i,j)];g+=`<circle cx="${a[0].toFixed(1)}" cy="${a[1].toFixed(1)}" r="5.5" fill="var(--q4)" stroke="var(--ink)" stroke-width=".8"/>`;}
+    return svgW(300,200,g,amorf?'Red de sílice desordenada (vidrio)':'Red de sílice ordenada (cristal)');}
+  const CERF=[['Cristal iónico (tipo NaCl / MgO)',figSalt(),'Cationes (naranja) y aniones (verde) se alternan en un patrón que se repite. Por su enlace iónico, el deslizamiento enfrenta cargas iguales: por eso son frágiles.'],
+    ['Sílice cristalina (cuarzo)',silica(false),'Cada Si (morado) se une a O (rojo) en una red periódica: orden de largo alcance.'],
+    ['Vidrio de sílice',silica(true,5),'Mismas unidades, pero sin repetición: orden solo de corto alcance. Es la estructura del vidrio.']];
+  $('#cl-cerfig').innerHTML=CERF.map(f=>`<figure class="cl-fig">${f[1]}<figcaption><b>${f[0]}.</b> ${f[2]}</figcaption></figure>`).join('');
+
+  // ---------- juego ----------
+  let total=0;const addT=n=>{total+=n;$('#cl-total').textContent='Puntos totales: '+total;};
+  const SUB={fer:['Metal','Ferroso'],nof:['Metal','No ferroso'],tpl:['Polímero','Termoplástico'],tfj:['Polímero','Termofijo'],ela:['Polímero','Elastómero'],tra:['Cerámico','Tradicional'],ava:['Cerámico','Avanzado']};
+  const FAM={metal:'Metal',pol:'Polímero',cer:'Cerámico'};const famOf=s=>({fer:'metal',nof:'metal',tpl:'pol',tfj:'pol',ela:'pol',tra:'cer',ava:'cer'})[s];
+  const MAT=[['Acero AISI 1045','fer','Base hierro, 0.45 % C; se usa en ejes.'],['Acero AISI 4140','fer','Acero aleado con Cr y Mo, base hierro.'],['Acero inoxidable 304','fer','Acero con Cr y Ni: sigue siendo base hierro.'],['Fundición gris','fer','Hierro con 2.14 % C o más y grafito en hojuelas.'],['Aleación Al 6061','nof','Base aluminio.'],['Latón (Cu–Zn)','nof','Base cobre.'],['Ti–6Al–4V','nof','Base titanio, de uso aeronáutico y biomédico.'],['Aleación de magnesio AZ91','nof','Base magnesio.'],['Inconel 718','nof','Superaleación base níquel.'],
+    ['Polietileno (PE)','tpl','Cadenas sin entrecruzar: se funde y se reprocesa.'],['PVC','tpl','Termoplástico para tubería.'],['Nylon 6,6','tpl','Termoplástico para engranes y fibras.'],['PMMA (acrílico)','tpl','Termoplástico transparente.'],['PET de botella','tpl','Termoplástico reciclable.'],['Resina epóxica curada','tfj','Red entrecruzada: no se refunde.'],['Baquelita (fenólica)','tfj','Primer termofijo comercial.'],['Poliéster insaturado (fibra de vidrio)','tfj','Resina termofija curada.'],
+    ['Caucho natural vulcanizado','ela','Entrecruzamiento ligero con azufre.'],['Neopreno','ela','Elastómero resistente al aceite y al clima.'],['Silicón (PDMS)','ela','Elastómero para sellos y biomédico.'],['EPDM','ela','Elastómero para juntas automotrices.'],
+    ['Porcelana','tra','Caolín, cuarzo y feldespato.'],['Ladrillo','tra','Arcilla cocida.'],['Cemento Portland','tra','Cerámico tradicional de construcción.'],['Vidrio sodocálcico','tra','Sílice con Na₂O y CaO.'],['Refractario de arcilla','tra','Para hornos; base arcilla.'],
+    ['Alúmina (Al₂O₃)','ava','Óxido sintético de alta pureza.'],['Carburo de silicio (SiC)','ava','Carburo para abrasivos y sellos.'],['Nitruro de silicio (Si₃N₄)','ava','Nitruro para rodamientos.'],['Zirconia (ZrO₂)','ava','Óxido para coronas dentales.'],['Titanato de bario (BaTiO₃)','ava','Cerámico funcional para capacitores.']];
+  function mkGame(el,render){const o={};el._g=o;render(o);}
+  const stars=p=>p>=0.9?'Experto en materiales':p>=0.7?'Buen nivel':p>=0.5?'Vas avanzando':'Repasa el mapa y vuelve a intentar';
+  function summary(box,sc,n,miss,again){const p=sc.ok/n;
+    box.innerHTML=`<div class="cl-card"><b>${sc.ok} de ${n} correctas</b><small>${stars(p)} · mejor racha: ${sc.best}</small></div>${miss.length?'<div><b>Para repasar:</b><ul style="margin:4px 0 0;padding-left:20px">'+miss.map(m=>`<li>${m}</li>`).join('')+'</ul></div>':'<div class="cl-fb ok">Sin errores.</div>'}<div><button class="btn primary" id="again">Jugar de nuevo</button></div>`;
+    $('#again',box).onclick=again;}
+  function bump(sc,ok){if(ok){sc.ok++;sc.st++;sc.best=Math.max(sc.best,sc.st);let p=10;if(sc.st%3===0)p+=5;addT(p);}else sc.st=0;}
+
+  // Juego 1
+  (function(){const box=$('#cl-g1');let lvl=1;
+    function start(){const sc={ok:0,st:0,best:0},q=shuffle(MAT).slice(0,10),miss=[];let i=0;next();
+      function next(){
+        if(i>=q.length)return summary(box,sc,q.length,miss,start);
+        const [nm,sub,why]=q[i];
+        const bins=lvl===1?Object.keys(FAM).map(k=>[k,FAM[k]]):Object.keys(SUB).map(k=>[k,SUB[k][0]+' · '+SUB[k][1]]);
+        box.innerHTML=`<div class="cl-sub">${[1,2].map(n=>`<button class="btn${lvl===n?' primary':''}" data-l="${n}">Nivel ${n}: ${n===1?'familia':'subfamilia'}</button>`).join('')}</div>
+        <div class="cl-bar"><i style="width:${i/q.length*100}%"></i></div><div class="note">Material ${i+1} de ${q.length} · racha ${sc.st}</div>
+        <div class="cl-card"><small>¿A qué ${lvl===1?'familia':'subfamilia'} pertenece?</small><b>${nm}</b></div>
+        <div class="cl-bins">${bins.map(([k,l])=>`<button class="cl-bin" data-k="${k}">${l}</button>`).join('')}</div>
+        <div class="cl-fb" id="fb" aria-live="polite"></div><div id="nx"></div>`;
+        $$('[data-l]',box).forEach(b=>b.onclick=()=>{lvl=+b.dataset.l;start();});
+        $$('.cl-bin',box).forEach(b=>b.onclick=()=>{
+          const ans=b.dataset.k,ok=lvl===1?ans===famOf(sub):ans===sub;bump(sc,ok);
+          $$('.cl-bin',box).forEach(x=>{x.disabled=true;const right=lvl===1?x.dataset.k===famOf(sub):x.dataset.k===sub;if(right)x.classList.add('ok');else if(x===b)x.classList.add('bad');});
+          const fb=$('#fb',box);fb.className='cl-fb '+(ok?'ok':'bad');fb.textContent=(ok?'Correcto. ':'No. ')+nm+': '+SUB[sub][0]+' · '+SUB[sub][1]+'. '+why;
+          if(!ok)miss.push(nm+' → '+SUB[sub][0]+' · '+SUB[sub][1]);
+          $('#nx',box).innerHTML=`<button class="btn primary" id="nb">${i+1<q.length?'Siguiente':'Ver resultado'}</button>`;$('#nb',box).onclick=()=>{i++;next();};});
+      }}
+    start();})();
+
+  // Juego 2
+  (function(){const box=$('#cl-g2');
+    const CODES=['1020','1045','1080','1095','1117','1340','4130','4140','4340','4620','5160','52100','6150','8620','8640','9260'];
+    const info=c=>{const five=c.length===5;return {ser:five?'Cromo (alto C)':SER[c.slice(0,2)][0],pre:c.slice(0,2),C:+c.slice(2)/100};};
+    const serNames=[...new Set(Object.values(SER).map(v=>v[0]))];
+    function mk(){if(Math.random()<0.3){const FAMS=['Austenítico','Ferrítico','Martensítico','Dúplex','Endurecible por precipitación'],ST=[['304','Austenítico','18 % Cr y 8 % Ni; no magnético'],['316','Austenítico','como el 304 con Mo'],['321','Austenítico','estabilizado con Ti'],['201','Austenítico','Cr–Mn–Ni, más económico'],['430','Ferrítico','16–18 % Cr, magnético y no se templa'],['409','Ferrítico','≈ 11 % Cr, escapes'],['410','Martensítico','12 % Cr, se endurece por temple'],['420','Martensítico','cuchillería, se endurece por temple'],['440C','Martensítico','17 % Cr y ≈ 1 % C'],['2205','Dúplex','austenita + ferrita'],['17-4 PH','Endurecible por precipitación','endurece por envejecido']],x=ST[Math.floor(Math.random()*ST.length)];
+        const o=shuffle([x[1],...shuffle(FAMS.filter(f=>f!==x[1])).slice(0,3)]);return {q:`El acero inoxidable <b>${x[0]}</b>: ¿a qué familia pertenece?`,o,a:x[1],e:`${x[0]}: ${x[1].toLowerCase()} (${x[2]}).`};}
+      const c=CODES[Math.floor(Math.random()*CODES.length)],t=Math.floor(Math.random()*3),I=info(c);
+      if(t===0){const o=shuffle([I.ser,...shuffle(serNames.filter(n=>n!==I.ser)).slice(0,3)]);return {q:`En el acero <b>${c}</b>, ¿qué tipo de acero indican los dos primeros dígitos (${I.pre})?`,o,a:I.ser,e:`${c}: serie ${I.pre} = ${I.ser}.`};}
+      if(t===1){const f=v=>v.toFixed(2).replace(/\.?0+$/,'')+' % C',ops=[I.C,I.C*10,I.C/10,I.C*100].filter((v,i,a)=>v<=100&&a.indexOf(v)===i);
+        const o=shuffle(ops.map(f));return {q:`En el acero <b>${c}</b>, ¿cuánto carbono indican los últimos dígitos (${c.slice(2)})?`,o,a:f(I.C),e:`${c.slice(2)} son centésimas de por ciento: ${I.C.toFixed(2)} % C.`};}
+      const same=CODES.filter(x=>x!==c&&info(x).C===I.C),sameS=CODES.filter(x=>x!==c&&info(x).pre===I.pre),pool=shuffle([...same,...sameS,...CODES.filter(x=>x!==c)]).filter((v,i,a)=>a.indexOf(v)===i&&v!==c).slice(0,3);
+      return {q:`Busco un acero <b>${I.ser}</b> con <b>${I.C.toFixed(2)} % C</b>. ¿Qué código AISI es?`,o:shuffle([c,...pool]),a:c,e:`Serie ${I.pre} (${I.ser}) y ${I.C.toFixed(2)} % C forman el código ${c}.`};}
+    function start(){const sc={ok:0,st:0,best:0},miss=[];let i=0;const N=10;next();
+      function next(){if(i>=N)return summary(box,sc,N,miss,start);const Q=mk();
+        box.innerHTML=`<div class="cl-bar"><i style="width:${i/N*100}%"></i></div><div class="note">Pregunta ${i+1} de ${N} · racha ${sc.st}</div><div class="cl-card"><small>Descifra el código</small><b style="font-size:clamp(20px,4vw,26px)">${Q.q}</b></div>
+          <div class="cl-bins">${Q.o.map(o=>`<button class="cl-bin" data-v="${o}">${o}</button>`).join('')}</div><div class="cl-fb" id="fb" aria-live="polite"></div><div id="nx"></div><p class="note" style="margin:0">Ayuda: la pestaña Metales trae el decodificador y la tabla de series.</p>`;
+        $$('.cl-bin',box).forEach(b=>b.onclick=()=>{const ok=b.dataset.v===Q.a;bump(sc,ok);
+          $$('.cl-bin',box).forEach(x=>{x.disabled=true;if(x.dataset.v===Q.a)x.classList.add('ok');else if(x===b)x.classList.add('bad');});
+          const fb=$('#fb',box);fb.className='cl-fb '+(ok?'ok':'bad');fb.textContent=(ok?'Correcto. ':'No. ')+Q.e;if(!ok)miss.push(Q.e);
+          $('#nx',box).innerHTML=`<button class="btn primary" id="nb">${i+1<N?'Siguiente':'Ver resultado'}</button>`;$('#nb',box).onclick=()=>{i++;next();};});}}
+    start();})();
+
+  // Juego 3
+  (function(){const box=$('#cl-g3');
+    const KINDS={metal:['Metal cristalino','Átomos en una red ordenada y electrones libres (puntos naranja): enlace metálico.',s=>figMetal(s)],
+      salt:['Cerámico cristalino','Iones de dos tamaños alternados en un patrón que se repite.',()=>figSalt()],
+      glass:['Vidrio (cerámico amorfo)','Misma red de Si y O pero sin repetición: orden solo de corto alcance.',s=>silica(true,s)],
+      tpl:['Termoplástico','Cadenas enredadas sin entrecruzamientos: se pueden fundir y reprocesar.',s=>figThermoplastic(s)],
+      tfj:['Termofijo','Red densa con muchos entrecruzamientos (puntos naranja): no se refunde.',()=>figThermoset()],
+      ela:['Elastómero','Cadenas largas con pocos entrecruzamientos: se estiran y regresan.',s=>{let d,k=s;do{d=chains(k++,6,70,7,300,200,9,7);}while(d.xl.length<4);return svgW(300,200,drawChains(d,1,300,200),'Elastómero');}]};
+    const keys=Object.keys(KINDS);
+    function start(){const sc={ok:0,st:0,best:0},miss=[],seq=shuffle([...keys,...shuffle(keys).slice(0,4)]);let i=0;const N=seq.length;next();
+      function next(){if(i>=N)return summary(box,sc,N,miss,start);const k=seq[i],K=KINDS[k];
+        box.innerHTML=`<div class="cl-bar"><i style="width:${i/N*100}%"></i></div><div class="note">Estructura ${i+1} de ${N} · racha ${sc.st}</div><figure class="cl-fig" style="max-width:420px;margin:0 auto;width:100%">${K[2](10+Math.floor(Math.random()*500))}<figcaption>¿Qué material representa este esquema?</figcaption></figure>
+          <div class="cl-bins">${keys.map(x=>`<button class="cl-bin" data-k="${x}">${KINDS[x][0]}</button>`).join('')}</div><div class="cl-fb" id="fb" aria-live="polite"></div><div id="nx"></div>`;
+        $$('.cl-bin',box).forEach(b=>b.onclick=()=>{const ok=b.dataset.k===k;bump(sc,ok);
+          $$('.cl-bin',box).forEach(x=>{x.disabled=true;if(x.dataset.k===k)x.classList.add('ok');else if(x===b)x.classList.add('bad');});
+          const fb=$('#fb',box);fb.className='cl-fb '+(ok?'ok':'bad');fb.textContent=(ok?'Correcto. ':'No. Era: '+K[0]+'. ')+K[1];if(!ok)miss.push(K[0]+': '+K[1]);
+          $('#nx',box).innerHTML=`<button class="btn primary" id="nb">${i+1<N?'Siguiente':'Ver resultado'}</button>`;$('#nb',box).onclick=()=>{i++;next();};});}}
+    start();})();
+
+  // Juego 4: selección de materiales (misma familia, entre familias o mixto)
+  (function(){const box=$('#cl-g4');let lvl='x';
+    const FAML={M:'Metal',P:'Polímero',C:'Cerámico',K:'Compuesto'};
+    const o=(l,f,r)=>[l,f,r];
+    const CASES=[
+     // ---- misma familia: metales ----
+     ['in','Eje de transmisión','Una máquina industrial necesita un eje que soporte torsión y flexión con cargas fluctuantes. Debe poder templarse y revenirse para alcanzar alta resistencia, a un costo moderado.',['Resistencia y tenacidad altas tras tratamiento térmico','Resistencia a la fatiga','Costo moderado'],
+       [o('AISI 4140','M','Acero medio carbono aleado con Cr–Mo: buena templabilidad; templado y revenido da alta resistencia y tenacidad.'),o('AISI 1010','M','Bajo carbono: casi no endurece por temple y su resistencia es insuficiente.'),o('Fundición gris','M','Frágil en tensión y con mala resistencia a la fatiga por las hojuelas de grafito.'),o('Aluminio 1100','M','Aluminio casi puro: blando y de baja resistencia.')],0],
+     ['in','Lámina de carrocería','Un fabricante estampa por embutido profundo la lámina de una puerta. Necesita un metal muy dúctil, soldable y barato.',['Ductilidad alta','Soldabilidad','Bajo costo'],
+       [o('AISI 1010','M','Bajo carbono (menos de 0.25 % C): ferrita dúctil, fácil de embutir, soldar y barata.'),o('AISI 1095','M','Alto carbono: duro y poco dúctil; se agrietaría al embutir.'),o('Fundición blanca','M','Rica en cementita: muy dura y frágil, no se deforma.'),o('Aluminio 6061','M','Se puede estampar, pero cuesta más y se conforma peor que el acero de bajo carbono.')],0],
+     ['in','Resorte de hoja','Se diseña un resorte de hoja para la suspensión de una camioneta. Debe almacenar mucha energía elástica y resistir fatiga repetida.',['Límite elástico alto','Resistencia a la fatiga','Templable'],
+       [o('AISI 1010','M','Bajo carbono: fluye con poca carga y quedaría deformado.'),o('Aluminio 1100','M','Límite elástico muy bajo.'),o('AISI 5160','M','Acero al Cr de medio-alto carbono, templado y revenido: alto límite elástico, típico de resortes.'),o('Fundición gris','M','Frágil: se rompería en lugar de flexionarse.')],2],
+     ['in','Tanque de planta lechera','Un tanque se lava a diario con detergentes y vapor. No debe contaminar el producto ni oxidarse.',['Resistencia a la corrosión','Superficie higiénica y fácil de limpiar','Soldable'],
+       [o('AISI 1020 pintado','M','La pintura se daña con el lavado y el acero se oxida.'),o('Fundición gris','M','Porosa y se corroe.'),o('AISI 1045','M','Se oxida y contaminaría el producto.'),o('Inoxidable 304','M','Austenítico ≈ 18 % Cr y 8 % Ni: capa pasiva de Cr₂O₃, higiénico, soldable y estándar en alimentos.')],3],
+     ['in','Tubería en agua de mar','Una tubería de una plataforma costera transporta agua de mar, siempre con cloruros. Un tubo de inoxidable 304 ya presentó picaduras.',['Resistencia a picaduras por cloruros','Resistencia mecánica','Soldable'],
+       [o('Inoxidable 304','M','Es el que ya falló: no tiene Mo.'),o('Inoxidable 316','M','El Mo (≈ 2–3 %) mejora la resistencia a las picaduras por cloruros.'),o('Inoxidable 430','M','Ferrítico sin Mo: no es adecuado para agua de mar.'),o('AISI 1020','M','Se corroe rápidamente en agua salada.')],1],
+     ['in','Cuchillo de cocina','Se fabricarán cuchillos que resistan la corrosión de la cocina pero que se endurezcan por temple para conservar el filo.',['Endurecible por temple','Dureza alta','Resistencia a la corrosión moderada'],
+       [o('Inoxidable 304','M','Austenítico: no se endurece por temple.'),o('Inoxidable 430','M','Ferrítico: no se endurece por temple.'),o('Inoxidable 316','M','Austenítico: no se endurece por temple.'),o('Inoxidable 420','M','Martensítico (≈ 12–14 % Cr con más C): se templa, alcanza dureza alta y aún resiste la corrosión.')],3],
+     ['in','Fuselaje de una avioneta','El fuselaje necesita un metal ligero, con buena relación resistencia/peso, fácil de conformar y de costo moderado.',['Baja densidad','Buena resistencia específica','Costo moderado'],
+       [o('Aluminio 2024','M','Aleación Al–Cu de uso aeronáutico: densidad ≈ 2.7 g/cm³ y alta resistencia tras el envejecimiento.'),o('AISI 4340','M','Muy resistente pero denso (≈ 7.9 g/cm³): penaliza el peso.'),o('Latón (Cu–Zn)','M','Denso y de resistencia moderada.'),o('Fundición gris','M','Frágil y pesada.')],0],
+     ['in','Bolas de un rodamiento','Deben tener dureza muy alta y resistir el desgaste por contacto cíclico.',['Dureza muy alta tras temple','Resistencia al desgaste'],
+       [o('AISI 1010','M','Bajo carbono: no alcanza la dureza.'),o('Inoxidable 304','M','Austenítico: no se endurece por temple.'),o('AISI 52100','M','Acero al Cr de alto carbono (≈ 1 % C): templado alcanza dureza muy alta; es el estándar en rodamientos.'),o('Aluminio 6061','M','Demasiado blando para soportar el contacto cíclico.')],2],
+     ['in','Engrane cementado','Un engrane debe tener la superficie muy dura contra el desgaste y el núcleo tenaz contra el impacto.',['Superficie dura','Núcleo tenaz','Se cementa'],
+       [o('AISI 1095','M','Alto carbono: endurece en todo el espesor y el núcleo queda frágil.'),o('AISI 8620','M','Bajo carbono aleado Ni–Cr–Mo: se cementa, con superficie dura y núcleo tenaz.'),o('Fundición blanca','M','Frágil.'),o('Inoxidable 304','M','Austenítico: no se endurece por temple.')],1],
+     ['in','Base de un compresor','Se funde la base de un compresor estacionario grande. Interesan el bajo costo, el buen colado, el maquinado fácil y el amortiguamiento de vibraciones.',['Bajo costo y buen colado','Fácil de maquinar','Amortigua vibraciones'],
+       [o('Fundición gris','M','El grafito en hojuelas amortigua vibraciones, funde bien y se maquina con facilidad.'),o('AISI 4340','M','Caro y difícil de colar en piezas complejas; no se necesita tanta resistencia.'),o('Ti–6Al–4V','M','Muy caro: no se justifica.'),o('Fundición blanca','M','Muy dura y frágil: difícil de maquinar.')],0],
+     ['in','Pieza de turbina de un motor a reacción','Una pieza gira dentro de la turbina, entre 700 y 1 000 °C, con esfuerzos altos y gases oxidantes.',['Resistencia a muy alta temperatura','Resistencia a la oxidación','Resistencia a la fluencia'],
+       [o('Aluminio 7075','M','Pierde resistencia por encima de ≈ 150–200 °C.'),o('AISI 1020','M','Se oxida y se ablanda.'),o('Ti–6Al–4V','M','Su uso se limita a unos 400–500 °C: a 700–1 000 °C pierde resistencia.'),o('Inconel 718','M','Superaleación base níquel: conserva la resistencia y resiste la oxidación a alta temperatura.')],3],
+     // ---- misma familia: polímeros ----
+     ['in','Sello en contacto con combustible','Un sello flexible estará en contacto permanente con aceite y combustible dentro de un motor.',['Flexible y recupera su forma','Resistente a aceites e hidrocarburos'],
+       [o('Polietileno (HDPE)','P','Termoplástico rígido: no sella por elasticidad.'),o('Resina epóxica curada','P','Termofijo rígido y frágil.'),o('PMMA','P','Termoplástico rígido y quebradizo.'),o('Caucho nitrilo (NBR)','P','Elastómero con buena resistencia al aceite y al combustible.')],3],
+     ['in','Botella para agua con gas','Se fabricará una botella transparente que contenga gas carbónico sin que se escape y que resista la presión.',['Transparente','Barrera al CO₂','Resistencia a la presión interna'],
+       [o('PET','P','Termoplástico transparente, resistente y con buena barrera a los gases: es el estándar en botellas de bebidas.'),o('Polietileno (HDPE)','P','Más permeable a los gases y translúcido.'),o('Poliestireno (PS)','P','Quebradizo: no resiste bien la presión.'),o('PMMA','P','Rígido y quebradizo para esta aplicación.')],0],
+     ['in','Matriz de un laminado de fibra de carbono','Se necesita la resina que une las fibras de un laminado estructural que trabajará a unos 100 °C.',['Se cura y queda rígida','Buena adhesión a la fibra','Estable a 100 °C'],
+       [o('Polietileno (HDPE)','P','Termoplástico que se ablanda a esa temperatura y adhiere mal.'),o('Poliestireno (PS)','P','Se ablanda alrededor de 100 °C y es frágil.'),o('PVC','P','Se degrada con el calor.'),o('Resina epóxica','P','Termofijo: al curar forma una red rígida, adhiere bien a la fibra y soporta esa temperatura.')],3],
+     ['in','Película para empacar alimentos','Se busca una película delgada, flexible, barata y que se selle con calor.',['Flexible','Se funde y se sella con calor','Bajo costo'],
+       [o('Resina epóxica curada','P','Termofijo rígido: no es flexible ni se sella con calor.'),o('Poliéster insaturado curado','P','Termofijo rígido y frágil.'),o('Baquelita','P','Termofijo rígido: no se puede sellar con calor.'),o('Polietileno de baja densidad (LDPE)','P','Termoplástico flexible, barato y fácil de sellar con calor.')],3],
+     // ---- misma familia: cerámicos ----
+     ['in','Sello mecánico de una bomba','El sello de una bomba maneja lodos abrasivos y fluidos corrosivos con fricción constante.',['Dureza muy alta','Resistencia al desgaste y a la corrosión'],
+       [o('Porcelana sanitaria','C','Se desgasta con los abrasivos: no es suficientemente dura.'),o('Ladrillo','C','Poroso y blando frente a la abrasión.'),o('Vidrio sodocálcico','C','Frágil y de menor dureza.'),o('Carburo de silicio (SiC)','C','Cerámico avanzado muy duro y resistente al desgaste y a la corrosión.')],3],
+     ['in','Envase reutilizable de bebidas','Se necesita un envase transparente, químicamente inerte, que se pueda moldear fundido y lavar muchas veces.',['Transparente','Inerte','Se moldea fundido'],
+       [o('Alúmina (Al₂O₃)','C','Opaca y muy costosa de conformar.'),o('Ladrillo','C','Opaco y poroso.'),o('Cemento Portland','C','Opaco, poroso y se ataca con ácidos.'),o('Vidrio sodocálcico','C','Cerámico amorfo: transparente, inerte y se moldea fundido.')],3],
+     ['in','Interior de un horno de fundición','Se debe revestir el interior de un horno que trabaja por encima de 1 400 °C.',['Soportar temperaturas muy altas','Aislante térmico','Estable químicamente'],
+       [o('Vidrio sodocálcico','C','Se reblandece muy por debajo de esa temperatura.'),o('Cemento Portland','C','Se deshidrata y se degrada con el calor.'),o('Porcelana sanitaria','C','No está diseñada para esa temperatura sostenida.'),o('Ladrillo refractario de alúmina–sílice','C','Cerámico tradicional diseñado para hornos: punto de fusión alto y baja conductividad térmica.')],3],
+     // ---- entre familias ----
+     ['x','Visera transparente de un casco','La visera de un casco de motociclista debe ser transparente, resistir impactos sin astillarse y pesar poco.',['Transparente','Resistencia al impacto','Ligera y moldeable'],
+       [o('Vidrio sodocálcico','C','Transparente pero frágil y pesado: se astilla.'),o('Aluminio 6061','M','Opaco.'),o('PMMA','P','Transparente, pero se fractura con impactos fuertes.'),o('Policarbonato (PC)','P','Termoplástico transparente con muy alta resistencia al impacto y ligero.')],3],
+     ['x','Conductor de un cable doméstico','El alambre interior de un cable eléctrico debe conducir muy bien la corriente, ser dúctil y de costo razonable.',['Alta conductividad eléctrica','Ductilidad','Costo razonable'],
+       [o('PVC','P','Aislante eléctrico.'),o('Alúmina (Al₂O₃)','C','Aislante eléctrico y frágil.'),o('Cobre','M','Muy alta conductividad, dúctil y fácil de trefilar.'),o('Inoxidable 304','M','Conduce mucho peor que el cobre y es más costoso.')],2],
+     ['x','Cubierta de un cable doméstico','La cubierta de un cable debe aislar eléctricamente, ser flexible, resistir la intemperie y ser barata.',['Aislante eléctrico','Flexible','Bajo costo'],
+       [o('Cobre','M','Conductor: no aísla.'),o('Vidrio sodocálcico','C','Aislante pero rígido y frágil.'),o('PVC plastificado','P','Termoplástico aislante, flexible y económico.'),o('Alúmina (Al₂O₃)','C','Aislante pero rígida y frágil.')],2],
+     ['x','Tanque para ácido clorhídrico diluido','Se almacenará ácido clorhídrico diluido a temperatura ambiente en un tanque de tamaño mediano.',['Resistencia al ataque ácido','Bajo costo','No contamina el contenido'],
+       [o('AISI 1020','M','El ácido lo disuelve.'),o('Inoxidable 304','M','Los cloruros y el ácido lo atacan (picaduras y corrosión).'),o('Aluminio 6061','M','El HCl lo ataca rápidamente.'),o('Polietileno de alta densidad (HDPE)','P','Resiste químicamente el HCl diluido, es ligero y barato.')],3],
+     ['x','Cemento para fijar una prótesis','El cirujano debe rellenar el espacio entre el vástago de una prótesis y el hueso. El material se mezcla en el quirófano y debe endurecer en minutos a temperatura corporal.',['Se mezcla y cura in situ','Biocompatible','Rellena el espacio'],
+       [o('Titanio Ti–6Al–4V','M','Es sólido: no se puede verter ni curar en el lugar.'),o('Alúmina (Al₂O₃)','C','Cerámico sólido: no se moldea en el quirófano.'),o('Inoxidable 316L','M','Sólido: no rellena huecos.'),o('PMMA (cemento óseo)','P','Polimeriza en el quirófano a temperatura corporal y rellena el espacio.')],3],
+     ['x','Crisol para fundir níquel','Un crisol contendrá níquel líquido a cerca de 1 600 °C durante la fundición.',['Soportar 1 600 °C','No reaccionar con el metal','Aislante térmico'],
+       [o('Inoxidable 310','M','Se ablanda y se funde cerca de 1 400 °C.'),o('Cobre','M','Funde a ≈ 1 085 °C.'),o('Policarbonato (PC)','P','Se degrada muy por debajo de 200 °C.'),o('Alúmina (Al₂O₃)','C','Cerámico refractario: punto de fusión ≈ 2 070 °C y estable frente al metal fundido.')],3],
+     ['x','Engrane de una impresora de oficina','Un engrane pequeño trabaja con carga baja, debe ser silencioso, funcionar sin lubricante y producirse en masa por inyección.',['Silencioso y autolubricante','Producción masiva','Bajo costo'],
+       [o('AISI 8620 cementado','M','Es resistente, pero caro, ruidoso y requiere lubricación: sobrado para esta carga.'),o('Fundición gris','M','Pesada, ruidosa y no se inyecta.'),o('Alúmina (Al₂O₃)','C','Frágil y costosa de conformar.'),o('Nylon 6,6','P','Termoplástico autolubricante, silencioso y fácil de inyectar.')],3],
+     ['x','Sustrato de un módulo de potencia','Un módulo electrónico de potencia necesita una base que aísle eléctricamente los circuitos pero evacue muy bien el calor.',['Aislante eléctrico','Alta conductividad térmica'],
+       [o('Cobre','M','Conduce el calor, pero también la electricidad: pondría en corto los circuitos.'),o('Aluminio 6061','M','Conduce la electricidad.'),o('Epóxica con fibra de vidrio (FR-4)','K','Aísla, pero conduce mal el calor.'),o('Nitruro de aluminio (AlN)','C','Cerámico avanzado: aislante eléctrico y buen conductor térmico.')],3],
+     ['x','Carcasa de un dron de juguete','Una carcasa de forma compleja se fabricará por millones, con muy bajo costo y resistencia al impacto moderada.',['Forma compleja por inyección','Bajo costo en masa','Ligera'],
+       [o('Compuesto de fibra de carbono','K','Muy buen desempeño, pero costoso y de producción lenta para un juguete.'),o('Aluminio 6061','M','Maquinar o estampar esa forma encarece la pieza.'),o('Alúmina (Al₂O₃)','C','Frágil y de conformado costoso.'),o('ABS','P','Termoplástico fácil de inyectar, barato, ligero y resistente al impacto moderado.')],3],
+     ['x','Base de un torno de precisión','La bancada de un torno debe ser rígida, amortiguar las vibraciones del corte y fabricarse por colada a un costo razonable.',['Rigidez','Amortiguamiento de vibraciones','Colada y costo razonable'],
+       [o('Aluminio 6061','M','Menor rigidez y menor amortiguamiento.'),o('Nylon 6,6','P','Poca rigidez.'),o('Alúmina (Al₂O₃)','C','Frágil y costosa en piezas grandes.'),o('Fundición gris','M','Rígida, con grafito que amortigua vibraciones, se cuela bien y es económica.')],3],
+     ['x','Pilares de un puente','Los pilares trabajan sobre todo a compresión, tienen gran volumen, están a la intemperie y el presupuesto es limitado.',['Alta resistencia a compresión','Gran volumen a bajo costo','Durable a la intemperie'],
+       [o('Inoxidable 304','M','Excelente, pero carísimo para ese volumen.'),o('Aluminio 6061','M','Caro y se deforma bajo cargas grandes.'),o('Polietileno (HDPE)','P','Bajo módulo y fluencia bajo carga sostenida.'),o('Concreto (cemento Portland)','C','Cerámico tradicional: resistente a compresión, barato y durable; se refuerza con acero para la tensión.')],3],
+     ['x','Junta de un reactor químico','Una junta debe sellar un reactor a 200 °C con ácidos fuertes.',['Resistencia química','Estable a 200 °C','Sella por deformación'],
+       [o('Caucho natural','P','Se degrada con el calor y con los ácidos fuertes.'),o('Polietileno (HDPE)','P','Funde a ≈ 130 °C.'),o('AISI 1020','M','Se corroe con los ácidos.'),o('PTFE','P','Inerte frente a casi todos los ácidos y estable hasta ≈ 260 °C.')],3],
+     ['x','Mango de una olla','El mango de una olla se calienta por la base. Debe aislar el calor, soportar ≈ 150 °C y ser barato.',['Aislante térmico','Soportar 150 °C','Bajo costo'],
+       [o('Acero AISI 1020','M','Conduce el calor y quemaría la mano.'),o('Aluminio 6061','M','Conduce el calor.'),o('Vidrio sodocálcico','C','Frágil y de conducción térmica mayor que la de un polímero.'),o('Resina fenólica (baquelita)','P','Termofijo: aísla el calor, soporta esa temperatura y es barato.')],3],
+     ['x','Disco de freno de un auto económico','Un auto de producción masiva necesita discos de freno baratos, que soporten el calor del frenado normal y el desgaste.',['Bajo costo','Soporta el calor del frenado','Maquinado fácil'],
+       [o('Carburo de silicio (SiC)','C','Excelente en autos de lujo, pero muy caro para producción masiva.'),o('Aluminio 6061','M','Pierde resistencia con el calor del frenado.'),o('Nylon 6,6','P','Se funde.'),o('Fundición gris','M','Barata, conduce y disipa el calor, resiste el desgaste y se maquina fácil.')],3],
+     ['x','Tubería de agua caliente','Una instalación residencial conduce agua a 90 °C. Debe resistir la corrosión durante años.',['Resistir 90 °C','No corroerse','Se instala con facilidad'],
+       [o('PVC','P','Se ablanda por encima de ≈ 60 °C.'),o('Polietileno (HDPE)','P','Se deforma a esa temperatura.'),o('AISI 1020','M','Se corroe con el agua caliente.'),o('Cobre','M','Resiste la corrosión y la temperatura del agua caliente.')],3],
+     ['x','Vástago de prótesis de cadera','El vástago estará años dentro del cuerpo, con carga cíclica al caminar y en un medio salino.',['Biocompatibilidad','Resistencia a fatiga y a corrosión','Peso reducido'],
+       [o('AISI 1045','M','Se corroería en los fluidos corporales.'),o('Alúmina (Al₂O₃)','C','Se usa en cabezas femorales por su dureza, pero como vástago sería frágil.'),o('Ti–6Al–4V','M','Biocompatible, resistente a corrosión y fatiga, densidad ≈ 4.5 g/cm³ y menor módulo que el acero.'),o('PVC','P','Polímero blando: no soporta la carga del cuerpo.')],2],
+     ['x','Tubería de agua fría','Se instala la tubería de agua potable fría de una casa. Se busca bajo costo, poco peso, que no se oxide y que se una fácilmente.',['No se corroe','Ligera y barata','Fácil de unir'],
+       [o('Fundición blanca','M','Frágil y se oxida.'),o('Vidrio sodocálcico','C','Frágil y difícil de unir en una instalación.'),o('PVC','P','Termoplástico: ligero, inerte al agua, económico y se une con cementos solventes.'),o('Caucho natural vulcanizado','P','Elastómero: no conserva la forma ni soporta presión como tubo estructural.')],2],
+     ['x','Aislante de una bujía','El cuerpo aislante de una bujía debe aislar a alto voltaje y soportar choques térmicos y temperaturas altas.',['Aislante eléctrico','Estable a temperatura alta','Duro'],
+       [o('Cobre','M','Conductor eléctrico: lo contrario de lo que se pide.'),o('Alúmina (Al₂O₃)','C','Cerámico avanzado, aislante y estable a alta temperatura.'),o('PVC','P','Se ablanda y se degrada a baja temperatura.'),o('Silicón (PDMS)','P','Elastómero: no tiene la rigidez ni la estabilidad térmica requeridas.')],1],
+     ['x','Monocasco de Formula SAE','El equipo quiere un monocasco muy rígido y ligero. La masa es crítica y se acepta un costo mayor.',['Rigidez y resistencia específicas altas','Masa mínima','Se acepta costo alto'],
+       [o('Acero AISI 1020','M','Denso: la masa sería mucho mayor.'),o('Aluminio 6061','M','Opción válida, pero para la misma rigidez resulta más pesado que el compuesto.'),o('ABS','P','Termoplástico: rigidez y resistencia muy bajas para un chasis.'),o('Compuesto fibra de carbono/epoxi','K','Fibras de carbono rígidas en matriz epóxica: la mayor rigidez y resistencia por unidad de masa.')],3],
+     ['x','Inserto de torno','Un inserto debe maquinar acero a alta velocidad, donde la herramienta se calienta mucho.',['Dureza muy alta','Conserva la dureza en caliente','Resistencia al desgaste'],
+       [o('AISI 1020','M','Blando: se desgastaría de inmediato.'),o('Aluminio 6061','M','Blando.'),o('Nylon 6,6','P','Polímero: se reblandece con el calor.'),o('Carburo cementado WC–Co','C','Carburos duros de tungsteno en matriz de cobalto (cermet): dureza en caliente y gran resistencia al desgaste.')],3],
+     ['x','Tornillo reabsorbible','Se busca un tornillo o una sutura para fijar tejido blando que el cuerpo reabsorba con el tiempo, sin cirugía para retirarlo.',['Biocompatible','Biodegradable','Resistencia suficiente al inicio'],
+       [o('Ti–6Al–4V','M','Permanente: no se reabsorbe.'),o('Inoxidable 316L','M','Permanente.'),o('PLA','P','Termoplástico biodegradable y biocompatible: se hidroliza y el cuerpo lo reabsorbe.'),o('Alúmina (Al₂O₃)','C','Permanente y frágil.')],2]
+    ];
+    window.__CL_CASES=CASES;
+    const labs='ABCD';
+    const DESC={in:'Todas las opciones son de la misma familia: afina por composición, tratamiento y propiedades.',x:'Las opciones son de familias distintas: decide qué familia conviene y luego qué material.',mix:'Mezcla de ambos tipos de problema.'};
+    function start(){const sc={ok:0,st:0,best:0},miss=[],pool=CASES.filter(c=>lvl==='mix'||c[0]===lvl),q=shuffle(pool).slice(0,8);let i=0;const N=q.length;next();
+      function next(){if(i>=N){summary(box,sc,N,miss,start);box.insertAdjacentHTML('beforeend','<div class="cl-sub"><span class="note">Cambiar de tipo:</span>'+[['in','Misma familia'],['x','Entre familias'],['mix','Mixto']].map(([k,l])=>`<button class="btn${lvl===k?' primary':''}" data-l2="${k}">${l}</button>`).join('')+'</div>');$$('[data-l2]',box).forEach(b=>b.onclick=()=>{lvl=b.dataset.l2;start();});return;}
+        const [ty,tt,pp,req,ops,cor0]=q[i],ord=shuffle(ops.map((x,k)=>k)),cor=ord.indexOf(cor0);
+        box.innerHTML=`<div class="cl-sub">${[['in','Misma familia'],['x','Entre familias'],['mix','Mixto']].map(([k,l])=>`<button class="btn${lvl===k?' primary':''}" data-l="${k}">${l}</button>`).join('')}</div><div class="note">${DESC[lvl]}</div>
+          <div class="cl-bar"><i style="width:${i/N*100}%"></i></div><div class="note">Problema ${i+1} de ${N} · racha ${sc.st}</div>
+          <div class="cl-card" style="text-align:left"><small>Selecciona el material más conveniente</small><b style="font-size:clamp(22px,4vw,28px)">${tt}</b><p style="margin:8px 0 6px;font-size:16px">${pp}</p>
+          <div class="cl-sub">${req.map(r=>`<span class="badge">${r}</span>`).join('')}</div></div>
+          <div class="cl-bins" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr))">${ord.map((k,j)=>`<button class="cl-bin" data-j="${j}"><b>${labs[j]}.</b> ${ops[k][0]}</button>`).join('')}</div>
+          <div class="cl-fb" id="fb" aria-live="polite"></div><div id="why"></div><div id="nx"></div>`;
+        $$('[data-l]',box).forEach(b=>b.onclick=()=>{lvl=b.dataset.l;start();});
+        $$('.cl-bin',box).forEach(b=>b.onclick=()=>{const j=+b.dataset.j,ok=j===cor;bump(sc,ok);
+          $$('.cl-bin',box).forEach((x,jj)=>{x.disabled=true;if(jj===cor)x.classList.add('ok');else if(jj===j)x.classList.add('bad');});
+          const fb=$('#fb',box);fb.className='cl-fb '+(ok?'ok':'bad');fb.textContent=ok?'Correcto.':'No. La mejor opción era '+ops[cor0][0]+'.';
+          $('#why',box).innerHTML='<ul style="margin:4px 0 0;padding-left:20px;display:grid;gap:4px;font-size:15px">'+ord.map((k,jj)=>`<li><b>${labs[jj]}. ${ops[k][0]}${jj===cor?' ✓':''}</b> <span class="badge">${FAML[ops[k][1]]}</span> ${ops[k][2]}</li>`).join('')+'</ul>';
+          if(!ok)miss.push(tt+' → '+ops[cor0][0]);
+          $('#nx',box).innerHTML=`<button class="btn primary" id="nb">${i+1<N?'Siguiente':'Ver resultado'}</button>`;$('#nb',box).onclick=()=>{i++;next();};});}}
+    start();})();
+
+  $('#cl-gtabs').onclick=e=>{const b=e.target.closest('[data-g]');if(!b)return;['g1','g2','g3','g4'].forEach(g=>{$('#cl-'+g).hidden=g!==b.dataset.g;});$$('#cl-gtabs .tab').forEach(x=>x.setAttribute('aria-selected',x===b));};
+})();
+
 </script>
 <script>
 (function(){
@@ -1469,4 +2288,280 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   btn.addEventListener('click',()=>{const next=isDark()?'light':'dark';root.dataset.theme=next;try{localStorage.setItem('lab-theme',next);}catch(e){}paint();window.dispatchEvent(new Event('lab-theme'));});
   mq.addEventListener?.('change',paint);paint();window.dispatchEvent(new Event('lab-theme'));
 })();
+
+/* ===== Propiedades mecánicas (Clase 1) ===== */
+(function(){
+  const $=(s,r)=>(r||document).querySelector(s),$$=(s,r)=>[...(r||document).querySelectorAll(s)];
+  const root=$('#view-mec');if(!root)return;
+  const PI=Math.PI;
+  const fx=(x,d)=>{if(!isFinite(x))return '—';const a=Math.abs(x);if(a!==0&&(a>=1e5||a<1e-3))return x.toExponential(2).replace('e+','e').replace('.',',');return (+x.toFixed(d===undefined?2:d)).toString().replace('.',',');};
+  const num=v=>parseFloat(String(v).replace(',','.'));
+  const pick=a=>a[Math.floor(Math.random()*a.length)];
+  const rnd=(a,b,st)=>{const n=Math.round((b-a)/st);return +(a+Math.floor(Math.random()*(n+1))*st).toFixed(6);};
+  const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+
+  // ---------- pestañas ----------
+  const PANELS=['sim','real','dur','ej','juego'];
+  function panel(p){PANELS.forEach(k=>{$('#mc-'+k).hidden=k!==p;});$$('#mc-tabs .tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));
+    if(p==='sim')drawSim();if(p==='real')drawKn();if(p==='dur')drawB();if(p==='juego'&&!G.on)gameStart();}
+  $('#mc-tabs').onclick=e=>{const b=e.target.closest('[data-p]');if(b)panel(b.dataset.p);};
+
+  // ---------- materiales (valores ilustrativos) ----------
+  const MAT=[
+    {id:'acero',n:'Acero bajo carbono',E:207,sy:250,uts:420,eu:.22,ef:.32,sf:.75,ra:.60,nu:.30},
+    {id:'hs',n:'Acero de alta resistencia',E:207,sy:1000,uts:1100,eu:.05,ef:.12,sf:.80,ra:.40,nu:.30},
+    {id:'al',n:'Aluminio 6061-T6',E:69,sy:275,uts:310,eu:.09,ef:.12,sf:.85,ra:.45,nu:.33},
+    {id:'cu',n:'Cobre recocido',E:110,sy:70,uts:220,eu:.40,ef:.45,sf:.70,ra:.75,nu:.34},
+    {id:'fun',n:'Fundición gris (frágil)',E:100,uts:200,brit:1,nu:.26},
+    {id:'vid',n:'Vidrio sodocálcico (frágil)',E:70,uts:60,brit:1,nu:.22}
+  ];
+  MAT.forEach(m=>{if(m.brit){m.ef=m.uts/(m.E*1000);m.eu=m.ef;m.ra=0;m.sf=1;}});
+  const A0f=m=>PI*dia()*dia()/4;
+  // curva ingenieril
+  function sig(m,e){const E=m.E*1000;if(m.brit)return E*e;const ey=m.sy/E;
+    if(e<=ey)return E*e;
+    if(e<=m.eu){const x=(e-ey)/(m.eu-ey);return m.sy+(m.uts-m.sy)*(1-Math.pow(1-x,2.2));}
+    const y=(e-m.eu)/(m.ef-m.eu);return m.uts-(m.uts-m.sf*m.uts)*y*y;}
+  const eyOf=m=>m.brit?null:m.sy/(m.E*1000);
+  // mapa del deslizador p→e (no lineal)
+  function eOfP(m,p){if(m.brit)return p*m.ef;const ey=eyOf(m);
+    if(p<=.2)return ey*(p/.2);if(p<=.6)return ey+(m.eu-ey)*((p-.2)/.4);return m.eu+(m.ef-m.eu)*((p-.6)/.4);}
+  function pOfE(m,e){if(m.brit)return e/m.ef;const ey=eyOf(m);
+    if(e<=ey)return .2*e/ey;if(e<=m.eu)return .2+.4*(e-ey)/(m.eu-ey);return .6+.4*(e-m.eu)/(m.ef-m.eu);}
+  // deformación y esfuerzo reales
+  function trueAt(m,e){if(e<=m.eu)return{er:Math.log(1+e),sr:sig(m,e)*(1+e)};
+    const eru=Math.log(1+m.eu),sru=m.uts*(1+m.eu),erf=Math.log(1/(1-m.ra)),srf=m.sf*m.uts/(1-m.ra),y=(e-m.eu)/(m.ef-m.eu);
+    return{er:eru+(erf-eru)*y,sr:sru+(srf-sru)*y};}
+  // criterio 0.2 %
+  function sy02(m){if(m.brit)return null;const E=m.E*1000;let lo=eyOf(m),hi=m.eu;
+    for(let i=0;i<60;i++){const mid=(lo+hi)/2;if(sig(m,mid)-E*(mid-.002)>0)lo=mid;else hi=mid;}
+    return{e:lo,s:sig(m,lo)};}
+  const area=(m,e)=>{let a=0,n=400,pe=0,ps=0;for(let i=1;i<=n;i++){const ee=e*i/n,s=sig(m,ee);a+=(s+ps)/2*(ee-pe);pe=ee;ps=s;}return a;}; // MPa = MJ/m³
+
+  // ---------- gráfica ----------
+  const X0=64,X1=620,Y0=16,Y1=330;
+  function nice(r,n){const s=r/n,p=Math.pow(10,Math.floor(Math.log10(s))),f=s/p;return(f<1.5?1:f<3?2:f<7?5:10)*p;}
+  function plot(svg,m,o){
+    const pts=[],N=360;let xmax=0,ymax=0;
+    for(let i=0;i<=N;i++){const p=i/N,e=eOfP(m,p),s=sig(m,e),t=trueAt(m,e);pts.push({p,e,s,er:t.er,sr:t.sr});}
+    const showE=o.view!=='true',showT=o.view!=='eng';
+    pts.forEach(q=>{if(showE){xmax=Math.max(xmax,q.e);ymax=Math.max(ymax,q.s);}if(showT){xmax=Math.max(xmax,q.er);ymax=Math.max(ymax,q.sr);}});
+    ymax*=1.08;xmax*=1.03;
+    const did=o.scale==='did';
+    const px=(e,p)=>X0+(did?p:e/xmax)*(X1-X0)*(did?1:1);
+    const py=s=>Y1-(s/ymax)*(Y1-Y0);
+    let g='';
+    const ys=nice(ymax,5);for(let v=0;v<=ymax;v+=ys){g+=`<line class="mc-grid" x1="${X0}" x2="${X1}" y1="${py(v)}" y2="${py(v)}"/><text class="mc-t" x="${X0-6}" y="${py(v)+4}" text-anchor="end">${fx(v,0)}</text>`;}
+    g+=`<line class="mc-ax" x1="${X0}" y1="${Y1}" x2="${X1}" y2="${Y1}"/><line class="mc-ax" x1="${X0}" y1="${Y0}" x2="${X0}" y2="${Y1}"/>`;
+    g+=`<text class="mc-t" x="${X0}" y="${Y0-3}">σ (MPa)</text>`;
+    if(did){
+      const ks=[[0,'0']];if(!m.brit){ks.push([.2,'ε<tspan> </tspan>y']);}
+      const lab=(e)=>fx(e*100,e*100<1?2:1)+' %';
+      const tk=m.brit?[[0,0],[1,m.ef]]:[[0,0],[.2,eyOf(m)],[.6,m.eu],[1,m.ef]];
+      tk.forEach(([pp,e])=>{const x=px(0,pp);g+=`<line class="mc-grid" x1="${x}" x2="${x}" y1="${Y1}" y2="${Y1+5}"/><text class="mc-t" x="${x}" y="${Y1+18}" text-anchor="middle">${lab(e)}</text>`;});
+      g+=`<text class="mc-t" x="${X1}" y="${Y1+34}" text-anchor="end">ε (escala didáctica, valores reales en las marcas)</text>`;
+    }else{
+      const xs=nice(xmax*100,6);for(let v=0;v<=xmax*100;v+=xs){const x=px(v/100,0);g+=`<line class="mc-grid" x1="${x}" x2="${x}" y1="${Y1}" y2="${Y1+5}"/><text class="mc-t" x="${x}" y="${Y1+18}" text-anchor="middle">${fx(v,xs<1?2:0)}</text>`;}
+      g+=`<text class="mc-t" x="${X1}" y="${Y1+34}" text-anchor="end">ε (%)</text>`;
+    }
+    const path=(fx_,fy)=>'M'+pts.map(q=>fx_(q).toFixed(1)+' '+fy(q).toFixed(1)).join('L');
+    if(showT)g+=`<path class="mc-c2" d="${path(q=>px(q.er,q.p),q=>py(q.sr))}"/>`;
+    if(showE)g+=`<path class="mc-c1" d="${path(q=>px(q.e,q.p),q=>py(q.s))}"/>`;
+    // criterio 0.2 %
+    if(o.off&&!did&&!m.brit&&showE){const E=m.E*1000,r=sy02(m);let d='';for(let e=.002;e<=xmax;e+=xmax/200){const s=E*(e-.002);if(s>ymax)break;d+=(d?'L':'M')+px(e,0).toFixed(1)+' '+py(s).toFixed(1);}
+      g+=`<path class="mc-off" d="${d}"/><circle class="mc-mk" cx="${px(r.e,0)}" cy="${py(r.s)}" r="4.5"/><text class="mc-tl" x="${px(r.e,0)+8}" y="${py(r.s)+16}">σy(0.2 %) = ${fx(r.s,0)} MPa</text>`;}
+    // marcas
+    if(o.mks&&showE){
+      const mk=(e,s,t,dx,dy,an)=>{g+=`<circle class="mc-mk" cx="${px(e,pOfE(m,e))}" cy="${py(s)}" r="4.5"/><text class="mc-tl" x="${px(e,pOfE(m,e))+dx}" y="${py(s)+dy}" text-anchor="${an||'start'}">${t}</text>`;};
+      if(!m.brit){mk(eyOf(m),m.sy,'σy',8,14);mk(m.eu,m.uts,'UTS',0,-9,'middle');mk(m.ef,sig(m,m.ef),'fractura',-6,-8,'end');}
+      else mk(m.ef,m.uts,'fractura',-6,-8,'end');
+    }
+    // cursor
+    if(o.p!=null){const e=eOfP(m,o.p),s=sig(m,e),t=trueAt(m,e);
+      if(o.unl){const ep=e-s/(m.E*1000);g+=`<line class="mc-unl" x1="${px(e,o.p)}" y1="${py(s)}" x2="${px(ep,pOfE(m,Math.max(ep,0)))}" y2="${py(0)}"/>`;}
+      if(showE)g+=`<circle class="mc-dot" cx="${px(e,o.p)}" cy="${py(s)}" r="6.5"/>`;
+      if(showT)g+=`<circle class="mc-dot" style="fill:var(--denim)" cx="${px(t.er,o.p)}" cy="${py(t.sr)}" r="5.5"/>`;}
+    svg.innerHTML=g;
+    return {px,py,xmax,ymax};
+  }
+
+  // ---------- probeta ----------
+  function specimen(m,p){
+    const svg=$('#mc-spec');const cy=100,H0=26,G=40,x0=70,Lg0=170,s=1+.7*p,Lg=Lg0*s,xc=x0+Lg/2;
+    const ductile=!m.brit;
+    const rU=ductile?1-.22*Math.min(p/.6,1):1-.01*p;
+    const nb=ductile&&p>.6?(p-.6)/.4:0;
+    const neckR=ductile?Math.sqrt(1-m.ra)/.78:1,depth=Math.min(.7,Math.max(.12,(1-neckR)*1.8));
+    const broke=p>=.995;
+    const h=x=>H0*rU*(1-depth*nb*Math.exp(-Math.pow((x-xc)/(.14*Lg),2)));
+    const poly=(xa,xb,tipL,tipR)=>{let top='',bot='';const n=40;
+      for(let i=0;i<=n;i++){const x=xa+(xb-xa)*i/n;let hh=h(x);
+        if(tipL&&i===0)hh*=.35;if(tipR&&i===n)hh*=.35;
+        top+=(i?'L':'M')+x.toFixed(1)+' '+(cy-hh).toFixed(1);bot=('L'+x.toFixed(1)+' '+(cy+hh).toFixed(1))+bot;}
+      return `<path class="mc-spec" d="${top}${bot}Z"/>`;};
+    let g='';
+    if(!broke){g+=poly(x0,x0+Lg);g+=`<rect class="mc-grip" x="10" y="${cy-G}" width="60" height="${2*G}" rx="3"/><rect class="mc-grip" x="${x0+Lg}" y="${cy-G}" width="60" height="${2*G}" rx="3"/>`;
+      g+=`<line class="mc-ax" x1="${x0}" x2="${x0+Lg}" y1="${cy+G+14}" y2="${cy+G+14}"/><text class="mc-t" x="${xc}" y="${cy+G+30}" text-anchor="middle">L = L₀(1+ε)</text>`;}
+    else{const gap=ductile?16:8;g+=poly(x0,xc-gap/2,false,ductile)+poly(xc+gap/2,x0+Lg,ductile,false);
+      g+=`<rect class="mc-grip" x="10" y="${cy-G}" width="60" height="${2*G}" rx="3"/><rect class="mc-grip" x="${x0+Lg}" y="${cy-G}" width="60" height="${2*G}" rx="3"/>`;
+      g+=`<text class="mc-tl" x="${xc}" y="${cy-G-8}" text-anchor="middle">${ductile?'Fractura copa–cono':'Fractura frágil, sin estricción'}</text>`;}
+    svg.innerHTML=g;
+  }
+
+  // ---------- simulador ----------
+  const st={m:MAT[0],p:0,unl:false,timer:null};
+  const dia=()=>Math.max(2,num($('#mc-d0').value)||12.8);
+  const L0v=()=>Math.max(10,num($('#mc-l0').value)||50);
+  $('#mc-mat').innerHTML=MAT.map((m,i)=>`<option value="${i}">${m.n}</option>`).join('');
+  function regionOf(m,e,p){const ey=eyOf(m);if(m.brit)return p>=.995?'Fractura frágil':'Zona elástica (hasta romper)';
+    if(p>=.995)return'Fractura';if(e<=ey)return'Zona elástica';if(e<=m.eu)return'Deformación plástica uniforme';return'Estricción';}
+  function drawSim(){
+    const m=st.m,p=st.p,e=eOfP(m,p),s=sig(m,e),t=trueAt(m,e),d0=dia(),L0=L0v(),A0=PI*d0*d0/4;
+    const o={view:$('#mc-view').value,scale:$('#mc-scale').value,off:$('#mc-offc').checked,mks:$('#mc-mks').checked,p,unl:st.unl};
+    $('#mc-offc').disabled=o.scale==='did'||m.brit;
+    plot($('#mc-svg'),m,o);specimen(m,p);
+    // diámetro actual
+    let d;if(e<=m.eu){d=m.brit||e<=eyOf(m)?d0*(1-m.nu*e):d0/Math.sqrt(1+e);}
+    else{const du=d0/Math.sqrt(1+m.eu),df=d0*Math.sqrt(1-m.ra),y=(e-m.eu)/(m.ef-m.eu);d=du+(df-du)*y;}
+    const u=area(m,e),ep=Math.max(0,e-s/(m.E*1000));
+    const cell=(k,v)=>`<div class="mc-o"><small>${k}</small><b>${v}</b></div>`;
+    $('#mc-out').innerHTML=cell('Carga F',fx(s*A0/1000,2)+' kN')+cell('Esfuerzo σ',fx(s,1)+' MPa')+cell('Deformación ε',fx(e*100,e<.01?3:2)+' %')+cell('Alargamiento ΔL',fx(e*L0,3)+' mm')
+      +cell('Diámetro mín.',fx(d,2)+' mm')+cell('σ real',fx(t.sr,1)+' MPa')+cell('ε real',fx(t.er*100,e<.01?3:2)+' %')+cell('Energía absorbida',fx(u,2)+' MJ/m³')
+      +(st.unl?cell('Deformación permanente',fx(ep*100,3)+' %'):'');
+    $('#mc-reg').textContent=regionOf(m,e,p);
+    $('#mc-unl').textContent=st.unl?'Volver a cargar':'Descargar desde este punto';
+    // ficha
+    const r=sy02(m),ut=area(m,m.ef);
+    const row=(a,b)=>`<tr><td>${a}</td><td>${b}</td></tr>`;
+    $('#mc-card').innerHTML='<table><tr><th>Propiedad del material elegido</th><th>Valor</th></tr>'
+      +row('Módulo de Young E',fx(m.E,0)+' GPa')+row('Relación de Poisson μ',fx(m.nu,2))+row('Módulo de corte G = E/[2(1+μ)]',fx(m.E/(2*(1+m.nu)),1)+' GPa')
+      +(m.brit?row('σy','no hay fluencia: fractura elástica'):row('σy (inicio de la zona plástica)',fx(m.sy,0)+' MPa')+row('σy convencional (0.2 %)',fx(r.s,0)+' MPa')+row('Resiliencia ≈ σy²/(2E)',fx(m.sy*m.sy/(2*m.E),0)+' kJ/m³'))
+      +row('UTS (resistencia a la tensión)',fx(m.uts,0)+' MPa')+row('Elongación a la fractura %EL',fx(m.ef*100,m.ef<.01?2:1)+' %')+(m.brit?'':row('Reducción de área %RA',fx(m.ra*100,0)+' %'))
+      +row('Tenacidad (área bajo la curva)',fx(ut,m.brit?3:1)+' MJ/m³')+'</table>';
+  }
+  $('#mc-mat').onchange=()=>{st.m=MAT[+$('#mc-mat').value];st.p=0;$('#mc-p').value=0;st.unl=false;drawSim();};
+  $('#mc-p').oninput=()=>{st.p=$('#mc-p').value/1000;drawSim();};
+  ['mc-d0','mc-l0','mc-view','mc-scale','mc-offc','mc-mks'].forEach(i=>$('#'+i).addEventListener('input',drawSim));
+  $('#mc-unl').onclick=()=>{st.unl=!st.unl;drawSim();};
+  $('#mc-rst').onclick=()=>{stop();st.p=0;st.unl=false;$('#mc-p').value=0;drawSim();};
+  function stop(){if(st.timer){clearInterval(st.timer);st.timer=null;$('#mc-play').textContent='Reproducir';}}
+  $('#mc-play').onclick=()=>{if(st.timer){stop();return;}if(st.p>=.999){st.p=0;}st.unl=false;$('#mc-play').textContent='Pausar';
+    st.timer=setInterval(()=>{st.p=Math.min(1,st.p+.004);$('#mc-p').value=Math.round(st.p*1000);drawSim();if(st.p>=1)stop();},30);};
+
+  // ---------- esfuerzo real ----------
+  function drawReal(){const s=num($('#mc-r-s').value),e=num($('#mc-r-e').value)/100;
+    const cell=(k,v)=>`<div class="mc-o"><small>${k}</small><b>${v}</b></div>`;
+    $('#mc-r-out').innerHTML=cell('σ real',fx(s*(1+e),1)+' MPa')+cell('ε real',fx(Math.log(1+e)*100,2)+' %')+cell('Diferencia en σ',fx(s*e,1)+' MPa');}
+  const KN=[['Al 1100-O',180,.20],['Cobre recocido',315,.54],['Inox. 304 recocido',1275,.45],['Problema 5 (K = 100 000 psi)',689.5,.5]];
+  $('#mc-kn-pre').innerHTML=KN.map((k,i)=>`<button class="btn" data-kn="${i}">${k[0]}</button>`).join('');
+  $('#mc-kn-pre').onclick=e=>{const b=e.target.closest('[data-kn]');if(!b)return;const k=KN[+b.dataset.kn];$('#mc-k').value=k[1];$('#mc-n').value=k[2];drawKn();};
+  function drawKn(){drawReal();const K=num($('#mc-k').value),n=num($('#mc-n').value),er=num($('#mc-er').value);
+    const cell=(k,v)=>`<div class="mc-o"><small>${k}</small><b>${v}</b></div>`;
+    const sru=K*Math.pow(n,n),eu=Math.exp(n)-1,uts=sru/Math.exp(n);
+    $('#mc-kn-out').innerHTML=cell('σ real en ε evaluada',fx(K*Math.pow(er,n),1)+' MPa')+cell('Inicio de estricción: ε real',fx(n,3))+cell('σ real en la estricción',fx(sru,1)+' MPa')+cell('ε ingenieril en el UTS',fx(eu*100,1)+' %')+cell('UTS ingenieril',fx(uts,1)+' MPa');
+    const svg=$('#mc-kn-svg'),W0=64,W1=620,V0=14,V1=290,em=Math.max(n*2,er*1.2,.3),sm=K*Math.pow(em,n)*1.05;
+    const x=e=>W0+e/em*(W1-W0),y=s=>V1-s/sm*(V1-V0);let g='',N=120,d='';
+    const ys=nice(sm,5);for(let v=0;v<=sm;v+=ys)g+=`<line class="mc-grid" x1="${W0}" x2="${W1}" y1="${y(v)}" y2="${y(v)}"/><text class="mc-t" x="${W0-6}" y="${y(v)+4}" text-anchor="end">${fx(v,0)}</text>`;
+    const xs=nice(em,6);for(let v=0;v<=em;v+=xs)g+=`<text class="mc-t" x="${x(v)}" y="${V1+16}" text-anchor="middle">${fx(v,2)}</text>`;
+    g+=`<line class="mc-ax" x1="${W0}" y1="${V1}" x2="${W1}" y2="${V1}"/><line class="mc-ax" x1="${W0}" y1="${V0}" x2="${W0}" y2="${V1}"/><text class="mc-t" x="${W0}" y="${V0-2}">σ real (MPa)</text><text class="mc-t" x="${W1}" y="${V1+32}" text-anchor="end">ε real</text>`;
+    for(let i=1;i<=N;i++){const e=em*i/N;d+=(i>1?'L':'M')+x(e).toFixed(1)+' '+y(K*Math.pow(e,n)).toFixed(1);}
+    g+=`<path class="mc-c2" d="${d}"/><circle class="mc-mk" cx="${x(n)}" cy="${y(sru)}" r="5"/><text class="mc-tl" x="${x(n)+8}" y="${y(sru)+16}">estricción (ε real = n)</text><circle class="mc-dot" cx="${x(er)}" cy="${y(K*Math.pow(er,n))}" r="6"/>`;
+    svg.innerHTML=g;}
+  ['mc-r-s','mc-r-e','mc-k','mc-n','mc-er'].forEach(i=>$('#'+i).addEventListener('input',drawKn));
+
+  // ---------- Brinell ----------
+  function drawB(){const D=num($('#mc-bdia').value),F=num($('#mc-bF').value);let d=num($('#mc-bhue').value);
+    const bad=!(d>0&&d<D&&F>0);const cell=(k,v)=>`<div class="mc-o"><small>${k}</small><b>${v}</b></div>`;
+    if(bad){$('#mc-bout').innerHTML=cell('HB','—');$('#mc-bnote').textContent='La huella debe ser menor que la esfera (0 < d < D) y la carga positiva.';return;}
+    const hb=2*F/(PI*D*(D-Math.sqrt(D*D-d*d))),h=(D-Math.sqrt(D*D-d*d))/2;
+    $('#mc-bout').innerHTML=cell('HB',fx(hb,0)+' kgf/mm²')+cell('Profundidad h',fx(h,3)+' mm')+cell('UTS ≈ 3.5·HB (aceros)',fx(3.5*hb,0)+' MPa')+cell('d / D',fx(d/D,2));
+    $('#mc-bnote').textContent=(d>=.25*D&&d<=.5*D?'La huella está en el rango recomendado (0.25 D a 0.5 D).':'Fuera del rango recomendado 0.25 D a 0.5 D: conviene cambiar la carga o la esfera.')+' La relación UTS ≈ 3.5·HB solo aplica a aceros.';
+    const sc=150/D,cx=180,y0=150,R=D/2*sc,hh=h*sc,cyc=y0+hh-R;
+    $('#mc-bsvg').innerHTML=`<rect x="20" y="${y0}" width="320" height="70" class="mc-spec"/><circle cx="${cx}" cy="${cyc}" r="${R}" style="fill:var(--q3);fill-opacity:.35;stroke:var(--ink);stroke-width:1.5"/>`
+      +`<rect x="20" y="${y0-1}" width="${cx-d*sc/2-20}" height="3" style="fill:var(--q1)"/><rect x="${cx+d*sc/2}" y="${y0-1}" width="${340-cx-d*sc/2}" height="3" style="fill:var(--q1)"/>`
+      +`<line class="mc-unl" x1="${cx-d*sc/2}" x2="${cx+d*sc/2}" y1="${y0+14}" y2="${y0+14}"/><text class="mc-tl" x="${cx}" y="${y0+32}" text-anchor="middle">d = ${fx(d,2)} mm</text>`
+      +`<text class="mc-t" x="20" y="20">esfera D = ${fx(D,1)} mm</text>`;}
+  $('#mc-bs').oninput=()=>{const D=num($('#mc-bdia').value);$('#mc-bhue').value=+(D*$('#mc-bs').value/100).toFixed(2);drawB();};
+  $('#mc-bdia').onchange=()=>{const D=num($('#mc-bdia').value);$('#mc-bF').value=30*D*D;$('#mc-bhue').value=+(D*.4).toFixed(2);$('#mc-bs').value=40;drawB();};
+  $('#mc-b30').onclick=()=>{const D=num($('#mc-bdia').value);$('#mc-bF').value=30*D*D;drawB();};
+  ['mc-bF','mc-bhue'].forEach(i=>$('#'+i).addEventListener('input',drawB));
+
+  // ---------- ejercicios ----------
+  const MET=[['acero',207],['aluminio',69],['cobre',110],['titanio',107],['latón',97]];
+  const A0=d=>PI*d*d/4;
+  function steps(l){return '<div class="mc-sol"><ol>'+l.map(x=>'<li>'+x+'</li>').join('')+'</ol></div>';}
+  const GEN={
+    hooke(){const mt=pick(MET),d0=pick([10,12.5,12.8,15]),L0=pick([50,100]),eps=rnd(.0006,.0012,.0001),s0=mt[1]*1000*eps,F=+(s0*A0(d0)/1000).toFixed(1),dL=+(eps*L0).toFixed(3);
+      const a=A0(d0),s=F*1000/a,e=dL/L0,E=s/e/1000;
+      return{t:'Hooke y módulo de Young',txt:`Una probeta cilíndrica de d₀ = ${d0} mm y L₀ = ${L0} mm se carga en la zona elástica con F = ${F} kN y se alarga ${dL} mm. Calcula el esfuerzo, la deformación y el módulo de Young, e identifica el metal.`,
+      f:[{l:'σ',u:'MPa',a:s,r:.02},{l:'ε',u:'×10⁻³',a:e*1000,r:.02},{l:'E',u:'GPa',a:E,r:.03},{l:'Metal probable',sel:MET.map(x=>x[0]),a:MET.reduce((b,x)=>Math.abs(x[1]-E)<Math.abs(b[1]-E)?x:b)[0]}],
+      s:steps([`A₀ = πd₀²/4 = π(${d0})²/4 = ${fx(a,1)} mm²`,`σ = F/A₀ = ${fx(F*1000,0)} N / ${fx(a,1)} mm² = ${fx(s,1)} MPa`,`ε = ΔL/L₀ = ${dL}/${L0} = ${fx(e*1000,3)}×10⁻³`,`E = σ/ε = ${fx(s,1)} / ${fx(e,6)} = ${fx(E*1000,0)} MPa = ${fx(E,0)} GPa`,`El valor más cercano de la tabla (acero 207, Al 69, Cu 110, Ti 107, latón 97 GPa) es ${MET.reduce((b,x)=>Math.abs(x[1]-E)<Math.abs(b[1]-E)?x:b)[0]}.`])};},
+    poisson(){const mt=pick([['bronce',110,.33,320],['acero',207,.30,350],['aluminio',69,.33,275],['latón',97,.34,300]]),D=pick([10,12,16,20]),sg=rnd(.3,.6,.05)*mt[3],F=Math.round(sg*A0(D)/10)*10;
+      const a=A0(D),s=F/a,ez=s/(mt[1]*1000),ex=mt[2]*ez,dD=ex*D;
+      return{t:'Relación de Poisson',txt:`Una barra de ${mt[0]} de ${D} mm de diámetro soporta una fuerza de tensión de ${fx(F,0)} N. Datos: σy = ${mt[3]} MPa, E = ${mt[1]} GPa, μ = ${mt[2]}. Calcula el esfuerzo, la deformación longitudinal, la reducción de diámetro y el diámetro final. Verifica que la barra siga en zona elástica.`,
+      f:[{l:'σ',u:'MPa',a:s,r:.02},{l:'ε longitudinal',u:'×10⁻³',a:ez*1000,r:.02},{l:'|ΔD|',u:'×10⁻³ mm',a:dD*1000,r:.03},{l:'D final',u:'mm',a:D-dD,abs:.01}],
+      s:steps([`A₀ = π(${D})²/4 = ${fx(a,1)} mm²; σ = ${fx(F,0)}/${fx(a,1)} = ${fx(s,1)} MPa < σy = ${mt[3]} MPa: zona elástica.`,`ε_z = σ/E = ${fx(s,1)} / ${fx(mt[1]*1000,0)} = ${fx(ez*1000,3)}×10⁻³`,`ε_x = −μ·ε_z = −${mt[2]} × ${fx(ez*1000,3)}×10⁻³ = −${fx(ex*1000,3)}×10⁻³`,`ΔD = ε_x·D₀ = −${fx(dD,5)} mm`,`D_f = ${D} − ${fx(dD,5)} = ${fx(D-dD,4)} mm`])};},
+    ensayo(){const d0=pick([9,10,12.8]),L0=pick([50,50.8]),a=A0(d0),su=rnd(400,600,10),Fm=+(su*a/1000).toFixed(1),Ff=+(Fm*rnd(.65,.8,.01)).toFixed(1),ra=rnd(.35,.6,.01),df=+(d0*Math.sqrt(1-ra)).toFixed(1),el=rnd(15,30,1),Lf=+(L0*(1+el/100)).toFixed(1);
+      const af=A0(df),uts=Fm*1000/a,si=Ff*1000/a,sr=Ff*1000/af,EL=(Lf-L0)/L0*100,RA=(a-af)/a*100;
+      return{t:'Ensayo de tensión completo',txt:`Una probeta de acero con d₀ = ${d0} mm y L₀ = ${L0} mm se ensaya hasta la fractura. Registros: F máxima = ${Fm} kN, F en la fractura = ${Ff} kN, L final = ${Lf} mm, d final = ${df} mm. Calcula el UTS, el esfuerzo ingenieril y el real en la fractura, el %EL y el %RA.`,
+      f:[{l:'UTS',u:'MPa',a:uts,r:.02},{l:'σ ing. fractura',u:'MPa',a:si,r:.02},{l:'σ real fractura',u:'MPa',a:sr,r:.02},{l:'%EL',u:'%',a:EL,r:.02},{l:'%RA',u:'%',a:RA,r:.02}],
+      s:steps([`A₀ = π(${d0})²/4 = ${fx(a,1)} mm²; A_f = π(${df})²/4 = ${fx(af,1)} mm²`,`UTS = F_máx/A₀ = ${fx(Fm*1000,0)}/${fx(a,1)} = ${fx(uts,1)} MPa`,`σ ing. = ${fx(Ff*1000,0)}/${fx(a,1)} = ${fx(si,1)} MPa; σ real = ${fx(Ff*1000,0)}/${fx(af,1)} = ${fx(sr,1)} MPa`,`%EL = (${Lf} − ${L0})/${L0} × 100 = ${fx(EL,1)} %`,`%RA = (${fx(a,1)} − ${fx(af,1)})/${fx(a,1)} × 100 = ${fx(RA,1)} %`])};},
+    brinell(){const D=10,F=3000,d=rnd(3,4.8,.1),r=Math.sqrt(D*D-d*d),hb=2*F/(PI*D*(D-r));
+      return{t:'Dureza Brinell',txt:`En un ensayo Brinell con esfera de D = 10 mm y carga de 3000 kgf, la huella de un acero mide d = ${d} mm. Calcula HB y estima el UTS con UTS ≈ 3.5·HB.`,
+      f:[{l:'HB',u:'kgf/mm²',a:hb,r:.02},{l:'UTS',u:'MPa',a:3.5*hb,r:.02}],
+      s:steps([`√(D² − d²) = √(100 − ${fx(d*d,2)}) = ${fx(r,3)} mm`,`D − ${fx(r,3)} = ${fx(D-r,3)} mm; πD·${fx(D-r,3)} = ${fx(PI*D*(D-r),2)} mm²`,`HB = 2F/(…) = 6000/${fx(PI*D*(D-r),2)} = ${fx(hb,0)} kgf/mm²`,`UTS ≈ 3.5 × ${fx(hb,0)} = ${fx(3.5*hb,0)} MPa`])};},
+    real(){const s=rnd(200,450,10),e=rnd(2,15,1)/100,sr=s*(1+e),er=Math.log(1+e);
+      return{t:'Esfuerzo y deformación reales',txt:`Una probeta, antes de iniciar la estricción, registra σ = ${s} MPa y ε = ${fx(e*100,0)} %. Calcula el esfuerzo real y la deformación real.`,
+      f:[{l:'σ real',u:'MPa',a:sr,r:.01},{l:'ε real',u:'%',a:er*100,r:.02}],
+      s:steps([`σ_real = σ(1 + ε) = ${s} × ${fx(1+e,2)} = ${fx(sr,1)} MPa`,`ε_real = ln(1 + ε) = ln(${fx(1+e,2)}) = ${fx(er,4)} = ${fx(er*100,2)} %`])};},
+    energia(){const sy=pick([250,275,350,500]),mt=pick([['acero',207],['aluminio',69],['cobre',110]]),ey=sy/(mt[1]*1000),u=sy*sy/(2*mt[1]);
+      return{t:'Resiliencia',txt:`Un ${mt[0]} (E = ${mt[1]} GPa) tiene σy = ${sy} MPa. Calcula la deformación en la fluencia y la resiliencia (energía por volumen en la zona elástica, u = σy²/2E).`,
+      f:[{l:'ε en σy',u:'×10⁻³',a:ey*1000,r:.02},{l:'Resiliencia',u:'kJ/m³',a:u,r:.02}],
+      s:steps([`ε_y = σy/E = ${sy}/${fx(mt[1]*1000,0)} = ${fx(ey*1000,3)}×10⁻³`,`u = σy²/(2E) = ${sy}² / (2 × ${fx(mt[1]*1000,0)}) = ${fx(u/1000,4)} MPa = ${fx(u,1)} kJ/m³ (1 MPa = 1 MJ/m³)`])};}
+  };
+  const TIPOS=[['rand','Aleatorio'],['hooke','Hooke y módulo de Young'],['poisson','Relación de Poisson'],['ensayo','Ensayo de tensión completo'],['real','Esfuerzo y deformación reales'],['brinell','Dureza Brinell'],['energia','Resiliencia']];
+  $('#mc-ejt').innerHTML=TIPOS.map(t=>`<option value="${t[0]}">${t[1]}</option>`).join('');
+  const EJ={cur:null,ok:0,tot:0};
+  function ejNew(){const t=$('#mc-ejt').value,k=t==='rand'?pick(Object.keys(GEN)):t;EJ.cur=GEN[k]();const c=EJ.cur;
+    $('#mc-ejtxt').innerHTML='<b>'+c.t+'.</b> '+c.txt;
+    $('#mc-ejf').innerHTML=c.f.map((f,i)=>`<label class="mc-f" data-i="${i}">${f.l}${f.u?' ('+f.u+')':''}${f.sel?`<select class="mc-in"><option value="">elige…</option>${f.sel.map(s=>`<option>${s}</option>`).join('')}</select>`:'<input class="mc-in" inputmode="decimal" autocomplete="off">'}<span class="mc-mark"></span></label>`).join('');
+    $('#mc-ejsol').innerHTML='';}
+  function ejChk(){const c=EJ.cur;if(!c)return;let all=true;
+    c.f.forEach((f,i)=>{const lab=$(`#mc-ejf [data-i="${i}"]`),v=$('.mc-in',lab).value;let ok;
+      if(f.sel)ok=v===f.a;else{const x=num(v);ok=isFinite(x)&&(f.abs!==undefined?Math.abs(x-f.a)<=f.abs:Math.abs(x-f.a)<=f.r*Math.abs(f.a));}
+      lab.classList.toggle('ok',ok);lab.classList.toggle('bad',!ok);$('.mc-mark',lab).textContent=ok?'✓':'✗';if(!ok)all=false;});
+    if(!c.done){c.done=true;EJ.tot++;if(all)EJ.ok++;}$('#mc-ejs').textContent=`Resueltos bien a la primera: ${EJ.ok} de ${EJ.tot}`;return all;}
+  $('#mc-ejn').onclick=ejNew;$('#mc-ejt').onchange=ejNew;$('#mc-ejc').onclick=ejChk;
+  $('#mc-ejv').onclick=()=>{const c=EJ.cur;if(!c)return;c.done=c.done||(EJ.tot++,true);$('#mc-ejs').textContent=`Resueltos bien a la primera: ${EJ.ok} de ${EJ.tot}`;
+    $('#mc-ejsol').innerHTML=c.s+'<p class="note">Respuestas: '+c.f.map(f=>f.l+' = '+(f.sel?f.a:fx(f.a,f.a>100?1:3))+(f.u?' '+f.u:'')).join(' · ')+'</p>';};
+  // problemas de la clase con solución
+  const CLS=[
+   ['Problema 1: módulo de elasticidad (E ≈ 202 GPa)','d₀ = 12.8 mm, L₀ = 50.0 mm, F = 25 kN en zona elástica, ΔL = 0.048 mm. Calcula σ, ε y E.',['A₀ = π(12.8)²/4 = 128.7 mm²','σ = 25 000 N / 128.7 mm² = 194.3 MPa','ε = 0.048 / 50.0 = 9.6×10⁻⁴','E = 194.3 / 9.6×10⁻⁴ = 2.02×10⁵ MPa = 202 GPa: acero (cercano a 207 GPa).']],
+   ['Problema 2: Poisson en una barra de bronce (D_f ≈ 11.99 mm)','Barra de 12 mm de diámetro, F = 18 200 N, σy = 320 MPa, E = 110 GPa, μ = 0.33. Calcula el diámetro final.',['A₀ = π(12)²/4 = 113.1 mm²; σ = 18 200/113.1 = 160.9 MPa < 320 MPa: zona elástica.','ε_z = 160.9/110 000 = 1.463×10⁻³','ε_x = −0.33 × 1.463×10⁻³ = −4.83×10⁻⁴','ΔD = −4.83×10⁻⁴ × 12 = −0.0058 mm; D_f = 11.994 ≈ 11.99 mm']],
+   ['Problema 3: ensayo completo (UTS ≈ 497 MPa, %EL = 25 %, %RA = 50.6 %)','d₀ = 12.8 mm, L₀ = 50.8 mm, F_máx = 64 kN, F_fractura = 48 kN, L_f = 63.5 mm, d_f = 9.0 mm.',['A₀ = 128.7 mm²; A_f = π(9.0)²/4 = 63.6 mm²','UTS = 64 000/128.7 = 497 MPa','σ ing. fractura = 48 000/128.7 = 373 MPa; σ real fractura = 48 000/63.6 = 755 MPa','%EL = (63.5 − 50.8)/50.8 × 100 = 25.0 %; %RA = (128.7 − 63.6)/128.7 × 100 = 50.6 %']],
+   ['Problema 4: Brinell (HB ≈ 229, UTS ≈ 800 MPa)','Esfera D = 10 mm, carga 3000 kgf, huella d = 4.0 mm.',['√(100 − 16) = 9.165 mm; D − 9.165 = 0.835 mm','πD(0.835) = 26.23 mm²','HB = 6000/26.23 = 229 kgf/mm²','UTS ≈ 3.5 × 229 ≈ 800 MPa']],
+   ['Problema 5 (presentación 1.5): K = 100 000 psi y n = 0.5','Con σ_real = K·ε_real^n, calcula la resistencia real y el UTS ingenieril en el inicio de la estricción.',['K = 100 000 psi = 689.5 MPa; la estricción inicia en ε_real = n = 0.5','σ_real = K·nⁿ = 689.5 × 0.5^0.5 = 487.5 MPa','UTS = σ_real/(1 + ε) = 487.5 / e^0.5 = 487.5/1.6487 = 295.7 MPa','Coincide con la respuesta de la presentación (487.54 y 295.71 MPa).']]
+  ];
+  $('#mc-cls').innerHTML=CLS.map(c=>`<details style="margin:6px 0"><summary>${c[0]}</summary><p>${c[1]}</p>${steps(c[2])}</details>`).join('');
+
+  // ---------- juego ----------
+  const G={on:false,i:0,n:10,sc:0,streak:0,ok:0,cur:null,done:false};
+  $('#mc-gtbl').innerHTML='<table><tr><th>Material</th><th>E (GPa)</th><th>Fluencia (MPa)</th><th>UTS (MPa)</th><th>%EL</th></tr>'+MAT.map(m=>`<tr><td>${m.n}</td><td>${m.E}</td><td>${m.brit?'no hay':m.sy}</td><td>${m.uts}</td><td>${fx(m.ef*100,m.ef<.01?2:0)}</td></tr>`).join('')+'</table>';
+  function gameStart(){G.on=true;G.i=0;G.sc=0;G.streak=0;G.ok=0;gameRound();}
+  function gameRound(){G.done=false;const m=pick(MAT);G.cur=m;const opts=shuffle([m,...shuffle(MAT.filter(x=>x!==m)).slice(0,3)]);
+    $('#mc-gbox').innerHTML=`<p class="mc-score">Pregunta ${G.i+1} de ${G.n} · Puntos: ${G.sc}</p><div class="mc-fig"><svg id="mc-gsvg" viewBox="0 0 640 390" role="img" aria-label="Curva ingenieril de un material desconocido"></svg></div><div class="mc-opts">${opts.map(o=>`<button class="mc-opt" data-id="${o.id}">${o.n}</button>`).join('')}</div><div id="mc-gfb"></div>`;
+    plot($('#mc-gsvg'),m,{view:'eng',scale:'real',off:false,mks:false,p:null});}
+  $('#mc-gbox').onclick=e=>{const b=e.target.closest('.mc-opt'),nx=e.target.closest('#mc-gnext');
+    if(nx){G.i++;if(G.i>=G.n)gameEnd();else gameRound();return;}
+    if(!b||G.done)return;G.done=true;const ok=b.dataset.id===G.cur.id;
+    $$('.mc-opt').forEach(x=>{if(x.dataset.id===G.cur.id)x.classList.add('ok');});if(!ok)b.classList.add('bad');
+    if(ok){G.ok++;G.streak++;G.sc+=10+(G.streak%3===0?5:0);}else G.streak=0;
+    const m=G.cur;$('#mc-gfb').innerHTML=`<div class="mc-sol"><b>${ok?'Correcto.':'No.'}</b> Es ${m.n}: UTS ${m.uts} MPa y %EL ${fx(m.ef*100,m.ef<.01?2:0)} %${m.brit?'. Rompe sin fluencia ni estricción: la curva es una recta hasta la fractura.':'. Tiene fluencia, endurece hasta el UTS y luego se estrecha.'}</div><button class="btn" id="mc-gnext">${G.i+1>=G.n?'Ver resultado':'Siguiente'}</button>`;};
+  function gameEnd(){$('#mc-gbox').innerHTML=`<div class="mc-sol"><b>Resultado:</b> ${G.ok} de ${G.n} correctas · ${G.sc} puntos.</div><button class="btn" id="mc-grst">Jugar otra vez</button>`;$('#mc-grst').onclick=gameStart;}
+
+  // ---------- inicio ----------
+  window.__MEC={EJ,GEN,MAT,sig,eOfP,pOfE,sy02,trueAt,area,TIPOS};
+  ejNew();drawSim();drawKn();drawB();
+})();
+
 </script>
