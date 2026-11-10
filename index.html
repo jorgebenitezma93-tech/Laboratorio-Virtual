@@ -209,6 +209,16 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
 #view-mec .mc-lat{fill:var(--line)}
 #view-mec .mc-roll{fill:var(--q3);stroke:var(--ink);stroke-width:1.4}
 #view-mec .mc-plate{fill:var(--q1);stroke:var(--ink);stroke-width:1.4}
+#view-mec .mc-qz-hd{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin:10px 0 6px}
+#view-mec .mc-qz-bar{height:10px;border-radius:5px;background:var(--soft);border:1px solid var(--line);overflow:hidden}
+#view-mec .mc-qz-bar div{height:100%;width:100%;background:var(--naranja)}
+#view-mec .mc-qz-q{font-size:19px;font-weight:600;margin:12px 0 8px}
+#view-mec .mc-qz-b{font-size:15.5px;min-height:56px;display:flex;align-items:center;gap:10px}
+#view-mec .mc-qz-b span{font-size:22px}
+#view-mec .mc-qz-b:disabled{cursor:default;opacity:.95}
+#view-mec .mc-big .mc-qz-q{font-size:30px}
+#view-mec .mc-big .mc-qz-b{font-size:24px;min-height:84px}
+#view-mec .mc-big .mc-qz-o{grid-template-columns:repeat(2,1fr)}
 .views{display:flex;gap:0;border-bottom:2px solid var(--line);flex-wrap:wrap}
 .view{font:600 20px var(--f-display);letter-spacing:.02em;background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;color:var(--muted);padding:8px 16px;cursor:pointer}
 .view[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--naranja)}
@@ -695,9 +705,12 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       <button class="tab" role="tab" data-p="sim" aria-selected="true">Simulador de tensión</button>
       <button class="tab" role="tab" data-p="real" aria-selected="false">Esfuerzo real</button>
       <button class="tab" role="tab" data-p="frio" aria-selected="false">Trabajo en frío</button>
+      <button class="tab" role="tab" data-p="fam" aria-selected="false">Familias de materiales</button>
+      <button class="tab" role="tab" data-p="el" aria-selected="false">Polímeros: lineal y no lineal</button>
       <button class="tab" role="tab" data-p="dur" aria-selected="false">Dureza</button>
       <button class="tab" role="tab" data-p="ej" aria-selected="false">Ejercicios</button>
       <button class="tab" role="tab" data-p="juego" aria-selected="false">Juego</button>
+      <button class="tab" role="tab" data-p="quiz" aria-selected="false">Quiz</button>
     </div>
 
     <section class="card" id="mc-sim">
@@ -813,6 +826,58 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       </details>
     </section>
 
+    <section class="card" id="mc-fam" hidden>
+      <h2>Comparación entre familias de materiales</h2>
+      <p class="note">Las mismas condiciones de ensayo (tensión uniaxial) producen curvas muy distintas según la familia. Pulsa Reproducir para ver cómo se desarrolla cada curva hasta su fractura. Cambia el rango del eje ε: en 1 % se aprecian las pendientes elásticas y el cerámico; en 700 % solo el elastómero llena la gráfica. Valores ilustrativos (órdenes de magnitud), no datos de un material concreto.</p>
+      <div class="mc-ctl">
+        <label class="mc-f">Rango del eje ε<select id="mc-fa-r"><option value="0.01">0 a 1 %</option><option value="0.1">0 a 10 %</option><option value="0.5">0 a 50 %</option><option value="7">0 a 700 %</option></select></label>
+        <div class="mc-row" style="margin:0"><button class="btn" id="mc-fa-play">Reproducir</button><button class="btn" id="mc-fa-rst">Reiniciar</button></div>
+      </div>
+      <input type="range" class="mc-slide" id="mc-fa-p" min="0" max="1000" value="1000" aria-label="Avance de la deformación">
+      <div class="mc-g2">
+        <div class="mc-fig"><svg id="mc-fa-svg" viewBox="0 0 520 320" role="img" aria-label="Curvas esfuerzo deformación de metales, cerámico, polímeros y elastómero"></svg></div>
+        <div id="mc-fa-lg"></div>
+      </div>
+      <h3>Resumen por familia</h3>
+      <div class="mc-tbl" id="mc-fa-tb"></div>
+      <div class="mc-sol"><ol>
+        <li>Metales: módulo alto, fluencia clara, endurecimiento por deformación, estricción y fractura dúctil (%EL de decenas de por ciento).</li>
+        <li>Cerámicos: módulo muy alto, sin zona plástica; la curva es casi una recta y rompen frágilmente con %EL menor a 0.1 % porque sus defectos (grietas) controlan la resistencia. Por eso suele ensayarse en flexión y no en tensión.</li>
+        <li>Polímeros: módulo de 100 a 1000 veces menor que el de los metales; los termoplásticos dúctiles forman un cuello que se propaga (estirado en frío) y los termofijos se comportan casi como frágiles.</li>
+        <li>Elastómeros: módulo de unos MPa y deformaciones recuperables de varios cientos por ciento; su curva no es lineal (siguiente pestaña).</li>
+      </ol></div>
+    </section>
+
+    <section class="card" id="mc-el" hidden>
+      <h2>Polímeros: comportamiento lineal y no lineal</h2>
+      <p class="note">La ley de Hooke σ = E·ε describe bien la zona elástica de un metal o de un polímero convencional, pero no es una ley universal. En un elastómero la deformación es elástica (se recupera por completo) y aun así la curva es no lineal. Mueve cada deslizador y compara el esfuerzo real con la predicción de Hooke (línea punteada, pendiente del origen).</p>
+      <div class="mc-g2">
+        <div>
+          <h3>Polímero convencional (termoplástico tipo nailon)</h3>
+          <div class="mc-fig"><svg id="mc-el-s1" viewBox="0 0 520 320" role="img" aria-label="Curva de un termoplástico convencional con zona lineal, fluencia, cuello y endurecimiento"></svg></div>
+          <input type="range" class="mc-slide" id="mc-el-p1" min="0" max="1000" value="120" aria-label="Deformación del polímero convencional">
+          <div class="mc-out" id="mc-el-o1"></div>
+        </div>
+        <div>
+          <h3>Elastómero (caucho)</h3>
+          <div class="mc-fig"><svg id="mc-el-s2" viewBox="0 0 520 320" role="img" aria-label="Curva no lineal de un elastómero"></svg></div>
+          <input type="range" class="mc-slide" id="mc-el-p2" min="0" max="1000" value="400" aria-label="Deformación del elastómero">
+          <div class="mc-out" id="mc-el-o2"></div>
+        </div>
+      </div>
+      <h3>Qué pasa con las cadenas del elastómero</h3>
+      <div class="mc-fig" style="max-width:560px"><svg id="mc-el-ch" viewBox="0 0 520 150" role="img" aria-label="Cadenas enrolladas que se estiran y se alinean"></svg></div>
+      <p class="note">Esquema didáctico. Con λ = 1 las cadenas están enrolladas (muchas configuraciones posibles) y estirarlas cuesta poco. Cerca del límite de extensión están casi rectas y alineadas: la curva se vuelve muy empinada.</p>
+      <div class="mc-sol"><ol>
+        <li>Lineal: σ = E·ε, con E constante. Es el modelo de la zona elástica de metales, cerámicos y polímeros rígidos.</li>
+        <li>No lineal elástico (hiperelástico): el esfuerzo depende de la deformación de forma no proporcional y todo se recupera al descargar. Ejemplo, modelo neo-Hookeano con λ = 1 + ε: σ = G(λ − λ⁻²), con G ≈ E/3.</li>
+        <li>Con deformaciones grandes la curva sube de nuevo (como en la figura) y los modelos reales, como Mooney–Rivlin o Gent, ajustan constantes con datos experimentales.</li>
+        <li>No lineal no significa plástico: el polímero convencional queda con deformación permanente tras la fluencia; el elastómero regresa a su forma.</li>
+        <li>Para curvas no lineales se reportan el módulo tangente (pendiente local dσ/dε) o el módulo secante (σ/ε en un punto), y se indica la deformación a la que se midieron.</li>
+        <li>Otros materiales con curvas no lineales: fundición gris, concreto y tejidos biológicos blandos. En polímeros, además, el módulo depende de la temperatura y de la velocidad de carga (viscoelasticidad).</li>
+      </ol></div>
+    </section>
+
     <section class="card" id="mc-dur" hidden>
       <h2>Dureza Brinell</h2>
       <p class="note">HB = 2F / [πD (D − √(D² − d²))], con F en kgf y D, d en mm. Mueve d y mira cómo cambian la dureza y la resistencia estimada.</p>
@@ -864,6 +929,26 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       <div class="mc-tbl" id="mc-gtbl"></div>
       <div id="mc-gbox"></div>
     </section>
+
+    <section class="card" id="mc-quiz" hidden>
+      <h2>Quiz de propiedades mecánicas</h2>
+      <p class="note">Estilo concurso: cada pregunta tiene tiempo límite; ganas más puntos mientras más rápido aciertes y por rachas de respuestas correctas. Las preguntas y el orden de las opciones cambian en cada partida.</p>
+      <div class="mc-ctl">
+        <label class="mc-f">Tema<select id="mc-qz-t"></select></label>
+        <label class="mc-f">Preguntas<select id="mc-qz-n"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></label>
+        <label class="mc-f">Tiempo por pregunta<select id="mc-qz-s"><option value="15">15 s</option><option value="20" selected>20 s</option><option value="30">30 s</option><option value="60">60 s</option><option value="0">Sin límite</option></select></label>
+        <label class="mc-f">Apodo (para el ranking)<input class="mc-in" id="mc-qz-nick" maxlength="16" autocomplete="off" placeholder="opcional"></label>
+      </div>
+      <div class="mc-row">
+        <button class="btn" id="mc-qz-go">Iniciar partida</button>
+        <label class="mc-chk"><input type="checkbox" id="mc-qz-big"> Modo proyector (letra grande)</label>
+        <label class="mc-chk"><input type="checkbox" id="mc-qz-prof"> Modo profesor (nivel de Bloom y banco con respuestas)</label>
+      </div>
+      <div id="mc-qz-box"></div>
+      <div id="mc-qz-rank"></div>
+      <div id="mc-qz-bank"></div>
+    </section>
+
   </div>
   <footer>Modelo didáctico. Los puntos clave (temperaturas de fusión, eutécticos y solubilidades máximas) vienen de Callister &amp; Rethwisch, 10.ª ed. (Figs. 9.3, 9.7 y 9.8) y del ASM Handbook, vol. 3; las curvas entre esos puntos son ajustes suaves y deben tratarse como esquemas. Ge–Si se dibuja en % en peso de forma esquemática. Fe–Fe₃C es el diagrama metaestable de Callister, Fig. 9.24, con líneas rectas entre sus puntos clave; la región δ es muy angosta a esta escala. Composiciones en % en peso del segundo componente. Los diagramas de la actividad y de la evaluación (Ti–Al, Cr–Ni, Al–Cu, Cu–Zn, Al–Zn y Al–Mg) se calcularon con CALPHAD (pycalphad); en los sistemas calculados el esquema inferior muestra las fases en equilibrio a la temperatura elegida, no la microestructura final. La micrografía es un esquema, no una imagen real.</footer>
 </div>
@@ -2367,9 +2452,9 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 
   // ---------- pestañas ----------
-  const PANELS=['sim','real','frio','dur','ej','juego'];
+  const PANELS=['sim','real','frio','fam','el','dur','ej','juego','quiz'];
   function panel(p){PANELS.forEach(k=>{$('#mc-'+k).hidden=k!==p;});$$('#mc-tabs .tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));
-    if(p==='sim')drawSim();if(p==='real')drawKn();if(p==='dur')drawB();if(p==='frio'){frStatic();drawFrio();}if(p==='juego'&&!G.on)gameStart();}
+    if(p==='sim')drawSim();if(p==='real')drawKn();if(p==='dur')drawB();if(p==='frio'){frStatic();drawFrio();}if(p==='fam')drawFam();if(p==='el')drawEl();if(p==='juego'&&!G.on)gameStart();}
   $('#mc-tabs').onclick=e=>{const b=e.target.closest('[data-p]');if(b)panel(b.dataset.p);};
 
   // ---------- materiales (valores ilustrativos) ----------
@@ -2766,8 +2851,151 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     $('#mc-cout').innerHTML=o('A₀',fx(a0,1)+' mm²')+o('A_f',fx(af,1)+' mm²')+o('%CW',fx(cw,1)+' %')+o('ε real',fx(Math.log(a0/af)*100,1)+' %')+(df>d0?'<div class="mc-o"><small>Aviso</small><b>d_f > d₀: no es reducción</b></div>':'');}
   $('#mc-cd0').oninput=$('#mc-cdf').oninput=frCalc;
 
-  window.__MEC={FR,worked,flow,drawGrains,EJ,GEN,MAT,sig,eOfP,pOfE,sy02,trueAt,area,TIPOS};
-  frSetMat('acero');frCalc();ejNew();drawSim();drawKn();drawB();
+  // ---------- familias de materiales y no linealidad ----------
+  const KEYS_TP=[[0,0],[.025,55],[.05,62],[.14,46],[.6,47],[1.6,50],[2.5,78]];
+  function keyCurve(k){return e=>{if(e<=k[1][0])return k[1][1]*e/k[1][0];
+    for(let i=1;i<k.length-1;i++)if(e<=k[i+1][0]){const t=(e-k[i][0])/(k[i+1][0]-k[i][0]),s=t*t*(3-2*t);return k[i][1]+(k[i+1][1]-k[i][1])*s;}
+    return k[k.length-1][1];};}
+  const GG=.8,JM=70,gent=e=>{const l=1+e,I=l*l+2/l-3,st=GG*(l*l-1/l)/Math.max(.02,1-I/JM);return st/l;}; // esfuerzo ingenieril (MPa)
+  const FAMS=[
+    {id:'ac',n:'Metal dúctil (acero bajo carbono)',col:'var(--denim)',dash:'',E:207,ef:MAT[0].ef,f:e=>sig(MAT[0],e),sy:'250',nota:'Fluencia, endurecimiento, estricción'},
+    {id:'hs',n:'Metal de alta resistencia (acero)',col:'var(--denim)',dash:'2 4',E:207,ef:MAT[1].ef,f:e=>sig(MAT[1],e),sy:'1000',nota:'Alta resistencia, ductilidad moderada'},
+    {id:'ce',n:'Cerámico (alúmina)',col:'var(--bad)',dash:'',E:380,ef:300/380000,f:e=>380000*e,sy:'no hay',nota:'Lineal hasta la fractura frágil'},
+    {id:'tp',n:'Termoplástico dúctil (tipo nailon)',col:'var(--naranja)',dash:'',E:2.2,ef:2.5,f:keyCurve(KEYS_TP),sy:'62',nota:'Fluencia, cuello que se propaga, endurecimiento'},
+    {id:'tf',n:'Termofijo (tipo epoxi)',col:'var(--naranja)',dash:'6 4',E:3.2,ef:.024,f:e=>3200*e*(1-6*e),sy:'no hay',nota:'Casi frágil, poca deformación'},
+    {id:'el',n:'Elastómero (caucho)',col:'var(--ok)',dash:'',E:.0024,ef:6.2,f:gent,sy:'no hay',nota:'Muy deformable, recuperable, no lineal'}];
+  FAMS.forEach(c=>{let m=0;for(let i=0;i<=400;i++)m=Math.max(m,c.f(c.ef*i/400));c.smax=m;});
+  function lineChart(svg,o){const X0=62,X1=504,Y0=14,Y1=268,px=e=>X0+Math.min(e,o.R)/o.R*(X1-X0),py=s=>Y1-Math.min(s,o.Y)/o.Y*(Y1-Y0);
+    let g='';const sx=nice(o.R*100,5),sy=nice(o.Y,5);
+    for(let v=0;v<=o.R*100+1e-9;v+=sx){g+=`<line class="mc-grid" x1="${px(v/100)}" y1="${Y0}" x2="${px(v/100)}" y2="${Y1}"/><text class="mc-t" x="${px(v/100)}" y="${Y1+15}" text-anchor="middle">${fx(v,v<1?2:0)}</text>`;}
+    for(let v=0;v<=o.Y+1e-9;v+=sy){g+=`<line class="mc-grid" x1="${X0}" y1="${py(v)}" x2="${X1}" y2="${py(v)}"/><text class="mc-t" x="${X0-6}" y="${py(v)+4}" text-anchor="end">${fx(v,v<1?1:0)}</text>`;}
+    g+=`<path class="mc-ax" d="M${X0} ${Y0}V${Y1}H${X1}"/><text class="mc-tl" x="${(X0+X1)/2}" y="${Y1+34}" text-anchor="middle">Deformación ingenieril ε (%)</text><text class="mc-tl" transform="translate(14 ${(Y0+Y1)/2}) rotate(-90)" text-anchor="middle">σ (MPa)</text>`;
+    if(o.hooke){const e1=Math.min(o.R,o.Y/o.hooke);g+=`<line class="mc-off" x1="${px(0)}" y1="${py(0)}" x2="${px(e1)}" y2="${py(o.hooke*e1)}"/>`;}
+    o.curves.forEach(c=>{const end=Math.min(c.ef,o.R,o.front===undefined?1e9:o.front);if(end<=0)return;let d='';
+      for(let i=0;i<=300;i++){const e=end*i/300;d+=(i?'L':'M')+px(e).toFixed(1)+' '+py(c.f(e)).toFixed(1);}
+      g+=`<path fill="none" stroke="${c.col}" stroke-width="2.6" ${c.dash?`stroke-dasharray="${c.dash}"`:''} d="${d}"/>`;
+      const broke=c.ef<=o.R&&(o.front===undefined||o.front>=c.ef),sx2=px(end),sy2=py(c.f(end));
+      if(broke)g+=`<path d="M${sx2-5} ${sy2-5}l10 10m0 -10l-10 10" stroke="${c.col}" stroke-width="2.4" fill="none"/>`;
+      else g+=`<circle class="mc-dot" cx="${sx2}" cy="${sy2}" r="4.5"/>`;});
+    if(o.mark!==undefined&&o.mark.length)o.mark.forEach(q=>{g+=`<circle class="mc-dot" cx="${px(q[0])}" cy="${py(q[1])}" r="5"/>`;});
+    svg.innerHTML=g;return{px,py};}
+  const FA={t:1,run:0,on:{ac:1,hs:1,ce:1,tp:1,tf:1,el:1}};
+  $('#mc-fa-lg').innerHTML='<div class="mc-tbl"><table><tr><th>Curva</th><th>Esfuerzo ahora</th></tr>'+FAMS.map(c=>`<tr><td><label class="mc-chk"><input type="checkbox" data-fa="${c.id}" checked><svg width="30" height="10" aria-hidden="true"><line x1="0" y1="5" x2="30" y2="5" stroke="${c.col}" stroke-width="3" ${c.dash?`stroke-dasharray="${c.dash}"`:''}/></svg>${c.n}</label></td><td id="mc-fa-v-${c.id}">—</td></tr>`).join('')+'</table></div>';
+  $('#mc-fa-tb').innerHTML='<table><tr><th>Familia</th><th>E (GPa)</th><th>Fluencia (MPa)</th><th>Resistencia máx. (MPa)</th><th>%EL aprox.</th><th>Rasgos</th></tr>'+FAMS.map(c=>`<tr><td>${c.n}</td><td>${fx(c.E,c.E<.1?4:c.E<10?1:0)}</td><td>${c.sy}</td><td>${fx(c.smax,0)}</td><td>${fx(c.ef*100,c.ef<.01?2:0)}</td><td>${c.nota}</td></tr>`).join('')+'</table>';
+  function drawFam(){const R=+$('#mc-fa-r').value,front=R*FA.t,vis=FAMS.filter(c=>FA.on[c.id]);let Y=1;
+    vis.forEach(c=>{const end=Math.min(c.ef,R);for(let i=0;i<=200;i++)Y=Math.max(Y,c.f(end*i/200));});
+    lineChart($('#mc-fa-svg'),{R,Y:Y*1.1,curves:vis,front});
+    FAMS.forEach(c=>{const e=Math.min(front,c.ef),el=$('#mc-fa-v-'+c.id);el.textContent=FA.on[c.id]?(front>=c.ef&&c.ef<=R?'fractura ('+fx(c.f(c.ef),0)+' MPa)':(front>c.ef?'fracturó antes':fx(c.f(e),e*0+c.smax<10?2:0)+' MPa')):'—';});}
+  function faStop(){FA.run=0;$('#mc-fa-play').textContent='Reproducir';}
+  $('#mc-fa-r').onchange=()=>{faStop();drawFam();};
+  $('#mc-fa-p').oninput=e=>{faStop();FA.t=+e.target.value/1000;drawFam();};
+  $('#mc-fa-lg').onchange=e=>{const k=e.target.dataset.fa;if(k){FA.on[k]=e.target.checked?1:0;drawFam();}};
+  $('#mc-fa-rst').onclick=()=>{faStop();FA.t=0;$('#mc-fa-p').value=0;drawFam();};
+  $('#mc-fa-play').onclick=()=>{if(FA.run){faStop();return;}
+    if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){FA.t=1;$('#mc-fa-p').value=1000;drawFam();return;}
+    if(FA.t>=.999)FA.t=0;const id=FA.run=Date.now(),t0=performance.now(),a0=FA.t;$('#mc-fa-play').textContent='Pausar';
+    (function st(t){if(FA.run!==id)return;FA.t=Math.min(1,a0+(t-t0)/7000);$('#mc-fa-p').value=Math.round(FA.t*1000);drawFam();if(FA.t<1)requestAnimationFrame(st);else faStop();})(t0);};
+  // polímero convencional vs elastómero
+  const TP=FAMS[3],EL=FAMS[5],E0TP=TP.E*1000,E0EL=3*GG;
+  const eAt=(c,s,R)=>Math.min(c.ef,R)*s/1000;
+  function elOut(el,c,e,E0){const h=1e-4*Math.max(.01,e+.01),s=c.f(e),sp=(c.f(Math.min(c.ef,e+h))-c.f(Math.max(0,e-h)))/(Math.min(c.ef,e+h)-Math.max(0,e-h)),H=E0*e,err=H>0?(H-s)/s*100:0;
+    el.innerHTML=`<div class="mc-o"><small>ε</small><b>${fx(e*100,e<.1?2:0)} %</b></div><div class="mc-o"><small>σ real</small><b>${fx(s,s<10?2:1)} MPa</b></div><div class="mc-o"><small>E secante σ/ε</small><b>${e>0?fx(s/e,s/e<10?2:0):'—'} MPa</b></div><div class="mc-o"><small>E tangente dσ/dε</small><b>${fx(sp,sp<10?2:0)} MPa</b></div><div class="mc-o"><small>Hooke con E₀ predice</small><b>${fx(H,H<10?2:0)} MPa</b></div><div class="mc-o"><small>Error de Hooke</small><b>${e>0?(err>=0?'+':'')+fx(err,0)+' %':'—'}</b></div>`;}
+  function drawEl(){const R1=.3,R2=7,e1=R1*$('#mc-el-p1').value/1000,e2=Math.min(EL.ef,R2*$('#mc-el-p2').value/1000);
+    lineChart($('#mc-el-s1'),{R:R1,Y:90,curves:[TP],front:e1,hooke:E0TP});
+    lineChart($('#mc-el-s2'),{R:R2,Y:22,curves:[EL],front:e2,hooke:E0EL});
+    elOut($('#mc-el-o1'),TP,Math.min(e1,TP.ef),E0TP);elOut($('#mc-el-o2'),EL,e2,E0EL);
+    const l=1+e2,lm=7.2,cw=Math.sqrt(Math.max(0,1-Math.pow(l/lm,2)));let g='<rect x="10" y="10" width="14" height="130" fill="var(--q3)"/><rect x="496" y="10" width="14" height="130" fill="var(--q3)"/>';
+    const span=Math.min(440,150*l),x0=260-span/2;
+    for(let k=0;k<5;k++){const y=24+k*25,ph=k*.9;let d='';for(let i=0;i<=120;i++){const t=i/120,x=x0+span*t,a=(10+4*(k%2))*cw*Math.sin(t*2*PI*(7+k%3)+ph);d+=(i?'L':'M')+x.toFixed(1)+' '+(y+a).toFixed(1);}
+      g+=`<path d="${d}" fill="none" stroke="var(--ink)" stroke-width="1.6"/><line x1="24" y1="${y}" x2="${x0}" y2="${y}" stroke="var(--muted)"/><line x1="${x0+span}" y1="${y}" x2="496" y2="${y}" stroke="var(--muted)"/>`;}
+    g+=`<text class="mc-tl" x="260" y="146" text-anchor="middle">λ = ${fx(l,2)} (ε = ${fx(e2*100,0)} %)</text>`;$('#mc-el-ch').innerHTML=g;}
+  $('#mc-el-p1').oninput=$('#mc-el-p2').oninput=drawEl;
+
+  // ---------- quiz ----------
+  const QT={tension:'Tensión y curvas σ–ε',dureza:'Dureza',familias:'Familias de materiales',nolineal:'Comportamiento no lineal',frio:'Trabajo en frío'};
+  const QB=[
+   {t:'tension',b:'Recordar',q:'¿Qué propiedad mide la pendiente de la zona elástica de la curva esfuerzo–deformación?',o:['El módulo de Young E','La tenacidad','La ductilidad','La dureza Brinell'],e:'En la zona elástica σ = E·ε, así que la pendiente es el módulo de Young.'},
+   {t:'tension',b:'Aplicar',q:'Una probeta de d₀ = 10 mm soporta 15.7 kN en zona elástica. ¿Cuál es el esfuerzo ingenieril?',o:['200 MPa','157 MPa','400 MPa','20 MPa'],e:'A₀ = π(10)²/4 = 78.54 mm²; σ = 15 700 N / 78.54 mm² = 199.9 ≈ 200 MPa.'},
+   {t:'tension',b:'Comprender',q:'¿Qué ocurre en el punto del UTS (resistencia máxima a la tensión)?',o:['Comienza la estricción','La probeta se fractura','Termina la zona elástica','Comienza la fluencia'],e:'En el UTS la carga es máxima y la deformación se localiza en un cuello (estricción); la fractura ocurre después.'},
+   {t:'tension',b:'Comprender',q:'¿Cómo se obtiene σy en un material sin fluencia definida?',o:['Con una recta paralela a la zona elástica que parte de ε = 0.002','Tomando el punto de mayor esfuerzo','Dividiendo el UTS entre 2','Tomando el esfuerzo en la fractura'],e:'Criterio del 0.2 %: la intersección de esa paralela con la curva da el esfuerzo de fluencia convencional.'},
+   {t:'tension',b:'Analizar',q:'Dos probetas del mismo acero, una de 8 mm y otra de 16 mm de diámetro, se ensayan a tensión. ¿Qué es igual en ambas?',o:['σy y E','La carga de fluencia','La carga máxima','La elongación absoluta ΔL'],e:'σy y E son propiedades del material. La fuerza depende del área (F = σ·A) y ΔL de la longitud calibrada.'},
+   {t:'tension',b:'Aplicar',q:'Una probeta de L₀ = 50 mm termina con L_f = 62.5 mm. ¿Cuál es el %EL?',o:['25 %','20 %','12.5 %','125 %'],e:'%EL = (62.5 − 50)/50 × 100 = 25 %.'},
+   {t:'tension',b:'Aplicar',q:'Una probeta pasa de A₀ = 100 mm² a A_f = 64 mm² en la fractura. ¿Cuál es el %RA?',o:['36 %','64 %','56 %','156 %'],e:'%RA = (100 − 64)/100 × 100 = 36 %.'},
+   {t:'tension',b:'Comprender',q:'Antes de la estricción, ¿por qué el esfuerzo real es mayor que el ingenieril?',o:['Porque el área de la sección disminuye mientras se alarga','Porque la carga real es mayor que la medida','Porque el material endurece por temperatura','Porque L₀ aumenta'],e:'El esfuerzo ingenieril usa A₀. Con volumen constante, al alargarse la probeta su área baja y σ_real = F/A = σ(1 + ε).'},
+   {t:'tension',b:'Aplicar',q:'Antes de la estricción, σ = 300 MPa y ε = 10 %. ¿Cuál es el esfuerzo real?',o:['330 MPa','300 MPa','270 MPa','310 MPa'],e:'σ_real = σ(1 + ε) = 300 × 1.10 = 330 MPa.'},
+   {t:'tension',b:'Aplicar',q:'Un acero de E = 200 GPa tiene σy = 250 MPa. ¿Cuál es su resiliencia u = σy²/(2E)?',o:['≈ 156 kJ/m³','≈ 313 kJ/m³','≈ 62.5 kJ/m³','≈ 1.25 MJ/m³'],e:'u = 250² / (2 × 200 000) = 0.156 MPa = 156 kJ/m³ (1 MPa = 1 MJ/m³).'},
+   {t:'tension',b:'Aplicar',q:'Un metal con μ = 0.30 se alarga ε_long = 0.002. ¿Cuál es la deformación lateral?',o:['−6×10⁻⁴','+6×10⁻⁴','−6.7×10⁻³','−2×10⁻³'],e:'ε_lat = −μ·ε_long = −0.30 × 0.002 = −6×10⁻⁴ (el material se adelgaza).'},
+   {t:'tension',b:'Recordar',q:'Para un material isótropo, ¿cuál es el valor teórico máximo de la relación de Poisson?',o:['0.5','1.0','0.25','0.33'],e:'μ = 0.5 corresponde a conservación de volumen; los metales rondan 0.25 a 0.35.'},
+   {t:'tension',b:'Aplicar',q:'Con E = 200 GPa y μ = 0.30, ¿cuál es el módulo de cortante G = E/[2(1 + μ)]?',o:['76.9 GPa','142.9 GPa','153.8 GPa','100 GPa'],e:'G = 200 / [2(1.30)] = 200/2.6 = 76.9 GPa.'},
+   {t:'tension',b:'Comprender',q:'La tenacidad de un material en tensión se representa en la curva σ–ε como…',o:['El área total bajo la curva','La pendiente inicial','El esfuerzo máximo','La deformación en la fluencia'],e:'El área bajo la curva es la energía por unidad de volumen absorbida hasta la fractura.'},
+   {t:'tension',b:'Comprender',q:'Se descarga una probeta desde un punto en zona plástica. ¿Cómo se ve la descarga?',o:['Una recta paralela a la zona elástica que deja deformación permanente','La misma curva de carga en sentido inverso','Una recta vertical','Una curva que regresa al origen'],e:'La parte elástica se recupera con pendiente E; la parte plástica queda como deformación permanente.'},
+   {t:'tension',b:'Aplicar',q:'Un metal sigue σ_real = K·ε_real^n con K = 500 MPa y n = 0.25. ¿Cuál es el esfuerzo real cuando inicia la estricción?',o:['≈ 354 MPa','≈ 125 MPa','500 MPa','≈ 177 MPa'],e:'La estricción inicia en ε_real = n = 0.25; σ_real = 500 × 0.25^0.25 = 500 × 0.707 = 353.6 MPa.'},
+   {t:'dureza',b:'Recordar',q:'¿Qué se mide en el ensayo Brinell?',o:['El diámetro de la huella de una esfera','La profundidad residual de un cono','Las diagonales de una pirámide','El rebote de un martillo'],e:'Brinell usa una esfera de acero o carburo y se mide el diámetro de la huella.'},
+   {t:'dureza',b:'Aplicar',q:'Con D = 10 mm, F = 3000 kgf y d = 4.0 mm, ¿cuánto vale HB?',o:['≈ 229','≈ 300','≈ 160','≈ 458'],e:'√(100 − 16) = 9.165; D − 9.165 = 0.835; πD·0.835 = 26.2; HB = 6000/26.2 ≈ 229.'},
+   {t:'dureza',b:'Aplicar',q:'Un acero tiene HB = 200. Con UTS ≈ 3.5·HB, ¿cuánto vale el UTS aproximado?',o:['700 MPa','57 MPa','200 MPa','3500 MPa'],e:'UTS ≈ 3.5 × 200 = 700 MPa.'},
+   {t:'dureza',b:'Recordar',q:'¿Qué ensayo usa un cono de diamante o una esfera y mide la profundidad residual?',o:['Rockwell','Brinell','Mohs','Charpy'],e:'En Rockwell la lectura es la profundidad residual de penetración (escalas HRC, HRB, etc.).'},
+   {t:'dureza',b:'Recordar',q:'¿Qué ensayo usa una pirámide alargada y es útil para materiales frágiles y capas delgadas?',o:['Knoop','Shore','Brinell','Rockwell C'],e:'Knoop usa una pirámide alargada y se mide la diagonal mayor; sirve para microdureza en materiales frágiles y capas delgadas.'},
+   {t:'dureza',b:'Comprender',q:'¿Qué describe la dureza de un material?',o:['Su resistencia a la deformación plástica localizada','Su capacidad de absorber energía de impacto','Su módulo de elasticidad','Su densidad'],e:'La dureza es la resistencia a la penetración o al rayado, es decir, a la deformación plástica localizada.'},
+   {t:'familias',b:'Comprender',q:'¿Qué familia muestra una curva casi lineal hasta la fractura y %EL menor a 0.1 %?',o:['Cerámicos','Metales dúctiles','Elastómeros','Termoplásticos dúctiles'],e:'Los cerámicos no tienen zona plástica apreciable y rompen de forma frágil.'},
+   {t:'familias',b:'Comprender',q:'¿Por qué los cerámicos suelen ensayarse en flexión y no en tensión?',o:['Es difícil sujetarlos sin romperlos y las grietas pequeñas dominan en tensión','Porque no tienen módulo de elasticidad','Porque se funden al sujetarlos','Porque su curva es no lineal'],e:'Alinear y sujetar un cerámico sin dañarlo es difícil, y los defectos controlan la resistencia en tensión; la flexión es más práctica.'},
+   {t:'familias',b:'Analizar',q:'¿Qué lista ordena de menor a mayor módulo de elasticidad?',o:['Elastómero, termoplástico, aluminio, acero, alúmina','Termoplástico, elastómero, acero, aluminio, alúmina','Aluminio, acero, termoplástico, elastómero, alúmina','Alúmina, acero, aluminio, termoplástico, elastómero'],e:'Órdenes de magnitud: elastómero ≈ 0.002 a 0.01 GPa, termoplástico ≈ 1 a 3, aluminio ≈ 69, acero ≈ 207, alúmina ≈ 380.'},
+   {t:'familias',b:'Comprender',q:'En un termoplástico dúctil, después de la fluencia, ¿qué ocurre con el cuello?',o:['Se propaga a lo largo de la probeta mientras las cadenas se alinean','Se cierra y la probeta vuelve a su forma','Provoca fractura inmediata','Desaparece al subir el esfuerzo'],e:'Es el estirado en frío: el cuello se extiende y las cadenas se orientan en la dirección de la carga.'},
+   {t:'familias',b:'Analizar',q:'Un material soporta 600 % de deformación con módulo de unos pocos MPa y recupera su forma. ¿Qué es?',o:['Un elastómero','Un termofijo','Una cerámica','Un acero de alta resistencia'],e:'Deformaciones elásticas enormes con módulo muy bajo son típicas de elastómeros (cadenas enrolladas con pocos entrecruzamientos).'},
+   {t:'familias',b:'Comprender',q:'¿Cómo es la curva σ–ε de un termofijo rígido (tipo epoxi)?',o:['Casi lineal y con fractura frágil','Con un cuello largo que se propaga','Con un plateau a 600 %','Con una fluencia marcada y estricción'],e:'Las redes entrecruzadas limitan el movimiento de cadenas: poca deformación y fractura casi frágil.'},
+   {t:'familias',b:'Comprender',q:'¿Qué mecanismo permite la deformación plástica en los metales dúctiles?',o:['El movimiento de dislocaciones','La fusión local','El rompimiento de enlaces iónicos','La difusión de vacancias a temperatura ambiente'],e:'La deformación plástica ocurre por deslizamiento de dislocaciones en los planos de deslizamiento.'},
+   {t:'familias',b:'Evaluar',q:'Se busca un resorte que almacene mucha energía elástica por volumen (σy²/2E alto). Entre estos, ¿cuál conviene?',o:['Acero de alta resistencia (σy ≈ 1000 MPa)','Cobre recocido (σy ≈ 70 MPa)','Acero bajo carbono (σy ≈ 250 MPa)','Aluminio recocido de baja resistencia'],e:'Con E similar, σy² decide: el acero de alta resistencia da el mayor σy²/2E.'},
+   {t:'nolineal',b:'Comprender',q:'¿La ley de Hooke σ = E·ε describe a un elastómero en todo su rango?',o:['No: su curva es no lineal','Sí, con E constante','Sí, pero con μ = 0.5','Solo después de la fluencia'],e:'Solo es válida aproximadamente a deformaciones muy pequeñas; luego la pendiente cambia continuamente.'},
+   {t:'nolineal',b:'Comprender',q:'¿Qué significa que un elastómero sea elástico no lineal?',o:['Recupera su forma al descargar, pero σ no es proporcional a ε','Se deforma de forma permanente','Sigue exactamente σ = E·ε','Tiene fluencia y estricción'],e:'Elástico se refiere a la recuperación; no lineal, a que el esfuerzo no es proporcional a la deformación.'},
+   {t:'nolineal',b:'Analizar',q:'¿Por qué la curva de un elastómero se vuelve muy empinada a deformaciones grandes?',o:['Las cadenas se estiran y alinean casi por completo','Se multiplican las dislocaciones','Ocurre recristalización','Se rompen los entrecruzamientos'],e:'Al agotarse la longitud de contorno disponible de las cadenas, estirar más cuesta mucho más esfuerzo.'},
+   {t:'nolineal',b:'Comprender',q:'En una curva no lineal, ¿qué módulo se usa para describir la rigidez en un punto?',o:['El módulo tangente (o el secante) indicando la deformación','Un E único para todo el ensayo','La relación de Poisson','El módulo de resiliencia'],e:'La pendiente local dσ/dε (tangente) o σ/ε en un punto (secante) cambian con la deformación y deben reportarse con ella.'},
+   {t:'nolineal',b:'Analizar',q:'¿En cuál de estos materiales es más razonable usar σ = E·ε casi hasta la fractura?',o:['Vidrio','Caucho natural','Acero bajo carbono','Nailon'],e:'El vidrio se comporta de forma lineal elástica hasta romper frágilmente.'},
+   {t:'nolineal',b:'Comprender',q:'Un termoplástico se calienta cerca de su temperatura de transición vítrea. ¿Qué pasa con su módulo?',o:['Disminuye mucho','Aumenta mucho','No cambia','Se vuelve cero siempre'],e:'Los polímeros son viscoelásticos: su módulo depende de la temperatura y cae de forma marcada alrededor de T_g.'},
+   {t:'nolineal',b:'Analizar',q:'Un polímero convencional y un elastómero se deforman cada uno al 10 % y se descargan. ¿Qué es lo más probable?',o:['El elastómero regresa a su longitud; el polímero convencional puede quedar con deformación permanente','Ambos quedan con deformación permanente','Ambos regresan por completo','El polímero convencional regresa y el elastómero no'],e:'No lineal no significa plástico: el elastómero es elástico; el termoplástico ya pasó su fluencia hacia el 4 a 5 %.'},
+   {t:'frio',b:'Recordar',q:'¿Cómo se define el porcentaje de trabajo en frío %CW?',o:['(A₀ − A_f)/A₀ × 100','(A_f − A₀)/A_f × 100','(L_f − L₀)/L₀ × 100','A_f/A₀ × 100'],e:'%CW = (A₀ − A_f)/A₀ × 100, con A el área de la sección transversal.'},
+   {t:'frio',b:'Aplicar',q:'Un alambre de cobre pasa de 15.2 mm a 12.2 mm de diámetro por trefilado en frío. ¿Cuál es el %CW?',o:['≈ 35.6 %','≈ 19.7 %','≈ 64.4 %','≈ 24.1 %'],e:'%CW = [1 − (12.2/15.2)²] × 100 = (1 − 0.644) × 100 = 35.6 %. El 19.7 % sale de usar diámetros en vez de áreas.'},
+   {t:'frio',b:'Comprender',q:'Al trabajar un metal en frío, ¿qué pasa con σy y con la ductilidad?',o:['σy sube y el %EL baja','σy baja y el %EL sube','Ambos suben','Ambos bajan'],e:'Se multiplican y enmarañan las dislocaciones: más resistencia y dureza, menos ductilidad.'},
+   {t:'frio',b:'Comprender',q:'¿Por qué endurece la deformación en frío?',o:['Las dislocaciones se multiplican y se bloquean entre sí y con los límites de grano','Los granos crecen','El material se calienta y recristaliza','Desaparecen las dislocaciones'],e:'Más dislocaciones significa más obstáculos al deslizamiento: hace falta más esfuerzo para seguir deformando.'},
+   {t:'frio',b:'Recordar',q:'¿Qué tratamiento restaura la ductilidad de un metal trabajado en frío?',o:['Recocido (recuperación y recristalización)','Más laminación','Temple en agua sin calentar','Enfriamiento criogénico'],e:'El recocido elimina dislocaciones y forma granos nuevos libres de deformación.'},
+   {t:'frio',b:'Comprender',q:'¿Cuál es la relación aproximada entre el aumento de σy y la densidad de dislocaciones ρ?',o:['Δσy ∝ √ρ','Δσy ∝ 1/ρ','Δσy ∝ ρ²','No hay relación'],e:'Δσy crece aproximadamente con la raíz de ρ (relación tipo Taylor).'},
+   {t:'frio',b:'Comprender',q:'Después de laminar en frío una placa, ¿cómo se ven sus granos?',o:['Alargados en la dirección de laminación','Equiaxiales y más pequeños','Más grandes y equiaxiales','Esféricos'],e:'La deformación estira los granos en la dirección de laminación y los comprime en el espesor.'},
+   {t:'frio',b:'Aplicar',q:'Una placa de 10 mm se lamina en frío hasta 6 mm con ancho constante. ¿Cuál es el %CW?',o:['40 %','60 %','66.7 %','4 %'],e:'%CW = (10 − 6)/10 × 100 = 40 %.'},
+   {t:'frio',b:'Comprender',q:'Durante el crecimiento de grano, ¿qué ocurre?',o:['Los granos grandes crecen a costa de los pequeños y baja σy','Los granos se alargan','Aumentan las dislocaciones','Sube la dureza'],e:'Se reduce el área de límites de grano; con granos mayores baja la resistencia (Hall–Petch).'},
+   {t:'frio',b:'Aplicar',q:'Al planear varias reducciones consecutivas en frío, ¿qué conviene hacer?',o:['Recocer entre pasos cuando la ductilidad se agote','Aumentar siempre la reducción por paso','Evitar medir el diámetro','Trabajar siempre arriba de la temperatura de recristalización'],e:'El metal pierde ductilidad con el %CW; si se sigue deformando se agrieta, por eso se recuece entre pasos.'}
+  ];
+  $('#mc-qz-t').innerHTML='<option value="all">Todos los temas</option>'+Object.keys(QT).map(k=>`<option value="${k}">${QT[k]}</option>`).join('');
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const SHP=[['▲','--denim'],['◆','--naranja'],['●','--ok'],['■','--cafe']];
+  const QZ={on:false,pool:[],i:0,sc:0,streak:0,best:0,ok:0,t0:0,lim:20,tm:0,cur:null,done:false,by:{},bad:[],nick:''};
+  function qzRank(){let a=[];try{a=JSON.parse(localStorage.getItem('imec1402_quiz')||'[]');}catch(e){}return a;}
+  function qzShowRank(){const a=qzRank();$('#mc-qz-rank').innerHTML=a.length?'<h3>Mejores partidas (este navegador)</h3><div class="mc-tbl"><table><tr><th>#</th><th>Apodo</th><th>Puntos</th><th>Aciertos</th><th>Tema</th></tr>'+a.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.n)}</td><td>${r.s}</td><td>${r.ok}/${r.N}</td><td>${esc(r.t)}</td></tr>`).join('')+'</table></div>':'';}
+  function qzStart(){const t=$('#mc-qz-t').value,N=+$('#mc-qz-n').value;let pool=QB.filter(q=>t==='all'||q.t===t);
+    QZ.lim=+$('#mc-qz-s').value;QZ.pool=shuffle(pool).slice(0,N);QZ.i=0;QZ.sc=0;QZ.streak=0;QZ.best=0;QZ.ok=0;QZ.by={};QZ.bad=[];QZ.on=true;QZ.nick=($('#mc-qz-nick').value||'').trim()||'Anónimo';
+    $('#mc-qz-box').classList.toggle('mc-big',$('#mc-qz-big').checked);qzRound();}
+  function qzRound(){clearInterval(QZ.tm);QZ.done=false;const q=QZ.pool[QZ.i],idx=shuffle([0,1,2,3]);QZ.cur={q,idx};
+    $('#mc-qz-box').innerHTML=`<div class="mc-qz-hd"><span class="mc-score">Pregunta ${QZ.i+1} de ${QZ.pool.length} · ${QT[q.t]}</span><span class="mc-score">Puntos: <b id="mc-qz-sc">${QZ.sc}</b> · Racha: ${QZ.streak}</span></div>`+(QZ.lim?'<div class="mc-qz-bar"><div id="mc-qz-fill"></div></div><div class="mc-score" id="mc-qz-sec"></div>':'')+`<p class="mc-qz-q">${q.q}</p><div class="mc-opts mc-qz-o">${idx.map((k,j)=>`<button class="mc-opt mc-qz-b" data-k="${k}" style="border-left:10px solid var(${SHP[j][1]})"><span style="color:var(${SHP[j][1]})">${SHP[j][0]}</span> ${q.o[k]}</button>`).join('')}</div><div id="mc-qz-fb"></div>`;
+    QZ.t0=performance.now();
+    if(QZ.lim){const tick=()=>{const el=(performance.now()-QZ.t0)/1000,rem=Math.max(0,QZ.lim-el);const f=$('#mc-qz-fill');if(f)f.style.width=(rem/QZ.lim*100)+'%';const s=$('#mc-qz-sec');if(s)s.textContent=fx(rem,0)+' s';if(rem<=0)qzAns(null);};tick();QZ.tm=setInterval(tick,100);}}
+  function qzAns(k){if(QZ.done)return;QZ.done=true;clearInterval(QZ.tm);const {q}=QZ.cur,el=(performance.now()-QZ.t0)/1000,ok=k!==null&&+k===0;
+    const by=QZ.by[q.t]||(QZ.by[q.t]={ok:0,n:0});by.n++;let pts=0;
+    if(ok){by.ok++;QZ.ok++;QZ.streak++;QZ.best=Math.max(QZ.best,QZ.streak);const base=QZ.lim?Math.round(500+500*Math.max(0,1-el/QZ.lim)):1000;pts=base+100*Math.min(QZ.streak-1,4);QZ.sc+=pts;}else{QZ.streak=0;QZ.bad.push(q);}
+    $$('#mc-qz-box .mc-qz-b').forEach(b=>{b.disabled=true;if(+b.dataset.k===0)b.classList.add('ok');else if(k!==null&&b.dataset.k===String(k))b.classList.add('bad');});
+    const last=QZ.i+1>=QZ.pool.length;$('#mc-qz-sc').textContent=QZ.sc;
+    $('#mc-qz-fb').innerHTML=`<div class="mc-sol"><b>${ok?'Correcto, +'+pts+' puntos.':(k===null?'Se acabó el tiempo.':'Incorrecto.')}</b> ${q.e}${$('#mc-qz-prof').checked?` <span class="mc-score">[Bloom: ${q.b}]</span>`:''}</div><button class="btn" id="mc-qz-nx">${last?'Ver resultados':'Siguiente'}</button>`;}
+  function qzEnd(){QZ.on=false;const N=QZ.pool.length,pc=Math.round(QZ.ok/N*100);
+    const row=Object.keys(QZ.by).map(k=>`<tr><td>${QT[k]}</td><td>${QZ.by[k].ok} de ${QZ.by[k].n}</td></tr>`).join('');
+    $('#mc-qz-box').innerHTML=`<div class="mc-sol"><b>Resultado de ${esc(QZ.nick)}:</b> ${QZ.sc} puntos · ${QZ.ok} de ${N} correctas (${pc} %) · mejor racha ${QZ.best}.</div><div class="mc-tbl"><table><tr><th>Tema</th><th>Aciertos</th></tr>${row}</table></div>`+(QZ.bad.length?'<h3>Para repasar</h3>'+QZ.bad.map(q=>`<details style="margin:6px 0"><summary>${q.q}</summary><p><b>Respuesta:</b> ${q.o[0]}</p><p>${q.e}</p></details>`).join(''):'<p class="note">Sin errores. Excelente.</p>')+'<div class="mc-row"><button class="btn" id="mc-qz-again">Jugar otra vez</button></div>';
+    try{const a=qzRank();a.push({n:QZ.nick,s:QZ.sc,ok:QZ.ok,N,t:$('#mc-qz-t').selectedOptions[0].textContent});a.sort((x,y)=>y.s-x.s);localStorage.setItem('imec1402_quiz',JSON.stringify(a.slice(0,5)));}catch(e){}
+    qzShowRank();}
+  $('#mc-qz-go').onclick=qzStart;
+  $('#mc-qz-box').onclick=e=>{const b=e.target.closest('.mc-qz-b');if(b){qzAns(b.dataset.k);return;}
+    if(e.target.closest('#mc-qz-nx')){QZ.i++;if(QZ.i>=QZ.pool.length)qzEnd();else qzRound();}
+    if(e.target.closest('#mc-qz-again'))qzStart();};
+  $('#mc-qz-big').onchange=()=>$('#mc-qz-box').classList.toggle('mc-big',$('#mc-qz-big').checked);
+  $('#mc-qz-prof').onchange=()=>{const on=$('#mc-qz-prof').checked;$('#mc-qz-bank').innerHTML=on?'<h3>Banco de preguntas con respuestas (modo profesor)</h3><div class="mc-tbl"><table><tr><th>#</th><th>Tema</th><th>Bloom</th><th>Pregunta</th><th>Respuesta correcta</th></tr>'+QB.map((q,i)=>`<tr><td>${i+1}</td><td>${QT[q.t]}</td><td>${q.b}</td><td>${q.q}</td><td>${q.o[0]}</td></tr>`).join('')+'</table></div>':'';};
+  qzShowRank();
+
+  window.__MEC={QB,FAMS,gent,QZ,FR,worked,flow,drawGrains,EJ,GEN,MAT,sig,eOfP,pOfE,sy02,trueAt,area,TIPOS};
+  drawFam();drawEl();frSetMat('acero');frCalc();ejNew();drawSim();drawKn();drawB();
 })();
 
 </script>
