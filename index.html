@@ -198,6 +198,17 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
 #view-mec summary{cursor:pointer;font-weight:600}
 #view-mec #mc-gbox .mc-fig{max-width:620px}
 #view-mec #mc-gbox .mc-fig svg{max-height:330px}
+#view-mec .mc-cv{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+#view-mec .mc-st{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:8px 0}
+#view-mec .mc-st figure{margin:0}
+#view-mec .mc-st figcaption{font-size:13px;line-height:1.35;margin-top:5px}
+#view-mec .mc-st figcaption b{display:block;font:600 13.5px var(--f-body)}
+#view-mec .mc-st .mc-fig{padding:4px}
+#view-mec .mc-dl{stroke:var(--denim);stroke-width:1.8;fill:none;stroke-linecap:round}
+#view-mec .mc-sl{stroke:var(--naranja);stroke-width:1;fill:none;stroke-dasharray:4 3;opacity:.7}
+#view-mec .mc-lat{fill:var(--line)}
+#view-mec .mc-roll{fill:var(--q3);stroke:var(--ink);stroke-width:1.4}
+#view-mec .mc-plate{fill:var(--q1);stroke:var(--ink);stroke-width:1.4}
 .views{display:flex;gap:0;border-bottom:2px solid var(--line);flex-wrap:wrap}
 .view{font:600 20px var(--f-display);letter-spacing:.02em;background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;color:var(--muted);padding:8px 16px;cursor:pointer}
 .view[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--naranja)}
@@ -679,10 +690,11 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     <p class="note" style="margin:0">Esquemas didácticos elaborados para el curso; no están a escala. Consulta los datos de aleaciones y propiedades en Callister y Rethwisch (10.ª ed.) y en Askeland y Wright (2015).</p>
   </div>
   <div id="view-mec" hidden style="display:grid;gap:18px">
-    <p class="lead" style="margin:0">Clase 1: propiedades mecánicas y ensayo de tensión. Estira una probeta virtual, lee la curva esfuerzo–deformación, calcula dureza Brinell y practica con problemas nuevos cada vez. Los materiales son ilustrativos (órdenes de magnitud), no datos de una aleación concreta.</p>
+    <p class="lead" style="margin:0">Clase 1: propiedades mecánicas y ensayo de tensión. Estira una probeta virtual, lee la curva esfuerzo–deformación, calcula dureza Brinell, observa cómo el trabajo en frío deforma los granos y endurece el metal, y practica con problemas nuevos cada vez. Los materiales son ilustrativos (órdenes de magnitud), no datos de una aleación concreta.</p>
     <div class="tabs" id="mc-tabs" role="tablist">
       <button class="tab" role="tab" data-p="sim" aria-selected="true">Simulador de tensión</button>
       <button class="tab" role="tab" data-p="real" aria-selected="false">Esfuerzo real</button>
+      <button class="tab" role="tab" data-p="frio" aria-selected="false">Trabajo en frío</button>
       <button class="tab" role="tab" data-p="dur" aria-selected="false">Dureza</button>
       <button class="tab" role="tab" data-p="ej" aria-selected="false">Ejercicios</button>
       <button class="tab" role="tab" data-p="juego" aria-selected="false">Juego</button>
@@ -745,6 +757,60 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       <div class="mc-out" id="mc-kn-out"></div>
       <div class="mc-fig"><svg id="mc-kn-svg" viewBox="0 0 640 330" role="img" aria-label="Curva real sigma igual K epsilon a la n"></svg></div>
       <p class="note">Valores de K y n de la presentación 1.5 (Kalpakjian); el cobre y el aluminio corresponden a la condición recocida. El problema 5 de la presentación usa K = 100 000 psi (689.5 MPa) y n = 0.5.</p>
+    </section>
+
+    <section class="card" id="mc-frio" hidden>
+      <h2>Endurecimiento por deformación en frío</h2>
+      <p class="note">Al deformar plásticamente un metal por debajo de su temperatura de recristalización (laminar, trefilar, forjar en frío) se vuelve más duro y resistente, pero menos dúctil. Mueve el deslizador y observa qué les pasa a los granos y a la curva esfuerzo–deformación. Los dibujos son esquemas didácticos, no micrografías reales.</p>
+      <div class="mc-ctl">
+        <label class="mc-f">Material<select id="mc-fmat"></select></label>
+        <label class="mc-f"><span>Trabajo en frío: <b><span id="mc-fcwv">0</span> %</b></span><input type="range" class="mc-slide" id="mc-fcw" min="0" max="70" value="0" step="1" aria-label="Porcentaje de trabajo en frío"></label>
+        <div class="mc-row" style="margin:0"><button class="btn" id="mc-fan">Animar</button><button class="btn" id="mc-frs">Reiniciar</button></div>
+      </div>
+      <div class="mc-g2">
+        <div>
+          <canvas class="mc-cv" id="mc-fcv" width="480" height="336" role="img" aria-label="Esquema de los granos del metal deformado en frío"></canvas>
+          <p class="note" id="mc-fcap" style="margin-top:8px"></p>
+        </div>
+        <div>
+          <div class="mc-fig"><svg id="mc-frol" viewBox="0 0 460 300" role="img" aria-label="Laminación en frío: la placa entra gruesa y sale delgada"></svg></div>
+          <div class="mc-fig" style="margin-top:10px"><svg id="mc-fsvg" viewBox="0 0 520 320" role="img" aria-label="Curvas esfuerzo deformación del metal recocido y del trabajado en frío"></svg></div>
+        </div>
+      </div>
+      <div class="mc-out" id="mc-fout"></div>
+      <p class="note" id="mc-fnote"></p>
+
+      <h3>Cómo cambian los granos, paso a paso</h3>
+      <p class="note">La misma muestra a distintos grados de trabajo en frío (laminación: la placa se adelgaza y se alarga). Los puntitos con forma de ⊥ son dislocaciones: son más numerosas conforme avanza la deformación.</p>
+      <div class="mc-st" id="mc-fst"></div>
+
+      <h3>Por qué endurece: las dislocaciones se estorban</h3>
+      <div class="mc-st" id="mc-fdis"></div>
+      <div class="mc-sol"><ol>
+        <li>La deformación plástica ocurre por movimiento de dislocaciones sobre planos de deslizamiento.</li>
+        <li>Mientras se deforma, aparecen nuevas dislocaciones (fuentes como Frank–Read): la densidad ρ aumenta mucho.</li>
+        <li>Con más dislocaciones, estas se cruzan, se enredan y se bloquean entre sí; además chocan con los límites de grano.</li>
+        <li>Para seguir deformando hace falta más esfuerzo: sube σy y el UTS, sube la dureza, y la ductilidad (%EL) baja porque queda menos capacidad de deformación.</li>
+        <li>Aproximación útil: el aumento de resistencia crece con la raíz de la densidad de dislocaciones, Δσy ∝ √ρ.</li>
+      </ol></div>
+
+      <h3>Qué pasa al calentar: recocido</h3>
+      <p class="note">Calentar un metal trabajado en frío revierte el efecto. Recuperación, recristalización y crecimiento de grano ocurren al subir la temperatura (la recristalización suele empezar entre 0.3 y 0.5 de la temperatura de fusión en kelvin, según el metal y el %CW).</p>
+      <div class="mc-st" id="mc-fan5"></div>
+
+      <h3>Calcula el %CW</h3>
+      <div class="mc-fl">
+        <label class="mc-f">Diámetro inicial d₀ (mm)<input type="number" class="mc-in" id="mc-cd0" value="15.2" step="0.1" min="0.1"></label>
+        <label class="mc-f">Diámetro final d_f (mm)<input type="number" class="mc-in" id="mc-cdf" value="12.2" step="0.1" min="0.1"></label>
+      </div>
+      <div class="mc-out" id="mc-cout"></div>
+      <details style="margin-top:12px"><summary>Fórmulas de esta sección</summary>
+        <div class="mc-fm">%CW = (A₀ − A_f)/A₀ × 100    (A = área de la sección)</div>
+        <div class="mc-fm">Alambre: A = πd²/4    Placa laminada: %CW = (h₀ − h_f)/h₀ × 100</div>
+        <div class="mc-fm">ε_real = ln(A₀/A_f)    L_f/L₀ = A₀/A_f (volumen constante)</div>
+        <div class="mc-fm">σ_real = K·ε_real<sup>n</sup>    Δσy ∝ √ρ    Hall–Petch: σy = σ₀ + k_y/√d</div>
+        <p class="note">Referencia: Callister, capítulo 7 (endurecimiento por deformación, recuperación, recristalización y crecimiento de grano) y el capítulo equivalente de Askeland; verifica el número de sección en tu edición.</p>
+      </details>
     </section>
 
     <section class="card" id="mc-dur" hidden>
@@ -2301,9 +2367,9 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 
   // ---------- pestañas ----------
-  const PANELS=['sim','real','dur','ej','juego'];
+  const PANELS=['sim','real','frio','dur','ej','juego'];
   function panel(p){PANELS.forEach(k=>{$('#mc-'+k).hidden=k!==p;});$$('#mc-tabs .tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));
-    if(p==='sim')drawSim();if(p==='real')drawKn();if(p==='dur')drawB();if(p==='juego'&&!G.on)gameStart();}
+    if(p==='sim')drawSim();if(p==='real')drawKn();if(p==='dur')drawB();if(p==='frio'){frStatic();drawFrio();}if(p==='juego'&&!G.on)gameStart();}
   $('#mc-tabs').onclick=e=>{const b=e.target.closest('[data-p]');if(b)panel(b.dataset.p);};
 
   // ---------- materiales (valores ilustrativos) ----------
@@ -2514,12 +2580,20 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       return{t:'Esfuerzo y deformación reales',txt:`Una probeta, antes de iniciar la estricción, registra σ = ${s} MPa y ε = ${fx(e*100,0)} %. Calcula el esfuerzo real y la deformación real.`,
       f:[{l:'σ real',u:'MPa',a:sr,r:.01},{l:'ε real',u:'%',a:er*100,r:.02}],
       s:steps([`σ_real = σ(1 + ε) = ${s} × ${fx(1+e,2)} = ${fx(sr,1)} MPa`,`ε_real = ln(1 + ε) = ln(${fx(1+e,2)}) = ${fx(er,4)} = ${fx(er*100,2)} %`])};},
+    frio(){const d0=pick([8,10,12]),cw=rnd(10,50,5)/100,df=+(d0*Math.sqrt(1-cw)).toFixed(2),a0=A0(d0),af=A0(df),CW=(a0-af)/a0*100,er=Math.log(a0/af)*100;
+      return{t:'Trabajo en frío (trefilado)',txt:`Un alambre de cobre recocido de ${d0} mm de diámetro se trefila en frío hasta ${df} mm. Calcula el %CW y la deformación real equivalente, e indica cómo cambian la resistencia y la ductilidad.`,
+      f:[{l:'%CW',u:'%',a:CW,r:.02},{l:'ε real',u:'%',a:er,r:.02},{l:'Resistencia (σy y UTS)',sel:['aumenta','disminuye','no cambia'],a:'aumenta'},{l:'Ductilidad (%EL)',sel:['aumenta','disminuye','no cambia'],a:'disminuye'}],
+      s:steps([`A₀ = π(${d0})²/4 = ${fx(a0,2)} mm²; A_f = π(${df})²/4 = ${fx(af,2)} mm²`,`%CW = (A₀ − A_f)/A₀ × 100 = (${fx(a0,2)} − ${fx(af,2)})/${fx(a0,2)} × 100 = ${fx(CW,1)} %`,`ε_real = ln(A₀/A_f) = ln(${fx(a0/af,3)}) = ${fx(er/100,4)} = ${fx(er,1)} %`,`Al deformar en frío aumentan las dislocaciones y se bloquean entre sí: σy y UTS aumentan y el %EL disminuye.`])};},
+    laminado(){const h0=pick([6,8,10,12,15]),cw=rnd(10,60,5)/100,hf=+(h0*(1-cw)).toFixed(2),CW=(h0-hf)/h0*100,ra=h0/hf;
+      return{t:'Laminación en frío',txt:`Una placa de aluminio de ${h0} mm de espesor se lamina en frío hasta ${hf} mm. El ancho no cambia. Calcula el %CW y cuántas veces se alarga la placa (L_f / L₀).`,
+      f:[{l:'%CW',u:'%',a:CW,r:.02},{l:'L_f / L₀',u:'',a:ra,r:.02}],
+      s:steps([`Con ancho w constante, A = w·h, así que %CW = (h₀ − h_f)/h₀ × 100 = (${h0} − ${hf})/${h0} × 100 = ${fx(CW,1)} %`,`Volumen constante: L₀·w·h₀ = L_f·w·h_f, entonces L_f/L₀ = h₀/h_f = ${h0}/${hf} = ${fx(ra,3)}`])};},
     energia(){const sy=pick([250,275,350,500]),mt=pick([['acero',207],['aluminio',69],['cobre',110]]),ey=sy/(mt[1]*1000),u=sy*sy/(2*mt[1]);
       return{t:'Resiliencia',txt:`Un ${mt[0]} (E = ${mt[1]} GPa) tiene σy = ${sy} MPa. Calcula la deformación en la fluencia y la resiliencia (energía por volumen en la zona elástica, u = σy²/2E).`,
       f:[{l:'ε en σy',u:'×10⁻³',a:ey*1000,r:.02},{l:'Resiliencia',u:'kJ/m³',a:u,r:.02}],
       s:steps([`ε_y = σy/E = ${sy}/${fx(mt[1]*1000,0)} = ${fx(ey*1000,3)}×10⁻³`,`u = σy²/(2E) = ${sy}² / (2 × ${fx(mt[1]*1000,0)}) = ${fx(u/1000,4)} MPa = ${fx(u,1)} kJ/m³ (1 MPa = 1 MJ/m³)`])};}
   };
-  const TIPOS=[['rand','Aleatorio'],['hooke','Hooke y módulo de Young'],['poisson','Relación de Poisson'],['ensayo','Ensayo de tensión completo'],['real','Esfuerzo y deformación reales'],['brinell','Dureza Brinell'],['energia','Resiliencia']];
+  const TIPOS=[['rand','Aleatorio'],['hooke','Hooke y módulo de Young'],['poisson','Relación de Poisson'],['ensayo','Ensayo de tensión completo'],['real','Esfuerzo y deformación reales'],['brinell','Dureza Brinell'],['energia','Resiliencia'],['frio','Trabajo en frío (trefilado)'],['laminado','Laminación en frío']];
   $('#mc-ejt').innerHTML=TIPOS.map(t=>`<option value="${t[0]}">${t[1]}</option>`).join('');
   const EJ={cur:null,ok:0,tot:0};
   function ejNew(){const t=$('#mc-ejt').value,k=t==='rand'?pick(Object.keys(GEN)):t;EJ.cur=GEN[k]();const c=EJ.cur;
@@ -2540,7 +2614,8 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
    ['Problema 2: Poisson en una barra de bronce (D_f ≈ 11.99 mm)','Barra de 12 mm de diámetro, F = 18 200 N, σy = 320 MPa, E = 110 GPa, μ = 0.33. Calcula el diámetro final.',['A₀ = π(12)²/4 = 113.1 mm²; σ = 18 200/113.1 = 160.9 MPa < 320 MPa: zona elástica.','ε_z = 160.9/110 000 = 1.463×10⁻³','ε_x = −0.33 × 1.463×10⁻³ = −4.83×10⁻⁴','ΔD = −4.83×10⁻⁴ × 12 = −0.0058 mm; D_f = 11.994 ≈ 11.99 mm']],
    ['Problema 3: ensayo completo (UTS ≈ 497 MPa, %EL = 25 %, %RA = 50.6 %)','d₀ = 12.8 mm, L₀ = 50.8 mm, F_máx = 64 kN, F_fractura = 48 kN, L_f = 63.5 mm, d_f = 9.0 mm.',['A₀ = 128.7 mm²; A_f = π(9.0)²/4 = 63.6 mm²','UTS = 64 000/128.7 = 497 MPa','σ ing. fractura = 48 000/128.7 = 373 MPa; σ real fractura = 48 000/63.6 = 755 MPa','%EL = (63.5 − 50.8)/50.8 × 100 = 25.0 %; %RA = (128.7 − 63.6)/128.7 × 100 = 50.6 %']],
    ['Problema 4: Brinell (HB ≈ 229, UTS ≈ 800 MPa)','Esfera D = 10 mm, carga 3000 kgf, huella d = 4.0 mm.',['√(100 − 16) = 9.165 mm; D − 9.165 = 0.835 mm','πD(0.835) = 26.23 mm²','HB = 6000/26.23 = 229 kgf/mm²','UTS ≈ 3.5 × 229 ≈ 800 MPa']],
-   ['Problema 5 (presentación 1.5): K = 100 000 psi y n = 0.5','Con σ_real = K·ε_real^n, calcula la resistencia real y el UTS ingenieril en el inicio de la estricción.',['K = 100 000 psi = 689.5 MPa; la estricción inicia en ε_real = n = 0.5','σ_real = K·nⁿ = 689.5 × 0.5^0.5 = 487.5 MPa','UTS = σ_real/(1 + ε) = 487.5 / e^0.5 = 487.5/1.6487 = 295.7 MPa','Coincide con la respuesta de la presentación (487.54 y 295.71 MPa).']]
+   ['Problema 5 (presentación 1.5): K = 100 000 psi y n = 0.5','Con σ_real = K·ε_real^n, calcula la resistencia real y el UTS ingenieril en el inicio de la estricción.',['K = 100 000 psi = 689.5 MPa; la estricción inicia en ε_real = n = 0.5','σ_real = K·nⁿ = 689.5 × 0.5^0.5 = 487.5 MPa','UTS = σ_real/(1 + ε) = 487.5 / e^0.5 = 487.5/1.6487 = 295.7 MPa','Coincide con la respuesta de la presentación (487.54 y 295.71 MPa).']],
+   ['Problema 6 (trabajo en frío): trefilado de un alambre de cobre (%CW ≈ 35.6 %)','Un alambre de cobre de 15.2 mm de diámetro se trefila en frío hasta 12.2 mm. Calcula el %CW y la deformación real.',['A₀ = π(15.2)²/4 = 181.5 mm²; A_f = π(12.2)²/4 = 116.9 mm²','%CW = (181.5 − 116.9)/181.5 × 100 = 35.6 %','ε_real = ln(A₀/A_f) = ln(1.552) = 0.440 = 44.0 %','Tras el trefilado el alambre es más duro y resistente y menos dúctil.']]
   ];
   $('#mc-cls').innerHTML=CLS.map(c=>`<details style="margin:6px 0"><summary>${c[0]}</summary><p>${c[1]}</p>${steps(c[2])}</details>`).join('');
 
@@ -2560,8 +2635,139 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   function gameEnd(){$('#mc-gbox').innerHTML=`<div class="mc-sol"><b>Resultado:</b> ${G.ok} de ${G.n} correctas · ${G.sc} puntos.</div><button class="btn" id="mc-grst">Jugar otra vez</button>`;$('#mc-grst').onclick=gameStart;}
 
   // ---------- inicio ----------
-  window.__MEC={EJ,GEN,MAT,sig,eOfP,pOfE,sy02,trueAt,area,TIPOS};
-  ejNew();drawSim();drawKn();drawB();
+  // ---------- trabajo en frío ----------
+  const CC=document.createElement('canvas');CC.width=CC.height=1;const CCx=CC.getContext('2d',{willReadFrequently:true});
+  function parseCol(s,fb){CCx.fillStyle=fb;try{CCx.fillStyle=s||fb;}catch(e){}CCx.clearRect(0,0,1,1);CCx.fillRect(0,0,1,1);const d=CCx.getImageData(0,0,1,1).data;return[d[0],d[1],d[2]];}
+  function cols(){const cs=getComputedStyle(root),g=(n,fb)=>parseCol(cs.getPropertyValue(n).trim(),fb);
+    const pal=[g('--q1','#E3CBA8'),g('--q2','#C9D6C1'),g('--q4','#CDB8D4'),g('--q5','#DDA985'),g('--q6','#A9C2CF'),g('--q7','#CDBA72')];
+    const lum=pal.reduce((a,c)=>a+(0.299*c[0]+0.587*c[1]+0.114*c[2]),0)/pal.length/255;
+    return{pal,line:lum<.45?[235,235,240]:[38,42,58]};}
+  function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function hsh(a,b,c){let h=Math.imul(a|0,374761393)+Math.imul(b|0,668265263)+Math.imul(c|0,1274126177)|0;h=Math.imul(h^h>>>13,1274126177);h^=h>>>16;return(h>>>0)/4294967296;}
+  const SP=64,seedC={};
+  function seedTab(s){if(seedC[s])return seedC[s];const t=new Float32Array(SP*SP*2);
+    for(let j=0;j<SP;j++)for(let i=0;i<SP;i++){t[(j*SP+i)*2]=.15+.7*hsh(i,j,s*2+1);t[(j*SP+i)*2+1]=.15+.7*hsh(i,j,s*2+2);}return seedC[s]=t;}
+  // cuadrícula de granos de Voronoi; la laminación estira x por lam y comprime y por 1/lam
+  function idGrid(W,H,lam,S,seed,out,off){const t=seedTab(seed),sx=S/(lam*W),sy=S*lam/W;
+    for(let py=0;py<H;py++){const y=(py+.5)*sy,cj=Math.floor(y);
+      for(let px=0;px<W;px++){const x=(px+.5)*sx,ci=Math.floor(x);let best=1e9,bid=0;
+        for(let dj=-1;dj<=1;dj++){const jj=(((cj+dj)%SP)+SP)%SP;
+          for(let di=-1;di<=1;di++){const ii=(((ci+di)%SP)+SP)%SP,k=(jj*SP+ii)*2,dx=x-(ci+di+t[k]),dy=y-(cj+dj+t[k+1]),d=dx*dx+dy*dy;
+            if(d<best){best=d;bid=jj*SP+ii;}}}
+        out[py*W+px]=bid+off;}}}
+  function drawGrains(cv,o){const W=cv.width,H=cv.height,ctx=cv.getContext('2d'),C=cols(),ids=new Int32Array(W*H);
+    idGrid(W,H,o.lam,o.S,o.seed,ids,0);let mask=null;
+    if(o.rec){const m2=new Int32Array(W*H);idGrid(W,H,1,o.rec.S,o.rec.seed,m2,100000);const r=rng(o.rec.seed+5),nu=[];
+      for(let i=0;i<o.rec.N;i++)nu.push([r()*W,r()*H]);mask=new Uint8Array(W*H);const R=o.rec.R*W;
+      for(let py=0;py<H;py++)for(let px=0;px<W;px++){let inside=false;
+        for(let i=0;i<nu.length;i++){const dx=px-nu[i][0],dy=py-nu[i][1],rr=R*(1+.35*(hsh(px>>3,py>>3,i)-.5));if(dx*dx+dy*dy<rr*rr){inside=true;break;}}
+        if(inside){ids[py*W+px]=m2[py*W+px];mask[py*W+px]=1;}}}
+    const img=ctx.createImageData(W,H),D=img.data;
+    for(let k=0;k<W*H;k++){const id=ids[k],c=C.pal[Math.floor(hsh(id&0xffff,id>>16,7)*C.pal.length)],sh=.9+.2*hsh(id,3,9);
+      const px=k%W,bd=(px+1<W&&ids[k]!==ids[k+1])||(k+W<W*H&&ids[k]!==ids[k+W]);
+      const q=k*4;if(bd){D[q]=C.line[0];D[q+1]=C.line[1];D[q+2]=C.line[2];}
+      else{D[q]=Math.min(255,c[0]*sh);D[q+1]=Math.min(255,c[1]*sh);D[q+2]=Math.min(255,c[2]*sh);}D[q+3]=255;}
+    ctx.putImageData(img,0,0);
+    const n=Math.round((o.dens||0)*W*H/161280);
+    if(n>0){const r=rng(o.seed+11),s=Math.max(2.6,W/75);ctx.strokeStyle='rgb('+C.line.join(',')+')';ctx.lineWidth=Math.max(1,W/260);ctx.lineCap='round';ctx.beginPath();
+      for(let i=0;i<n;i++){const x=r()*W,y=r()*H,up=r()<.5?1:-1;if(mask&&mask[Math.floor(y)*W+Math.floor(x)])continue;
+        ctx.moveTo(x-s,y+up*s*.7);ctx.lineTo(x+s,y+up*s*.7);ctx.moveTo(x,y+up*s*.7);ctx.lineTo(x,y-up*s);}
+      ctx.stroke();}}
+  // modelo de trabajo en frío (curvas ilustrativas)
+  const FMAT=MAT.filter(m=>!m.brit);
+  const cwMax=m=>Math.min(70,Math.floor(95*m.ra));
+  function flow(m,er){const eru=Math.log(1+m.eu),sru=m.uts*(1+m.eu);
+    if(er<=eru){const e=Math.exp(er)-1;return sig(m,e)*(1+e);}
+    return sru/Math.pow(eru,eru)*Math.pow(er,eru);} // tramo posterior: K·ε^n con n = ε_real en el UTS
+  function worked(m,cw){const E=m.E*1000,eru=Math.log(1+m.eu),pts=[];
+    if(cw<.005){const N=120;for(let i=0;i<=N;i++){const e=eOfP(m,i/N);pts.push([e,sig(m,e)]);}return{pts,sy:m.sy,uts:m.uts,ef:m.ef,eu:m.eu};}
+    const et=Math.min(Math.log(1/(1-cw)),.95*Math.log(1/(1-m.ra))),sy=flow(m,et),off=sy/E;pts.push([0,0]);
+    let UTS,euT;
+    if(et<eru){UTS=flow(m,eru)*Math.exp(-(eru-et));euT=Math.exp(eru-et)-1+off;
+      for(let i=0;i<=50;i++){const er=et+(eru-et)*i/50;pts.push([Math.exp(er-et)-1+off,flow(m,er)*Math.exp(-(er-et))]);}}
+    else{UTS=sy;euT=off;pts.push([off,sy]);}
+    const efT=euT+(m.ef-m.eu)*(1-cw),sf=UTS*Math.min(.97,m.sf+(.97-m.sf)*cw/.6);
+    for(let i=1;i<=30;i++){const y=i/30;pts.push([euT+(efT-euT)*y,UTS-(UTS-sf)*y*y]);}
+    return{pts,sy,uts:UTS,ef:efT,eu:euT};}
+  const FR={m:FMAT[0],cw:0,anim:0};
+  function frCap(cw){const asp=1/((1-cw)*(1-cw));
+    const t=cw<.005?'Metal recocido: granos equiaxiales (de tamaño parecido en todas direcciones) y pocas dislocaciones. Es blando y muy dúctil.'
+      :cw<.15?'Deformación leve: los granos empiezan a alargarse en el sentido de laminación y las dislocaciones se multiplican.'
+      :cw<.35?'Los granos se aplanan y se alargan; las dislocaciones se cruzan y empiezan a bloquearse. El metal ya es notablemente más duro.'
+      :cw<.55?'Granos muy alargados (fibrosos) con una red densa de dislocaciones enredadas. Poca ductilidad residual.'
+      :'Granos en forma de hebras y densidad de dislocaciones máxima. El material casi no puede deformarse más sin agrietarse: hay que recocerlo.';
+    return t+(cw>=.005?` Relación largo/alto de cada grano ≈ 1/(1 − CW)² = ${fx(asp,1)}.`:'');}
+  function drawRoll(cw){const svg=$('#mc-frol'),h0=70,hf=h0*(1-cw),cy=150,R=50,xr=230;
+    const tb=cy-hf/2,bb=cy+hf/2,L=1/(1-cw);
+    let s=`<polygon class="mc-plate" points="14,${cy-h0/2} ${xr-22},${cy-h0/2} ${xr+22},${tb} ${446},${tb} 446,${bb} ${xr+22},${bb} ${xr-22},${cy+h0/2} 14,${cy+h0/2}"/>`;
+    s+=`<circle class="mc-roll" cx="${xr}" cy="${tb-R}" r="${R}"/><circle class="mc-roll" cx="${xr}" cy="${bb+R}" r="${R}"/>`;
+    s+=`<path class="mc-ax" d="M${xr-18} ${tb-R} a18 18 0 1 0 36 0" /><path class="mc-ax" d="M${xr-18} ${bb+R} a18 18 0 1 1 36 0" />`;
+    s+=`<text class="mc-tl" x="22" y="${cy-h0/2-8}">h₀ = 10 mm</text><text class="mc-tl" x="440" text-anchor="end" y="${tb-8}">h_f = ${fx(10*(1-cw),1)} mm</text>`;
+    s+=`<text class="mc-t" x="14" y="292">Entra gruesa y corta</text><text class="mc-t" x="446" y="292" text-anchor="end">${cw<.005?'Sale igual':'Sale delgada, ×'+fx(L,2)+' más larga'}</text>`;
+    s+=`<path class="mc-ax" d="M60 ${cy} h50 m-8 -6 l8 6 l-8 6"/>`;
+    svg.innerHTML=s;}
+  function drawFChart(m,cw){const svg=$('#mc-fsvg'),a=worked(m,0),b=worked(m,cw),X0=56,X1=500,Y0=14,Y1=272;
+    const xmax=Math.max(a.ef,b.ef)*100*1.04,ymax=Math.max(a.uts,b.uts)*1.12,px=e=>X0+e*100/xmax*(X1-X0),py=s=>Y1-s/ymax*(Y1-Y0);
+    let g='';const sx=nice(xmax,5),sy=nice(ymax,5);
+    for(let v=0;v<=xmax;v+=sx){g+=`<line class="mc-grid" x1="${px(v/100)}" y1="${Y0}" x2="${px(v/100)}" y2="${Y1}"/><text class="mc-t" x="${px(v/100)}" y="${Y1+16}" text-anchor="middle">${fx(v,0)}</text>`;}
+    for(let v=0;v<=ymax;v+=sy){g+=`<line class="mc-grid" x1="${X0}" y1="${py(v)}" x2="${X1}" y2="${py(v)}"/><text class="mc-t" x="${X0-6}" y="${py(v)+4}" text-anchor="end">${fx(v,0)}</text>`;}
+    g+=`<path class="mc-ax" d="M${X0} ${Y0}V${Y1}H${X1}"/><text class="mc-tl" x="${(X0+X1)/2}" y="${Y1+36}" text-anchor="middle">Deformación ingenieril ε (%)</text><text class="mc-tl" transform="translate(14 ${(Y0+Y1)/2}) rotate(-90)" text-anchor="middle">σ (MPa)</text>`;
+    const path=w=>'M'+w.pts.map(q=>px(q[0]).toFixed(1)+' '+py(q[1]).toFixed(1)).join('L');
+    g+=`<path class="mc-c1" d="${path(a)}"/>`;if(cw>=.005)g+=`<path class="mc-c2" d="${path(b)}"/>`;
+    g+=`<circle class="mc-dot" cx="${px(a.ef)}" cy="${py(a.pts[a.pts.length-1][1])}" r="4"/>`;
+    if(cw>=.005){const L=b.pts[b.pts.length-1];g+=`<circle class="mc-dot" cx="${px(L[0])}" cy="${py(L[1])}" r="4"/>`;}
+    g+=`<line class="mc-c1" x1="${X0+10}" y1="${Y0+10}" x2="${X0+40}" y2="${Y0+10}"/><text class="mc-t" x="${X0+46}" y="${Y0+14}">Recocido</text>`;
+    g+=`<line class="mc-c2" x1="${X0+10}" y1="${Y0+28}" x2="${X0+40}" y2="${Y0+28}"/><text class="mc-t" x="${X0+46}" y="${Y0+32}">Trabajado en frío (${fx(cw*100,0)} %)</text>`;
+    svg.innerHTML=g;}
+  function drawFrio(){const m=FR.m,cw=FR.cw,lam=1/(1-cw);
+    $('#mc-fcwv').textContent=fx(cw*100,0);
+    drawGrains($('#mc-fcv'),{lam,S:10,seed:1,dens:Math.round(cw*380)});
+    $('#mc-fcap').textContent=frCap(cw);drawRoll(cw);drawFChart(m,cw);
+    const a=worked(m,0),b=worked(m,cw),dsy=b.sy-a.sy;
+    const o=(l,v)=>`<div class="mc-o"><small>${l}</small><b>${v}</b></div>`;
+    $('#mc-fout').innerHTML=o('%CW',fx(cw*100,0)+' %')+o('ε real equivalente',fx(Math.log(lam)*100,0)+' %')+o('σy',fx(a.sy,0)+' → '+fx(b.sy,0)+' MPa')+o('UTS',fx(a.uts,0)+' → '+fx(b.uts,0)+' MPa')+o('%EL aprox.',fx(a.ef*100,0)+' → '+fx(b.ef*100,0)+' %')+o('HB aprox. (UTS/3,5)',fx(a.uts/3.5,0)+' → '+fx(b.uts/3.5,0));
+    $('#mc-fnote').textContent=cw<.005?'Sin trabajo en frío las dos curvas coinciden.':`La resistencia a la fluencia sube ${fx(dsy,0)} MPa y la elongación baja ${fx((a.ef-b.ef)*100,0)} puntos porcentuales. Valores ilustrativos, calculados con un modelo de endurecimiento tipo K·εⁿ.`;}
+  function frSetMat(id){FR.m=FMAT.find(x=>x.id===id)||FMAT[0];const mx=cwMax(FR.m),s=$('#mc-fcw');s.max=mx;if(FR.cw*100>mx)FR.cw=mx/100;s.value=Math.round(FR.cw*100);drawFrio();}
+  $('#mc-fmat').innerHTML=FMAT.map(m=>`<option value="${m.id}">${m.n}</option>`).join('');
+  $('#mc-fmat').onchange=e=>frSetMat(e.target.value);
+  $('#mc-fcw').oninput=e=>{FR.cw=+e.target.value/100;drawFrio();};
+  $('#mc-frs').onclick=()=>{FR.anim=0;FR.cw=0;$('#mc-fcw').value=0;$('#mc-fan').textContent='Animar';drawFrio();};
+  $('#mc-fan').onclick=()=>{if(FR.anim){FR.anim=0;$('#mc-fan').textContent='Animar';return;}
+    const mx=cwMax(FR.m);if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){FR.cw=mx/100;$('#mc-fcw').value=mx;drawFrio();return;}
+    const id=FR.anim=Date.now();$('#mc-fan').textContent='Detener';if(FR.cw*100>=mx-.5)FR.cw=0;const t0=performance.now(),c0=FR.cw*100;
+    (function step(t){if(FR.anim!==id)return;const f=Math.min(1,(t-t0)/(4500*(mx-c0)/mx+300));FR.cw=Math.round(c0+(mx-c0)*f)/100;$('#mc-fcw').value=Math.round(FR.cw*100);drawFrio();
+      if(f<1)requestAnimationFrame(step);else{FR.anim=0;$('#mc-fan').textContent='Animar';}})(t0);};
+  function frStatic(){
+    const stc=[[0,'Recocido','CW 0 %','Granos equiaxiales, pocas dislocaciones.'],[.2,'Deformación moderada','CW 20 %','Los granos empiezan a aplanarse.'],[.4,'Deformación fuerte','CW 40 %','Granos alargados y muchas dislocaciones.'],[.6,'Deformación severa','CW 60 %','Granos en forma de hebras.'],[.7,'Máxima deformación','CW 70 %','Casi sin ductilidad: hay que recocer.']];
+    $('#mc-fst').innerHTML=stc.map((c,i)=>`<figure><canvas class="mc-cv" id="mc-fs${i}" width="200" height="140" role="img" aria-label="Granos con ${c[2]}"></canvas><figcaption><b>${c[1]} · ${c[2]}</b>${c[3]}</figcaption></figure>`).join('');
+    stc.forEach((c,i)=>drawGrains($('#mc-fs'+i),{lam:1/(1-c[0]),S:10,seed:1,dens:Math.round(c[0]*380)}));
+    const ann=[['Deformado (60 %)','Granos alargados y muchas dislocaciones. Duro y poco dúctil.',{lam:2.5,S:10,seed:1,dens:230}],
+      ['Recuperación','Calentando poco: las dislocaciones se reacomodan y se alivian esfuerzos internos. Los granos se ven igual; la dureza baja poco.',{lam:2.5,S:10,seed:1,dens:70}],
+      ['Recristalización (inicio)','Nacen granos nuevos, pequeños y sin deformación, en zonas muy deformadas y en los límites.',{lam:2.5,S:10,seed:1,dens:150,rec:{S:26,seed:5,N:7,R:.13}}],
+      ['Recristalización completa','Todos los granos son nuevos y equiaxiales. Se recuperan la blandura y la ductilidad.',{lam:1,S:24,seed:5,dens:0}],
+      ['Crecimiento de grano','Con más tiempo o temperatura, los granos grandes crecen a costa de los pequeños. Baja σy (Hall–Petch).',{lam:1,S:8,seed:9,dens:0}]];
+    $('#mc-fan5').innerHTML=ann.map((c,i)=>`<figure><canvas class="mc-cv" id="mc-fa${i}" width="200" height="140" role="img" aria-label="${c[0]}"></canvas><figcaption><b>${i+1}. ${c[0]}</b>${c[1]}</figcaption></figure>`).join('');
+    ann.forEach((c,i)=>drawGrains($('#mc-fa'+i),c[2]));
+    // dislocaciones
+    function dis(n,seed,tang){const r=rng(seed),W=200,Hh=150;let s='';
+      for(let y=14;y<Hh;y+=14)for(let x=10;x<W;x+=14)s+=`<circle class="mc-lat" cx="${x}" cy="${y}" r="1.5"/>`;
+      const ang=[0,60,120];
+      for(let i=0;i<n;i++){const x=16+r()*(W-32),y=16+r()*(Hh-32),a=tang?ang[Math.floor(r()*3)]:0,up=r()<.5?1:-1;
+        if(tang||i<2)s+=`<line class="mc-sl" x1="${x-20*Math.cos(a*PI/180)}" y1="${y-20*Math.sin(a*PI/180)}" x2="${x+20*Math.cos(a*PI/180)}" y2="${y+20*Math.sin(a*PI/180)}"/>`;
+        s+=`<path class="mc-dl" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${tang?(r()<.5?0:a):0}) scale(1 ${up})" d="M-6 4H6M0 4V-8"/>`;}
+      return s;}
+    const dd=[['Recocido','ρ baja. Las dislocaciones están lejos unas de otras y se mueven con poco esfuerzo.',dis(4,3,false)+'<path class="mc-ax" d="M60 140 h36 m-7 -5 l7 5 l-7 5"/>'],
+      ['Trabajo en frío moderado','Las fuentes generan más dislocaciones; empiezan a cruzarse y a estorbarse.',dis(16,5,true)],
+      ['Trabajo en frío alto','Densidad muy alta y enmarañada: se bloquean entre sí y contra los límites de grano. Mover una exige mucho más esfuerzo.',dis(40,8,true)]];
+    $('#mc-fdis').innerHTML=dd.map(c=>`<figure><div class="mc-fig"><svg viewBox="0 0 200 150" role="img" aria-label="${c[0]}: dislocaciones en una red cristalina">${c[2]}</svg></div><figcaption><b>${c[0]}</b>${c[1]}</figcaption></figure>`).join('');}
+  function frCalc(){const d0=num($('#mc-cd0').value),df=num($('#mc-cdf').value);
+    if(!(d0>0&&df>0)){$('#mc-cout').innerHTML='';return;}
+    const a0=A0(d0),af=A0(df),cw=(a0-af)/a0*100,o=(l,v)=>`<div class="mc-o"><small>${l}</small><b>${v}</b></div>`;
+    $('#mc-cout').innerHTML=o('A₀',fx(a0,1)+' mm²')+o('A_f',fx(af,1)+' mm²')+o('%CW',fx(cw,1)+' %')+o('ε real',fx(Math.log(a0/af)*100,1)+' %')+(df>d0?'<div class="mc-o"><small>Aviso</small><b>d_f > d₀: no es reducción</b></div>':'');}
+  $('#mc-cd0').oninput=$('#mc-cdf').oninput=frCalc;
+
+  window.__MEC={FR,worked,flow,drawGrains,EJ,GEN,MAT,sig,eOfP,pOfE,sy02,trueAt,area,TIPOS};
+  frSetMat('acero');frCalc();ejNew();drawSim();drawKn();drawB();
 })();
 
 </script>
