@@ -219,6 +219,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
 #view-mec .mc-big .mc-qz-q{font-size:30px}
 #view-mec .mc-big .mc-qz-b{font-size:24px;min-height:84px}
 #view-mec .mc-big .mc-qz-o{grid-template-columns:repeat(2,1fr)}
+#view-mec #mc-tip .mc-fig{max-width:660px;margin:0 auto}
 .views{display:flex;gap:0;border-bottom:2px solid var(--line);flex-wrap:wrap}
 .view{font:600 20px var(--f-display);letter-spacing:.02em;background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;color:var(--muted);padding:8px 16px;cursor:pointer}
 .view[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--naranja)}
@@ -700,14 +701,15 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     <p class="note" style="margin:0">Esquemas didácticos elaborados para el curso; no están a escala. Consulta los datos de aleaciones y propiedades en Callister y Rethwisch (10.ª ed.) y en Askeland y Wright (2015).</p>
   </div>
   <div id="view-mec" hidden style="display:grid;gap:18px">
-    <p class="lead" style="margin:0">Clase 1: propiedades mecánicas y ensayo de tensión. Estira una probeta virtual, lee la curva esfuerzo–deformación, calcula dureza Brinell, observa cómo el trabajo en frío deforma los granos y endurece el metal, y practica con problemas nuevos cada vez. Los materiales son ilustrativos (órdenes de magnitud), no datos de una aleación concreta.</p>
+    <p class="lead" style="margin:0">Clase 1: propiedades mecánicas y ensayo de tensión. Estira una probeta virtual, lee la curva esfuerzo–deformación, calcula la dureza con distintos métodos (Brinell, Rockwell, Vickers, Knoop, Shore, Mohs), observa cómo el trabajo en frío deforma los granos y endurece el metal, y practica con problemas nuevos cada vez. Los materiales son ilustrativos (órdenes de magnitud), no datos de una aleación concreta.</p>
     <div class="tabs" id="mc-tabs" role="tablist">
       <button class="tab" role="tab" data-p="sim" aria-selected="true">Simulador de tensión</button>
       <button class="tab" role="tab" data-p="real" aria-selected="false">Esfuerzo real</button>
       <button class="tab" role="tab" data-p="frio" aria-selected="false">Trabajo en frío</button>
       <button class="tab" role="tab" data-p="fam" aria-selected="false">Familias de materiales</button>
       <button class="tab" role="tab" data-p="el" aria-selected="false">Polímeros: lineal y no lineal</button>
-      <button class="tab" role="tab" data-p="dur" aria-selected="false">Dureza</button>
+      <button class="tab" role="tab" data-p="dur" aria-selected="false">Dureza Brinell</button>
+      <button class="tab" role="tab" data-p="tip" aria-selected="false">Tipos de dureza</button>
       <button class="tab" role="tab" data-p="ej" aria-selected="false">Ejercicios</button>
       <button class="tab" role="tab" data-p="juego" aria-selected="false">Juego</button>
       <button class="tab" role="tab" data-p="quiz" aria-selected="false">Quiz</button>
@@ -905,6 +907,84 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
         <tr><td>Shore</td><td>Durómetro</td><td>Penetración</td><td>Elastómeros y plásticos</td></tr>
         <tr><td>Mohs</td><td>Rayado entre minerales</td><td>Escala ordinal 1 a 10</td><td>Mineralogía</td></tr>
       </table></div>
+    </section>
+
+    <section class="card" id="mc-tip" hidden>
+      <h2>Tipos de dureza: simulaciones</h2>
+      <p class="note">La dureza no es una propiedad única: cada método mide algo distinto (huella, profundidad, rebote, rayado) y por eso se usan escalas diferentes. Elige un método y manipula el simulador. Los dibujos son esquemas, con ángulos y profundidades exagerados cuando hace falta para verse.</p>
+      <div class="tabs" id="mc-hdtabs" role="tablist">
+        <button class="tab" role="tab" data-h="roc" aria-selected="true">Rockwell</button>
+        <button class="tab" role="tab" data-h="vk" aria-selected="false">Vickers y Knoop</button>
+        <button class="tab" role="tab" data-h="sh" aria-selected="false">Shore</button>
+        <button class="tab" role="tab" data-h="mo" aria-selected="false">Mohs</button>
+        <button class="tab" role="tab" data-h="cm" aria-selected="false">Comparar y elegir</button>
+      </div>
+
+      <div id="mc-hd-roc">
+        <h3>Rockwell: mide la profundidad residual</h3>
+        <p class="note">Se aplica una precarga (referencia), luego la carga mayor, y se regresa a la precarga. La lectura es HR = N − h/0.002, con h en mm: entre más profunda la huella, más blando el material.</p>
+        <div class="mc-ctl">
+          <label class="mc-f">Escala<select id="mc-rk-s"><option value="C">HRC · cono de diamante, 150 kgf</option><option value="A">HRA · cono de diamante, 60 kgf</option><option value="B">HRB · bola de 1/16 pulg, 100 kgf</option></select></label>
+          <label class="mc-f"><span>Lectura HR: <b id="mc-rk-v">60</b></span><input type="range" class="mc-slide" id="mc-rk-hr" min="20" max="68" value="60" aria-label="Lectura Rockwell"></label>
+        </div>
+        <div class="mc-fig"><svg id="mc-rk-svg" viewBox="0 0 540 302" role="img" aria-label="Tres etapas del ensayo Rockwell: precarga, carga mayor y medición de la profundidad residual"></svg></div>
+        <div class="mc-out" id="mc-rk-out"></div>
+        <p class="note" id="mc-rk-note"></p>
+      </div>
+
+      <div id="mc-hd-vk" hidden>
+        <h3>Vickers y Knoop: se miden las diagonales de la huella</h3>
+        <p class="note">Vickers: pirámide de diamante de base cuadrada (136° entre caras), HV = 2F·sen(68°)/d² ≈ 1.8544·F/d². Knoop: pirámide alargada, HK = 14.229·F/L² (L = diagonal mayor). F en kgf y diagonales en mm; el resultado queda en kgf/mm².</p>
+        <div class="mc-ctl">
+          <label class="mc-f">Método<select id="mc-vk-m"><option value="V">Vickers</option><option value="K">Knoop</option></select></label>
+          <label class="mc-f">Carga F (kgf)<select id="mc-vk-F"><option>0.1</option><option>0.5</option><option>1</option><option>5</option><option>10</option><option selected>30</option><option>50</option><option>100</option></select></label>
+          <label class="mc-f"><span>Dureza objetivo (deslizador): <b id="mc-vk-hv">400</b></span><input type="range" class="mc-slide" id="mc-vk-s" min="100" max="1000" value="400" step="10" aria-label="Dureza objetivo"></label>
+        </div>
+        <div class="mc-fl" id="mc-vk-fl"></div>
+        <div class="mc-fig"><svg id="mc-vk-svg" viewBox="0 0 540 230" role="img" aria-label="Vista superior de la huella y perfil de la indentación"></svg></div>
+        <div class="mc-out" id="mc-vk-out"></div>
+        <p class="note" id="mc-vk-note"></p>
+      </div>
+
+      <div id="mc-hd-sh" hidden>
+        <h3>Shore: dureza de elastómeros y plásticos blandos</h3>
+        <p class="note">Un durómetro hunde un penetrador con un resorte y la lectura va de 100 (sin penetración) a 0 (penetración de unos 2.5 mm). Shore A usa un penetrador truncado y un resorte débil (elastómeros blandos); Shore D usa un cono agudo y un resorte más fuerte (plásticos y elastómeros duros).</p>
+        <div class="mc-ctl">
+          <label class="mc-f">Escala<select id="mc-sh-s"><option value="A">Shore A</option><option value="D">Shore D</option></select></label>
+          <label class="mc-f"><span>Penetración h: <b><span id="mc-sh-hv">1.0</span> mm</b></span><input type="range" class="mc-slide" id="mc-sh-p" min="0" max="250" value="100" aria-label="Penetración del durómetro"></label>
+        </div>
+        <div class="mc-fig"><svg id="mc-sh-svg" viewBox="0 0 540 230" role="img" aria-label="Durómetro Shore con carátula y penetrador"></svg></div>
+        <div class="mc-out" id="mc-sh-out"></div>
+        <p class="note">Las escalas A y D se traslapan en la zona de 90 A a 40 D aproximadamente: si el resultado en A pasa de unos 90, conviene cambiar a D; si en D queda debajo de unos 20, conviene usar A. Los valores concretos dependen de la norma (ASTM D2240); verifica antes de usarlos en un informe.</p>
+      </div>
+
+      <div id="mc-hd-mo" hidden>
+        <h3>Mohs: escala ordinal de rayado</h3>
+        <p class="note">Un material raya a otro si es más duro. La escala solo ordena (1 a 10); no dice cuánto más duro es uno que otro. Elige quién raya y qué superficie se prueba.</p>
+        <div class="mc-ctl">
+          <label class="mc-f">Raya con<select id="mc-mo-a"></select></label>
+          <label class="mc-f">Superficie<select id="mc-mo-b"></select></label>
+        </div>
+        <div class="mc-out" id="mc-mo-out"></div>
+        <div class="mc-fig"><svg id="mc-mo-svg" viewBox="0 0 540 250" role="img" aria-label="Escala de Mohs comparada con la dureza absoluta aproximada"></svg></div>
+        <p class="note">Izquierda: escala Mohs, pasos iguales. Derecha: dureza absoluta aproximada en escala logarítmica (orden de magnitud: el diamante es mucho más duro que el corindón). Las durezas aproximadas de objetos comunes (uña, moneda, vidrio, navaja) son valores de referencia habituales; verifícalos en tu fuente.</p>
+      </div>
+
+      <div id="mc-hd-cm" hidden>
+        <h3>Comparación de métodos</h3>
+        <div class="mc-tbl"><table>
+          <tr><th>Método</th><th>Penetrador</th><th>Se mide</th><th>Resultado</th><th>Uso típico</th></tr>
+          <tr><td>Brinell</td><td>Esfera de acero o carburo (D = 10 mm)</td><td>Diámetro de la huella d</td><td>HB = 2F / [πD (D − √(D² − d²))]</td><td>Metales blandos y medios, fundiciones, piezas grandes y heterogéneas</td></tr>
+          <tr><td>Rockwell</td><td>Cono de diamante o bola</td><td>Profundidad residual h</td><td>HR = N − h/0.002 (HRC: N = 100; HRB: N = 130)</td><td>Lectura rápida en taller, aceros tratados térmicamente</td></tr>
+          <tr><td>Vickers</td><td>Pirámide de diamante, 136°</td><td>Diagonales d₁ y d₂</td><td>HV ≈ 1.8544·F/d²</td><td>Todo el rango de dureza, perfiles de dureza, microdureza</td></tr>
+          <tr><td>Knoop</td><td>Pirámide alargada de diamante</td><td>Diagonal mayor L</td><td>HK = 14.229·F/L²</td><td>Materiales frágiles y capas delgadas (huella poco profunda)</td></tr>
+          <tr><td>Shore A / D</td><td>Cono truncado / cono agudo con resorte</td><td>Penetración</td><td>Lectura de 0 a 100</td><td>Elastómeros y plásticos</td></tr>
+          <tr><td>Mohs</td><td>Rayado entre minerales</td><td>Quién raya a quién</td><td>Número ordinal de 1 a 10</td><td>Mineralogía y campo</td></tr>
+        </table></div>
+        <p class="note">Las conversiones entre escalas (por ejemplo ASTM E140) son tablas empíricas que dependen del material: no son ecuaciones y no deben extrapolarse. La relación UTS ≈ 3.5·HB se usa solo como estimación en aceros.</p>
+        <h3>¿Qué método usarías?</h3>
+        <div id="mc-cm-g"></div>
+      </div>
     </section>
 
     <section class="card" id="mc-ej" hidden>
@@ -2452,9 +2532,9 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 
   // ---------- pestañas ----------
-  const PANELS=['sim','real','frio','fam','el','dur','ej','juego','quiz'];
+  const PANELS=['sim','real','frio','fam','el','dur','tip','ej','juego','quiz'];
   function panel(p){PANELS.forEach(k=>{$('#mc-'+k).hidden=k!==p;});$$('#mc-tabs .tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));
-    if(p==='sim')drawSim();if(p==='real')drawKn();if(p==='dur')drawB();if(p==='frio'){frStatic();drawFrio();}if(p==='fam')drawFam();if(p==='el')drawEl();if(p==='juego'&&!G.on)gameStart();}
+    if(p==='sim')drawSim();if(p==='real')drawKn();if(p==='dur')drawB();if(p==='frio'){frStatic();drawFrio();}if(p==='tip')hdPanel('roc');if(p==='fam')drawFam();if(p==='el')drawEl();if(p==='juego'&&!G.on)gameStart();}
   $('#mc-tabs').onclick=e=>{const b=e.target.closest('[data-p]');if(b)panel(b.dataset.p);};
 
   // ---------- materiales (valores ilustrativos) ----------
@@ -2673,12 +2753,24 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       return{t:'Laminación en frío',txt:`Una placa de aluminio de ${h0} mm de espesor se lamina en frío hasta ${hf} mm. El ancho no cambia. Calcula el %CW y cuántas veces se alarga la placa (L_f / L₀).`,
       f:[{l:'%CW',u:'%',a:CW,r:.02},{l:'L_f / L₀',u:'',a:ra,r:.02}],
       s:steps([`Con ancho w constante, A = w·h, así que %CW = (h₀ − h_f)/h₀ × 100 = (${h0} − ${hf})/${h0} × 100 = ${fx(CW,1)} %`,`Volumen constante: L₀·w·h₀ = L_f·w·h_f, entonces L_f/L₀ = h₀/h_f = ${h0}/${hf} = ${fx(ra,3)}`])};},
+    vickers(){const F=pick([10,30,50]),HV0=rnd(150,700,10),d0=Math.sqrt(1.8544*F/HV0),dl=rnd(0,.02,.005),d1=+(d0*(1+dl)).toFixed(3),d2=+(d0*(1-dl)).toFixed(3),d=(d1+d2)/2,HV=1.8544*F/(d*d);
+      return{t:'Dureza Vickers',txt:`En un ensayo Vickers con F = ${F} kgf, las diagonales de la huella miden d₁ = ${d1} mm y d₂ = ${d2} mm. Calcula la diagonal promedio y la dureza HV (HV ≈ 1.8544·F/d²).`,
+      f:[{l:'d promedio',u:'mm',a:d,abs:.0006},{l:'HV',u:'kgf/mm²',a:HV,r:.02}],
+      s:steps([`d = (d₁ + d₂)/2 = (${d1} + ${d2})/2 = ${fx(d,4)} mm`,`d² = ${fx(d*d,5)} mm²`,`HV = 1.8544·F/d² = 1.8544 × ${F} / ${fx(d*d,5)} = ${fx(HV,0)} kgf/mm²`])};},
+    rockwell(){const hr=rnd(30,65,1),h=+((100-hr)*.002).toFixed(3),e=h/.002;
+      return{t:'Dureza Rockwell C',txt:`En un ensayo Rockwell C (cono de diamante, N = 100) la profundidad residual es h = ${h} mm. Calcula h en unidades de 0.002 mm y la lectura HRC (HRC = 100 − h/0.002).`,
+      f:[{l:'h/0.002',u:'unidades',a:e,r:.01},{l:'HRC',u:'',a:100-e,abs:.5}],
+      s:steps([`h/0.002 = ${h}/0.002 = ${fx(e,0)}`,`HRC = 100 − ${fx(e,0)} = ${fx(100-e,0)}`,`Más profundidad implicaría menos dureza.`])};},
+    knoop(){const F=pick([.1,.2,.5,1]),HK0=rnd(200,800,10),L=+Math.sqrt(14.229*F/HK0).toFixed(3),HK=14.229*F/(L*L),hh=L/30.5*1000;
+      return{t:'Dureza Knoop',txt:`En un ensayo Knoop con F = ${F} kgf, la diagonal mayor de la huella mide L = ${L} mm. Calcula HK (HK = 14.229·F/L²) y estima la profundidad con h ≈ L/30.5.`,
+      f:[{l:'HK',u:'kgf/mm²',a:HK,r:.02},{l:'Profundidad',u:'µm',a:hh,r:.03}],
+      s:steps([`L² = ${L}² = ${fx(L*L,6)} mm²`,`HK = 14.229 × ${F} / ${fx(L*L,6)} = ${fx(HK,0)} kgf/mm²`,`h ≈ L/30.5 = ${L}/30.5 = ${fx(L/30.5,5)} mm = ${fx(hh,1)} µm`])};},
     energia(){const sy=pick([250,275,350,500]),mt=pick([['acero',207],['aluminio',69],['cobre',110]]),ey=sy/(mt[1]*1000),u=sy*sy/(2*mt[1]);
       return{t:'Resiliencia',txt:`Un ${mt[0]} (E = ${mt[1]} GPa) tiene σy = ${sy} MPa. Calcula la deformación en la fluencia y la resiliencia (energía por volumen en la zona elástica, u = σy²/2E).`,
       f:[{l:'ε en σy',u:'×10⁻³',a:ey*1000,r:.02},{l:'Resiliencia',u:'kJ/m³',a:u,r:.02}],
       s:steps([`ε_y = σy/E = ${sy}/${fx(mt[1]*1000,0)} = ${fx(ey*1000,3)}×10⁻³`,`u = σy²/(2E) = ${sy}² / (2 × ${fx(mt[1]*1000,0)}) = ${fx(u/1000,4)} MPa = ${fx(u,1)} kJ/m³ (1 MPa = 1 MJ/m³)`])};}
   };
-  const TIPOS=[['rand','Aleatorio'],['hooke','Hooke y módulo de Young'],['poisson','Relación de Poisson'],['ensayo','Ensayo de tensión completo'],['real','Esfuerzo y deformación reales'],['brinell','Dureza Brinell'],['energia','Resiliencia'],['frio','Trabajo en frío (trefilado)'],['laminado','Laminación en frío']];
+  const TIPOS=[['rand','Aleatorio'],['hooke','Hooke y módulo de Young'],['poisson','Relación de Poisson'],['ensayo','Ensayo de tensión completo'],['real','Esfuerzo y deformación reales'],['brinell','Dureza Brinell'],['energia','Resiliencia'],['frio','Trabajo en frío (trefilado)'],['laminado','Laminación en frío'],['vickers','Dureza Vickers'],['rockwell','Dureza Rockwell C'],['knoop','Dureza Knoop']];
   $('#mc-ejt').innerHTML=TIPOS.map(t=>`<option value="${t[0]}">${t[1]}</option>`).join('');
   const EJ={cur:null,ok:0,tot:0};
   function ejNew(){const t=$('#mc-ejt').value,k=t==='rand'?pick(Object.keys(GEN)):t;EJ.cur=GEN[k]();const c=EJ.cur;
@@ -2961,6 +3053,15 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
    {t:'frio',b:'Aplicar',q:'Una placa de 10 mm se lamina en frío hasta 6 mm con ancho constante. ¿Cuál es el %CW?',o:['40 %','60 %','66.7 %','4 %'],e:'%CW = (10 − 6)/10 × 100 = 40 %.'},
    {t:'frio',b:'Comprender',q:'Durante el crecimiento de grano, ¿qué ocurre?',o:['Los granos grandes crecen a costa de los pequeños y baja σy','Los granos se alargan','Aumentan las dislocaciones','Sube la dureza'],e:'Se reduce el área de límites de grano; con granos mayores baja la resistencia (Hall–Petch).'},
    {t:'frio',b:'Aplicar',q:'Al planear varias reducciones consecutivas en frío, ¿qué conviene hacer?',o:['Recocer entre pasos cuando la ductilidad se agote','Aumentar siempre la reducción por paso','Evitar medir el diámetro','Trabajar siempre arriba de la temperatura de recristalización'],e:'El metal pierde ductilidad con el %CW; si se sigue deformando se agrieta, por eso se recuece entre pasos.'}
+   ,{t:'dureza',b:'Recordar',q:'¿Cuál es el ángulo entre caras opuestas de la pirámide del indentador Vickers?',o:['136°','120°','90°','68°'],e:'El indentador Vickers es una pirámide de diamante de base cuadrada con 136° entre caras opuestas.'},
+   {t:'dureza',b:'Aplicar',q:'Un ensayo Vickers con F = 30 kgf deja una diagonal promedio de 0.30 mm. ¿Cuál es HV?',o:['≈ 618','≈ 1000','≈ 185','≈ 309'],e:'HV = 1.8544·F/d² = 1.8544 × 30 / 0.09 = 618 kgf/mm².'},
+   {t:'dureza',b:'Aplicar',q:'En un ensayo Rockwell C la profundidad residual es 0.080 mm. ¿Cuál es la lectura HRC (N = 100)?',o:['60','40','80','20'],e:'h/0.002 = 40 unidades; HRC = 100 − 40 = 60.'},
+   {t:'dureza',b:'Comprender',q:'En Rockwell, ¿qué relación hay entre profundidad residual y lectura?',o:['A mayor profundidad, menor dureza','A mayor profundidad, mayor dureza','No hay relación','La lectura es la profundidad en mm'],e:'La lectura es N − h/0.002: la huella más profunda corresponde a un material más blando.'},
+   {t:'dureza',b:'Comprender',q:'¿Por qué Knoop se prefiere para capas delgadas y materiales frágiles?',o:['Su huella es poco profunda y alargada','Usa una esfera muy grande','Mide el rebote de un martillo','Usa cargas de miles de kgf'],e:'La huella Knoop tiene una profundidad de unos L/30, mucho menor que la Vickers (d/7), y se agrieta menos con cargas bajas.'},
+   {t:'dureza',b:'Recordar',q:'¿Para qué materiales se usa principalmente la escala Shore A?',o:['Elastómeros blandos','Aceros templados','Minerales','Cerámicos densos'],e:'Shore A está pensada para elastómeros y plásticos blandos; Shore D para plásticos más duros.'},
+   {t:'dureza',b:'Comprender',q:'¿Qué indica la escala de Mohs?',o:['Un orden de rayado, no cuánto más duro es un mineral','La profundidad de una huella','La carga necesaria para rayar','Un valor proporcional a HV'],e:'Mohs es ordinal: dice quién raya a quién, pero los pasos no son iguales (el diamante es mucho más duro que el corindón).'},
+   {t:'dureza',b:'Analizar',q:'Se mide la dureza de un perfil desde la superficie hasta el núcleo de un engrane cementado con huellas muy cercanas. ¿Qué método conviene?',o:['Microdureza Vickers','Brinell con 3000 kgf','Shore A','Mohs'],e:'Las huellas diminutas de la microdureza permiten medir a profundidades muy próximas en una misma escala.'},
+   {t:'dureza',b:'Evaluar',q:'Un ingeniero convierte HRC a HB con una ecuación exacta y la aplica a cualquier material. ¿Qué observación es correcta?',o:['Las conversiones son tablas empíricas que dependen del material y no deben extrapolarse','La conversión es exacta para todos los metales','Solo es válida entre Shore A y D','La conversión es exacta si se usa la misma carga'],e:'Las conversiones (ASTM E140, por ejemplo) son empíricas y válidas para ciertos materiales y rangos.'}
   ];
   $('#mc-qz-t').innerHTML='<option value="all">Todos los temas</option>'+Object.keys(QT).map(k=>`<option value="${k}">${QT[k]}</option>`).join('');
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -2993,6 +3094,101 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   $('#mc-qz-big').onchange=()=>$('#mc-qz-box').classList.toggle('mc-big',$('#mc-qz-big').checked);
   $('#mc-qz-prof').onchange=()=>{const on=$('#mc-qz-prof').checked;$('#mc-qz-bank').innerHTML=on?'<h3>Banco de preguntas con respuestas (modo profesor)</h3><div class="mc-tbl"><table><tr><th>#</th><th>Tema</th><th>Bloom</th><th>Pregunta</th><th>Respuesta correcta</th></tr>'+QB.map((q,i)=>`<tr><td>${i+1}</td><td>${QT[q.t]}</td><td>${q.b}</td><td>${q.q}</td><td>${q.o[0]}</td></tr>`).join('')+'</table></div>':'';};
   qzShowRank();
+
+  // ---------- tipos de dureza ----------
+  const HDP=['roc','vk','sh','mo','cm'];
+  function hdPanel(h){HDP.forEach(k=>{$('#mc-hd-'+k).hidden=k!==h;});$$('#mc-hdtabs .tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.h===h));
+    if(h==='roc')drawRk();if(h==='vk')vkDraw();if(h==='sh')drawSh();if(h==='mo')drawMo();if(h==='cm'&&!CM.cur)cmNext();}
+  $('#mc-hdtabs').onclick=e=>{const b=e.target.closest('[data-h]');if(b)hdPanel(b.dataset.h);};
+  const oc=(k,v)=>`<div class="mc-o"><small>${k}</small><b>${v}</b></div>`;
+  // Rockwell
+  const RK={C:{N:100,lo:20,hi:68,def:60,load:150,ind:'cono de diamante 120°',cone:1,nm:'HRC'},A:{N:100,lo:60,hi:85,def:75,load:60,ind:'cono de diamante 120°',cone:1,nm:'HRA'},B:{N:130,lo:40,hi:100,def:80,load:100,ind:'bola de 1/16 pulg',cone:0,nm:'HRB'}};
+  function rkInd(x,d,cone,y0){const R=56;return cone?`<polygon points="${x},${y0+d} ${x-26},${y0+d-64} ${x+26},${y0+d-64}" style="fill:var(--q3);stroke:var(--ink);stroke-width:1.3"/><rect x="${x-26}" y="${y0+d-92}" width="52" height="28" style="fill:var(--q3);stroke:var(--ink);stroke-width:1.3"/>`
+    :`<circle cx="${x}" cy="${y0+d-R}" r="${R}" style="fill:var(--q3);stroke:var(--ink);stroke-width:1.3"/>`;}
+  function rkCrater(x,d,cone,y0){if(d<=0)return'';if(cone){const w=d*.53;return `<polygon points="${x-w},${y0} ${x},${y0+d} ${x+w},${y0}" style="fill:var(--bg)"/>`;}
+    const w=Math.sqrt(Math.max(0,2*56*d-d*d));return `<path d="M${x-w} ${y0} Q${x} ${y0+2*d} ${x+w} ${y0}Z" style="fill:var(--bg)"/>`;}
+  function drawRk(){const k=RK[$('#mc-rk-s').value],sl=$('#mc-rk-hr');
+    sl.min=k.lo;sl.max=k.hi;if(+sl.value<k.lo||+sl.value>k.hi)sl.value=k.def;const hr=+sl.value;$('#mc-rk-v').textContent=hr;
+    const hres=(k.N-hr)*.002,hel=hres*.3+.01,kp=240,y0=136,xs=[90,270,450];
+    let g='';xs.forEach(x=>{g+=`<rect x="${x-80}" y="${y0}" width="160" height="140" class="mc-spec"/>`;});
+    const dr=hres*kp,dt=(hres+hel)*kp;
+    g+=rkCrater(xs[1],dt-hel*kp*.0,k.cone,y0)+rkCrater(xs[2],dr,k.cone,y0);
+    g+=rkInd(xs[0],0,k.cone,y0)+rkInd(xs[1],dt,k.cone,y0)+rkInd(xs[2],dr,k.cone,y0);
+    g+=`<line x1="${xs[2]-80}" y1="${y0}" x2="${xs[2]+80}" y2="${y0}" style="stroke:var(--naranja);stroke-width:1.2;stroke-dasharray:4 3"/>`;
+    g+=`<line class="mc-unl" x1="${xs[2]+62}" y1="${y0}" x2="${xs[2]+62}" y2="${y0+dr}"/><text class="mc-tl" x="${xs[2]+68}" y="${y0+dr/2+4}">h</text>`;
+    g+=`<text class="mc-tl" x="${xs[0]}" y="18" text-anchor="middle">1. Precarga (10 kgf)</text><text class="mc-tl" x="${xs[1]}" y="18" text-anchor="middle">2. Carga mayor (${k.load} kgf)</text><text class="mc-tl" x="${xs[2]}" y="18" text-anchor="middle">3. Se regresa a la precarga</text>`;
+    g+=`<text class="mc-t" x="${xs[0]}" y="296" text-anchor="middle">Referencia</text><text class="mc-t" x="${xs[1]}" y="296" text-anchor="middle">h + recuperación elástica</text><text class="mc-t" x="${xs[2]}" y="296" text-anchor="middle">Se mide h residual</text>`;
+    $('#mc-rk-svg').innerHTML=g;
+    $('#mc-rk-out').innerHTML=oc('Lectura',fx(hr,0)+' '+k.nm)+oc('Profundidad residual h',fx(hres*1000,0)+' µm ('+fx(hres,3)+' mm)')+oc('h en unidades de 0.002 mm',fx(hres/.002,0))+oc('Penetrador',k.ind)+oc('Carga mayor',k.load+' kgf');
+    $('#mc-rk-note').textContent=`${k.nm} = ${k.N} − h/0.002 = ${k.N} − ${fx(hres,3)}/0.002 = ${fx(hr,0)}. Más profundidad significa menor dureza. Regla práctica: el espesor de la pieza debe ser varias veces mayor que la profundidad (la norma ASTM E18 fija el valor mínimo; verifícalo antes de ensayar).`;}
+  $('#mc-rk-s').onchange=()=>{const k=RK[$('#mc-rk-s').value],s=$('#mc-rk-hr');s.min=k.lo;s.max=k.hi;s.value=k.def;drawRk();};$('#mc-rk-hr').oninput=drawRk;
+  // Vickers y Knoop
+  function vkFields(){const m=$('#mc-vk-m').value;$('#mc-vk-fl').innerHTML=m==='V'?'<label class="mc-f">Diagonal d₁ (mm)<input type="number" class="mc-in" id="mc-vk-d1" step="0.001" min="0.001"></label><label class="mc-f">Diagonal d₂ (mm)<input type="number" class="mc-in" id="mc-vk-d2" step="0.001" min="0.001"></label>':'<label class="mc-f">Diagonal mayor L (mm)<input type="number" class="mc-in" id="mc-vk-L" step="0.001" min="0.001"></label>';
+    $$('#mc-vk-fl input').forEach(i=>i.oninput=vkDraw);vkFromSlider();}
+  function vkFromSlider(){const m=$('#mc-vk-m').value,F=num($('#mc-vk-F').value),H=+$('#mc-vk-s').value,d=+(Math.sqrt((m==='V'?1.8544:14.229)*F/H)).toFixed(4);
+    if(m==='V'){$('#mc-vk-d1').value=d;$('#mc-vk-d2').value=d;}else $('#mc-vk-L').value=d;vkDraw();}
+  function vkDraw(){const m=$('#mc-vk-m').value,F=num($('#mc-vk-F').value);let d1,d2,L,d,H,dep;
+    if(m==='V'){d1=num($('#mc-vk-d1').value);d2=num($('#mc-vk-d2').value);d=(d1+d2)/2;}else{L=num($('#mc-vk-L').value);d=L;d1=d2=L;}
+    if(!(d>0&&F>0)){$('#mc-vk-out').innerHTML=oc('Dureza','—');return;}
+    H=m==='V'?1.8544*F/(d*d):14.229*F/(d*d);dep=m==='V'?d/7:d/30.5;$('#mc-vk-hv').textContent=fx(H,0);
+    let g='';
+    if(m==='V'){const a=80*d1/d,b=80*d2/d;g+=`<polygon points="140,${115-b} ${140+a},115 140,${115+b} ${140-a},115" style="fill:var(--q1);stroke:var(--ink);stroke-width:1.6"/><line class="mc-off" x1="${140-a}" y1="115" x2="${140+a}" y2="115"/><line class="mc-off" x1="140" y1="${115-b}" x2="140" y2="${115+b}"/><text class="mc-tl" x="140" y="${115+b+22}" text-anchor="middle">d₁ = ${fx(d1*1000,0)} µm · d₂ = ${fx(d2*1000,0)} µm</text>`;
+      const w=56.6,dd=22.9;g+=`<rect x="300" y="130" width="200" height="70" class="mc-spec"/><polygon points="${400-w},130 ${400+w},130 400,${130+dd}" style="fill:var(--bg);stroke:var(--ink);stroke-width:1.4"/><text class="mc-tl" x="400" y="${130+dd+22}" text-anchor="middle">h ≈ d/7 = ${fx(dep*1000,0)} µm</text><text class="mc-t" x="400" y="118" text-anchor="middle">136° entre caras</text>`;}
+    else{g+=`<polygon points="40,115 140,101 240,115 140,129" style="fill:var(--q1);stroke:var(--ink);stroke-width:1.6"/><line class="mc-off" x1="40" y1="115" x2="240" y2="115"/><text class="mc-tl" x="140" y="${155}" text-anchor="middle">L = ${fx(L*1000,0)} µm · ancho ≈ L/7.11</text>`;
+      g+=`<rect x="300" y="130" width="200" height="70" class="mc-spec"/><polygon points="300,130 500,130 400,${130+6.6}" style="fill:var(--bg);stroke:var(--ink);stroke-width:1.4"/><text class="mc-tl" x="400" y="${130+6.6+22}" text-anchor="middle">h ≈ L/30.5 = ${fx(dep*1000,1)} µm</text><text class="mc-t" x="400" y="118" text-anchor="middle">perfil a lo largo de L (mucho más plano)</text>`;}
+    g+=`<text class="mc-t" x="140" y="20" text-anchor="middle">Vista superior de la huella</text><text class="mc-t" x="400" y="20" text-anchor="middle">Perfil (esquema)</text>`;
+    $('#mc-vk-svg').innerHTML=g;
+    $('#mc-vk-out').innerHTML=oc(m==='V'?'HV':'HK',fx(H,0)+' kgf/mm²')+oc(m==='V'?'d promedio':'L',fx(d*1000,0)+' µm')+oc('Profundidad ≈',fx(dep*1000,dep<.01?1:0)+' µm')+oc('Carga',fx(F,1)+' kgf');
+    $('#mc-vk-note').textContent=m==='V'?`HV = 1.8544·F/d² = 1.8544 × ${fx(F,1)} / ${fx(d,4)}² = ${fx(H,0)}. Con la misma pirámide sirve para blandos y duros; en durezas bajas y medias HV y HB dan valores parecidos. Las dos diagonales deben ser casi iguales: si no, la superficie o el montaje están mal.`
+      :`HK = 14.229·F/L² = 14.229 × ${fx(F,1)} / ${fx(d,4)}² = ${fx(H,0)}. A igual diagonal, la huella Knoop es unas 4 veces menos profunda que la Vickers: por eso se usa en capas delgadas y materiales frágiles.`;}
+  $('#mc-vk-m').onchange=vkFields;$('#mc-vk-F').onchange=vkFromSlider;$('#mc-vk-s').oninput=()=>{$('#mc-vk-hv').textContent=$('#mc-vk-s').value;vkFromSlider();};
+  vkFields();
+  // Shore
+  function drawSh(){const A=$('#mc-sh-s').value==='A',h=+$('#mc-sh-p').value/100,S=100-100*h/2.5;$('#mc-sh-hv').textContent=fx(h,2);
+    const cx=130,cy=125,r=92;let g=`<circle cx="${cx}" cy="${cy}" r="${r+6}" style="fill:var(--bg);stroke:var(--ink);stroke-width:1.6"/>`;
+    for(let v=0;v<=100;v+=10){const t=(-120+240*v/100)*PI/180,x1=cx+(r-8)*Math.sin(t),y1=cy-(r-8)*Math.cos(t),x2=cx+r*Math.sin(t),y2=cy-r*Math.cos(t),x3=cx+(r-24)*Math.sin(t),y3=cy-(r-24)*Math.cos(t);
+      g+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--ink)" stroke-width="1.5"/><text class="mc-t" x="${x3}" y="${y3+4}" text-anchor="middle">${v}</text>`;}
+    const t=(-120+240*S/100)*PI/180;g+=`<line x1="${cx}" y1="${cy}" x2="${cx+(r-14)*Math.sin(t)}" y2="${cy-(r-14)*Math.cos(t)}" style="stroke:var(--naranja);stroke-width:3;stroke-linecap:round"/><circle cx="${cx}" cy="${cy}" r="5" style="fill:var(--ink)"/>`;
+    g+=`<text class="mc-tl" x="${cx}" y="${cy+55}" text-anchor="middle">Shore ${A?'A':'D'} = ${fx(S,0)}</text>`;
+    const px=420,y0=140,hp=h*32;g+=`<rect x="320" y="${y0}" width="200" height="82" class="mc-spec"/><rect x="${px-30}" y="40" width="60" height="${y0-40-14}" style="fill:var(--q3);stroke:var(--ink);stroke-width:1.3"/><rect x="${px-70}" y="${y0-14}" width="140" height="14" style="fill:var(--q3);stroke:var(--ink);stroke-width:1.3"/>`;
+    g+=A?`<polygon points="${px-7},${y0} ${px+7},${y0} ${px+2.5},${y0+hp} ${px-2.5},${y0+hp}" style="fill:var(--ink)"/>`:`<polygon points="${px-6},${y0} ${px+6},${y0} ${px},${y0+hp}" style="fill:var(--ink)"/>`;
+    g+=`<line class="mc-unl" x1="${px+40}" y1="${y0}" x2="${px+40}" y2="${y0+hp}"/><text class="mc-tl" x="${px+46}" y="${y0+hp/2+4}">h</text><text class="mc-t" x="${px}" y="${y0+104}" text-anchor="middle">${A?'penetrador truncado, resorte débil':'cono agudo, resorte fuerte'}</text>`;
+    $('#mc-sh-svg').innerHTML=g;
+    $('#mc-sh-out').innerHTML=oc('Lectura',fx(S,0)+' Shore '+(A?'A':'D'))+oc('Penetración h',fx(h,2)+' mm')+oc('Relación','S = 100 − 100·h/2.5')+oc('Interpretación',S>=70?'duro (poca penetración)':S>=35?'dureza media':'blando (mucha penetración)');}
+  $('#mc-sh-s').onchange=drawSh;$('#mc-sh-p').oninput=drawSh;
+  // Mohs
+  const MIN=[['Talco',1,1],['Yeso',2,3],['Calcita',3,9],['Fluorita',4,21],['Apatito',5,48],['Ortoclasa',6,72],['Cuarzo',7,100],['Topacio',8,200],['Corindón',9,400],['Diamante',10,1500]];
+  const OBJ=[['Uña',2.5],['Moneda de cobre',3],['Vidrio común',5.5],['Navaja de acero',5.5],['Lima de acero',6.5]];
+  const MO=MIN.map(m=>[m[0],m[1]]).concat(OBJ).sort((a,b)=>a[1]-b[1]);
+  $('#mc-mo-a').innerHTML=MO.map((m,i)=>`<option value="${i}">${m[0]} (${fx(m[1],1)})</option>`).join('');$('#mc-mo-b').innerHTML=$('#mc-mo-a').innerHTML;
+  $('#mc-mo-a').value=MO.findIndex(m=>m[0]==='Cuarzo');$('#mc-mo-b').value=MO.findIndex(m=>m[0]==='Vidrio común');
+  function drawMo(){const A=MO[+$('#mc-mo-a').value],B=MO[+$('#mc-mo-b').value];let v;
+    if(A[1]>B[1])v=`${A[0]} raya a ${B[0]}: ${fx(A[1],1)} > ${fx(B[1],1)}.`;else if(A[1]<B[1])v=`${A[0]} no raya a ${B[0]}; sí ocurre al revés: ${B[0]} raya a ${A[0]}.`;else v='Dureza parecida: no hay un rayado claro; se prueba con otro material de referencia.';
+    $('#mc-mo-out').innerHTML=`<div class="mc-o" style="grid-column:1/-1"><small>Resultado</small><b style="font-size:15px">${v}</b></div>`;
+    const base=205,maxH=165,lg=Math.log10(1500);let g=`<path class="mc-ax" d="M30 ${base}H260M290 ${base}H520"/>`;
+    MIN.forEach((m,i)=>{const x1=36+i*22,x2=296+i*22,h1=m[1]/10*maxH,h2=Math.max(3,Math.log10(m[2])/lg*maxH),sel=(MO[+$('#mc-mo-a').value][0]===m[0]||MO[+$('#mc-mo-b').value][0]===m[0]);
+      const st=sel?'stroke:var(--naranja);stroke-width:2.5':'stroke:var(--ink);stroke-width:1';
+      g+=`<rect x="${x1}" y="${base-h1}" width="16" height="${h1}" style="fill:var(--q6);${st}"/><rect x="${x2}" y="${base-h2}" width="16" height="${h2}" style="fill:var(--q5);${st}"/><text class="mc-t" x="${x1+8}" y="${base+14}" text-anchor="middle">${m[1]}</text><text class="mc-t" x="${x2+8}" y="${base+14}" text-anchor="middle">${m[1]}</text>`;});
+    g+=`<text class="mc-tl" x="145" y="${base+34}" text-anchor="middle">Escala Mohs (ordinal)</text><text class="mc-tl" x="405" y="${base+34}" text-anchor="middle">Dureza absoluta aprox. (log)</text><text class="mc-t" x="145" y="14" text-anchor="middle">1 talco · 10 diamante</text>`;
+    $('#mc-mo-svg').innerHTML=g;}
+  $('#mc-mo-a').onchange=$('#mc-mo-b').onchange=drawMo;
+  // elegir método
+  const CMS=[
+   ['Una pieza forjada de acero, grande y de estructura gruesa y heterogénea, necesita un valor de dureza que promedie la microestructura.',['Brinell','Vickers con 0.1 kgf','Shore A','Mohs'],'La huella grande de Brinell abarca muchos granos y fases, y promedia la heterogeneidad.'],
+   ['En una línea de producción hay que revisar rápidamente la dureza de miles de piezas de acero ya templadas.',['Rockwell C','Brinell con 3000 kgf','Shore A','Mohs'],'Rockwell lee la profundidad directamente en una escala, sin medir huellas con microscopio.'],
+   ['Se necesita el perfil de dureza desde la superficie hasta el núcleo de un engrane cementado, con indentaciones muy pequeñas y cercanas.',['Vickers (microdureza)','Brinell','Rockwell B','Shore D'],'La microdureza Vickers deja huellas minúsculas y permite medir en una sola escala a distintas profundidades.'],
+   ['Un recubrimiento cerámico delgado y frágil debe medirse sin atravesarlo ni agrietarlo.',['Knoop (carga baja)','Brinell','Rockwell C','Shore A'],'La huella Knoop es poco profunda (≈ L/30) y con carga baja agrieta menos.'],
+   ['Una junta de neopreno blando debe verificarse en planta con un instrumento portátil.',['Shore A','Rockwell C','Vickers','Mohs'],'Shore A está pensada para elastómeros blandos.'],
+   ['Un geólogo identifica un mineral en campo con una navaja y un vidrio.',['Mohs','Brinell','Vickers','Rockwell C'],'La escala de Mohs es un ordenamiento por rayado y se aplica con herramientas sencillas.'],
+   ['Una carcasa de plástico rígido se compara con otra más blanda en un laboratorio rápido.',['Shore D','Mohs','Brinell con 3000 kgf','Vickers con 100 kgf'],'Shore D, con cono agudo y resorte más fuerte, cubre plásticos más duros que Shore A.'],
+   ['En un lingote grueso de aluminio blando se busca una huella grande y fácil de medir con una lupa.',['Brinell','Rockwell C','Knoop','Mohs'],'Brinell es adecuado para metales blandos y medios; Rockwell C con diamante sería excesivo.']];
+  const CM={cur:null,used:[]};
+  function cmNext(){if(CM.used.length>=CMS.length)CM.used=[];let i;do{i=Math.floor(Math.random()*CMS.length);}while(CM.used.includes(i));CM.used.push(i);CM.cur=i;const s=CMS[i];
+    $('#mc-cm-g').innerHTML=`<p style="font-size:16px"><b>Escenario.</b> ${s[0]}</p><div class="mc-opts">${shuffle(s[1].map((o,k)=>[o,k])).map(o=>`<button class="mc-opt" data-k="${o[1]}">${o[0]}</button>`).join('')}</div><div id="mc-cm-fb"></div>`;}
+  $('#mc-cm-g').onclick=e=>{const b=e.target.closest('.mc-opt'),nx=e.target.closest('#mc-cm-nx');if(nx){cmNext();return;}if(!b||b.disabled)return;
+    const s=CMS[CM.cur],ok=b.dataset.k==='0';$$('#mc-cm-g .mc-opt').forEach(x=>{x.disabled=true;if(x.dataset.k==='0')x.classList.add('ok');});if(!ok)b.classList.add('bad');
+    $('#mc-cm-fb').innerHTML=`<div class="mc-sol"><b>${ok?'Correcto.':'No.'}</b> ${s[2]}</div><button class="btn" id="mc-cm-nx">Otro escenario</button>`;};
+  drawRk();
 
   window.__MEC={QB,FAMS,gent,QZ,FR,worked,flow,drawGrains,EJ,GEN,MAT,sig,eOfP,pOfE,sy02,trueAt,area,TIPOS};
   drawFam();drawEl();frSetMat('acero');frCalc();ejNew();drawSim();drawKn();drawB();
