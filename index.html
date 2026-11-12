@@ -220,6 +220,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
 #view-mec .mc-big .mc-qz-b{font-size:24px;min-height:84px}
 #view-mec .mc-big .mc-qz-o{grid-template-columns:repeat(2,1fr)}
 #view-mec #mc-tip .mc-fig{max-width:660px;margin:0 auto}
+#view-mec #mc-fal-im .mc-fig:has(#mc-im-pen){max-width:560px;margin:0 auto}
 .views{display:flex;gap:0;border-bottom:2px solid var(--line);flex-wrap:wrap}
 .view{font:600 20px var(--f-display);letter-spacing:.02em;background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;color:var(--muted);padding:8px 16px;cursor:pointer}
 .view[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--naranja)}
@@ -701,7 +702,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     <p class="note" style="margin:0">Esquemas didácticos elaborados para el curso; no están a escala. Consulta los datos de aleaciones y propiedades en Callister y Rethwisch (10.ª ed.) y en Askeland y Wright (2015).</p>
   </div>
   <div id="view-mec" hidden style="display:grid;gap:18px">
-    <p class="lead" style="margin:0">Clase 1: propiedades mecánicas y ensayo de tensión. Estira una probeta virtual, lee la curva esfuerzo–deformación, calcula la dureza con distintos métodos (Brinell, Rockwell, Vickers, Knoop, Shore, Mohs), observa cómo el trabajo en frío deforma los granos y endurece el metal, y practica con problemas nuevos cada vez. Los materiales son ilustrativos (órdenes de magnitud), no datos de una aleación concreta.</p>
+    <p class="lead" style="margin:0">Clase 1: propiedades mecánicas y ensayo de tensión. Estira una probeta virtual, lee la curva esfuerzo–deformación, estudia el impacto, la fractura, la fatiga y la fluencia, calcula la dureza con distintos métodos (Brinell, Rockwell, Vickers, Knoop, Shore, Mohs), observa cómo el trabajo en frío deforma los granos y endurece el metal, y practica con problemas nuevos cada vez. Los materiales son ilustrativos (órdenes de magnitud), no datos de una aleación concreta.</p>
     <div class="tabs" id="mc-tabs" role="tablist">
       <button class="tab" role="tab" data-p="sim" aria-selected="true">Simulador de tensión</button>
       <button class="tab" role="tab" data-p="real" aria-selected="false">Esfuerzo real</button>
@@ -710,6 +711,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       <button class="tab" role="tab" data-p="el" aria-selected="false">Polímeros: lineal y no lineal</button>
       <button class="tab" role="tab" data-p="dur" aria-selected="false">Dureza Brinell</button>
       <button class="tab" role="tab" data-p="tip" aria-selected="false">Tipos de dureza</button>
+      <button class="tab" role="tab" data-p="fal" aria-selected="false">Impacto, fractura, fatiga, fluencia</button>
       <button class="tab" role="tab" data-p="ej" aria-selected="false">Ejercicios</button>
       <button class="tab" role="tab" data-p="juego" aria-selected="false">Juego</button>
       <button class="tab" role="tab" data-p="quiz" aria-selected="false">Quiz</button>
@@ -984,6 +986,159 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
         <p class="note">Las conversiones entre escalas (por ejemplo ASTM E140) son tablas empíricas que dependen del material: no son ecuaciones y no deben extrapolarse. La relación UTS ≈ 3.5·HB se usa solo como estimación en aceros.</p>
         <h3>¿Qué método usarías?</h3>
         <div id="mc-cm-g"></div>
+      </div>
+    </section>
+
+    <section class="card" id="mc-fal" hidden>
+      <h2>Impacto, fractura, fatiga y fluencia</h2>
+      <p class="note">Un material puede resistir la carga de diseño y aun así fallar: por un golpe a baja temperatura, por una grieta que crece, por cargas repetidas o por calor sostenido. Cada bloque tiene su simulador y ejemplos de contexto (chasis de Formula SAE, ejes, tuberías, álabes). Los valores de los materiales son ilustrativos (órdenes de magnitud), no datos de una aleación concreta.</p>
+      <div class="tabs" id="mc-faltabs" role="tablist">
+        <button class="tab" role="tab" data-f="im" aria-selected="true">Impacto (Charpy)</button>
+        <button class="tab" role="tab" data-f="fx" aria-selected="false">Fractura</button>
+        <button class="tab" role="tab" data-f="ft" aria-selected="false">Fatiga</button>
+        <button class="tab" role="tab" data-f="cr" aria-selected="false">Fluencia</button>
+        <button class="tab" role="tab" data-f="dg" aria-selected="false">Diagnóstico</button>
+      </div>
+
+      <div id="mc-fal-im">
+        <h3>Péndulo Charpy: energía absorbida</h3>
+        <p class="note">El martillo cae desde h₀, rompe la probeta entallada y sube hasta h_f. La energía absorbida es la diferencia de energía potencial: E = m·g·(h₀ − h_f). Si el martillo casi no sube, la probeta absorbió mucha energía (tenaz); si sube casi lo mismo que cayó, absorbió poca (frágil).</p>
+        <div class="mc-ctl">
+          <label class="mc-f">Masa del martillo m (kg)<input type="number" id="mc-im-m" value="20" min="1" max="60" step="1"></label>
+          <label class="mc-f">Altura inicial h₀ (m)<input type="number" id="mc-im-h0" value="1.4" min="0.2" max="1.8" step="0.05"></label>
+          <label class="mc-f"><span>Altura final h_f: <b><span id="mc-im-hfv">0.80</span> m</b></span><input type="range" class="mc-slide" id="mc-im-hf" min="0" max="140" value="80" aria-label="Altura final del martillo"></label>
+        </div>
+        <div class="mc-row"><button class="btn" id="mc-im-go">Soltar el péndulo</button></div>
+        <div class="mc-fig"><svg id="mc-im-pen" viewBox="0 0 520 275" role="img" aria-label="Péndulo Charpy con las posiciones inicial y final del martillo"></svg></div>
+        <div class="mc-out" id="mc-im-out"></div>
+
+        <h3>Transición dúctil–frágil</h3>
+        <p class="note">Los aceros al carbono (estructura BCC) pasan de dúctiles a frágiles al bajar la temperatura. Los metales FCC (aluminio, cobre, acero inoxidable austenítico) no muestran una transición marcada. Elige un caso y mueve la temperatura de servicio.</p>
+        <div class="mc-row" id="mc-im-ex"></div>
+        <div class="mc-ctl">
+          <label class="mc-f">Material<select id="mc-im-mat"><option value="bcc">Acero al carbono (BCC)</option><option value="fcc">Acero inoxidable austenítico (FCC)</option><option value="al">Aluminio (FCC)</option></select></label>
+          <label class="mc-f"><span>Temperatura de servicio: <b><span id="mc-im-tv">20</span> °C</b></span><input type="range" class="mc-slide" id="mc-im-t" min="-100" max="100" value="20" aria-label="Temperatura de servicio"></label>
+        </div>
+        <div class="mc-g2">
+          <div class="mc-fig"><svg id="mc-im-db" viewBox="0 0 520 300" role="img" aria-label="Energía absorbida contra temperatura para tres materiales"></svg></div>
+          <div><div class="mc-out" id="mc-im-o2"></div><p id="mc-im-ctx"></p></div>
+        </div>
+        <div class="mc-sol"><ol>
+          <li>Tres causas se suman para volver frágil a un metal dúctil: baja temperatura, triaxialidad (entallas, grietas, espesores grandes) y velocidad de carga alta.</li>
+          <li>El resultado Charpy es una energía en joules y depende de la probeta y de la entalla: sirve para comparar y para localizar la transición, no es una propiedad pura.</li>
+          <li>La temperatura de transición se define con un criterio (por ejemplo, la energía media entre los dos niveles). Se diseña para que la temperatura de servicio quede por encima, con margen.</li>
+          <li>Caso histórico para comentar: los buques Liberty de la Segunda Guerra Mundial sufrieron fracturas frágiles en agua fría.</li>
+        </ol></div>
+      </div>
+
+      <div id="mc-fal-fx" hidden>
+        <h3>Mecánica de la fractura: una grieta concentra el esfuerzo</h3>
+        <p class="note">K = Y·σ·√(πa) en MPa·√m, con a en metros. Hay fractura cuando K ≥ K_IC. Esfuerzo crítico: σc = K_IC / (Y·√(πa)). Tamaño crítico: a_c = (1/π)·[K_IC / (Y·σ)]². Y ≈ 1.0 para una grieta interna de longitud 2a; Y ≈ 1.12 para una grieta de borde de longitud a.</p>
+        <div class="mc-row" id="mc-fx-ex"></div>
+        <div class="mc-ctl">
+          <label class="mc-f">Material<select id="mc-fx-mat"></select></label>
+          <label class="mc-f">K_IC (MPa·√m)<input type="number" id="mc-fx-k" value="40" min="0.1" step="0.5"></label>
+          <label class="mc-f">σy (MPa), 0 si no fluye<input type="number" id="mc-fx-sy" value="450" min="0" step="10"></label>
+          <label class="mc-f">Geometría<select id="mc-fx-y"><option value="1">Grieta interna (Y = 1.00)</option><option value="1.12">Grieta de borde (Y = 1.12)</option></select></label>
+        </div>
+        <div class="mc-ctl">
+          <label class="mc-f"><span>Tamaño de la grieta a: <b><span id="mc-fx-av">6.0</span> mm</b></span><input type="range" class="mc-slide" id="mc-fx-a" min="0" max="1000" value="500" aria-label="Tamaño de la grieta"></label>
+          <label class="mc-f"><span>Esfuerzo aplicado σ: <b><span id="mc-fx-sv">250</span> MPa</b></span><input type="range" class="mc-slide" id="mc-fx-s" min="0" max="1000" value="400" aria-label="Esfuerzo aplicado"></label>
+        </div>
+        <div class="mc-g2">
+          <div class="mc-fig"><svg id="mc-fx-svg" viewBox="0 0 520 320" role="img" aria-label="Esfuerzo crítico contra tamaño de grieta"></svg></div>
+          <div><div class="mc-fig"><svg id="mc-fx-pl" viewBox="0 0 260 150" role="img" aria-label="Placa con grieta de borde"></svg></div><div class="mc-out" id="mc-fx-out"></div></div>
+        </div>
+        <p id="mc-fx-ver" class="mc-reg" style="margin-top:6px"></p>
+        <p class="note" id="mc-fx-note"></p>
+        <div class="mc-sol"><ol>
+          <li>Tres usos de las mismas fórmulas: dado σ y a, ¿hay fractura? Dado K_IC y a, ¿qué σ máximo? Dado K_IC y σ, ¿qué tamaño de grieta debe detectar la inspección?</li>
+          <li>La fractura puede ocurrir con σ muy por debajo de σy: importan el esfuerzo y el tamaño de la grieta. Por eso la fluencia no protege cuando hay una grieta grande.</li>
+          <li>K_IC es una propiedad del material medida en deformación plana. Sube con grano fino y con menor espesor (esfuerzo plano); baja con mayor velocidad de deformación, entallas y espesores grandes. Mayor resistencia mecánica casi siempre cuesta tenacidad.</li>
+          <li>Órdenes de magnitud: metales dúctiles, decenas a cientos de MPa·√m; cerámicos técnicos, 1 a 10; vidrios, alrededor de 1; polímeros, 1 a 5.</li>
+        </ol></div>
+      </div>
+
+      <div id="mc-fal-ft" hidden>
+        <h3>Curva S–N: esfuerzo contra ciclos a la falla</h3>
+        <p class="note">Cada punto de la curva es una probeta ensayada a una amplitud σa constante hasta romper. El acero tiene límite de fatiga (la curva se hace horizontal); el aluminio no (la curva sigue bajando, y se usa la resistencia para un número de ciclos dado, por ejemplo 10⁷). Los modelos son esquemas.</p>
+        <div class="mc-row" id="mc-ft-ex"></div>
+        <div class="mc-ctl">
+          <label class="mc-f">Material<select id="mc-ft-mat"><option value="ac">Acero (con límite de fatiga)</option><option value="al">Aluminio (sin límite de fatiga)</option></select></label>
+          <label class="mc-f">UTS (MPa)<input type="number" id="mc-ft-u" value="600" min="100" max="2000" step="10"></label>
+          <label class="mc-f">σa nominal (MPa)<input type="number" id="mc-ft-s" value="250" min="1" step="5"></label>
+          <label class="mc-f">Factor de concentración Kt<input type="number" id="mc-ft-kt" value="1" min="1" max="5" step="0.1"></label>
+          <label class="mc-f">Velocidad (ciclos/min)<input type="number" id="mc-ft-r" value="3000" min="1" step="100"></label>
+          <label class="mc-f">Horas de uso por día<input type="number" id="mc-ft-h" value="8" min="0.1" max="24" step="0.5"></label>
+        </div>
+        <div class="mc-g2">
+          <div class="mc-fig"><svg id="mc-ft-svg" viewBox="0 0 520 320" role="img" aria-label="Curva S–N con el punto de operación"></svg></div>
+          <div><div class="mc-out" id="mc-ft-out"></div><p class="mc-reg" id="mc-ft-ver"></p><p class="note" id="mc-ft-note"></p></div>
+        </div>
+
+        <h3>Propagación de la grieta: ley de Paris</h3>
+        <p class="note">da/dN = C·(ΔK)ᵐ con ΔK = Y·Δσ·√(πa). Para m ≠ 2 y Y constante: N_f = 2·[a₀^(−(m−2)/2) − a_f^(−(m−2)/2)] / [(m−2)·C·(Y·Δσ·√π)ᵐ]. Usa a en metros, Δσ en MPa y C coherente con da/dN en m/ciclo y ΔK en MPa·√m.</p>
+        <div class="mc-ctl">
+          <label class="mc-f">Δσ (MPa)<input type="number" id="mc-pa-ds" value="100" min="1" step="5"></label>
+          <label class="mc-f">a₀ (mm)<input type="number" id="mc-pa-a0" value="1" min="0.01" step="0.1"></label>
+          <label class="mc-f">a_f (mm)<input type="number" id="mc-pa-af" value="10" min="0.02" step="0.5"></label>
+          <label class="mc-f">m<input type="number" id="mc-pa-m" value="3" min="1" max="6" step="0.1"></label>
+          <label class="mc-f">C (m/ciclo, MPa·√m)<input type="number" id="mc-pa-c" value="1e-11" step="any"></label>
+          <label class="mc-f">Y<input type="number" id="mc-pa-y" value="1" min="0.5" max="2" step="0.01"></label>
+        </div>
+        <div class="mc-g2">
+          <div class="mc-fig"><svg id="mc-pa-svg" viewBox="0 0 520 300" role="img" aria-label="Longitud de grieta contra ciclos"></svg></div>
+          <div><div class="mc-out" id="mc-pa-out"></div><p class="note" id="mc-pa-note"></p></div>
+        </div>
+        <div class="mc-sol"><ol>
+          <li>Fatiga: falla por cargas repetidas aunque σ sea bajo, sin deformación plástica visible. Pasa por iniciación (microgrieta en la superficie o en un concentrador), propagación (marcas de playa) y fractura final repentina.</li>
+          <li>Acortan la vida: concentradores (entallas, cuñeros, cambios bruscos de sección), superficies rugosas o dañadas, esfuerzo medio de tensión alto, corrosión y temperatura. La alargan: radios de acuerdo generosos, pulido fino, esfuerzos residuales de compresión (granallado, nitruración) e inspección periódica.</li>
+          <li>La mayor parte de la vida de propagación se gasta cuando la grieta es pequeña, porque el crecimiento se acelera con a. Como N_f ∝ Δσ⁻ᵐ, con m = 3 duplicar Δσ divide la vida entre 8.</li>
+          <li>En aceros el límite de fatiga suele quedar entre 35 % y 60 % del UTS (rango de Callister; verifica la edición).</li>
+        </ol></div>
+      </div>
+
+      <div id="mc-fal-cr" hidden>
+        <h3>Fluencia (creep): deformación lenta bajo carga y calor constantes</h3>
+        <p class="note">Tres etapas: I primaria (la velocidad baja), II secundaria (velocidad casi constante y mínima; domina la vida útil) y III terciaria (se acelera hasta la ruptura). Es importante por encima de aproximadamente 0.4 de la temperatura de fusión en kelvin. Modelo ilustrativo: t_r = t₀·(σ₀/σ)ⁿ·exp[(Q/R)(1/T − 1/T₀)], con n = 5.</p>
+        <div class="mc-row" id="mc-cr-ex"></div>
+        <div class="mc-ctl">
+          <label class="mc-f">Material<select id="mc-cr-mat"></select></label>
+          <label class="mc-f"><span>Temperatura: <b><span id="mc-cr-tv">600</span> °C</b></span><input type="range" class="mc-slide" id="mc-cr-t" min="0" max="1100" value="600" aria-label="Temperatura"></label>
+          <label class="mc-f"><span>Esfuerzo σ: <b><span id="mc-cr-sv">100</span> MPa</b></span><input type="range" class="mc-slide" id="mc-cr-s" min="20" max="200" value="100" aria-label="Esfuerzo"></label>
+        </div>
+        <div class="mc-g2">
+          <div class="mc-fig"><svg id="mc-cr-svg" viewBox="0 0 520 320" role="img" aria-label="Curva de fluencia con las tres etapas"></svg></div>
+          <div><div class="mc-out" id="mc-cr-out"></div><p class="mc-reg" id="mc-cr-ver"></p><p class="note" id="mc-cr-note"></p></div>
+        </div>
+
+        <h3>Parámetro de Larson–Miller: LM = T·(C + log t)</h3>
+        <p class="note">T en kelvin, t en horas hasta la ruptura y C una constante del material (cerca de 20 en muchas aleaciones). A igual esfuerzo, LM es constante: permite predecir el tiempo de ruptura a otra temperatura sin repetir el ensayo largo.</p>
+        <div class="mc-ctl">
+          <label class="mc-f">Calcular<select id="mc-lm-mode"><option value="t">Tiempo a otra temperatura</option><option value="T">Temperatura para un tiempo objetivo</option></select></label>
+          <label class="mc-f">C<input type="number" id="mc-lm-c" value="20" step="0.5"></label>
+          <label class="mc-f">T₁ (K)<input type="number" id="mc-lm-t1" value="1000" min="200" step="10"></label>
+          <label class="mc-f">t₁ (h)<input type="number" id="mc-lm-h1" value="100" min="0.001" step="any"></label>
+          <label class="mc-f" id="mc-lm-l2">T₂ (K)<input type="number" id="mc-lm-v2" value="900" min="200" step="10"></label>
+        </div>
+        <div class="mc-out" id="mc-lm-out"></div>
+        <p class="note" id="mc-lm-note"></p>
+      </div>
+
+      <div id="mc-fal-dg" hidden>
+        <h3>Cada modo de falla tiene su ensayo</h3>
+        <div class="mc-tbl"><table>
+          <tr><th>Situación de servicio</th><th>Falla</th><th>Propiedad o ensayo</th></tr>
+          <tr><td>Carga estática</td><td>Deformación permanente</td><td>σy, UTS (tensión)</td></tr>
+          <tr><td>Contacto o desgaste</td><td>Penetración</td><td>Dureza (HB, HRC, HV)</td></tr>
+          <tr><td>Golpe, clima frío</td><td>Fractura frágil</td><td>Charpy, temperatura de transición</td></tr>
+          <tr><td>Grieta o defecto</td><td>Fractura rápida</td><td>K_IC</td></tr>
+          <tr><td>Cargas repetidas</td><td>Fatiga</td><td>Curva S–N, ley de Paris</td></tr>
+          <tr><td>Alta temperatura</td><td>Fluencia</td><td>Curva de creep, Larson–Miller</td></tr>
+        </table></div>
+        <h3>¿Qué modo de falla es?</h3>
+        <p class="note">Lee el caso y elige el modo de falla más probable.</p>
+        <div id="mc-dg-g"></div>
       </div>
     </section>
 
@@ -2532,9 +2687,9 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 
   // ---------- pestañas ----------
-  const PANELS=['sim','real','frio','fam','el','dur','tip','ej','juego','quiz'];
+  const PANELS=['sim','real','frio','fam','el','dur','tip','fal','ej','juego','quiz'];
   function panel(p){PANELS.forEach(k=>{$('#mc-'+k).hidden=k!==p;});$$('#mc-tabs .tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));
-    if(p==='sim')drawSim();if(p==='real')drawKn();if(p==='dur')drawB();if(p==='frio'){frStatic();drawFrio();}if(p==='tip')hdPanel('roc');if(p==='fam')drawFam();if(p==='el')drawEl();if(p==='juego'&&!G.on)gameStart();}
+    if(p==='sim')drawSim();if(p==='real')drawKn();if(p==='dur')drawB();if(p==='frio'){frStatic();drawFrio();}if(p==='tip')hdPanel('roc');if(p==='fal')falPanel('im');if(p==='fam')drawFam();if(p==='el')drawEl();if(p==='juego'&&!G.on)gameStart();}
   $('#mc-tabs').onclick=e=>{const b=e.target.closest('[data-p]');if(b)panel(b.dataset.p);};
 
   // ---------- materiales (valores ilustrativos) ----------
@@ -2765,12 +2920,28 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
       return{t:'Dureza Knoop',txt:`En un ensayo Knoop con F = ${F} kgf, la diagonal mayor de la huella mide L = ${L} mm. Calcula HK (HK = 14.229·F/L²) y estima la profundidad con h ≈ L/30.5.`,
       f:[{l:'HK',u:'kgf/mm²',a:HK,r:.02},{l:'Profundidad',u:'µm',a:hh,r:.03}],
       s:steps([`L² = ${L}² = ${fx(L*L,6)} mm²`,`HK = 14.229 × ${F} / ${fx(L*L,6)} = ${fx(HK,0)} kgf/mm²`,`h ≈ L/30.5 = ${L}/30.5 = ${fx(L/30.5,5)} mm = ${fx(hh,1)} µm`])};},
+    charpy(){const m=pick([10,15,20,25]),h0=rnd(100,160,5)/100,hf=rnd(20,Math.round(h0*100)-20,5)/100,E=m*9.81*(h0-hf);
+      return{t:'Energía de impacto (Charpy)',txt:`El martillo de un péndulo Charpy tiene masa ${m} kg y se suelta desde h₀ = ${fx(h0,2)} m. Tras romper la probeta sube hasta h_f = ${fx(hf,2)} m. Calcula la energía absorbida (g = 9.81 m/s²).`,
+      f:[{l:'E absorbida',u:'J',a:E,r:.02}],s:steps([`E = m·g·(h₀ − h_f) = ${m} × 9.81 × (${fx(h0,2)} − ${fx(hf,2)})`,`E = ${fx(m*9.81,2)} N × ${fx(h0-hf,2)} m = ${fx(E,1)} J`,`Mientras menos suba el martillo, más energía absorbió la probeta.`])};},
+    kic(){const K=pick([40,50,60,98]),a=rnd(10,80,5)/10,Y=pick([1,1.12]),sy=pick([450,600,1500]),q=Math.sqrt(PI*a/1000),sc=K/(Y*q);
+      return{t:'Fractura: esfuerzo crítico',txt:`Una placa de acero tiene una grieta de ${fx(a,1)} mm (Y = ${fx(Y,2)}), K_IC = ${K} MPa·√m y σy = ${sy} MPa. Calcula el esfuerzo que produce la fractura e indica si ocurre antes o después de la fluencia.`,
+      f:[{l:'σc',u:'MPa',a:sc,r:.02},{l:'¿Fractura antes de fluir?',sel:['sí, antes de la fluencia','no, primero fluye'],a:sc<sy?'sí, antes de la fluencia':'no, primero fluye'}],
+      s:steps([`a = ${fx(a,1)} mm = ${fx(a/1000,4)} m; √(πa) = ${fx(q,4)} m½`,`σc = K_IC / (Y√(πa)) = ${K} / (${fx(Y,2)} × ${fx(q,4)}) = ${fx(sc,1)} MPa`,`Comparación: σc = ${fx(sc,1)} ${sc<sy?'<':'>'} σy = ${sy} MPa → ${sc<sy?'la fractura frágil ocurre antes de la fluencia':'el material fluye antes de fracturarse'}`])};},
+    acrit(){const K=pick([40,50,60,98]),Y=pick([1,1.12]),s=pick([150,200,250,300]),ac=Math.pow(K/(Y*s),2)/PI*1000;
+      return{t:'Fractura: tamaño crítico de grieta',txt:`Un componente (K_IC = ${K} MPa·√m, Y = ${fx(Y,2)}) trabaja a σ = ${s} MPa. ¿Qué tamaño de grieta debe detectar la inspección (a_c)?`,
+      f:[{l:'a_c',u:'mm',a:ac,r:.02}],s:steps([`a_c = (1/π)·[K_IC/(Yσ)]²`,`K_IC/(Yσ) = ${K} / (${fx(Y,2)} × ${s}) = ${fx(K/(Y*s),4)} m½`,`a_c = (${fx(K/(Y*s),4)})² / π = ${fx(ac/1000,5)} m = ${fx(ac,2)} mm`])};},
+    paris(){const ds=pick([80,100,120]),a0=pick([.5,1,2]),af=pick([8,10,15]),Nf=parisN(a0/1000,af/1000,3,1e-11,1,ds),X=ds*Math.sqrt(PI);
+      return{t:'Fatiga: ley de Paris',txt:`Una placa trabaja con Δσ = ${ds} MPa. Una grieta crece de a₀ = ${fx(a0,1)} mm a a_f = ${af} mm. Datos: Y = 1, m = 3, C = 1×10⁻¹¹ (da/dN en m/ciclo, ΔK en MPa·√m). Calcula N_f en unidades de 10⁵ ciclos.`,
+      f:[{l:'N_f',u:'×10⁵ ciclos',a:Nf/1e5,r:.02}],s:steps([`(Y·Δσ·√π)³ = (${ds} × 1.7725)³ = ${sci(Math.pow(X,3),3)}`,`a₀^(−1/2) = ${fx(Math.pow(a0/1000,-.5),2)}; a_f^(−1/2) = ${fx(Math.pow(af/1000,-.5),2)}`,`N_f = 2·(a₀^(−1/2) − a_f^(−1/2)) / [C·(Y·Δσ·√π)³] = ${sci(Nf,2)} ciclos`])};},
+    larson(){const C=20,T1=pick([950,1000,1050]),t1=pick([50,100,200]),T2=T1-rnd(50,150,25),LM=T1*(C+Math.log10(t1)),l2=LM/T2-C,t2=Math.pow(10,l2);
+      return{t:'Fluencia: Larson–Miller',txt:`A un esfuerzo dado, una aleación (C = 20) se rompe en ${t1} h a ${T1} K. ¿En cuánto tiempo se rompe a ${T2} K con el mismo esfuerzo? Da LM, log t₂ y t₂ en horas.`,
+      f:[{l:'LM',u:'',a:LM,r:.005},{l:'log t₂',u:'',a:l2,abs:.03},{l:'t₂',u:'h',a:t2,r:.12}],s:steps([`LM = T₁(C + log t₁) = ${T1} × (20 + ${fx(Math.log10(t1),3)}) = ${fx(LM,0)}`,`${fx(LM,0)} = ${T2} × (20 + log t₂) → 20 + log t₂ = ${fx(LM/T2,3)} → log t₂ = ${fx(l2,3)}`,`t₂ = 10^${fx(l2,3)} = ${sci(t2,2)} h`,`Al bajar la temperatura, el tiempo de ruptura aumenta.`])};},
     energia(){const sy=pick([250,275,350,500]),mt=pick([['acero',207],['aluminio',69],['cobre',110]]),ey=sy/(mt[1]*1000),u=sy*sy/(2*mt[1]);
       return{t:'Resiliencia',txt:`Un ${mt[0]} (E = ${mt[1]} GPa) tiene σy = ${sy} MPa. Calcula la deformación en la fluencia y la resiliencia (energía por volumen en la zona elástica, u = σy²/2E).`,
       f:[{l:'ε en σy',u:'×10⁻³',a:ey*1000,r:.02},{l:'Resiliencia',u:'kJ/m³',a:u,r:.02}],
       s:steps([`ε_y = σy/E = ${sy}/${fx(mt[1]*1000,0)} = ${fx(ey*1000,3)}×10⁻³`,`u = σy²/(2E) = ${sy}² / (2 × ${fx(mt[1]*1000,0)}) = ${fx(u/1000,4)} MPa = ${fx(u,1)} kJ/m³ (1 MPa = 1 MJ/m³)`])};}
   };
-  const TIPOS=[['rand','Aleatorio'],['hooke','Hooke y módulo de Young'],['poisson','Relación de Poisson'],['ensayo','Ensayo de tensión completo'],['real','Esfuerzo y deformación reales'],['brinell','Dureza Brinell'],['energia','Resiliencia'],['frio','Trabajo en frío (trefilado)'],['laminado','Laminación en frío'],['vickers','Dureza Vickers'],['rockwell','Dureza Rockwell C'],['knoop','Dureza Knoop']];
+  const TIPOS=[['rand','Aleatorio'],['hooke','Hooke y módulo de Young'],['poisson','Relación de Poisson'],['ensayo','Ensayo de tensión completo'],['real','Esfuerzo y deformación reales'],['brinell','Dureza Brinell'],['energia','Resiliencia'],['frio','Trabajo en frío (trefilado)'],['laminado','Laminación en frío'],['vickers','Dureza Vickers'],['rockwell','Dureza Rockwell C'],['knoop','Dureza Knoop'],['charpy','Impacto Charpy'],['kic','Fractura: σ crítico'],['acrit','Fractura: a crítica'],['paris','Fatiga: Paris'],['larson','Fluencia: Larson–Miller']];
   $('#mc-ejt').innerHTML=TIPOS.map(t=>`<option value="${t[0]}">${t[1]}</option>`).join('');
   const EJ={cur:null,ok:0,tot:0};
   function ejNew(){const t=$('#mc-ejt').value,k=t==='rand'?pick(Object.keys(GEN)):t;EJ.cur=GEN[k]();const c=EJ.cur;
@@ -2792,7 +2963,12 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
    ['Problema 3: ensayo completo (UTS ≈ 497 MPa, %EL = 25 %, %RA = 50.6 %)','d₀ = 12.8 mm, L₀ = 50.8 mm, F_máx = 64 kN, F_fractura = 48 kN, L_f = 63.5 mm, d_f = 9.0 mm.',['A₀ = 128.7 mm²; A_f = π(9.0)²/4 = 63.6 mm²','UTS = 64 000/128.7 = 497 MPa','σ ing. fractura = 48 000/128.7 = 373 MPa; σ real fractura = 48 000/63.6 = 755 MPa','%EL = (63.5 − 50.8)/50.8 × 100 = 25.0 %; %RA = (128.7 − 63.6)/128.7 × 100 = 50.6 %']],
    ['Problema 4: Brinell (HB ≈ 229, UTS ≈ 800 MPa)','Esfera D = 10 mm, carga 3000 kgf, huella d = 4.0 mm.',['√(100 − 16) = 9.165 mm; D − 9.165 = 0.835 mm','πD(0.835) = 26.23 mm²','HB = 6000/26.23 = 229 kgf/mm²','UTS ≈ 3.5 × 229 ≈ 800 MPa']],
    ['Problema 5 (presentación 1.5): K = 100 000 psi y n = 0.5','Con σ_real = K·ε_real^n, calcula la resistencia real y el UTS ingenieril en el inicio de la estricción.',['K = 100 000 psi = 689.5 MPa; la estricción inicia en ε_real = n = 0.5','σ_real = K·nⁿ = 689.5 × 0.5^0.5 = 487.5 MPa','UTS = σ_real/(1 + ε) = 487.5 / e^0.5 = 487.5/1.6487 = 295.7 MPa','Coincide con la respuesta de la presentación (487.54 y 295.71 MPa).']],
-   ['Problema 6 (trabajo en frío): trefilado de un alambre de cobre (%CW ≈ 35.6 %)','Un alambre de cobre de 15.2 mm de diámetro se trefila en frío hasta 12.2 mm. Calcula el %CW y la deformación real.',['A₀ = π(15.2)²/4 = 181.5 mm²; A_f = π(12.2)²/4 = 116.9 mm²','%CW = (181.5 − 116.9)/181.5 × 100 = 35.6 %','ε_real = ln(A₀/A_f) = ln(1.552) = 0.440 = 44.0 %','Tras el trefilado el alambre es más duro y resistente y menos dúctil.']]
+   ['Problema 6 (trabajo en frío): trefilado de un alambre de cobre (%CW ≈ 35.6 %)','Un alambre de cobre de 15.2 mm de diámetro se trefila en frío hasta 12.2 mm. Calcula el %CW y la deformación real.',['A₀ = π(15.2)²/4 = 181.5 mm²; A_f = π(12.2)²/4 = 116.9 mm²','%CW = (181.5 − 116.9)/181.5 × 100 = 35.6 %','ε_real = ln(A₀/A_f) = ln(1.552) = 0.440 = 44.0 %','Tras el trefilado el alambre es más duro y resistente y menos dúctil.']],
+   ['Clase 2 · Charpy (E = 117.7 J)','Martillo de 20 kg desde h₀ = 1.40 m; sube hasta h_f = 0.80 m. Calcula la energía absorbida (g = 9.81 m/s²).',['E = m·g·(h₀ − h_f) = 20 × 9.81 × (1.40 − 0.80)','E = 196.2 N × 0.60 m = 117.7 J','Si el martillo subiera hasta 1.30 m: E = 196.2 × 0.10 = 19.6 J, comportamiento frágil.']],
+   ['Clase 2 · Fractura (σc ≈ 291 MPa, antes de la fluencia)','Placa de acero con grieta de 6.0 mm, K_IC = 40 MPa·√m, σy = 450 MPa, Y = 1. Calcula σc.',['a = 0.006 m; √(πa) = 0.1373 m½','σc = 40 / 0.1373 = 291.3 MPa','291.3 MPa < σy = 450 MPa: fractura frágil antes de la fluencia.']],
+   ['Clase 2 · Inspección (σc ≈ 604 MPa, a_c ≈ 10.15 mm)','Grieta de borde (Y = 1.12), K_IC = 60 MPa·√m. Calcula σc para a = 2.5 mm y a_c si σ = 300 MPa.',['√(π·0.0025) = 0.0886; Y√(πa) = 0.0993; σc = 60/0.0993 = 604.5 MPa','K_IC/(Yσ) = 60/(1.12 × 300) = 0.1786 m½','a_c = (0.1786)²/π = 0.01015 m = 10.15 mm']],
+   ['Clase 2 · Paris (N_f ≈ 7.8 × 10⁵ ciclos)','Δσ = 100 MPa, a₀ = 1 mm, a_f = 10 mm, Y = 1, m = 3, C = 1×10⁻¹¹. Calcula N_f.',['(Y·Δσ·√π)³ = (100 × 1.7725)³ = 5.569 × 10⁶; C × 5.569 × 10⁶ = 5.569 × 10⁻⁵','a₀^(−1/2) = 31.62; a_f^(−1/2) = 10.00','N_f = 2 × (31.62 − 10.00) / 5.569 × 10⁻⁵ ≈ 7.8 × 10⁵ ciclos']],
+   ['Clase 2 · Larson–Miller (t ≈ 2.8 × 10⁴ h)','Una aleación (C = 20) se rompe en 100 h a 1000 K. ¿Cuánto dura a 900 K con el mismo esfuerzo?',['LM = 1000 × (20 + log 100) = 22 000','22 000 = 900 × (20 + log t) → log t = 4.44','t = 10^4.44 ≈ 2.8 × 10⁴ h (unos 3.2 años)']]
   ];
   $('#mc-cls').innerHTML=CLS.map(c=>`<details style="margin:6px 0"><summary>${c[0]}</summary><p>${c[1]}</p>${steps(c[2])}</details>`).join('');
 
@@ -3004,7 +3180,7 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
   $('#mc-el-p1').oninput=$('#mc-el-p2').oninput=drawEl;
 
   // ---------- quiz ----------
-  const QT={tension:'Tensión y curvas σ–ε',dureza:'Dureza',familias:'Familias de materiales',nolineal:'Comportamiento no lineal',frio:'Trabajo en frío'};
+  const QT={tension:'Tensión y curvas σ–ε',dureza:'Dureza',familias:'Familias de materiales',nolineal:'Comportamiento no lineal',frio:'Trabajo en frío',impacto:'Impacto y transición',fractura:'Fractura',fatiga:'Fatiga',fluencia:'Fluencia'};
   const QB=[
    {t:'tension',b:'Recordar',q:'¿Qué propiedad mide la pendiente de la zona elástica de la curva esfuerzo–deformación?',o:['El módulo de Young E','La tenacidad','La ductilidad','La dureza Brinell'],e:'En la zona elástica σ = E·ε, así que la pendiente es el módulo de Young.'},
    {t:'tension',b:'Aplicar',q:'Una probeta de d₀ = 10 mm soporta 15.7 kN en zona elástica. ¿Cuál es el esfuerzo ingenieril?',o:['200 MPa','157 MPa','400 MPa','20 MPa'],e:'A₀ = π(10)²/4 = 78.54 mm²; σ = 15 700 N / 78.54 mm² = 199.9 ≈ 200 MPa.'},
@@ -3062,6 +3238,25 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
    {t:'dureza',b:'Comprender',q:'¿Qué indica la escala de Mohs?',o:['Un orden de rayado, no cuánto más duro es un mineral','La profundidad de una huella','La carga necesaria para rayar','Un valor proporcional a HV'],e:'Mohs es ordinal: dice quién raya a quién, pero los pasos no son iguales (el diamante es mucho más duro que el corindón).'},
    {t:'dureza',b:'Analizar',q:'Se mide la dureza de un perfil desde la superficie hasta el núcleo de un engrane cementado con huellas muy cercanas. ¿Qué método conviene?',o:['Microdureza Vickers','Brinell con 3000 kgf','Shore A','Mohs'],e:'Las huellas diminutas de la microdureza permiten medir a profundidades muy próximas en una misma escala.'},
    {t:'dureza',b:'Evaluar',q:'Un ingeniero convierte HRC a HB con una ecuación exacta y la aplica a cualquier material. ¿Qué observación es correcta?',o:['Las conversiones son tablas empíricas que dependen del material y no deben extrapolarse','La conversión es exacta para todos los metales','Solo es válida entre Shore A y D','La conversión es exacta si se usa la misma carga'],e:'Las conversiones (ASTM E140, por ejemplo) son empíricas y válidas para ciertos materiales y rangos.'}
+   ,{t:'impacto',b:'Aplicar',q:'Un péndulo de 15 kg cae desde 1.20 m y sube hasta 0.50 m tras romper la probeta. ¿Qué energía absorbió?',o:['≈ 103 J','≈ 177 J','≈ 74 J','≈ 250 J'],e:'E = m·g·(h₀ − h_f) = 15 × 9.81 × (1.20 − 0.50) = 103.0 J.'},
+   {t:'impacto',b:'Comprender',q:'¿Qué indica una temperatura de transición dúctil–frágil en un acero al carbono?',o:['Por debajo de ella el acero rompe con poca energía y casi sin deformación','Es la temperatura de fusión','Es donde el acero recristaliza','Es el límite de fatiga'],e:'Los aceros BCC pasan de dúctiles a frágiles al enfriarse; se diseña para que la temperatura de servicio quede por encima de la transición.'},
+   {t:'impacto',b:'Comprender',q:'¿Por qué el aluminio no muestra una transición dúctil–frágil marcada?',o:['Tiene estructura FCC','Tiene estructura BCC','Es cerámico','No se puede ensayar con Charpy'],e:'Los metales FCC (aluminio, cobre) conservan su ductilidad al enfriarse; los BCC, como el acero al carbono, la pierden.'},
+   {t:'impacto',b:'Analizar',q:'¿Qué combinación favorece más una fractura frágil en un acero?',o:['Una entalla, baja temperatura y un golpe rápido','Superficie pulida, alta temperatura y carga lenta','Grano muy fino y carga estática','Esfuerzo bajo y temperatura ambiente'],e:'Baja temperatura, triaxialidad (entalla) y alta velocidad de carga se suman para fragilizar un metal dúctil.'},
+   {t:'fractura',b:'Aplicar',q:'Una placa tiene una grieta de borde de 2 mm (Y = 1.12) y K_IC = 50 MPa·√m. ¿A qué esfuerzo fractura?',o:['≈ 563 MPa','≈ 630 MPa','≈ 282 MPa','≈ 50 MPa'],e:'σc = K_IC/(Y√(πa)) = 50 / (1.12 × 0.0793) = 563 MPa. Si se olvida Y se obtiene 630 MPa.'},
+   {t:'fractura',b:'Aplicar',q:'Con K_IC = 60 MPa·√m, Y = 1.12 y σ = 300 MPa, ¿cuál es el tamaño crítico de grieta a_c?',o:['≈ 10 mm','≈ 32 mm','≈ 1 mm','≈ 100 mm'],e:'a_c = (1/π)[K_IC/(Yσ)]² = (0.1786)²/π = 0.01015 m ≈ 10.15 mm.'},
+   {t:'fractura',b:'Comprender',q:'Una placa con grieta falla a un esfuerzo menor que σy. ¿Qué lo explica?',o:['La grieta concentra el esfuerzo y K llega a K_IC','El material endureció por deformación','Subió la temperatura','Disminuyó la densidad'],e:'K = Yσ√(πa): con una grieta grande, K alcanza K_IC con un σ por debajo de σy.'},
+   {t:'fractura',b:'Recordar',q:'¿En qué unidades se expresa K_IC?',o:['MPa·√m','MPa','J','GPa'],e:'K_IC se expresa en MPa·√m (con a en metros en la fórmula).'},
+   {t:'fractura',b:'Analizar',q:'¿Cuál de estas acciones sube la tenacidad a la fractura de un metal?',o:['Reducir el tamaño de grano','Aumentar la velocidad de deformación','Añadir entallas','Usar espesores mayores en deformación plana'],e:'El grano fino sube la tenacidad (y también σy). La mayor velocidad, las entallas y los espesores grandes la reducen.'},
+   {t:'fatiga',b:'Comprender',q:'¿Qué distingue la curva S–N de un acero de la de un aluminio?',o:['El acero tiene límite de fatiga y el aluminio no','El aluminio tiene límite de fatiga y el acero no','Ambos tienen límite de fatiga','Ninguno depende del número de ciclos'],e:'Bajo el límite de fatiga un acero resiste prácticamente infinitos ciclos; en el aluminio la curva sigue bajando y se usa la resistencia para un número de ciclos dado (por ejemplo 10⁷).'},
+   {t:'fatiga',b:'Recordar',q:'¿Cuáles son las etapas de una falla por fatiga?',o:['Iniciación, propagación y fractura final','Fluencia, estricción y fractura','Carga, descarga y recuperación','Nucleación, crecimiento y recocido'],e:'Una microgrieta nace, crece un poco en cada ciclo (marcas de playa) y la sección restante se rompe de golpe.'},
+   {t:'fatiga',b:'Analizar',q:'Un eje con cuñero de esquinas agudas falla antes que uno sin cuñero. ¿Por qué?',o:['El cuñero es un concentrador de esfuerzos donde nace la grieta','El cuñero aumenta el UTS','El eje sin cuñero tiene menor límite de fatiga','El cuñero reduce la temperatura'],e:'Los concentradores multiplican el esfuerzo local y acortan la vida a fatiga; se mejoran con radios de acuerdo generosos.'},
+   {t:'fatiga',b:'Aplicar',q:'Con la ley de Paris y m = 3, si se duplica Δσ, ¿qué pasa con la vida por propagación?',o:['Se divide entre 8','Se divide entre 2','Se duplica','Se divide entre 3'],e:'N_f ∝ Δσ⁻ᵐ; con m = 3, duplicar Δσ divide N_f entre 2³ = 8.'},
+   {t:'fatiga',b:'Evaluar',q:'¿Cuál de estas medidas alarga la vida a fatiga de un eje de acero?',o:['Granallado para dejar esfuerzos residuales de compresión','Rectificar con acabado rugoso','Eliminar los radios de acuerdo','Aumentar el esfuerzo medio de tensión'],e:'Los esfuerzos residuales de compresión dificultan que las grietas nazcan y crezcan. Las otras opciones acortan la vida.'},
+   {t:'fluencia',b:'Comprender',q:'¿Qué caracteriza la etapa II (secundaria) de la fluencia?',o:['Velocidad de deformación casi constante y mínima','Velocidad de deformación decreciente','Aceleración hasta la ruptura','Deformación instantánea elástica'],e:'En la etapa II la velocidad es casi constante; domina la vida útil. La I disminuye la velocidad y la III la acelera hasta romper.'},
+   {t:'fluencia',b:'Recordar',q:'¿A partir de qué temperatura relativa (T/T_f, en kelvin) la fluencia es importante?',o:['Alrededor de 0.4','Alrededor de 0.1','Solo por encima de 1.0','Alrededor de 0.05'],e:'La fluencia aparece de forma importante por encima de aproximadamente 0.4 de la temperatura de fusión en kelvin.'},
+   {t:'fluencia',b:'Aplicar',q:'Una aleación (C = 20) rompe en 100 h a 1000 K. ¿Cuánto tarda en romper a 900 K con el mismo esfuerzo (Larson–Miller)?',o:['≈ 2.8 × 10⁴ h','≈ 110 h','≈ 1000 h','≈ 28 h'],e:'LM = 1000(20 + 2) = 22 000; 22 000 = 900(20 + log t) → log t = 4.44 → t ≈ 2.8 × 10⁴ h.'},
+   {t:'fluencia',b:'Analizar',q:'Si sube la temperatura de servicio de un álabe de turbina, ¿qué pasa con el tiempo de ruptura por fluencia?',o:['Baja','Sube','No cambia','Se vuelve infinito'],e:'La fluencia se acelera con la temperatura, así que el tiempo hasta la ruptura disminuye.'},
+   {t:'fluencia',b:'Analizar',q:'¿Por qué el plomo a temperatura ambiente puede mostrar fluencia?',o:['Su temperatura de fusión es baja y 20 °C ya supera 0.4 de ella','Es un material cerámico','Tiene estructura BCC','Tiene un límite de fatiga muy alto'],e:'T/T_f = 293/601 ≈ 0.49: para el plomo la temperatura ambiente ya es alta en términos homólogos.'}
   ];
   $('#mc-qz-t').innerHTML='<option value="all">Todos los temas</option>'+Object.keys(QT).map(k=>`<option value="${k}">${QT[k]}</option>`).join('');
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -3190,7 +3385,185 @@ footer{font-size:13px;color:var(--muted);max-width:90ch}
     $('#mc-cm-fb').innerHTML=`<div class="mc-sol"><b>${ok?'Correcto.':'No.'}</b> ${s[2]}</div><button class="btn" id="mc-cm-nx">Otro escenario</button>`;};
   drawRk();
 
-  window.__MEC={QB,FAMS,gent,QZ,FR,worked,flow,drawGrains,EJ,GEN,MAT,sig,eOfP,pOfE,sy02,trueAt,area,TIPOS};
+  // ---------- impacto, fractura, fatiga y fluencia ----------
+  const SUP={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻'};
+  function sci(x,d){if(!isFinite(x))return '∞';if(x===0)return '0';const e=Math.floor(Math.log10(Math.abs(x))),m=x/Math.pow(10,e);return fx(m,d===undefined?1:d)+' × 10'+String(e).split('').map(c=>SUP[c]).join('');}
+  const FALP=['im','fx','ft','cr','dg'];
+  function falPanel(f){FALP.forEach(k=>{$('#mc-fal-'+k).hidden=k!==f;});$$('#mc-faltabs .tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.f===f));
+    if(f==='im'){drawPen();drawDb();}if(f==='fx')drawFx();if(f==='ft'){drawSN();drawParis();}if(f==='cr'){drawCr();lmCalc();}if(f==='dg'&&DG.cur===null)dgNext();}
+  $('#mc-faltabs').onclick=e=>{const b=e.target.closest('[data-f]');if(b)falPanel(b.dataset.f);};
+  const chips=(id,arr,fn)=>{$(id).innerHTML=arr.map((x,i)=>`<button class="btn" data-i="${i}">${x.l}</button>`).join('');$(id).onclick=e=>{const b=e.target.closest('[data-i]');if(b)fn(arr[+b.dataset.i]);};};
+  const reduced=()=>window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // --- Charpy
+  const PAN={t:null};
+  function drawPen(tt){const m=num($('#mc-im-m').value),h0=Math.min(1.8,Math.max(.1,num($('#mc-im-h0').value))),sl=$('#mc-im-hf');sl.max=Math.round(h0*100);if(+sl.value>+sl.max)sl.value=sl.max;
+    const hf=+sl.value/100;$('#mc-im-hfv').textContent=fx(hf,2);const L=1,px=260,py=26,Lp=170;
+    const th0=Math.acos(Math.max(-1,1-h0/L)),thf=Math.acos(Math.max(-1,1-hf/L)),pos=th=>[px+Lp*Math.sin(th),py+Lp*Math.cos(th)];
+    const bob=(th,st)=>{const p=pos(th);return `<line x1="${px}" y1="${py}" x2="${p[0]}" y2="${p[1]}" style="${st}"/><circle cx="${p[0]}" cy="${p[1]}" r="15" style="${st};fill:var(--q3);fill-opacity:${st.includes('dasharray')?.25:1}"/>`;};
+    const gs='stroke:var(--muted);stroke-width:1.6;stroke-dasharray:4 4',ss='stroke:var(--ink);stroke-width:2.4';
+    let g=`<line x1="40" y1="${py+Lp}" x2="480" y2="${py+Lp}" class="mc-grid"/>`;
+    const broken=tt!==undefined&&tt>.5;
+    g+=broken?`<rect x="${px-34}" y="${py+Lp+20}" width="24" height="12" class="mc-spec"/><rect x="${px+14}" y="${py+Lp+30}" width="24" height="12" class="mc-spec" transform="rotate(14 ${px+26} ${py+Lp+36})"/>`:`<rect x="${px-26}" y="${py+Lp+20}" width="52" height="12" class="mc-spec"/><path d="M${px-4} ${py+Lp+20}l4 6l4 -6" fill="var(--bg)" stroke="var(--ink)"/>`;
+    g+=`<rect x="${px-60}" y="${py+Lp+32}" width="120" height="8" style="fill:var(--q3);stroke:var(--ink)"/>`;
+    g+=bob(-th0,gs)+bob(thf,gs);
+    let thn=-th0;if(tt!==undefined)thn=tt<=.5?-th0*(1-tt*2):thf*(tt*2-1);
+    g+=bob(thn,ss)+`<circle cx="${px}" cy="${py}" r="5" style="fill:var(--ink)"/>`;
+    const a=pos(-th0),b=pos(thf);
+    g+=`<text class="mc-tl" x="${a[0]-22}" y="${a[1]-22}" text-anchor="middle">h₀ = ${fx(h0,2)} m</text><text class="mc-tl" x="${b[0]+22}" y="${b[1]-22}" text-anchor="middle">h_f = ${fx(hf,2)} m</text>`;
+    g+=`<text class="mc-t" x="${px}" y="${py+Lp+60}" text-anchor="middle">Probeta con entalla en V sobre los apoyos (esquema, no a escala)</text>`;
+    $('#mc-im-pen').innerHTML=g;
+    const E0=m*9.81*h0,Ef=m*9.81*hf,E=E0-Ef;
+    $('#mc-im-out').innerHTML=oc('E potencial inicial',fx(E0,1)+' J')+oc('E potencial final',fx(Ef,1)+' J')+oc('Energía absorbida',fx(E,1)+' J')+oc('% de la energía inicial',fx(E/E0*100,0)+' %');}
+  ['#mc-im-m','#mc-im-h0','#mc-im-hf'].forEach(s=>$(s).oninput=()=>drawPen());
+  $('#mc-im-go').onclick=()=>{if(reduced()){drawPen(1);return;}const id=PAN.t=Date.now(),t0=performance.now();(function st(t){if(PAN.t!==id)return;const f=Math.min(1,(t-t0)/2600);drawPen(f);if(f<1)requestAnimationFrame(st);else setTimeout(()=>{if(PAN.t===id)drawPen();},900);})(t0);};
+  $('#mc-im-hf').oninput=()=>{PAN.t=null;drawPen();};
+  const IMM={bcc:{n:'Acero al carbono (BCC)',f:T=>10+120/(1+Math.exp(-(T+20)/18)),col:'var(--denim)'},fcc:{n:'Acero inoxidable austenítico (FCC)',f:T=>160-.08*(100-T),col:'var(--ok)'},al:{n:'Aluminio (FCC)',f:T=>30+.02*(T+100),col:'var(--naranja)'}};
+  const IMX=[{l:'Chasis de acero al carbono a 25 °C',m:'bcc',T:25,x:'A temperatura ambiente un chasis tubular de acero al carbono absorbe mucha energía en un choque: se deforma antes de romper.'},
+    {l:'El mismo chasis en una mañana helada (−25 °C)',m:'bcc',T:-25,x:'Cerca de la transición, un golpe sobre una entalla (soldadura, cambio de sección) puede fracturar sin deformación apreciable. Hay que elegir el acero pensando en la temperatura mínima de servicio.'},
+    {l:'Tubería de acero al carbono a −60 °C',m:'bcc',T:-60,x:'Muy por debajo de la transición: fractura frágil con poca energía. Para clima frío se especifican aceros con transición baja o aleaciones FCC.'},
+    {l:'Soporte de aluminio a −40 °C',m:'al',T:-40,x:'El aluminio (FCC) no tiene transición marcada: conserva su comportamiento al enfriarse, aunque absorbe menos energía que un acero dúctil.'}];
+  chips('#mc-im-ex',IMX,x=>{$('#mc-im-mat').value=x.m;$('#mc-im-t').value=x.T;drawDb(x.x);});
+  function drawDb(ctx){const mk=$('#mc-im-mat').value,T=+$('#mc-im-t').value;$('#mc-im-tv').textContent=T;const X0=56,X1=504,Y0=14,Y1=252,px=t=>X0+(t+100)/200*(X1-X0),py=e=>Y1-e/180*(Y1-Y0);let g='';
+    for(let t=-100;t<=100;t+=50)g+=`<line class="mc-grid" x1="${px(t)}" y1="${Y0}" x2="${px(t)}" y2="${Y1}"/><text class="mc-t" x="${px(t)}" y="${Y1+15}" text-anchor="middle">${t}</text>`;
+    for(let e=0;e<=180;e+=30)g+=`<line class="mc-grid" x1="${X0}" y1="${py(e)}" x2="${X1}" y2="${py(e)}"/><text class="mc-t" x="${X0-6}" y="${py(e)+4}" text-anchor="end">${e}</text>`;
+    g+=`<path class="mc-ax" d="M${X0} ${Y0}V${Y1}H${X1}"/><text class="mc-tl" x="${(X0+X1)/2}" y="${Y1+34}" text-anchor="middle">Temperatura (°C)</text><text class="mc-tl" transform="translate(14 ${(Y0+Y1)/2}) rotate(-90)" text-anchor="middle">Energía absorbida (J)</text>`;
+    Object.keys(IMM).forEach(k=>{const c=IMM[k];let d='';for(let t=-100;t<=100;t+=2)d+=(t>-100?'L':'M')+px(t).toFixed(1)+' '+py(c.f(t)).toFixed(1);g+=`<path fill="none" stroke="${c.col}" stroke-width="${k===mk?3.4:1.8}" ${k===mk?'':'opacity=".55"'} d="${d}"/>`;});
+    g+=`<line x1="${px(-20)}" y1="${Y0}" x2="${px(-20)}" y2="${Y1}" style="stroke:var(--denim);stroke-dasharray:3 4;opacity:.6"/>`;
+    const E=IMM[mk].f(T);g+=`<circle class="mc-dot" cx="${px(T)}" cy="${py(E)}" r="6"/><text class="mc-t" x="${px(-20)+4}" y="${Y0+10}">T transición del acero al carbono ≈ −20 °C</text>`;
+    g+=Object.keys(IMM).map((k,i)=>`<line x1="${X0+10}" y1="${Y1-60+i*16}" x2="${X0+34}" y2="${Y1-60+i*16}" stroke="${IMM[k].col}" stroke-width="3"/><text class="mc-t" x="${X0+40}" y="${Y1-56+i*16}">${IMM[k].n}</text>`).join('');
+    $('#mc-im-db').innerHTML=g;
+    let st;if(mk==='bcc'){const lo=10,hi=130,fr=(E-lo)/(hi-lo);st=fr<.2?'Frágil: poca energía, casi sin deformación':fr>.8?'Dúctil: mucha energía, fractura con deformación':'Zona de transición: comportamiento incierto y con dispersión';}else st='Sin transición marcada en este rango';
+    $('#mc-im-o2').innerHTML=oc('Energía a '+T+' °C',fx(E,0)+' J')+oc('Estado',st);
+    if(ctx!==undefined)PAN.ctx=ctx;$('#mc-im-ctx').textContent=PAN.ctx||'';}
+  $('#mc-im-mat').onchange=$('#mc-im-t').oninput=()=>{PAN.ctx='';drawDb();};
+  // --- Fractura
+  const FXM=[['Acero estructural (datos del problema 6 de la presentación)',40,450],['Acero de alta resistencia (σy = 1520 MPa, K_IC = 98 MPa·√m)',98,1520],['Cerámico técnico (K_IC ≈ 4; el rango típico es 1 a 10)',4,0],['Vidrio (K_IC ≈ 1)',1,0],['Personalizado',null,null]];
+  $('#mc-fx-mat').innerHTML=FXM.map((m,i)=>`<option value="${i}">${m[0]}</option>`).join('');
+  const aOf=p=>0.1*Math.pow(300,p/1000),pOfA=a=>1000*Math.log(a/0.1)/Math.log(300);
+  const FXE=[{l:'Placa con grieta no detectada (6 mm)',mat:0,Y:1,a:6,s:320},{l:'Inspección: grieta de borde, K_IC = 60',mat:4,K:60,sy:0,Y:1.12,a:2.5,s:300},{l:'Grieta en soldadura de un chasis (acero de alta resistencia)',mat:1,Y:1.12,a:2,s:600},{l:'Parabrisas de vidrio con microgrieta (0.1 mm)',mat:3,Y:1,a:.1,s:30}];
+  function fxMax(){const sy=num($('#mc-fx-sy').value);return sy>0?1.25*sy:700;}
+  chips('#mc-fx-ex',FXE,x=>{$('#mc-fx-mat').value=x.mat;const m=FXM[x.mat];$('#mc-fx-k').value=x.K??m[1];$('#mc-fx-sy').value=x.sy??m[2];$('#mc-fx-y').value=x.Y;$('#mc-fx-a').value=Math.round(pOfA(x.a));$('#mc-fx-s').value=Math.round(x.s/fxMax()*1000);drawFx();});
+  $('#mc-fx-mat').onchange=()=>{const m=FXM[+$('#mc-fx-mat').value];if(m[1]!==null){$('#mc-fx-k').value=m[1];$('#mc-fx-sy').value=m[2];}drawFx();};
+  function drawFx(){const K=num($('#mc-fx-k').value),sy=num($('#mc-fx-sy').value),Y=num($('#mc-fx-y').value),a=aOf(+$('#mc-fx-a').value),smax=fxMax(),s=+$('#mc-fx-s').value/1000*smax;
+    $('#mc-fx-av').textContent=fx(a,a<1?2:1);$('#mc-fx-sv').textContent=fx(s,0);
+    if(!(K>0&&Y>0)){$('#mc-fx-out').innerHTML=oc('K','—');return;}
+    const Kap=Y*s*Math.sqrt(PI*a/1000),sc=K/(Y*Math.sqrt(PI*a/1000)),ac=s>0?Math.pow(K/(Y*s),2)/PI*1000:Infinity;
+    const X0=56,X1=504,Y0=14,Y1=262,lx0=Math.log10(.1),lx1=Math.log10(30),px=v=>X0+(Math.log10(v)-lx0)/(lx1-lx0)*(X1-X0),py=v=>Y1-Math.min(v,smax)/smax*(Y1-Y0);let g='';
+    [.1,.3,1,3,10,30].forEach(v=>{g+=`<line class="mc-grid" x1="${px(v)}" y1="${Y0}" x2="${px(v)}" y2="${Y1}"/><text class="mc-t" x="${px(v)}" y="${Y1+15}" text-anchor="middle">${fx(v,1)}</text>`;});
+    const sy2=nice(smax,5);for(let v=0;v<=smax;v+=sy2)g+=`<line class="mc-grid" x1="${X0}" y1="${py(v)}" x2="${X1}" y2="${py(v)}"/><text class="mc-t" x="${X0-6}" y="${py(v)+4}" text-anchor="end">${fx(v,0)}</text>`;
+    g+=`<path class="mc-ax" d="M${X0} ${Y0}V${Y1}H${X1}"/><text class="mc-tl" x="${(X0+X1)/2}" y="${Y1+34}" text-anchor="middle">Tamaño de grieta a (mm, escala log)</text><text class="mc-tl" transform="translate(14 ${(Y0+Y1)/2}) rotate(-90)" text-anchor="middle">σ (MPa)</text>`;
+    let d='';for(let i=0;i<=200;i++){const v=.1*Math.pow(300,i/200),c=K/(Y*Math.sqrt(PI*v/1000));d+=(i?'L':'M')+px(v).toFixed(1)+' '+py(c).toFixed(1);}
+    g+=`<path class="mc-c1" d="${d}"/><text class="mc-t" x="${X1-6}" y="${Y0+14}" text-anchor="end">arriba de la curva: fractura</text><text class="mc-t" x="${X1-6}" y="${Y1-8}" text-anchor="end">abajo: sin fractura</text>`;
+    if(sy>0&&sy<=smax)g+=`<line class="mc-off" x1="${X0}" y1="${py(sy)}" x2="${X1}" y2="${py(sy)}"/><text class="mc-t" x="${X0+6}" y="${py(sy)-5}">σy = ${fx(sy,0)} MPa</text>`;
+    g+=`<circle class="mc-dot" cx="${px(a)}" cy="${py(s)}" r="6" style="fill:${Kap>=K?'var(--bad)':'var(--ok)'}"/>`;$('#mc-fx-svg').innerHTML=g;
+    const edge=Y>1.05,wpx=200,sc2=5,cl=Math.min(Math.max(a*sc2,2),edge?96:94);let p=`<rect x="30" y="22" width="${wpx}" height="106" class="mc-spec"/>`;
+    p+=edge?`<polygon points="30,${75-3} ${30+cl},75 30,${75+3}" style="fill:var(--bad);stroke:var(--bad)"/>`:`<polygon points="${130-cl},75 130,72 ${130+cl},75 130,78" style="fill:var(--bad);stroke:var(--bad)"/>`;
+    p+=`<path d="M80 4v16m-5 -6l5 6l5 -6M180 4v16m-5 -6l5 6l5 -6M80 146v-16m-5 6l5 -6l5 6M180 146v-16m-5 6l5 -6l5 6" class="mc-ax"/><text class="mc-t" x="240" y="80">${edge?'a':'2a'}</text>`;$('#mc-fx-pl').innerHTML=p;
+    $('#mc-fx-out').innerHTML=oc('K aplicado',fx(Kap,1)+' MPa·√m')+oc('K_IC',fx(K,1)+' MPa·√m')+oc('σc con esta grieta',fx(sc,0)+' MPa')+oc('a_c con este σ',isFinite(ac)?fx(ac,2)+' mm':'—');
+    const ver=Kap>=K?`Fractura: K = ${fx(Kap,1)} ≥ K_IC = ${fx(K,1)}.`+(sy>0&&sc<sy?' Ocurre antes de la fluencia (σc < σy): fractura frágil y rápida.':''):`Sin fractura: K = ${fx(Kap,1)} < K_IC = ${fx(K,1)}.`;
+    $('#mc-fx-ver').textContent=ver+(sy>0&&s>sy?' Además σ > σy: el material fluye.':'');
+    $('#mc-fx-note').textContent=`σc = K_IC/(Y√(πa)) = ${fx(K,1)} / (${fx(Y,2)}·√(π·${fx(a/1000,5)})) = ${fx(sc,0)} MPa. Con σ = ${fx(s,0)} MPa, la grieta crítica mide a_c = (1/π)[K_IC/(Yσ)]² = ${isFinite(ac)?fx(ac,2)+' mm':'—'}.`;}
+  ['#mc-fx-k','#mc-fx-sy','#mc-fx-y','#mc-fx-a','#mc-fx-s'].forEach(s=>$(s).oninput=$(s).onchange=drawFx);
+  // --- Fatiga S–N
+  function snM(mat,U){const s1=.9*U;if(mat==='ac'){const se=.5*U;return{s1,se,lab:'Límite de fatiga',f:N=>{const l=Math.log10(N);return l<=3?s1:l>=7?se:s1-(s1-se)*(l-3)/4;},inv:s=>s<=se?Infinity:s>=s1?1e3:Math.pow(10,3+4*(s1-s)/(s1-se))};}
+    const s7=.35*U,sl=.03*U;return{s1,se:s7,lab:'Resistencia a 10⁷ ciclos',f:N=>{const l=Math.log10(N);return l<=3?s1:l<=7?s1-(s1-s7)*(l-3)/4:s7-sl*(l-7);},inv:s=>s>=s1?1e3:s>=s7?Math.pow(10,3+4*(s1-s)/(s1-s7)):Math.pow(10,Math.min(14,7+(s7-s)/sl))};}
+  const FTE=[{l:'Eje de motor de acero (σa = 250 MPa)',m:'ac',U:600,s:250,kt:1,r:3000,h:8},{l:'El mismo eje con cuñero agudo (Kt ≈ 2)',m:'ac',U:600,s:250,kt:2,r:3000,h:8},{l:'Soporte de aluminio (σa = 90 MPa)',m:'al',U:300,s:90,kt:1,r:600,h:8},{l:'Bieleta de suspensión con soldadura (Kt ≈ 2.5, valor ilustrativo)',m:'ac',U:700,s:150,kt:2.5,r:300,h:2}];
+  chips('#mc-ft-ex',FTE,x=>{$('#mc-ft-mat').value=x.m;$('#mc-ft-u').value=x.U;$('#mc-ft-s').value=x.s;$('#mc-ft-kt').value=x.kt;$('#mc-ft-r').value=x.r;$('#mc-ft-h').value=x.h;drawSN();});
+  function drawSN(){const mat=$('#mc-ft-mat').value,U=num($('#mc-ft-u').value),sa=num($('#mc-ft-s').value),kt=num($('#mc-ft-kt').value)||1,r=num($('#mc-ft-r').value),h=num($('#mc-ft-h').value);
+    if(!(U>0&&sa>=0)){$('#mc-ft-out').innerHTML=oc('σ efectivo','—');return;}
+    const M=snM(mat,U),se=sa*kt,N=M.inv(se),X0=56,X1=504,Y0=14,Y1=262,px=l=>X0+(l-3)/5*(X1-X0),ymax=U*1.05,py=v=>Y1-Math.min(Math.max(v,0),ymax)/ymax*(Y1-Y0);let g='';
+    for(let l=3;l<=8;l++)g+=`<line class="mc-grid" x1="${px(l)}" y1="${Y0}" x2="${px(l)}" y2="${Y1}"/><text class="mc-t" x="${px(l)}" y="${Y1+15}" text-anchor="middle">10${SUP[String(l)]}</text>`;
+    const sy2=nice(ymax,5);for(let v=0;v<=ymax;v+=sy2)g+=`<line class="mc-grid" x1="${X0}" y1="${py(v)}" x2="${X1}" y2="${py(v)}"/><text class="mc-t" x="${X0-6}" y="${py(v)+4}" text-anchor="end">${fx(v,0)}</text>`;
+    g+=`<path class="mc-ax" d="M${X0} ${Y0}V${Y1}H${X1}"/><text class="mc-tl" x="${(X0+X1)/2}" y="${Y1+34}" text-anchor="middle">Ciclos a la falla N (escala log)</text><text class="mc-tl" transform="translate(14 ${(Y0+Y1)/2}) rotate(-90)" text-anchor="middle">Amplitud σa (MPa)</text>`;
+    let d='';for(let i=0;i<=100;i++){const l=3+5*i/100;d+=(i?'L':'M')+px(l).toFixed(1)+' '+py(M.f(Math.pow(10,l))).toFixed(1);}
+    g+=`<path class="mc-c1" d="${d}"/><line class="mc-c2" x1="${X0}" y1="${py(se)}" x2="${X1}" y2="${py(se)}"/><text class="mc-t" x="${X0+6}" y="${py(se)-5}">σ efectivo = ${fx(se,0)} MPa</text>`;
+    if(isFinite(N)&&N<=1e8)g+=`<circle class="mc-dot" cx="${px(Math.log10(Math.max(N,1e3)))}" cy="${py(se)}" r="6"/>`;else g+=`<path d="M${X1-26} ${py(se)}h24m-7 -5l7 5l-7 5" class="mc-ax"/>`;
+    if(mat==='ac')g+=`<text class="mc-t" x="${X1-6}" y="${py(M.se)-6}" text-anchor="end">límite de fatiga ≈ ${fx(M.se,0)} MPa</text>`;
+    $('#mc-ft-svg').innerHTML=g;
+    const cyc=r*60*h,days=N/cyc;let ver;
+    if(se>=U)ver='σ efectivo ≥ UTS: la pieza falla por sobrecarga estática, no por fatiga.';
+    else if(!isFinite(N))ver='Vida infinita: σ efectivo está por debajo del límite de fatiga.';
+    else if(N<=1e3)ver='σ efectivo muy alto: falla en menos de 10³ ciclos.';
+    else ver=`Falla por fatiga hacia ${sci(N,1)} ciclos.`;
+    $('#mc-ft-ver').textContent=ver;
+    $('#mc-ft-out').innerHTML=oc('σ efectivo = Kt·σa',fx(se,0)+' MPa')+oc(M.lab,fx(M.se,0)+' MPa')+oc('Vida N',isFinite(N)?(N<=1e3?'< 10³':(N>1e12?'> 10¹²':sci(N,1)))+' ciclos':'infinita')+oc('Ciclos por día',sci(cyc,1))+oc('Tiempo de uso hasta la falla',isFinite(N)&&N>1e3?(days<1?fx(days*h*60,0)+' min de uso':days<730?fx(days,0)+' días':fx(days/365,1)+' años'):'—');
+    $('#mc-ft-note').textContent=(mat==='ac'?'Modelo: σ(10³) = 0.9·UTS y límite de fatiga = 0.5·UTS (en aceros suele estar entre 35 % y 60 % del UTS).':'Modelo: σ(10³) = 0.9·UTS, 0.35·UTS a 10⁷ ciclos y sigue bajando 0.03·UTS por década.')+' Un concentrador (Kt) multiplica el esfuerzo local y acorta mucho la vida.';}
+  ['#mc-ft-mat','#mc-ft-u','#mc-ft-s','#mc-ft-kt','#mc-ft-r','#mc-ft-h'].forEach(s=>$(s).oninput=$(s).onchange=drawSN);
+  // --- Paris
+  function parisN(a0,af,m,C,Y,ds){const X=Y*ds*Math.sqrt(PI);if(Math.abs(m-2)<1e-9)return Math.log(af/a0)/(C*X*X);const p=(m-2)/2;return (Math.pow(a0,-p)-Math.pow(af,-p))/(p*C*Math.pow(X,m));}
+  function drawParis(){const ds=num($('#mc-pa-ds').value),a0=num($('#mc-pa-a0').value)/1000,af=num($('#mc-pa-af').value)/1000,m=num($('#mc-pa-m').value),C=num($('#mc-pa-c').value),Y=num($('#mc-pa-y').value);
+    if(!(ds>0&&a0>0&&af>a0&&C>0&&Y>0&&m>0)){$('#mc-pa-out').innerHTML=oc('N_f','—');$('#mc-pa-svg').innerHTML='';$('#mc-pa-note').textContent='Revisa los datos: se requiere a_f > a₀ y valores positivos.';return;}
+    const Nf=parisN(a0,af,m,C,Y,ds),N2=af>2*a0?parisN(a0,2*a0,m,C,Y,ds):Nf,X0=64,X1=504,Y0=14,Y1=262,px=n=>X0+n/Nf*(X1-X0),amax=af*1000,py=v=>Y1-v/amax*(Y1-Y0);let g='';
+    for(let i=0;i<=5;i++){const n=Nf*i/5;g+=`<line class="mc-grid" x1="${px(n)}" y1="${Y0}" x2="${px(n)}" y2="${Y1}"/><text class="mc-t" x="${px(n)}" y="${Y1+15}" text-anchor="middle">${sci(n,1)}</text>`;}
+    const sy2=nice(amax,5);for(let v=0;v<=amax+1e-9;v+=sy2)g+=`<line class="mc-grid" x1="${X0}" y1="${py(v)}" x2="${X1}" y2="${py(v)}"/><text class="mc-t" x="${X0-6}" y="${py(v)+4}" text-anchor="end">${fx(v,v<1?1:0)}</text>`;
+    g+=`<path class="mc-ax" d="M${X0} ${Y0}V${Y1}H${X1}"/><text class="mc-tl" x="${(X0+X1)/2}" y="${Y1+34}" text-anchor="middle">Ciclos N</text><text class="mc-tl" transform="translate(14 ${(Y0+Y1)/2}) rotate(-90)" text-anchor="middle">Longitud de grieta a (mm)</text>`;
+    let d='';const p=(m-2)/2,X=Y*ds*Math.sqrt(PI);for(let i=0;i<=200;i++){const n=Nf*i/200;let a;if(Math.abs(m-2)<1e-9)a=a0*Math.exp(C*X*X*n);else{const t=Math.pow(a0,-p)-p*C*Math.pow(X,m)*n;a=t>0?Math.pow(t,-1/p):af;}d+=(i?'L':'M')+px(n).toFixed(1)+' '+py(Math.min(a,af)*1000).toFixed(1);}
+    g+=`<path class="mc-c1" d="${d}"/><circle class="mc-dot" cx="${px(Nf)}" cy="${py(amax)}" r="5"/>`;
+    if(af>2*a0)g+=`<line class="mc-off" x1="${px(N2)}" y1="${py(0)}" x2="${px(N2)}" y2="${py(2*a0*1000)}"/><text class="mc-t" x="${px(N2)+4}" y="${Y1-6}">a = 2a₀</text>`;
+    $('#mc-pa-svg').innerHTML=g;
+    $('#mc-pa-out').innerHTML=oc('Vida por propagación N_f',sci(Nf,2)+' ciclos')+(af>2*a0?oc('Ciclos de a₀ a 2a₀',sci(N2,2)):'')+(af>2*a0?oc('Fracción de la vida en ese tramo',fx(N2/Nf*100,0)+' %'):'')+oc('ΔK inicial',fx(Y*ds*Math.sqrt(PI*a0),1)+' MPa·√m')+oc('ΔK final',fx(Y*ds*Math.sqrt(PI*af),1)+' MPa·√m');
+    $('#mc-pa-note').textContent=af>2*a0?`La grieta pasa de ${fx(a0*1000,2)} a ${fx(2*a0*1000,2)} mm en ${fx(N2/Nf*100,0)} % de la vida y el resto del crecimiento va cada vez más rápido. Si a_f supera el tamaño crítico (K_max ≥ K_IC), la fractura ocurre antes de llegar a a_f.`:'Con a_f ≤ 2a₀ el crecimiento es corto; revisa que a_f sea el tamaño crítico o el límite de inspección.';}
+  ['#mc-pa-ds','#mc-pa-a0','#mc-pa-af','#mc-pa-m','#mc-pa-c','#mc-pa-y'].forEach(s=>$(s).oninput=drawParis);
+  // --- Fluencia
+  const CRM={ni:{n:'Aleación base níquel (álabes)',Tm:1728,Q:285,E:207,s0:200},fe:{n:'Acero (hierro)',Tm:1811,Q:251,E:207,s0:100},cu:{n:'Cobre',Tm:1358,Q:197,E:110,s0:60},al:{n:'Aluminio',Tm:933,Q:142,E:69,s0:50},pb:{n:'Plomo',Tm:601,Q:109,E:16,s0:4}};
+  $('#mc-cr-mat').innerHTML=Object.keys(CRM).map(k=>`<option value="${k}">${CRM[k].n}</option>`).join('');
+  const CRE=[{l:'Álabe de turbina de gas a 900 °C',m:'ni',T:900,s:100,x:'Subir la temperatura de servicio acorta mucho el tiempo de ruptura: por eso los álabes se enfrían y se fabrican con superaleaciones.'},
+    {l:'Tubería de vapor de acero a 540 °C',m:'fe',T:540,s:200,x:'A 0.45 de la temperatura de fusión la fluencia ya es importante; la tubería se diseña para una vida de decenas de años y se inspecciona su abultamiento.'},
+    {l:'Colector de escape de un motor de competencia (acero a 800 °C)',m:'fe',T:800,s:100,x:'A esa temperatura la fluencia y la oxidación limitan la vida: se usan aceros inoxidables o aleaciones de níquel para el colector.'},
+    {l:'Plomo a temperatura ambiente',m:'pb',T:20,s:200,x:'El plomo a 20 °C ya está por encima de 0.4 de su temperatura de fusión: fluye bajo cargas pequeñas, por eso los techos y tuberías de plomo se deforman con los años.'}];
+  chips('#mc-cr-ex',CRE,x=>{$('#mc-cr-mat').value=x.m;$('#mc-cr-t').value=x.T;$('#mc-cr-s').value=x.s;CR.ctx=x.x;drawCr();});
+  const CR={ctx:''};
+  function crTr(c,T,s,f){const T0=.6*c.Tm;return 1000*Math.pow(1/f,5)*Math.exp(c.Q*1000/8.314*(1/T-1/T0));}
+  function crEps(x,e0){return e0+.4*(1-Math.exp(-x/.03))+2*x+.6*(Math.exp(5*(x-1))-Math.exp(-5))/(1-Math.exp(-5));}
+  function drawCr(){const c=CRM[$('#mc-cr-mat').value],Tc=+$('#mc-cr-t').value,T=Tc+273,f=+$('#mc-cr-s').value/100,s=c.s0*f;$('#mc-cr-tv').textContent=Tc;$('#mc-cr-sv').textContent=fx(s,s<10?1:0);
+    const T0=.6*c.Tm,tr=crTr(c,T,s,f),tref=1000,e0=s/(c.E*1000)*100,e0r=c.s0/(c.E*1000)*100,ratio=T/c.Tm;
+    const lmin=Math.min(-1,Math.floor(Math.log10(tr))-1),lmax=Math.min(10,Math.ceil(Math.log10(Math.max(tr,tref)))+1),X0=60,X1=504,Y0=14,Y1=262,px=l=>X0+(l-lmin)/(lmax-lmin)*(X1-X0),ymax=Math.max(e0,e0r)+3.6,py=v=>Y1-Math.min(v,ymax)/ymax*(Y1-Y0);let g='';
+    for(let l=Math.ceil(lmin);l<=lmax;l++)g+=`<line class="mc-grid" x1="${px(l)}" y1="${Y0}" x2="${px(l)}" y2="${Y1}"/><text class="mc-t" x="${px(l)}" y="${Y1+15}" text-anchor="middle">10${String(l).split('').map(q=>SUP[q]).join('')}</text>`;
+    const sy2=nice(ymax,5);for(let v=0;v<=ymax;v+=sy2)g+=`<line class="mc-grid" x1="${X0}" y1="${py(v)}" x2="${X1}" y2="${py(v)}"/><text class="mc-t" x="${X0-6}" y="${py(v)+4}" text-anchor="end">${fx(v,1)}</text>`;
+    g+=`<path class="mc-ax" d="M${X0} ${Y0}V${Y1}H${X1}"/><text class="mc-tl" x="${(X0+X1)/2}" y="${Y1+34}" text-anchor="middle">Tiempo (h, escala log)</text><text class="mc-tl" transform="translate(14 ${(Y0+Y1)/2}) rotate(-90)" text-anchor="middle">Deformación (%)</text>`;
+    const curve=(trr,ee,cl)=>{let d='';const N=160;for(let i=0;i<=N;i++){const l=lmin+(Math.log10(trr)-lmin)*i/N,x=Math.pow(10,l)/trr;d+=(i?'L':'M')+px(l).toFixed(1)+' '+py(crEps(Math.min(x,1),ee)).toFixed(1);}return `<path d="${d}" fill="none" ${cl}/>`;};
+    g+=curve(tref,e0r,'stroke="var(--muted)" stroke-width="1.8" stroke-dasharray="5 4"')+curve(tr,e0,'stroke="var(--denim)" stroke-width="3"');
+    const lt=Math.log10(tr);g+=`<path d="M${px(lt)-5} ${py(crEps(1,e0))-5}l10 10m0 -10l-10 10" stroke="var(--bad)" stroke-width="2.4" fill="none"/>`;
+    g+=`<text class="mc-t" x="${X0+8}" y="${Y0+12}">línea gris: referencia (σ de referencia, 0.6·T_f)</text><text class="mc-t" x="${px(lt)}" y="${py(crEps(1,e0))-10}" text-anchor="middle">ruptura</text>`;
+    [['I',.01],['II',.35],['III',.93]].forEach(q=>{const l=lmin+(lt-lmin)*0+Math.log10(q[1]*tr);if(l>lmin+.2)g+=`<text class="mc-tl" x="${px(l)}" y="${Y1-8}" text-anchor="middle" style="fill:var(--naranja)">${q[0]}</text>`;});
+    $('#mc-cr-svg').innerHTML=g;
+    const yrs=tr/8760;let tt=tr>=8760?fx(yrs,yrs<10?1:0)+' años':tr>=48?fx(tr/24,0)+' días':fx(tr,tr<10?1:0)+' h';
+    $('#mc-cr-out').innerHTML=oc('T / T_f',fx(ratio,2))+oc('Tiempo de ruptura',T>=c.Tm?'—':tt+' ('+sci(tr,1)+' h)')+oc('Deformación elástica inicial',fx(e0,2)+' %');
+    $('#mc-cr-ver').textContent=T>=c.Tm?'Por encima de la temperatura de fusión: el material ya no es sólido.':ratio>=.4?'T/T_f ≥ 0.4: la fluencia es importante en servicio.':'T/T_f < 0.4: la fluencia suele ser poco importante en servicio.';
+    $('#mc-cr-note').textContent=(CR.ctx||'Más esfuerzo o más temperatura: la curva se desplaza hacia arriba y la ruptura ocurre antes.')+' Modelo ilustrativo con n = 5; la referencia rompe a 1000 h a 0.6·T_f con el σ de referencia ('+c.s0+' MPa).';}
+  $('#mc-cr-mat').onchange=$('#mc-cr-t').oninput=$('#mc-cr-s').oninput=()=>{CR.ctx='';drawCr();};
+  // Larson–Miller
+  function lmCalc(){const mode=$('#mc-lm-mode').value,C=num($('#mc-lm-c').value),T1=num($('#mc-lm-t1').value),t1=num($('#mc-lm-h1').value),v2=num($('#mc-lm-v2').value);const L2=$('#mc-lm-l2'),ph=mode==='t'?'T₂ (K)':'t₂ objetivo (h)';
+    if(L2.firstChild.textContent!==ph)L2.firstChild.textContent=ph;
+    if(!(T1>0&&t1>0&&v2>0)){$('#mc-lm-out').innerHTML=oc('LM','—');return;}
+    const LM=T1*(C+Math.log10(t1));let h;
+    if(mode==='t'){const e=LM/v2-C,t2=Math.pow(10,e);h=oc('LM = T₁(C + log t₁)',fx(LM,0))+oc('C + log t₂ = LM/T₂',fx(e+C,2))+oc('log t₂',fx(e,2))+oc('t₂',sci(t2,2)+' h')+oc('Equivale a',t2>=8760?fx(t2/8760,1)+' años':fx(t2/24,0)+' días');
+      $('#mc-lm-note').textContent=`LM = ${T1} × (${C} + log ${t1}) = ${fx(LM,0)}; ${fx(LM,0)} = ${v2} × (${C} + log t₂) → log t₂ = ${fx(e,2)} → t₂ ≈ ${sci(t2,2)} h. Con T₁ = 1000 K, t₁ = 100 h, C = 20 y T₂ = 900 K se obtiene t₂ ≈ 2.8 × 10⁴ h, unos 3.2 años (problema de la clase).`;}
+    else{const T2=LM/(C+Math.log10(v2));h=oc('LM = T₁(C + log t₁)',fx(LM,0))+oc('T₂ = LM/(C + log t₂)',fx(T2,0)+' K')+oc('T₂ en °C',fx(T2-273,0)+' °C');
+      $('#mc-lm-note').textContent=`Para que la pieza dure ${fx(v2,0)} h con el mismo esfuerzo: T₂ = ${fx(LM,0)} / (${C} + log ${v2}) = ${fx(T2,0)} K. Duración más larga exige temperatura menor.`;}
+    $('#mc-lm-out').innerHTML=h;}
+  $('#mc-fal-cr').addEventListener('input',e=>{if(e.target.id&&e.target.id.startsWith('mc-lm-'))lmCalc();});
+  // Diagnóstico
+  const DGM=['Fatiga (cargas repetidas)','Fluencia (alta temperatura sostenida)','Fractura frágil por impacto (baja temperatura o baja tenacidad)','Fractura rápida por grieta preexistente (K ≥ K_IC)','Deformación plástica por sobrecarga estática'];
+  const DGS=[['Un brazo de suspensión de un auto de competencia se rompe tras miles de vueltas. La superficie de fractura tiene una zona lisa con marcas concéntricas y una zona final rugosa.',0,-1,'Las marcas de playa y la zona final rugosa son típicas de fatiga: iniciación, propagación y fractura final.'],
+    ['Una tubería de vapor sobrecalentado a 540 °C se abulta lentamente durante meses hasta que revienta.',1,-1,'Deformación lenta bajo carga constante y calor: fluencia (creep), con T mayor que 0.4 de la temperatura de fusión.'],
+    ['Un chasis de acero al carbono se fractura sin deformarse tras un golpe en una mañana a −25 °C. La superficie es plana y brillante.',2,3,'Baja temperatura, entalla y golpe: se está por debajo de la transición dúctil–frágil.'],
+    ['Una placa soldada trabaja a 200 MPa, muy por debajo de su σy de 450 MPa, y se rompe de golpe desde una grieta de soldadura que nadie detectó.',3,2,'Con una grieta de tamaño crítico, K = Yσ√(πa) llega a K_IC antes de que el material fluya.'],
+    ['Un eje de motor con un cuñero de esquinas agudas falla después de millones de vueltas con esfuerzos nominales bajos.',0,-1,'El cuñero es un concentrador de esfuerzos: la grieta de fatiga nace ahí.'],
+    ['Un álabe de turbina de gas se alarga con las horas de operación hasta rozar la carcasa.',1,-1,'Alargamiento gradual a alta temperatura: fluencia. Se analiza con curvas de creep y Larson–Miller.'],
+    ['El diente de un engrane de acero muy duro se parte con un golpe seco cuando un brazo robótico choca con un tope.',2,3,'Un material muy duro suele ser poco tenaz: bajo impacto absorbe poca energía y se fractura de forma frágil.'],
+    ['Una barra de acero se estira de forma permanente porque se le aplicó una carga estática mayor que su σy.',4,-1,'Sin grieta, sin ciclos y sin calor: es deformación plástica por sobrecarga (σ > σy).'],
+    ['Un parabrisas con una microgrieta en el borde se parte de golpe con un esfuerzo pequeño.',3,2,'Material frágil con defecto: el esfuerzo crítico σc = K_IC/(Y√(πa)) puede ser bajo.']];
+  const DG={cur:null,used:[]};
+  function dgNext(){if(DG.used.length>=DGS.length)DG.used=[];let i;do{i=Math.floor(Math.random()*DGS.length);}while(DG.used.includes(i));DG.used.push(i);DG.cur=i;const s=DGS[i];
+    const others=shuffle([0,1,2,3,4].filter(k=>k!==s[1]&&k!==s[2])).slice(0,3),ops=shuffle([s[1]].concat(others));
+    $('#mc-dg-g').innerHTML=`<p style="font-size:16px"><b>Caso.</b> ${s[0]}</p><div class="mc-opts">${ops.map(k=>`<button class="mc-opt" data-k="${k}">${DGM[k]}</button>`).join('')}</div><div id="mc-dg-fb"></div>`;}
+  $('#mc-dg-g').onclick=e=>{const nx=e.target.closest('#mc-dg-nx');if(nx){dgNext();return;}const b=e.target.closest('.mc-opt');if(!b||b.disabled)return;const s=DGS[DG.cur],ok=+b.dataset.k===s[1];
+    $$('#mc-dg-g .mc-opt').forEach(x=>{x.disabled=true;if(+x.dataset.k===s[1])x.classList.add('ok');});if(!ok)b.classList.add('bad');
+    $('#mc-dg-fb').innerHTML=`<div class="mc-sol"><b>${ok?'Correcto.':'No.'}</b> ${s[3]}</div><button class="btn" id="mc-dg-nx">Otro caso</button>`;};
+  drawPen();drawDb();drawFx();drawSN();drawParis();drawCr();lmCalc();
+
+  window.__MEC={parisN,snM,crTr,QB,FAMS,gent,QZ,FR,worked,flow,drawGrains,EJ,GEN,MAT,sig,eOfP,pOfE,sy02,trueAt,area,TIPOS};
   drawFam();drawEl();frSetMat('acero');frCalc();ejNew();drawSim();drawKn();drawB();
 })();
 
